@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, scale=1">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js"></script>
+
+    <title>Calendario</title>
+</head>
+<body>
+    <header class="encabezado">
+        <img class="logo" src="../assets/img/logo.png" alt="logo-SEEP">
+        <div>
+          <h3>Bienvenido(a) (Usuario)</h3>
+          <a class="cerrar-sesion" href="#">Cerrar sesión</a>
+        </div>
+      
+       
+    </header>
+    <main class="contenedor">
+        <div class="menu-iconos">
+            <a href="inicio.html"><img src="../assets/img/inicio.png" alt="boton de inicio">
+            </a> 
+            <figcaption class="titulos-iconos">Inicio</figcaption>
+            <a href="cuentas.html"><img src="../assets/img/cuentas.png" alt="boton de cuentas"></a>
+            <figcaption class="titulos-iconos">Cuenta</figcaption>
+            <a href="calendario.html"><img src="../assets/img/calendario.png" alt="boton calendario"></a>
+            <figcaption class="titulos-iconos">Calendario</figcaption>
+            <a href="#"><img src="../assets/img/fichas.png" alt="boton fichas"></a>
+            <figcaption class="titulos-iconos">Fichas</figcaption>
+            <a href="#"><img src="../assets/img/documentos.png" alt="boton documentos"></a>
+            <figcaption class="titulos-iconos">Documentos</figcaption>
+            <a href="#"><img src="../assets/img/bitacora.png" alt="boton bitacoras"></a>
+            <figcaption class="titulos-iconos">Bitácoras</figcaption>
+         </div>
+
+    <div class="container-calendar">
+         <div class="calendario">
+            <button id="buscar">Buscar</button>
+        </br>
+            <div id="calendar"  class="calendar"></div>
+        </br>
+            <button id="generar">Generar reporte</button>
+        
+        </div> 
+        
+        <div class="botones-calendario">
+            <button class="btns">Visitas Programadas</button>
+            <button class="btns">Agendar Visitas</button>
+            <button class="btns">Modificar Visitas</button>
+            <button class="btns">Cancelar Visitas</button>
+            <button class="btns">Generar  Alertas</button>
+        </div>
+    </div>
+    </div> 
+    </main>
+</body>
+<script>
+    $(document).ready(function () {
+        $('#calendar').fullCalendar({
+        });
+    });
+</script>
+
+
+</html>

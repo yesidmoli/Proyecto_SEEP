@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, scale=1">
+    <!-- <link rel="stylesheet" href="css/stylelogin.css"> -->
+    <link rel="stylesheet" href="styles.css">
+    <title>Sistema De Evaluación</title>
+</head>
+<body>
+    <header class="encabezado-login">
+        <img src="assets/img/logo.png" alt="logo-SEEP">
+        <img src="assets/img/cditi.png" alt="logo-CDITI">  
+    </header>
+
+    <main class="login-container">
+        <form class="form-login">
+            <h1  class="titulo-login" >Iniciar sesión</h1>
+            <label for="acount-type">Seleccione tipo de usuario</label>
+            <select class="input-login" id="acount-type"  name="acount-type">
+                <option disabled selected hidden>Seleccione una opción</option>
+                <option value="user">Aprendiz</option>
+                <option value="admin">Administrador</option>
+                <option value="teacher">Instructor</option>
+            </select>
+            <label for="numeroId">N° Identificación:</label>
+            <input class="input-login"  placeholder="N° Identificación" name="username"  id="numeroId">
+
+            <label for="contraseña">Contraseña:</label>
+            <input  class="input-login" type="password" placeholder="Contraseña" name="password"  id="contraseña">
+
+            <a  class="recupera-contraseña"  href="#">Recuperar contraseña</a>
+            <center><button  class="btns"  type="submit"> Iniciar Sesión </button></center>
+        </form>
+    </main>
+</body>
+</html>

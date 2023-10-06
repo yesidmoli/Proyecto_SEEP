@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, scale=1">
+    <link rel="stylesheet" href="../styles.css">
+    <title>Aprendiz</title>
+</head>
+<body>
+    <header class="encabezado">
+        <img class="logo" src="../assets/img/logo.png" alt="logo-SEEP">
+        <div>
+          <h3>Bienvenido(a) (Usuario)</h3>
+          <a class="cerrar-sesion" href="#">Cerrar sesión</a>
+        </div> 
+    </header>
+
+    <main class="contenedor">
+    <div class="menu-iconos">
+        <a href="../htmls/inicio.html"><img src="../assets/img/inicio.png" alt="boton de inicio">
+        </a> 
+        <figcaption class="titulos-iconos">Inicio</figcaption>
+        <a href="../cuentas.html"><img src="../assets/img/cuentas.png" alt="boton de cuentas"></a>
+        <figcaption class="titulos-iconos">Cuenta</figcaption>
+        <a href="calendario.html"><img src="../assets/img/calendario.png" alt="boton calendario"></a>
+        <figcaption class="titulos-iconos">Calendario</figcaption>
+        <a href="#"><img src="../assets/img/fichas.png" alt="boton fichas"></a>
+        <figcaption class="titulos-iconos">Fichas</figcaption>
+        <a href="#"><img src="../assets/img/documentos.png" alt="boton documentos"></a>
+        <figcaption class="titulos-iconos">Documentos</figcaption>
+        <a href="#"><img src="../assets/img/bitacora.png" alt="boton bitacoras"></a>
+        <figcaption class="titulos-iconos">Bitácoras</figcaption>
+     </div>
+
+         <section class="informacion-aprendiz">
+                
+                    <div class="info-formacion">
+                        
+
+                        <div class="nombre-documento">
+                            <img src="../assets/img/logo-sena.png" alt="Logo-sena">
+                            <p class="nombre-aprendiz"><b>Yesid Molina Becerra</b></br>
+                             <b>CC:</b> 1059695065</p>
+                        </div>
+                       
+                        <div class="info-ficha">
+                            <p><b>Ficha:</b> 2653755</br>
+                            <b>Etapa Lectiva:</b> </br>
+                            <b>Etapa Productiva:</b></p>
+                        </div>
+                    </div>
+
+                    <div class="container-datos-aprendiz">
+                        <div class="input-field">
+                            <label for="tipoDocumento">Tipo de Documento:</label>
+                            <input type="text" id="tipoDocumento" value="Cédula de Ciudadanía" readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="fechaExpedicion">Fecha de Expedición:</label>
+                            <input type="text" id="fechaExpedicion" value="15 de agosto, 2023" readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="lugarExpedicion">Lugar de Expedición:</label>
+                            <input type="text" id="lugarExpedicion" value="Bogotá, D.C." readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                            <input type="text" id="fechaNacimiento" value="05 de julio, 2000" readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="sexo">Sexo:</label>
+                            <input type="text" id="sexo" value="Masculino" readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="direccion">Dirección de Domicilio:</label>
+                            <input type="text" id="direccion" value="Calle 123 #456" readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="municipio">Municipio:</label>
+                            <input type="text" id="municipio" value="Bogotá" readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="departamento">Departamento:</label>
+                            <input type="text" id="departamento" value="Cundinamarca" readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="telefonoFijo">Teléfono Fijo:</label>
+                            <input type="text" id="telefonoFijo" value="123-456-7890" readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="telefonoCelular">Teléfono Celular:</label>
+                            <input type="text" id="telefonoCelular" value="321-654-0987" readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="correo">Correo Electrónico:</label>
+                            <input type="text" id="correo" value="aprendiz@email.com" readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="correoSecundario">Correo Electrónico Secundario:</label>
+                            <input type="text" id="correoSecundario" value="secundario@email.com" readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="visita1">Visita 1:</label>
+                            <input type="text" id="visita1" value="Realizada el 10 de septiembre, 2023" readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="visita2">Visita 2:</label>
+                            <input type="text" id="visita2" value="Pendiente" readonly>
+                        </div>
+                
+                        <div class="input-field">
+                            <label for="visita3">Visita 3:</label>
+                            <input type="text" id="visita3" value="Pendiente" readonly>
+                        </div>
+
+                        <div class="bitacoras">
+                            <h2>Bitácoras</h2>
+                            <div class="input-field">
+                                <input type="checkbox" id="bitacora1">
+                                <label for="bitacora1">Bitácora 1</label>
+                            </div>
+                    
+                            <div class="input-field">
+                                <input type="checkbox" id="bitacora2">
+                                <label for="bitacora2">Bitácora 2</label>
+                            </div>
+                    
+                            <div class="input-field">
+                                <input type="checkbox" id="bitacora3">
+                                <label for="bitacora3">Bitácora 3</label>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    
+                <div class="botones-container">    
+                <div class="botones">
+                    <button class="btns">Planeacion</button>
+                    <button class="btns">Seguimiento</button>
+                    <button class="btns">Evaluación</button>
+                    <button class="btns">Documentación</button>
+                </div>
+                </div>
+
+            
+                
+        </section>  
+        </main>
+</body>
+</html>

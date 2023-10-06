@@ -1,0 +1,62 @@
+body{
+    font-family: Arial, Arial, Helvetica, sans-serif;
+    background-color: #fff; 
+    margin: 0;  
+}
+
+.contenedor-lista{
+    margin-left: 6rem;
+    margin-top: 25px;
+    display: flex;
+    gap: 6em;
+    width: 100%;
+}
+.ficha img{
+    width: 250px;
+}
+.lista{
+   width: 50%;
+}
+.texto{
+    margin-top: 20px;
+   
+}
+.texto p{
+    margin-left: 20px;
+}
+.seleccion{
+    background-color: #39a900;
+    border-radius: 5px;
+    border: none;
+    height: 2rem;
+    color: #fff;
+}
+.titulo-aprendices{
+    margin-left: 2rem;
+}
+
+ul li img{
+    width: 30px;
+    
+}
+.img-aprendiz{
+    display: flex;
+    align-items: center;
+}
+ul li{
+    font-size: 20px;
+    list-style: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+    margin-bottom: 3px;
+}
+ul li a{
+    margin-left: 10px;
+    color: #39a900;
+    font-size: 16px;
+}
+ul li p{
+    margin-left: 30px;
+    margin-top: 0px;
+    font-size: 15px;
+}

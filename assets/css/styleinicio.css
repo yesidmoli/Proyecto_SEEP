@@ -1,0 +1,111 @@
+body{
+    font-family: Arial, Arial, Helvetica, sans-serif;
+    background-color: #fff;   
+}
+
+
+.contenedor{
+    width: 100%;
+    display: flex;
+
+}
+.fichas{
+   width: 100%;
+   margin-top: 2rem;
+   margin-bottom: 0px;
+}
+.fichas , h2{
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.buscar{
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+.buscar img{
+    margin-right: 10px;
+    width: 25px;
+}
+.btn-buscar{
+  width: 6rem;
+  background-color: var(--color-primario);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 1.5px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s;
+}
+.cerrar-sesion{
+  color: var(--color-primario);
+}
+
+.form-control{
+    margin-left: 10px;
+    width: 200px;
+    height: 25px;
+    
+} 
+.contendor-principal-info{
+    margin-left: 6rem;
+    margin-right: 6rem;
+    width: 100%;
+}
+
+.info-fichas{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.rectangulo-ficha{
+  width: 200px;
+  padding: 5px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+  margin-top: 75px;
+  margin-left: 43px;
+  
+}
+.logo-info{
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #e2e2e2;
+  padding: 10px;
+}
+.texto-info{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+
+.aprendiz,.title2, .ficha, .title1{
+  margin: 0;
+}
+.title1{
+  color: black;
+  font-weight:600;
+  text-decoration: none;
+}
+.aprendiz{
+  color: #8b8a8a;
+}
+.codigo-ficha{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ficha{
+  color: #8b8a8a;
+}
+.numero-ficha{
+  margin: 0;
+}
+  
+  
