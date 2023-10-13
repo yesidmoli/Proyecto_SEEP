@@ -5,11 +5,11 @@ body{
 }
 
 .contenedor-lista{
-    margin-left: 6rem;
-    margin-top: 25px;
+    margin: 0px 10rem;
     display: flex;
-    gap: 6em;
+    justify-content: space-around;
     width: 100%;
+    margin-top: 25vh !important;
 }
 .ficha img{
     width: 250px;
@@ -24,18 +24,32 @@ body{
 .texto p{
     margin-left: 20px;
 }
-.seleccion{
-    background-color: #39a900;
+/* .seleccion{
+    background-color: var(--color-iconos);
     border-radius: 5px;
     border: none;
     height: 2rem;
     color: #fff;
+} */
+.seleccion {
+    /* Estilos generales para el select */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden; /* Oculta las opciones por defecto */
+    cursor: pointer;
+    background-color: var(--color-iconos);
+    color: #fff;
 }
+
+
+
+
 .titulo-aprendices{
     margin-left: 2rem;
 }
 
-ul li img{
+.lista-aprendices li img{
     width: 30px;
     
 }
@@ -43,19 +57,19 @@ ul li img{
     display: flex;
     align-items: center;
 }
-ul li{
+.lista-aprendices li{
     font-size: 20px;
     list-style: none;
     border-bottom: 1px solid black;
     width: 100%;
     margin-bottom: 3px;
 }
-ul li a{
+.lista-aprendices li a{
     margin-left: 10px;
-    color: #39a900;
+    color: var(--color-iconos);
     font-size: 16px;
 }
-ul li p{
+.lista-aprendicesli p{
     margin-left: 30px;
     margin-top: 0px;
     font-size: 15px;

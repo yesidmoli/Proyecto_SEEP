@@ -7,6 +7,7 @@ body{
 .contenedor{
     width: 100%;
     display: flex;
+    
 
 }
 .fichas{
@@ -29,7 +30,7 @@ body{
 }
 .btn-buscar{
   width: 6rem;
-  background-color: var(--color-primario);
+  background-color: var(--color-iconos);
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -50,9 +51,10 @@ body{
     
 } 
 .contendor-principal-info{
-    margin-left: 6rem;
-    margin-right: 6rem;
+    display: grid;
+    place-content: center;
     width: 100%;
+    margin-top: 22vh !important;
 }
 
 .info-fichas{
@@ -66,7 +68,6 @@ body{
   background-color: #ffffff;
   border-radius: 10px;
   border: 1px solid #e2e2e2;
-  margin-top: 75px;
   margin-left: 43px;
   
 }

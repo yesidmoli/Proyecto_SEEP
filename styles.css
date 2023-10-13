@@ -1,7 +1,9 @@
 @import 'assets/css/global.css';
-@import 'assets/css/stylelogin.css'; 
+@import 'assets/css/stylelogin.css';  
 @import 'assets/css/styleinicio.css';
-@import 'assets/css/stylelista.css'; 
+@import 'assets/css/stylelista.css';  
 @import 'assets/css/styleaprendiz.css';
 @import 'assets/css/stylecalendario.css';  
 @import 'assets/css/stylecuenta.css';
+@import 'assets/css/css_animate.css';
+@import 'assets/css/menu-lateral.css'

@@ -20,6 +20,7 @@ body{
     flex-direction: column;
     width: 100%;
     align-items: center;
+    margin-top: 21vh !important;
 
 }
 .nombre-documento{
@@ -63,8 +64,21 @@ input[type="checkbox"] {
     margin-right: 10px;
 }
 
+/* .bitacoras {
+    grid-column: 1/ span 3;
+} */
+
 .bitacoras {
-    grid-column: 1 / span 3;
+    grid-column: 1/ span 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.bitacoras-header {
+    grid-column: 1 / span 3; /* Abarca las 3 columnas de la cuadrícula */
+    text-align: center; /* Centra el texto horizontalmente */
+    margin: 0 0 10px; /* Agrega un margen inferior para separar el título de los checkboxes */
 }
 
 input[type="checkbox"] + label {

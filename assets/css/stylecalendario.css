@@ -9,13 +9,12 @@ body{
 .container-calendar{
     display: flex;
     padding: 1rem;
-    width:80%;
-    height: 500px;
-    margin-left: 4rem;
+    width:100%;
     margin-top: 10px;
     background-color: #ccc;
     justify-content: space-around;
     align-items: center;
+    margin-top: 22vh !important;
 }
 .calendar{
     margin-left: 50px;
@@ -28,7 +27,7 @@ body{
     color: #fff;
     border: none;
     border-radius: 5px;
-    background-color: #39a900;
+    background-color: var(--color-iconos);
     margin: 2rem 50%;
 }
 #buscar:hover{
@@ -45,7 +44,7 @@ body{
     color: #fff;
     border: none;
     border-radius: 5px;
-    background-color: #39a900;
+    background-color: var(--color-iconos);
 }
 #generar:hover{
     color: #fff;
