@@ -1,0 +1,111 @@
+/* Estilos generales */
+
+  
+  .container {
+    max-width: 800px;
+    margin: 20vh auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    top: 22vh !important;
+    height: 100vh;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  /* Estilos del formulario */
+  form {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 10px;
+    
+   
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  .container-btn{
+    display: flex;
+    justify-content: center;
+  }
+  button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 10rem;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Estilos de la lista de fichas */
+  .lista-fichas {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .lista-fichas li {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Estilos de los botones de la lista */
+  li button {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .btn-editar{
+    background: var(--color-iconos); 
+  }
+  .btn-delete{
+    background-color: #f44336;
+  }
+
+  .btn-delete:hover{
+    background-color: #f05f54;
+  }
+  .btns-crud{
+    display: flex;
+  }
+  
+  li button + button {
+    margin-left: 10px;
+  }
+  
+  .btn-editar:hover {
+    background-color: #53d32f;
+  }
+  
+  .List-fichas{
+    margin-top: 3rem;
+  }
