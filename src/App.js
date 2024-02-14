@@ -4,6 +4,7 @@ import Header from './components/layout/Header';
 import MainSection from './components/layout/MainSection';
 import Inicio from './components/Index/Inicio';
 import Cuentas from './components/Account/Cuentas';
+// import EditarCuenta from './components/Account/EditarCuenta';
 import Calendario from './components/Calendar/Calendario';
 import FormularioFicha from './components/Fichas/FormularioFicha';
 import FormularioAprendiz from './components/Apprentice/FormularioAprendiz';
@@ -23,7 +24,7 @@ function App() {
             <Route exact path="/calendario" component={Calendario} />
             <Route exact path="/fichas" component={FormularioFicha} /> 
             <Route exact path="/nuevo-aprendiz" component={FormularioAprendiz} /> 
-            <Route exact path="/lista-aprendices" component={ListaAprendices} /> 
+            <Route exact path="/lista-aprendices/:numero_ficha" component={ListaAprendices} /> 
             
           </Switch>
     

@@ -56,7 +56,7 @@ const Inicio = () => {
     <section class="info-fichas">
     {fichas.map(ficha => (
         <InfoFicha
-          key={ficha._id}
+          key={ficha.id}
           ficha = {ficha}
         />
       ))}

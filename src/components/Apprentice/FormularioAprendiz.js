@@ -5,25 +5,26 @@ import Swal from 'sweetalert2';
 
 const FormularioAprendiz = () => {
   const initialState = {
-    numeroFicha: '',
+    ficha: '',
     nombres: '',
     apellidos: '',
-    tipoDocumento: '',
-    numeroDocumento: '',
-    fechaExpedicion: '',
-    lugarExpedicion: '',
-    fechaNacimiento: '',
+    tipo_documento: '',
+    numero_documento: '',
+    fecha_expedicion: '',
+    lugar_expedicion: '',
+    fecha_nacimiento: '',
     sexo: '',
-    direccionDomicilio: '',
+    direccion_domicilio: '',
     municipio: '',
     departamento: '',
-    numeroCelular1: '',
-    numeroCelular2: '',
-    telefonoFijo: '',
-    correoPrincipal: '',
-    correoSecundario: '',
-    finalizacionLectiva: '',
-    estadoAprobacion: '',
+    numero_celular1: '',
+    numero_celular2: '',
+    telefono_fijo: '',
+    correo_principal: '',
+    correo_secundario: '',
+    finalizacion_etapa_lectiva: '',
+    estado_aprobacion: '',
+    empresa :'',
   };
 
   const [aprendiz, setAprendiz] = useState(initialState);
@@ -265,7 +266,7 @@ const FormularioAprendiz = () => {
       <ul className='lista-fichas'>
         {aprendices.map((a) => (
           <li key={a._id}>
-            {a.nombres} - {a.apellidos} - {a.tipoDocumento} - {a.numeroDocumento}
+            {a.nombres} - {a.apellidos} - {a.tipo_documento} - {a.numero_documento}
             <div className='btns-crud'>
             <button className='btn-editar' onClick={() => editarAprendiz(a._id)}>Editar</button>
             <button className='btn-delete' onClick={() => eliminarAprendiz(a._id)}>Eliminar</button>

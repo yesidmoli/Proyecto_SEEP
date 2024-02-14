@@ -67,7 +67,7 @@ const FormularioFicha = ({history}) => {
       }
 
       // Actualizar la lista de fichas
-      const consultarFicha= await clienteAxios.get('/fichas');
+      const consultarFicha= await clienteAxios.get('api/fichas');
       setFichas(consultarFicha.data);
 
       // Limpiar el formulario y restablecer el estado
@@ -135,7 +135,7 @@ const FormularioFicha = ({history}) => {
         <input
           type="text"
           name="numeroFicha"
-          value={ficha.numeroFicha}
+          value={ficha.numero_ficha}
           onChange={actualizarState}
         />
 
@@ -143,7 +143,7 @@ const FormularioFicha = ({history}) => {
         <input
           type="text"
           name="nombrePrograma"
-          value={ficha.nombrePrograma}
+          value={ficha.nombre_programa}
           onChange={actualizarState}
         />
 
@@ -151,7 +151,7 @@ const FormularioFicha = ({history}) => {
         <input
           type="text"
           name="nivelFormacion"
-          value={ficha.nivelFormacion}
+          value={ficha.nivel_formacion}
           onChange={actualizarState}
         />
 
@@ -159,7 +159,7 @@ const FormularioFicha = ({history}) => {
         <input
           type="text"
           name="horarioFormacion"
-          value={ficha.horarioFormacion}
+          value={ficha.horario_formacion}
           onChange={actualizarState}
         />
 
@@ -173,7 +173,7 @@ const FormularioFicha = ({history}) => {
       <ul className='lista-fichas'>
         {fichas.map((f) => (
           <li  key={f._id}>
-            {f.numeroFicha} - {f.nombrePrograma} - {f.nivelFormacion} - {f.horarioFormacion}
+            {f.numero_ficha} - {f.nombre_programa} - {f.nivel_formacion} - {f.horario_formacion}
 
             <div className='btns-crud'>
             <button className='btn-editar' onClick={() => editarFicha(f._id)}>Editar</button>

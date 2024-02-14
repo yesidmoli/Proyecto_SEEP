@@ -1,7 +1,36 @@
-import { Fragment } from "react"
+import { Fragment, useEffect, useState } from "react"
 import '../../../src/css/stylelista.css'
-function ListaAprendices(){
+import clienteAxios from "../../config/axios";
+import {Link } from "react-router-dom";
 
+function ListaAprendices(props){
+
+    //Extrae la propiedad numero de ficha
+    const {numero_ficha} = props.match.params;
+    //Muestra el número de la ficha
+    console.log("este es el numero ficha", numero_ficha)
+
+    const [aprendices, dataAprendices] = useState([]);
+
+    useEffect ( () => {
+        consultaAprendices()
+    }, []);
+    const consultaAprendices = async () =>{
+        try{
+            
+            //Realiza la solicitud a la API
+            const response = await clienteAxios.get(`/api/aprendices`, {
+                params: {numero_ficha:numero_ficha}
+            })
+            //Si funciona, imprime los resultados de los aprendices
+            console.log("estos son los aprendices de esa ficha", response.data.results)
+            dataAprendices(response.data.results)
+        }catch(error){
+            //Muestra un error si lo hay
+            console.log("este es el error", error)
+        }
+
+    }
     return(
         <Fragment>
              <div class="contenedor-lista">
@@ -33,12 +62,17 @@ function ListaAprendices(){
                 <h3 class="titulo-aprendices">Aprendices</h3>
                 <ul class="lista-aprendices">
                     <li>
-                        <div class="img-aprendiz"><img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" alt="img aprendiz"/><a href="aprendiz.html">Yesid Molina Becerra</a></div><p>Aprendiz</p></li>
-                    <li><div class="img-aprendiz"><img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" alt="img aprendiz"/><a href="aprendiz.html">Laura Ximena</a></div><p>Aprendiz</p></li>
-                    <li><div class="img-aprendiz"><img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" alt="img aprendiz"/><a href="aprendiz.html">Jhon Andres</a></div><p>Aprendiz</p></li>
-                    <li><div class="img-aprendiz"><img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" alt="img aprendiz"/><a href="aprendiz.html">Jhon Parra</a></div><p>Aprendiz</p></li>
-                    <li><div class="img-aprendiz"><img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" alt="img aprendiz"/><a href="aprendiz.html">Yesid Molina Becerra</a></div><p>Aprendiz</p></li>
-                    
+                    <div>
+      {aprendices.map(aprendiz => (
+        <div key={aprendiz.id}>
+          <div className="img-aprendiz">
+            <img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" alt="img aprendiz" />
+            <Link to="aprendiz.html">{`${aprendiz.nombres} ${aprendiz.apellidos}`}</Link>
+          </div>
+          <p>Aprendiz</p>
+        </div>
+      ))}
+    </div></li>
 
                 </ul>
             </div>

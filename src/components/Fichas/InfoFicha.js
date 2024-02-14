@@ -7,7 +7,7 @@ import logoSena from '../../img/logoSenaNa.png'
 const InfoFicha = ({ficha }) => {
 
   //extraemos los valores de l BD
-  const {_id, numeroFicha,nombrePrograma, nivelFormacion} = ficha;
+  const {id, numero_ficha, nombre_programa, nivel_formacion} = ficha;
 
   return (
     <div className="rectangulo-ficha">
@@ -15,14 +15,14 @@ const InfoFicha = ({ficha }) => {
         <img src={logoSena} width="90" alt="lista" />
       </div>
       <div className="texto-info">
-        <a className="title1" href="lista.html">
-          {nombrePrograma}
+        <a className="title1" href={`/lista-aprendices/${numero_ficha}`}>
+          {nombre_programa}
         </a>
-        <p className="title2">{nombrePrograma}</p>
-        <p className="aprendiz">{nivelFormacion}</p>
+        <p className="title2">{nombre_programa}</p>
+        <p className="aprendiz">{nivel_formacion}</p>
         <div className="codigo-ficha">
           <p className="ficha">Ficha:</p>
-          <p className="numero-ficha">{numeroFicha}</p>
+          <p className="numero-ficha">{numero_ficha}</p>
         </div>
       </div>
     </div>

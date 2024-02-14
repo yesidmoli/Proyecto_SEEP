@@ -3,12 +3,12 @@
   
   .container {
     max-width: 800px;
-    margin: 20vh auto;
+    margin-top: 1rem auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-    top: 22vh !important;
+    top: 1rem !important;
     height: 100vh;
   }
   
@@ -107,5 +107,5 @@
   }
   
   .List-fichas{
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
