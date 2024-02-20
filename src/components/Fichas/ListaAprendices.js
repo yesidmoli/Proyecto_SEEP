@@ -2,11 +2,13 @@ import { Fragment, useEffect, useState } from "react"
 import '../../../src/css/stylelista.css'
 import clienteAxios from "../../config/axios";
 import {Link } from "react-router-dom";
-
+import Header from "../layout/Header";
+import MainSection from "../layout/MainSection";
+import logoverde  from '../../../src/img/logo-sena.png'
 function ListaAprendices(props){
 
     //Extrae la propiedad numero de ficha
-    const {numero_ficha} = props.match.params;
+    const {numero_ficha, programa} = props.match.params;
     //Muestra el número de la ficha
     console.log("este es el numero ficha", numero_ficha)
 
@@ -33,18 +35,21 @@ function ListaAprendices(props){
     }
     return(
         <Fragment>
+            <Header />
+            <main className="container">
+                <MainSection />
              <div class="contenedor-lista">
                 <div class="ficha">
                     <section className="info">
-                    <img src="https://certificadossena.net/wp-content/uploads/2022/10/logo-sena-naranja-png-2022.png"  className="img-logo" alt="img"/>
-                    <h4>Análisis y desarrollo de software</h4>
-                    <h4>2653755</h4>
+                    <img src={logoverde}  className="img-logo" alt="img"/>
+                    <h4>{programa}</h4>
+                    <h4>{numero_ficha}</h4>
                     </section>
                    
                    <br></br>
 
                     <div class="texto">
-                        <select class="seleccion"  name="acount-type">
+                        {/* <select class="seleccion"  name="acount-type">
                             <option value="" disabled selected hidden>Filtrar</option>
                             <option value="aprobado">Aprobado</option>
                             <option value="No aprobado">No aprobado</option>
@@ -54,30 +59,41 @@ function ListaAprendices(props){
                             <option value="Visita 2">Visita 2</option>
                             <option value="Visita 3">Visita 3</option>
                             
-                        </select>
+                        </select> */}
+                        <div class="seleccion"><h6> Aprobado</h6></div>
+                        <div class="seleccion">Pendiente Aprobar</div>
                         </div>
                 </div>
 
                 <div class="lista">
                 <h3 class="titulo-aprendices">Aprendices</h3>
+                <hr></hr>
                 <ul class="lista-aprendices">
-                    <li>
-                    <div>
+                {aprendices.map(aprendiz => (
+                    <li  key={aprendiz.id}>
+
+        <div className="img-aprendiz">
+            <img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" alt="img aprendiz" />
+            <Link className="nombre-aprendiz" to={`/aprendiz/${aprendiz.id}`}>{`${aprendiz.nombres} ${aprendiz.apellidos}`}</Link>
+          </div>
+          <p>Aprendiz</p>
+                    {/* <div>
       {aprendices.map(aprendiz => (
         <div key={aprendiz.id}>
           <div className="img-aprendiz">
             <img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" alt="img aprendiz" />
-            <Link to="aprendiz.html">{`${aprendiz.nombres} ${aprendiz.apellidos}`}</Link>
+            <Link className="nombre-aprendiz" to="aprendiz.html">{`${aprendiz.nombres} ${aprendiz.apellidos}`}</Link>
           </div>
           <p>Aprendiz</p>
         </div>
       ))}
-    </div></li>
+    </div> */}
+    </li>  ))}
 
                 </ul>
             </div>
                 </div>
-            
+                </main>
         </Fragment>
     )
 }

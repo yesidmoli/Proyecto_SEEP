@@ -1,23 +1,32 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import clienteAxios from '../../config/axios';
 import '../../../src/css/styleinicio.css'
-
+import Header from '../layout/Header';
+import MainSection from '../layout/MainSection';
 
 //imagenes
 import iconoBuscar from'../../img/buscar.jpeg' 
 
 import InfoFicha from '../Fichas/InfoFicha';
 
+import { useAuth } from '../context/AuthContext';
+
 const Inicio = () => {
 
   const [fichas, guardarFicha] = useState([]) 
+
+  const {token} = useAuth()
 
   //hace el envio
   const consultarApi = async() =>{ 
 
       //trae la consulta
-      const consultarFicha = await clienteAxios.get('/api/fichas/'); 
+      const consultarFicha = await clienteAxios.get('/api/fichas-instructor/',  {
+        headers: {
+            Authorization: `Token ${token}`,
+        }
+    }); 
       // console.log(consultarCliente);
       console.log(consultarFicha.data);
 
@@ -40,8 +49,13 @@ const Inicio = () => {
   // }, []);
 
   return (
-   
+    <Fragment>
+    <Header />
+   <main className='container'> 
+   <MainSection />
     <section className="contendor-principal-info">
+    
+
       
       <div className="fichas">
         <h1>Programas y fichas de formación</h1>
@@ -65,7 +79,8 @@ const Inicio = () => {
     
     </section>
     
-    
+    </main>
+    </Fragment>
   );
 };
 
