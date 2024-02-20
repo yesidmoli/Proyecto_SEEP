@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import clienteAxios from '../../config/axios';
 import Swal from 'sweetalert2';
+import '../layout/MainSection';
+import '../layout/Header';
 
 const FormularioAprendiz = () => {
   const initialState = {

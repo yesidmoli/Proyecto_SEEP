@@ -1,6 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
 import clienteAxios from '../../config/axios';
+import '../layout/Header';
+import '../layout/MainSection';
 import '../../../src/css/styleinicio.css'
 
 

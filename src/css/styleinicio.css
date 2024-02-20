@@ -27,6 +27,7 @@ body{
     display: flex;
     align-items: center;
     margin-right: 5px;
+    margin-top: auto;
 }
 .buscar img{
     margin-right: 10px;

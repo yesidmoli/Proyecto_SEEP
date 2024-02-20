@@ -14,22 +14,25 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    height: 500px; 
+    width: 90%;
+    height: 550px; 
     background-color: #cccccc79;
-    margin-top: 70px;
+    margin-top:30px;
+    margin-left: 40px;
     padding: 5px;
 
 }
 
 .datos{
-    width: 70%;
-    height: 350px;
+    width: 90%;
+    height: 450px;
     margin-top: 23px;
     background-color: #d1cccc;
     padding: 1rem;
     border-radius: 10px;
+    
 }
+ 
 
 .nombre-usuario{
     margin-top: 20px;
@@ -37,37 +40,69 @@ body{
     text-align: center;
 }
 .bienvenido{
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin: 0px;
 }
 .titulo{
-    font-size: 20px;
+    font-size: 30px;
     text-align: center;
 }
 .h3{
-    font-size: 18px;
-    margin-left: 10px;
+    font-size: 25px;
+    margin-left: 20px;
     
 }
 input{
-    height: 27px;
+    height: 29px;
+    width: 30%;
+    display: grid;
+    
 }
 .guardar{
-    height: 70px;
-    width: 150px;
+    height: 50px;
+    width: fit-content;
+    
 }
-
-/* .btn-modificar{
-    background-color: #39a900;
+.btn-guardar{
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.nombres, .apellidos, .usuario, .correo, .telefono{
+    width: 20rem;
+}
+.grid-container{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+.datos2{
+    display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+}
+.div-datos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn-modificar{
+    background-color: #339104;
     color: #fff;
-    margin-left: 33%;
-    width: 35%;
-    height: 30px;
+    width: 30%;
+    height: 45px;
     border: none;
     border-radius: 5px;
+    font-size: 18px;
 }
 .btn-modificar:hover{
     background-color: #38a900d3;
     cursor: pointer; 
-} */
+} 
+center{
+    padding: 40px;
+} 
   

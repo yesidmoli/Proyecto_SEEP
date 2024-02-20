@@ -1,4 +1,6 @@
 import React from "react";
+import '../layout/Header';
+import '../layout/MainSection';
 
 const Calendario = () => {
     return (

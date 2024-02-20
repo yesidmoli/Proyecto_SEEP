@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import '../../css/stylecuenta.css';
+import '../layout/Header';
+import '../layout/MainSection';
 import EditarCuenta from "./EditarCuenta";
 
 const Cuentas = () => {
@@ -27,7 +29,7 @@ const Cuentas = () => {
     return (
       <div className="container-info-cuenta">
         {/* aqui mostrará el nombre que el usuario ingrese */}
-        <h1 className="nombre-usuario">Hola, {datosCuenta.nombres}{datosCuenta.apellidos}</h1>
+        <h1 className="nombre-usuario">Hola, {datosCuenta.nombres} {datosCuenta.apellidos}</h1>
         <h1 className="bienvenido">Bienvenido al SEEP</h1>
         <div className="datos">
           {mostrarEdicion ? (
@@ -41,6 +43,7 @@ const Cuentas = () => {
             <p className="h3">Usuario: {datosCuenta.usuario}</p>
             <p className="h3">Correo electrónico: {datosCuenta.correo}</p>
             <p className="h3">Teléfono: {datosCuenta.telefono}</p>
+            
             <center><button className="btn-modificar btns" onClick={mostrarInterfazEdicion}>Modificar Datos</button></center>
             </>
           )}

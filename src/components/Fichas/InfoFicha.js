@@ -3,6 +3,8 @@ import React from 'react';
 import '../../../src/css/styleinicio.css'
 //imagenes
 import logoSena from '../../img/logoSenaNa.png'
+import '../layout/Header';
+import '../layout/MainSection';
 
 const InfoFicha = ({ficha }) => {
 

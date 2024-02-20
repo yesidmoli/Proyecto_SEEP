@@ -4,8 +4,8 @@ import '../../../src/css/formularioFichas.css'
 import Swal from 'sweetalert2';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
-
+import '../layout/Header';
+import '../layout/MainSection';
 
 
 
