@@ -35,7 +35,7 @@ const MainSection = () => {
         <div className="animated slideInLeft">Fichas</div>
       </li>
       <li>
-        <Link to={"#"} aria-label="icon" className="iconLink">
+        <Link to={"/documentos"} aria-label="icon" className="iconLink">
           <i alt="icon" className="iconMenuLateral bi bi-file-earmark-zip"></i>
         </Link>
         <div className="animated slideInLeft">Documentos</div>

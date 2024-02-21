@@ -1,0 +1,173 @@
+/* .container {
+    max-width: 600px;
+    margin-top: 80px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  } */
+
+  
+  .conten-documentos{
+    /* background-color: #f8f8f8; */
+  }
+  #file{
+    height: 50px;
+  }
+  #date{
+    display: flex;
+  }
+  form {
+    display: grid;
+    gap: 10px;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .file{
+    background-color: #fff;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #39a900;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .btn-2{
+    width: 100%;
+    justify-content: end;
+    display: flex;
+    margin-top: 1rem;
+  }
+
+  button:hover {
+    background-color: #39a900;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+ 
+  }
+ 
+  .thead {
+    background-color: #ACACAC;
+    font-weight: bold;
+    text-align: left;
+  }
+  .buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  #subir{
+    width: 250px;
+    margin-top: 2rem;
+
+    
+  }
+  #cargar{
+    width: 250px;
+  }
+  #regresar{
+    justify-content: center;
+    align-items: center;
+  }
+  .item-aprendiz{
+  
+    list-style: none;
+    display: flex;
+    align-items: center;
+  
+    width: 100%;
+    color: black;
+    /* box-shadow: 0 0 10px rgba(48, 48, 48, 0.1); */
+    /* margin-bottom: 5px; */
+    /* border-radius: 10px; */
+    border-bottom: 1px solid rgb(185, 184, 184);
+ 
+  }
+  .item-aprendiz i {
+    font-size: 4rem;
+    color:#00324D;
+    margin-right: 1rem;
+  }
+  .item-aprendiz h5 {
+    margin: 0px;
+    color: #39a900;
+    font-weight: 600;
+  }
+  .item-aprendiz  h6 {
+    margin: 0px;
+  }
+  .list-aprendices{
+    padding: 0px;
+    margin-top: 3rem;
+  }
+  .datos-aprendiz{
+    display: flex;
+
+    flex-direction: column;
+    width: 100%;
+  }
+  .item-link{
+    text-decoration: none;
+    width: 60% !important;
+    display: flex;
+  }
+  .react-search-box input{
+   
+    padding: 1rem;
+    display: flex !important;
+    flex-direction: column !important;
+    margin-top: 2rem;
+  }
+  .input-doc{
+    display: flex; 
+    align-items: center;
+  }
+  .input-doc label{
+    width: 30%;
+    font-size: 1rem;
+  }
+  /* .input-doc select {
+    width: 50%;
+  } */
+ .document-container{
+  width: 80%;
+  margin-top: 3rem;
+ 
+ 
+ }
+ .document-container h4{
+  border-bottom: 1px solid #000;
+  margin-bottom: 1rem;
+  padding-bottom:10px ;
+ }
+ .cont-doc{
+  display: flex;
+  flex-direction: column;
+ align-items: center;
+ background-color: #EEEEEE;
+ overflow: scroll;
+
+ }
