@@ -19,6 +19,9 @@ import CalendarPage from './calendar/pages/CalendarPage';
 //perfil aprendiz
 import PerfilAprendiz from './components/Account/PerfilAprendiz';
 
+//docuentos
+import Documentos from './components/Documents/Documentos';
+import DocumentosAprendices from './components/Documents/DocumentosAprendices';
 import PrivateRoute from './components/auth/ PrivateRoute';
 
 function App() {
@@ -40,6 +43,8 @@ function App() {
             <Route exact path="/lista-aprendices/:numero_ficha/:programa" component={ListaAprendices} /> 
             <Route exact path="/aprendiz/:id/" component={InfoAprediz} />
             <Route exact path="/perfil-aprendiz" component={PerfilAprendiz} />
+            <Route exact path="/documentos-aprendiz/:id" component={Documentos} />
+            <PrivateRoute exact path="/documentos" component={DocumentosAprendices} />
 
 
           </Switch>

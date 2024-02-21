@@ -10,11 +10,12 @@ const Cuentas = () => {
   //traemos los datos del localstore
   const storedDatos = JSON.parse(localStorage.getItem('datosPerfil'));
 
+  const rol = localStorage.getItem('rol')
   //Datos vacios
   const [datosCuenta, setDatosCuenta] = useState ({
     nombres: storedDatos.nombres,
     apellidos: storedDatos.apellidos,
-    usuario: storedDatos.user,
+    usuario: rol,
     correo: storedDatos.correo,
     telefono: storedDatos.telefono
   });

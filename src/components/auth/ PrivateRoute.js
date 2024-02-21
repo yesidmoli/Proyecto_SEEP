@@ -30,6 +30,13 @@ const PrivateRoute = ({ component: Component, allowedRoles, ...rest })  => {
             return <Component {...props} />;
           }
         }
+        if (props.match.path === '/documentos') {
+          if (rol === 'aprendiz') {
+            return <Redirect to={`/documentos-aprendiz/${storedDatos.id}/`} />;
+          } else {
+            return <Component {...props} />;
+          }
+        }
         
         else {
           return <Component {...props} />;

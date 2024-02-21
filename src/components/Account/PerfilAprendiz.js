@@ -4,17 +4,19 @@ import EditarCuenta from "./EditarCuenta";
 import Header from "../layout/Header";
 import MainSection from "../layout/MainSection";
 import da from "date-fns/locale/da/index.js";
+
 const PerfilAprendiz = () => {
   const [mostrarEdicion, setMostrarEdicion] = useState(false);
   
   //traemos los datos del localstore
   const storedDatos = JSON.parse(localStorage.getItem('datosPerfil'));
+  const rol = localStorage.getItem('rol')
 
   //Datos vacios
   const [datosCuenta, setDatosCuenta] = useState ({
     nombres: storedDatos.nombres,
     apellidos: storedDatos.apellidos,
-    usuario: storedDatos.user,
+    usuario: rol,
     correo: storedDatos.correo_principal,
     telefono: storedDatos.numero_celular1
   });
