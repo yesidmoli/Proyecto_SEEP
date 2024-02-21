@@ -61,7 +61,7 @@ const Bitacoras = () => {
             <option>11</option>
             <option>12</option>
           </select>
-        <a href="../../files/formato-bitacora.xlsx" download="formato-bitacora.xlsx">Descargar</a>
+        <a href="../../files/Bitácora Formato Actualizado-JUN-2023.xlsx" download="formato-bitacora.xlsx">Descargar Bitácora</a>
 
         </div>
       )}

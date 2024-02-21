@@ -12,6 +12,20 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+  }
+  .container-dos{
+    width: 50%;
+    margin-top: 80px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90vh;
+    border: 1px solid #ccc;
   }
   #file{
     height: 50px;
@@ -80,7 +94,12 @@ body {
   #cargar{
     width: 250px;
   }
-  #regresar{
-    justify-content: center;
-    align-items: center;
+  .button{
+    width: 100%;
+    margin-top: auto;
+
   }
+  #regresar{
+    margin-left: 250px;
+  }
+  
