@@ -35,7 +35,7 @@ if (localStorage.getItem('datosPerfil')) {
   return (
     <header className="encabezado">
       <img className="logo" src={logo} alt="logo-SEEP" />
-      <div>
+      <div className='mensaje-bienvenida'>
         <h4>Bienvenido(a) {nombre} {apellidos}</h4>
         <a onClick={handleLogout} className="cerrar-sesion" href="#">Cerrar sesión</a>
       </div>

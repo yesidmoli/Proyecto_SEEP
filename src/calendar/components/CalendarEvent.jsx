@@ -2,17 +2,19 @@
 
 export const CalendarEvent = ({event}) => {
 
-    const { title, lugar, id, apellidos } = event;
+    const { title, lugar, id, apellidos, tipo_visita , identificacion_aprendiz} = event;
 
     return (
         <>
 
-            <strong>{id} {apellidos}</strong>
+            <strong >{title} {apellidos}</strong>
             <br/>
-            <span>{title}</span>
+            <span>  <strong>Documento:</strong> {identificacion_aprendiz}</span>
+            <br/>
+            <span> <strong>Tipo:</strong> {tipo_visita}</span>
             <br/>
             {/* <span> - {user.name}</span> */}
-            <span>{lugar}</span> {/* Mostrar el lugar */}
+            <span> <strong>Dirección:</strong> {lugar}</span> {/* Mostrar el lugar */}
         </>
     )
 }

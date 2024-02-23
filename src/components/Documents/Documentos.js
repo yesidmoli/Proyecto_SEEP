@@ -5,6 +5,7 @@ import Header from "../layout/Header";
 import MainSection from "../layout/MainSection";
 import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
+import Apps from "../layout/menu/App";
 const Documentos = (props) => {
 
     const {id} = props.match.params;
@@ -105,6 +106,7 @@ const Documentos = (props) => {
 
     return (
         <Fragment>
+          <Apps />
             <Header />
             <div className="container cont-doc">
                 <MainSection />

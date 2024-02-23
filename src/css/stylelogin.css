@@ -41,7 +41,7 @@ body{
 .titulo-login {
     font-size: 30px;
     margin-bottom: 20px;
-    text-align: center;
+
     color: black;
 
 }
@@ -55,6 +55,7 @@ label {
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    height: 3rem !important;
 }
 
 .recupera-contraseña {
@@ -62,3 +63,17 @@ label {
     color: var(--color-primario);
 }
 
+@media only screen and (max-width: 768px) {
+    .encabezado-login img{
+      
+      
+       max-width: 100%;
+    }
+    .encabezado-login{
+        height: 8rem;
+    }
+    .seep-img{
+        width: 30rem;
+    }
+   
+}

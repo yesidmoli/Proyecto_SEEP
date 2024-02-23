@@ -11,7 +11,7 @@ import iconoBuscar from'../../img/buscar.jpeg'
 import InfoFicha from '../Fichas/InfoFicha';
 
 import { useAuth } from '../context/AuthContext';
-
+import Apps from '../layout/menu/App';
 const Inicio = () => {
 
   const [fichas, guardarFicha] = useState([]) 
@@ -50,6 +50,7 @@ const Inicio = () => {
 
   return (
     <Fragment>
+      <Apps />
     <Header />
    <main className='container'> 
    <MainSection />

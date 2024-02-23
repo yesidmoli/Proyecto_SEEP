@@ -10,7 +10,7 @@ import '../../css/documentos.css';
 
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
-
+import Apps from "../layout/menu/App";
 function DocumentosAprendices (){
 
     const {token} = useAuth()
@@ -53,6 +53,7 @@ function DocumentosAprendices (){
       };
     return(
         <Fragment>
+          <Apps />
 
             <Header />
             

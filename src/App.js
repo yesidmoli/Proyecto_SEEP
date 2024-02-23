@@ -13,6 +13,8 @@ import ListaAprendices from './components/Fichas/ListaAprendices';
 import Login from './components/auth/Login';
 import InfoAprediz from './components/Apprentice/InfoAprendiz';
 
+import Apps from './components/layout/menu/App';
+
 import MyCalendar from './components/calendario';
 import CalendarPage from './calendar/pages/CalendarPage';
 
@@ -28,6 +30,7 @@ function App() {
   return (
     <Router>
       <Fragment>
+        {/* <Apps/> */}
         {/* <Header /> */}
        
         {/* <MainSection /> */}

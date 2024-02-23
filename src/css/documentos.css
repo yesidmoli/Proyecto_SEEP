@@ -171,3 +171,27 @@
  overflow: scroll;
 
  }
+ .my-custom-input-class{
+  width: auto!important;
+}
+
+@media only screen and (max-width: 768px) {
+  .document-container{
+    width: 100%;
+  }
+  .input-doc label{
+    width: 100%;
+  }
+  .input-doc{
+    display: block;
+  }
+  .item-link{
+    width: 100% !important;
+  }
+  /* .input-doc select, .file{
+
+    width: 15rem;
+
+  } */
+}
+

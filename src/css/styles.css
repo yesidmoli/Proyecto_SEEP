@@ -1,59 +1,164 @@
 /* Modal */
-.ReactModalPortal > div{
-  opacity: 0;
+.ReactModalPortal > div {
+  opacity: 0 !important;
 }
 
 .ReactModalPortal .ReactModal__Overlay {
-  align-items: center;
+  align-items: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  transition: opacity .2s ease-in-out !important;
+  z-index: 999 !important;
+}
+.ReactModalPortal .ReactModal__Overlay .titulo-event{
   display: flex;
   justify-content: center;
-  transition: opacity .2s ease-in-out;
-  z-index: 999;
+  align-items: center;
+  padding: 5px;
+  background-color: var(--color-iconos);
+  color: white;
+  font-size: 2rem;
+
+}
+.ReactModalPortal .ReactModal__Overlay .titulo-event i, h1{
+  margin-left: 3rem;
 }
 
 .modal-fondo {
-  background-color: rgba(0, 0, 0, 0.3);
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  position: fixed;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  position: fixed !important;
 }
 
 .ReactModalPortal .ReactModal__Overlay--after-open {
-  opacity: 1;
+  opacity: 1 !important;
+  background-color: aqua
 }
 
 .ReactModalPortal .ReactModal__Overlay--before-close {
-  opacity: 0;
+  opacity: 0 !important;
 }
 
 .modal {
-  background: white;
-  border-radius: 5px;
-  color: rgb(51, 51, 51);
-  display: inline;
-  max-height: 620px;
-  max-width: 500px;
-  outline: none;
-  padding: 10px;
+  background: white !important;
+  border-radius: 5px !important;
+  color: rgb(51, 51, 51) !important;
+  display: inline !important;
+  max-height: 620px !important;
+  max-width: 500px !important;
+  outline: none !important;
+  padding-bottom: 10px;
+
 }
 
-.fab{
-  border-radius: 100%;
-  bottom: 25px;
-  font-size: 30px;
-  padding: 20px;
-  position: fixed;
-  right: 25px;
+.fab {
+  border-radius: 100% !important;
+  bottom: 25px !important;
+  font-size: 30px !important;
+  padding: 20px !important;
+  position: fixed !important;
+  right: 25px !important;
 }
 
-.fab-danger{
-  border-radius: 100%;
-  bottom: 25px;
-  font-size: 26px;
-  position: fixed;
-  left: 25px;
-  width: 70px;
-  height: 70px;
+.fab-danger {
+  border-radius: 100% !important;
+  bottom: 25px !important;
+  font-size: 26px !important;
+  position: fixed !important;
+  left: 25px !important;
+  width: 70px !important;
+  height: 70px !important;
+}
+.cont-form{
+    display: flex;
+    padding: 1rem 5rem;
+    
+}
+.cont-form input{
+  width: 100% !important;
+
+}
+.form-contro{
+  height: 3rem;
+  background-color: #fff !important;
+}
+.fecha{
+  display: flex;
+  flex-direction: column;
+}
+.form-group {
+  margin: 0px !important;
+}
+.is_rojo{
+  color: red;
+}
+.btn-guardar{
+  display: flex;
+  justify-content: center;
+}
+.btn-guardar button{
+  /* background-color: var(--color-iconos); */
+  color: var(--color-iconos);
+  border: 1px solid var(--color-iconos);
+}
+.btn-guardar button:hover{
+  background-color: var(--color-iconos);
+  color: #fff;
+}
+.rbc-toolbar{
+  
+}
+.calendario {
+  padding-top: 1rem;
+  width: 100%;
+}
+.rbc-calendar{
+  width: 100%;
+}
+.rbc-btn-group{
+  width: 100%;
+}
+.rbc-btn-group button{
+ 
+
+}
+
+@media only screen and (max-width: 768px) {
+  .rbc-toolbar{
+  width: 100%;
+  }
+  
+  .rbc-btn-group button{
+
+ 
+  }
+  .rbc-btn-group{
+    display: flex;
+    
+  }
+  .rbc-row-bg{
+    overflow: auto;
+  }
+  .rbc-month-view{
+    overflow-y: scroll;
+    width: 40rem;
+  }
+  .rbc-row-bg{
+ 
+
+  }
+  .rbc-calendar{
+    overflow-y: scroll;
+  }
+  .cont-form{
+    padding:  10px 20px 20px;
+    grid-gap: 0px !important;
+
+  }
+
+  
+  
 }

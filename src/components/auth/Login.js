@@ -71,7 +71,7 @@ const Login = () => {
     <Fragment>
       
       <header class="encabezado-login">
-        <img src={logoSeep} alt="logo-SEEP" />
+        <img className='seep-img' src={logoSeep} alt="logo-SEEP" />
         <img src={cditi} alt="logo-CDITI"/>  
     </header>
 

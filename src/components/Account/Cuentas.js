@@ -4,6 +4,8 @@ import EditarCuenta from "./EditarCuenta";
 import Header from "../layout/Header";
 import MainSection from "../layout/MainSection";
 import da from "date-fns/locale/da/index.js";
+
+import Apps from "../layout/menu/App";
 const Cuentas = () => {
   const [mostrarEdicion, setMostrarEdicion] = useState(false);
   
@@ -32,6 +34,7 @@ const Cuentas = () => {
   };
     return (
       <Fragment>
+        <Apps /> 
         <Header />
         <main className="container">
           <MainSection />

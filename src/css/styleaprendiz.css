@@ -107,3 +107,28 @@ input[type="tel"] {
     font-weight: 500;
     padding: 2px;
 }
+@media only screen and (max-width: 768px) {
+    .nombre-documento{
+        margin: 0px;
+        width: 100%;
+        justify-content: space-evenly;
+        border-bottom: 1px solid #f8f8f8;
+    }
+    .info-formacion img{
+        width: 100px;
+        display: none;
+    }
+    .info-formacion{
+        gap: 0px;
+        margin-top: 1rem;
+        /* flex-direction: column;
+        align-items: normal;
+        justify-content: center; */
+        margin-bottom: 10px;
+    }
+    .container-datos-aprendiz{
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+        gap: 8px;
+    }
+}

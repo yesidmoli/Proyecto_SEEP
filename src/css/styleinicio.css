@@ -136,3 +136,39 @@
 .ficha-info{
   text-decoration: none;
 }
+.fichas h1{
+  margin-left: 0px;
+}
+@media only screen and (max-width: 768px) {
+  .buscar{
+    width: 100%;
+  }
+  .btn-buscar{
+    width: 10rem;
+  }
+  .info-fichas{
+    height: 40rem;
+    margin-top: 0px;
+
+  }
+  .rectangulo-ficha{
+    margin-left: 0px;
+    display: flex;
+    width: 100%;
+    height: 6rem;
+  }
+  .rectangulo-ficha img{
+    width: 3rem;
+    height: 3rem;
+  }
+  .texto-info{
+    gap: 0px;
+  }
+  .title2{
+    display: none;
+  }
+  .title1{
+    overflow: visible;
+  }
+  
+}

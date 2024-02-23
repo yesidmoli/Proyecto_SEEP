@@ -73,3 +73,15 @@
     margin: 0; 
 }
  
+@media only screen and (max-width: 768px) {
+    .encabezado .logo{
+        width: 11rem;
+    }
+    .mensaje-bienvenida{
+        display: none;
+    }
+    .encabezado{
+        justify-content: center;
+        height: 5rem;
+    }
+}
