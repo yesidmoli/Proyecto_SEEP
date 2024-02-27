@@ -2,14 +2,10 @@ import React from 'react';
 
 import '../../../src/css/styleinicio.css'
 //imagenes
-<<<<<<< HEAD
 import logoSena from '../../img/logoSenaNa.png'
 import '../layout/Header';
 import '../layout/MainSection';
-=======
-import logoSena from '../../img/logo-sena.png'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
->>>>>>> main
 
 const InfoFicha = ({ficha }) => {
 

@@ -24,11 +24,8 @@
     display: flex;
     align-items: center;
     margin-right: 5px;
-<<<<<<< HEAD
+    margin-left: 30px;
     margin-top: auto;
-=======
-    width: 50%;
->>>>>>> main
 }
 .buscar img{
     margin-right: 10px;

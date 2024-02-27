@@ -39,11 +39,7 @@ const Cuentas = () => {
           <MainSection />
       <div className="container-info-cuenta">
         {/* aqui mostrará el nombre que el usuario ingrese */}
-<<<<<<< HEAD
-        <h1 className="nombre-usuario">Hola, {datosCuenta.nombres} {datosCuenta.apellidos}</h1>
-=======
         <h1 className="nombre-usuario">Hola, {storedDatos.nombres}  {storedDatos.apellidos}</h1>
->>>>>>> main
         <h1 className="bienvenido">Bienvenido al SEEP</h1>
         <div className="datos">
           {mostrarEdicion ? (

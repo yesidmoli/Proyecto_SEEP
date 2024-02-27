@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-import React from "react";
 import '../layout/Header';
 import '../layout/MainSection';
-=======
 import React, { Fragment } from "react";
->>>>>>> main
 
 const Calendario = () => {
     return (
