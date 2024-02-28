@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import clienteAxios from '../../config/axios';
+import ListaFichas from './ListaFichas';
 import '../../../src/css/formularioFichas.css'
 import Swal from 'sweetalert2';
 import { withRouter } from 'react-router-dom';
@@ -14,22 +15,25 @@ const FormularioFicha = ({history}) => {
 
 
   const initialState = {
-    numeroFicha: '',
-    nombrePrograma: '',
-    nivelFormacion: '',
-    horarioFormacion: '',
+    numero_ficha: '',
+    nombre_programa: '',
+    nivel_formacion: '',
+    horario_formacion: '',
   };
 
   const [ficha, setFicha] = useState(initialState);
   const [fichas, setFichas] = useState([]);
   const [modoEdicion, setModoEdicion] = useState(false);
   const [idEditar, setIdEditar] = useState(null);
+  const [listaFichas, setListaFichas] = useState(false);
+
+ 
 
   useEffect(() => {
     // Lógica para obtener las fichas existentes 
     const obtenerFichas = async () => {
       try {
-        const consultarFicha = await clienteAxios.get('/fichas');
+        const consultarFicha = await clienteAxios.get('/api/fichas/');
         setFichas(consultarFicha.data);
       } catch (error) {
         console.error('Error al obtener las fichas:', error);
@@ -58,7 +62,7 @@ const FormularioFicha = ({history}) => {
       } else {
         // Crear nueva ficha
 
-        await clienteAxios.post('/fichas', ficha);
+        await clienteAxios.post('/api/fichas/', ficha);
         Swal.fire('¡Éxito!', 'La ficha se registró correctamente.', 'success');
         // Redirigir a la sección de listado de fichas
         history.push('/#listado-fichas');
@@ -67,7 +71,7 @@ const FormularioFicha = ({history}) => {
       }
 
       // Actualizar la lista de fichas
-      const consultarFicha= await clienteAxios.get('api/fichas');
+      const consultarFicha= await clienteAxios.get('api/fichas/');
       setFichas(consultarFicha.data);
 
       // Limpiar el formulario y restablecer el estado
@@ -79,6 +83,8 @@ const FormularioFicha = ({history}) => {
       Swal.fire('Error', 'Hubo un error al procesar la solicitud.', 'error');
     }
   };
+  
+  
 
   const editarFicha = (id) => {
     // Buscar la ficha por ID
@@ -109,7 +115,7 @@ const FormularioFicha = ({history}) => {
         await clienteAxios.delete(`/fichas/${id}`);
   
         // Actualizar la lista de fichas después de eliminar
-        const consultarFicha = await clienteAxios.get('/fichas');
+        const consultarFicha = await clienteAxios.get('api/fichas/');
         setFichas(consultarFicha.data);
   
         // Mostrar mensaje de éxito
@@ -120,11 +126,19 @@ const FormularioFicha = ({history}) => {
       Swal.fire('Error', 'Hubo un error al procesar la solicitud.', 'error');
     }
   };
+  const handleCargarFichas = () => {
+    setListaFichas(true);
+  }
+
+  if (listaFichas) {
+    return <ListaFichas />;
+  }
+
 
   return (
-    <div className='container'> 
+    <div className='container-fichas'> 
      <Link to={"/nuevo-aprendiz"} aria-label="icon" className="iconLink">
-     <button>Registrar Aprendiz</button>
+     <button id='registrar-aprendiz'>Registrar Aprendiz</button>
         </Link>
     
       <h2>Registro de Fichas</h2>
@@ -134,7 +148,7 @@ const FormularioFicha = ({history}) => {
         <label>Número de Ficha:</label>
         <input
           type="text"
-          name="numeroFicha"
+          name="numero_ficha"
           value={ficha.numero_ficha}
           onChange={actualizarState}
         />
@@ -142,7 +156,7 @@ const FormularioFicha = ({history}) => {
         <label>Nombre del Programa:</label>
         <input
           type="text"
-          name="nombrePrograma"
+          name="nombre_programa"
           value={ficha.nombre_programa}
           onChange={actualizarState}
         />
@@ -150,7 +164,7 @@ const FormularioFicha = ({history}) => {
         <label>Nivel de Formación:</label>
         <input
           type="text"
-          name="nivelFormacion"
+          name="nivel_formacion"
           value={ficha.nivel_formacion}
           onChange={actualizarState}
         />
@@ -158,17 +172,19 @@ const FormularioFicha = ({history}) => {
         <label>Horario de Formación:</label>
         <input
           type="text"
-          name="horarioFormacion"
+          name="horario_formacion"
           value={ficha.horario_formacion}
           onChange={actualizarState}
         />
 
         <div className='container-btn'>
-        <button className='btn-registro' type="submit">{modoEdicion ? 'Actualizar' : 'Registrar'}</button>
+        <button className='registrar-ficha' type="submit">{modoEdicion ? 'Actualizar' : 'Registrar'}</button>
+        <button className='listado-fichas' onClick={handleCargarFichas} >Listado de Fichas</button>
         </div>
        
       </form>
-    <section  id="listado-fichas" className='List-fichas'>
+      
+    {/* <section  id="listado-fichas" className='List-fichas'>
       <h2>Listado de Fichas Registradas</h2>
       <ul className='lista-fichas'>
         {fichas.map((f) => (
@@ -183,7 +199,7 @@ const FormularioFicha = ({history}) => {
           </li>
         ))}
       </ul>
-      </section>
+      </section> */}
     </div>
   );
 };

@@ -46,6 +46,7 @@ function App() {
             <Route exact path="/documentos-aprendiz/:id" component={Documentos} />
             <Route exact path="/documentos" component={DocumentosAprendices} />
             <Route exact path="/inicio-etapa-practica" component={FormularioAprendiz} />
+            <Route exact path="/bitacoras" component={Bitacoras} />
 
 
           </Switch>

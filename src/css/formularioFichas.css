@@ -4,15 +4,22 @@
     font-family: "Work Sans", sans-serif;
 }
   
-  .container {
+  .container-fichas {
     max-width: 800px;
-    margin-top: 1rem auto;
+    margin: auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     top: 1rem !important;
     height: 100vh;
+  }
+  .encabezado-fichas{
+    height: 100px;
+    background-color: #39a900;
+    font-size: 40px;
+    color: white;
+    padding: 20px;
+
   }
   
   h2 {
@@ -52,9 +59,18 @@
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 5px;
     font-size: 16px;
     width: 10rem;
+  }
+  #registrar-aprendiz{
+    border-radius: 5px;
+  }
+  .registrar-ficha{
+    border-radius: 5px;
+  }
+  .listado-fichas{
+    border-radius: 5px;
   }
   
   button:hover {
