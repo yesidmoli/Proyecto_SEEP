@@ -9,7 +9,7 @@ const StyledMenu = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: var(--color-iconos);
+  background: var(--color-corp-azul);
   transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
   height: 100vh;
   text-align: left;
@@ -80,7 +80,7 @@ const Menu = ({ open }) => {
         <div className="animated slideInLeft">Calendario</div>
       </li>
       <li>
-        <Link to={"/fichas"} aria-label="icon" className="iconLink">
+        <Link to={"#"} aria-label="icon" className="iconLink">
           <i alt="icon" className="iconMenuLateral bi-people-fill"></i>
         </Link>
         <div className="animated slideInLeft">Fichas</div>

@@ -26,6 +26,10 @@ import Documentos from './components/Documents/Documentos';
 import DocumentosAprendices from './components/Documents/DocumentosAprendices';
 import PrivateRoute from './components/auth/ PrivateRoute';
 
+
+//forma
+import ImagenPlaneacion from './components/prueb/InfoGeneral';
+import PDFGenerator from './components/prueb/pdfCovert';
 function App() {
   return (
     <Router>
@@ -48,6 +52,7 @@ function App() {
             <Route exact path="/perfil-aprendiz" component={PerfilAprendiz} />
             <Route exact path="/documentos-aprendiz/:id" component={Documentos} />
             <PrivateRoute exact path="/documentos" component={DocumentosAprendices} />
+            <Route exact path="/planeacion" component={PDFGenerator} />
 
 
           </Switch>

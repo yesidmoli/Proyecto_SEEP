@@ -4,7 +4,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    background: var(--color-iconos);
+    background: var(--color-corp-azul);
     display: inline-block;
     height: 100vh;
     position: absolute;
@@ -51,7 +51,7 @@
 .navMenuLat li div {
     display: none;
     z-index: 1;
-    background: #8fc73e;
+    background: #39A900;
     height: 8vh !important;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .navMenuLat li:hover i {
-    background: #8fc73e;
+    background: #39A900;
     color: white;
 }
 

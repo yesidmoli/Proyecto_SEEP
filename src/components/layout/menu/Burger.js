@@ -11,7 +11,7 @@ const StyledBurger = styled.button`
   justify-content: space-around;
   width: 2rem;
   height: 2rem;
-  background: transparent;
+  background: transparent !important;
   border: none;
   cursor: pointer;
   padding: 0;
@@ -24,7 +24,7 @@ const StyledBurger = styled.button`
   div {
     width: 2rem;
     height: 0.25rem;
-    background: ${({ open }) => open ? '#f8f8f8' : '#f8f8f8'};
+    background: ${({ open }) => open ? '#f8f8f8' : 'var(--color-corp-azul)'};
     border-radius: 10px;
     transition: all 0.3s linear;
     position: relative;

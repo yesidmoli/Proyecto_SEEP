@@ -11,9 +11,13 @@
      /* --color-iconos: #39A900;  */
     --color-iconos: #39A900; 
     /* --color-iconos: #00324D;  */
+    --color-corp-azul :#00324D;
     
 }
 
+body, .container{
+    background-color: #f8f8f8 !important;
+}
 .menu-iconos{
     display: flex;
     flex-direction: column;
@@ -56,15 +60,15 @@
     display: flex;
     height: 7rem;
     justify-content: space-evenly;
-    border-bottom: 8px solid var(--color-iconos) ;
+    border-bottom: 8px solid var(--color-corp-azul) ;
     align-items: center;  
     position: sticky;
-    background-color: var(--color-iconos);
+    background-color: #f8f8f8;
     width: 100%;
     
 }
 .encabezado h4{
-    color: #fbfbfb;
+    color: var(--color-corp-azul);
     font-weight: 600;
 }
 .encabezado .logo{
