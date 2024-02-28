@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    font-family: "Work Sans", sans-serif;
+
+}
+
 :root{
-    --color-primario:#00955c;
+    --color-primario:#39A900;
     --color-menu-iconos: #e2e2e2;
     /* --color-iconos: #00955c; */
      /* --color-iconos: #39A900;  */
-    --color-iconos: #00955c; 
+    --color-iconos: #39A900; 
     /* --color-iconos: #00324D;  */
     
 }
@@ -59,9 +65,10 @@
 }
 .encabezado h4{
     color: #fbfbfb;
+    font-weight: 600;
 }
 .encabezado .logo{
-    max-width: 350px; 
+    max-width: 280px; 
     height: auto;
     margin: 0; 
 }

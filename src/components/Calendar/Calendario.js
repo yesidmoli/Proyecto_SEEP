@@ -1,12 +1,16 @@
-import React from "react";
+import React, { Fragment } from "react";
 import '../layout/Header';
 import '../layout/MainSection';
 
 const Calendario = () => {
     return (
-      <div>
+      <Fragment>
+        
+        <div className="contenedor">
         <h1>Página de Calendario</h1>
-      </div>
+        </div>
+      </Fragment>
+      
     );
   };
 

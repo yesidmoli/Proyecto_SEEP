@@ -1,19 +1,25 @@
-import React, {useState} from "react";
+import React, {Fragment, useState} from "react";
 import '../../css/stylecuenta.css';
 import '../layout/Header';
 import '../layout/MainSection';
 import EditarCuenta from "./EditarCuenta";
-
+import Header from "../layout/Header";
+import MainSection from "../layout/MainSection";
+import da from "date-fns/locale/da/index.js";
 const Cuentas = () => {
   const [mostrarEdicion, setMostrarEdicion] = useState(false);
   
+  //traemos los datos del localstore
+  const storedDatos = JSON.parse(localStorage.getItem('datosPerfil'));
+
+  const rol = localStorage.getItem('rol')
   //Datos vacios
   const [datosCuenta, setDatosCuenta] = useState ({
-    nombres: '',
-    apellidos: '',
-    usuario: '',
-    correo: '',
-    telefono: ''
+    nombres: storedDatos.nombres,
+    apellidos: storedDatos.apellidos,
+    usuario: rol,
+    correo: storedDatos.correo,
+    telefono: storedDatos.telefono
   });
   const [datosModificados, setDatosModificados] = useState(null);
 
@@ -27,9 +33,13 @@ const Cuentas = () => {
     setMostrarEdicion(false); // Oculta la interfaz de edición
   };
     return (
+      <Fragment>
+        <Header />
+        <main className="container">
+          <MainSection />
       <div className="container-info-cuenta">
         {/* aqui mostrará el nombre que el usuario ingrese */}
-        <h1 className="nombre-usuario">Hola, {datosCuenta.nombres} {datosCuenta.apellidos}</h1>
+        <h1 className="nombre-usuario">Hola, {storedDatos.nombres}  {storedDatos.apellidos}</h1>
         <h1 className="bienvenido">Bienvenido al SEEP</h1>
         <div className="datos">
           {mostrarEdicion ? (
@@ -49,6 +59,8 @@ const Cuentas = () => {
           )}
         </div>
       </div>
+      </main>
+      </Fragment>
     );
   };
 export default Cuentas;

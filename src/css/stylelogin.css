@@ -1,4 +1,7 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    font-family: "Work Sans", sans-serif;
+}
 body{
     font-family: Arial, Arial, Helvetica, sans-serif;
     background-color: #fff;
@@ -8,12 +11,12 @@ body{
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
     align-items: center; 
-    height: 11rem;
+    height: 13.5rem;
     border-bottom: 8px solid var(--color-primario);
 }
 .encabezado-login img {
     max-width: 80%; 
-    height: auto;
+   
     margin: 0; 
 }
 

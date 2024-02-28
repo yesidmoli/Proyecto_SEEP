@@ -61,6 +61,7 @@
 
 .navMenuLat li:hover i {
     background: #8fc73e;
+    color: white;
 }
 
 .navMenuLat li:active i {
