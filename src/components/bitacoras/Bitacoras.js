@@ -1,81 +1,79 @@
 import React from "react";
 import '../../css/bitacoras.css';
-import VisualizarDocumentos from "./VisualizarDocumentos";
-import { useState } from "react";
-
+import { Fragment } from "react";
+import MainSection from "../layout/MainSection";
+import Header from "../layout/Header";
 
 const Bitacoras = () => {
-    const [seleccion, setSeleccion] = useState('');
-    const [mostrarCampoAdicional, setMostrarCampoAdicional] = useState(false);
-    const [mostrarDocumentos, setMostrarDocumentos] = useState(false);
-
-    const opciones = ['Bitacoras', 'Documento de identidad'];
-
-    const handleSeleccion = (e) => {
-        const nuevaSeleccion = e.target.value;
-        setSeleccion(nuevaSeleccion);
-
-        // Determina si se debe mostrar el campo adicional
-        setMostrarCampoAdicional(nuevaSeleccion === 'Bitacoras');
-        
-
-    }
-    const handleCargarDocumentos = () => {
-      // Actualiza el estado para mostrar el componente de VisualizarDocumentos
-      setMostrarDocumentos(true);
-    }
-  
-    if (mostrarDocumentos) {
-      // Si mostrarDocumentos es verdadero, renderiza el componente VisualizarDocumentos
-      return <VisualizarDocumentos />;
-    }
-    
-  
-    return (
-      <div class="container">
-      <h2>Subir Documentación</h2>
-      <form id="uploadForm" action="#" onsubmit="return uploadDocument()">
-        <label for="title">Tipo de documento:</label>
-        <select value={seleccion} onChange={handleSeleccion}>
-        <option value="">Seleccione una opción</option>
-        {opciones.map((opcion) => (
-          <option key={opcion} value={opcion}>
-            {opcion}
-          </option>
-        ))}
-      </select>
-      {mostrarCampoAdicional && (
-        <div>
-            <label>Seleccione el número de bitácora</label>
-          <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-          </select>
-        <a href="../../files/Bitácora Formato Actualizado-JUN-2023.xlsx" download="formato-bitacora.xlsx">Descargar Bitácora</a>
-
+  return (
+    <div className="contenedor-main">
+      <header className="header">Bitácoras del aprendiz</header>
+      <i class="bi bi-arrow-left-circle"></i>
+    <div className="container-checklist">
+      
+      <h2>Lista de verificación de bitácoras</h2>
+      <div className="list-checklist">
+      <ul>
+        <div className="section-one">
+        <li>
+          <input type="checkbox" id="tbitacora1" />
+          <label for="tbitacora1">Bitácora 1</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora2" />
+          <label for="bitacora2">Bitácora 2</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora3" />
+          <label for="bitacora3">Bitácora 3</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora4" />
+          <label for="bitacora4">Bitácora 4</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora5" />
+          <label for="bitacora5">Bitácora 5</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora6" />
+          <label for="bitacora6">Bitácora 6</label>
+        </li>
         </div>
-      )}
-        <label for="file">Archivo adjunto:</label>
-        <input type="file" id="file" name="file" required/>
-        <label for="date">Fecha:</label>
-        <input type="date" id="date" name="date" required/>
-        <div className="buttons">
-        <button id="subir" type="submit">Subir</button>
-        <button id="cargar" onClick={handleCargarDocumentos}>Documentos cargados</button>
+        <div className="section-two">
+        <li>
+          <input type="checkbox" id="bitacora7" />
+          <label for="bitacora7">Bitácora 7</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora8" />
+          <label for="bitacora8">Bitácora 8</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora9" />
+          <label for="bitacora9">Bitácora 9</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora10" />
+          <label for="bitacora10">Bitácora 10</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora11" />
+          <label for="bitacora11">Bitácora 11</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora12" />
+          <label for="bitacora12">Bitácora 12</label>
+        </li>
         </div>
-        </form>
+      </ul>
+      </div>
+      <div className="boton-guardar-bitacora">
+      <button id="guardar-bitacora" type="button">Guardar</button>
+      </div>
     </div>
-    )
-  };
+      </div>
+  );
+};
 
 export default Bitacoras;

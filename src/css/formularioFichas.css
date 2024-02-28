@@ -63,13 +63,7 @@
     font-size: 16px;
     width: 10rem;
   }
-  #registrar-aprendiz{
-    border-radius: 5px;
-  }
-  .registrar-ficha{
-    border-radius: 5px;
-  }
-  .listado-fichas{
+  #registrar-aprendiz,.registrar-ficha, .listado-fichas, #btn-editar-fichas, #regresar-registro {
     border-radius: 5px;
   }
   
@@ -93,7 +87,28 @@
     justify-content: space-between;
     align-items: center;
   }
+  .contenedor-fichas{
+    margin-top: 20px;
+    padding: 30px;
   
+  }
+  .contenedor-fichas ul{
+    margin-top: 20px;
+  }
+  .btns-lista-fichas{
+    margin: auto;
+    
+  }
+  #btn-delete-fichas{
+    background-color: #f44336;
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+
+  .title-button{
+    display: flex;
+    justify-content: space-between;
+  }
   /* Estilos de los botones de la lista */
   li button {
     background-color: #f44336;

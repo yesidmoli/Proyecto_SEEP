@@ -183,23 +183,7 @@ const FormularioFicha = ({history}) => {
         </div>
        
       </form>
-      
-    {/* <section  id="listado-fichas" className='List-fichas'>
-      <h2>Listado de Fichas Registradas</h2>
-      <ul className='lista-fichas'>
-        {fichas.map((f) => (
-          <li  key={f._id}>
-            {f.numero_ficha} - {f.nombre_programa} - {f.nivel_formacion} - {f.horario_formacion}
-
-            <div className='btns-crud'>
-            <button className='btn-editar' onClick={() => editarFicha(f._id)}>Editar</button>
-            <button className='btn-delete' onClick={() => eliminarFicha(f._id)}>Eliminar</button>
-            </div>
-            
-          </li>
-        ))}
-      </ul>
-      </section> */}
+      <ListaFichas editarFicha={editarFicha} eliminarFicha={eliminarFicha} />
     </div>
   );
 };
