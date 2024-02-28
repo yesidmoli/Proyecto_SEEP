@@ -51,7 +51,7 @@
 .navMenuLat li div {
     display: none;
     z-index: 1;
-    background: #39A900;
+    background: var( --color-primario);
     height: 8vh !important;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .navMenuLat li:hover i {
-    background: #39A900;
+    background: var( --color-primario);
     color: white;
 }
 

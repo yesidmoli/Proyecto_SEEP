@@ -4,7 +4,8 @@ import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useHistory } from 'react-router-dom';
 import '../../../src/css/global.css'
-import logo from '../../img/seep-logo-verde-2.png';
+import logo from '../../img/seep-logo-verde.svg';
+// import logo from '../../img/seep-logo-v2.svg';
 
 
 const Header = () => {

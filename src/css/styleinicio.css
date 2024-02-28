@@ -52,7 +52,7 @@
   transition: background-color 0.3s;
 }
 .cerrar-sesion{
-  color: var(--color-corp-azul);
+  color: white;
   font-weight: 600;
 }
 
