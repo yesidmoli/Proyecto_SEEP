@@ -4,102 +4,65 @@ body {
     margin: 0;
     padding: 0;
   }
-  
-  .container {
-    max-width: 600px;
-    margin-top: 80px;
-    background-color: #fff;
+  .header{
+    height: 100px;
+    background-color: #39a900;
+    font-size: 40px;
+    color: white;
     padding: 20px;
+  }
+  
+  .container-checklist {
+    max-width: 600px; /* Ajusta el ancho máximo según tus necesidades */
+    margin: auto; /* Centra el contenedor */
+    padding: 20px; /* Espacio de relleno */
+    margin-top: 30px;
+    background-color: #ccc;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
   }
-  .container-dos{
+  .bi-arrow-left-circle {
+    font-size: 30px;
+    color: #39a900;
+    margin-right: 5px; 
+  }
+  .section-one{
+    margin-left: 9%;
     width: 50%;
-    margin-top: 80px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 90vh;
-    border: 1px solid #ccc;
-  }
-  #file{
-    height: 50px;
-  }
-  #date{
-    display: flex;
-  }
-  form {
-    display: grid;
-    gap: 10px;
-  }
-  
-  label {
-    font-weight: bold;
-  }
-  
-  input[type="text"],
-  input[type="date"],
-  select,
-  textarea {
-    width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+  }
+  .section-two{
+    margin-left: 9%;
+    width: 50%;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
   }
   
-  button {
-    padding: 10px 20px;
-    background-color: #39a900;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  .list-checklist ul {
+    margin: auto;
+    display: flex;
+    list-style: none;
+    padding: 10px;
   }
   
-  button:hover {
-    background-color: #39a900;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-    text-align: left;
-  }
-  .buttons{
+  .list-checklist li {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    margin-bottom: 10px;
   }
-  #subir{
-    width: 250px;
-
-    
+  .list-checklist{
+    font-size: 20px;
   }
-  #cargar{
-    width: 250px;
+  
+  .list-checklist input[type="checkbox"] {
+    margin-right: 10px;
+    width: 20px;
   }
-  .button{
+  .boton-guardar-bitacora{
     width: 100%;
-    margin-top: auto;
-
   }
-  #regresar{
-    margin-left: 250px;
+  #guardar-bitacora{
+    border-radius: 5px;
   }
   

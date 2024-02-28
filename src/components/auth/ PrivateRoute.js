@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 //componentes
-import InfoAprediz from '../Apprentice/InfoAprendiz';
+import InfoAprendiz from '../Apprentice/InfoAprendiz';
 const PrivateRoute = ({ component: Component, allowedRoles, ...rest })  => {
   const { token } = useAuth();
  const rol = localStorage.getItem('rol')

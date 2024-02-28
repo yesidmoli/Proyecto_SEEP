@@ -28,7 +28,7 @@ body{
 
 .datos{
     width: 70%;
-    height: 50%;
+    height: 65%;
     margin-top: 23px;
     background-color: #F0EFF4;
     padding: 1rem;
@@ -59,9 +59,9 @@ input{
     height: 29px;
     width: 30%;
     display: grid;
-    
 }
 .guardar{
+    border-radius: 5px;
     height: 50px;
     width: fit-content;
     
@@ -71,9 +71,6 @@ input{
     padding: 10px;
     align-items: center;
     justify-content: center;
-}
-.nombres, .apellidos, .usuario, .correo, .telefono{
-    width: 20rem;
 }
 .grid-container{
     display: flex;

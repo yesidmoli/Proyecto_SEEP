@@ -24,7 +24,8 @@
     display: flex;
     align-items: center;
     margin-right: 5px;
-    width: 50%;
+    margin-left: 30px;
+    margin-top: auto;
 }
 .buscar img{
     margin-right: 10px;
