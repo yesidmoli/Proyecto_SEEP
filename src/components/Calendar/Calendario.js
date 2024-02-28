@@ -1,3 +1,5 @@
+import '../layout/Header';
+import '../layout/MainSection';
 import React, { Fragment } from "react";
 
 const Calendario = () => {

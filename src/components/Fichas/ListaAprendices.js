@@ -1,5 +1,7 @@
 import { Fragment, useEffect, useState } from "react"
-import '../../../src/css/stylelista.css'
+import '../../../src/css/stylelista.css';
+import '../layout/Header';
+import '../layout/MainSection';
 import clienteAxios from "../../config/axios";
 import {Link } from "react-router-dom";
 import Header from "../layout/Header";

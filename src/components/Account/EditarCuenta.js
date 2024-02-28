@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../../css/editarcuenta.css';
+import '../layout/MainSection';
+import '../layout/Header';
 
 const EditarCuenta = ({ datosCuenta, guardarCambios }) => {
 
@@ -17,55 +19,76 @@ const EditarCuenta = ({ datosCuenta, guardarCambios }) => {
   };
   return (
     <div className='container-info-cuenta2'>
-    <form onSubmit={handleSubmit}>
+      <h2>Editar datos</h2>
+    <form className="grid-container" onSubmit={handleSubmit}>
       <div className='datos2'>
-        <h2>Editar datos</h2>
-        <label htmlFor="nombres">Nombres:</label>
+        <div className='div-datos'>
+          <div>
+        <label htmlFor="nombres" >Nombres:</label>
         <input
+          className='nombres'
           type="text"
           id="nombres"
           value={nombres}
           onChange={(e) => setNombres(e.target.value)}
         />
-      </div>
-      <div>
-        <label htmlFor="apellidos">apellidos:</label>
+          </div>
+        </div>
+      <div className='div-datos'>
+        <div>
+        <label htmlFor="apellidos" >Apellidos:</label>
         <input
+          className='apellidos'
           type="text"
           id="apellidos"
           value={apellidos}
           onChange={(e) => setApellidos(e.target.value)}
         />
+        </div>
       </div>
-      <div>
-        <label htmlFor="usuario">usuario:</label>
+      <div className='div-datos'>
+        <div>
+        <label htmlFor="usuario" >Usuario:</label>
         <input
+          className='usuario'
           type="text"
           id="usuario"
           value={usuario}
           onChange={(e) => setUsuario(e.target.value)}
         />
+        </div>
       </div>
-      <div>
-        <label htmlFor="correo">correo:</label>
+      <div className='div-datos'>
+        <div>
+        <label htmlFor="correo" >Correo:</label>
         <input
+          className='correo'
           type="text"
           id="correo"
           value={correo}
           onChange={(e) => setCorreo(e.target.value)}
         />
+        </div>
       </div>
-      <div>
-        <label htmlFor="telefono">telefono:</label>
+      <div className='div-datos'>
+        <div>
+        <label htmlFor="telefono" >Teléfono:</label>
         <input
+          className='telefono'
           type="number"
           id="telefono"
           value={telefono}
           onChange={(e) => setTelefono(e.target.value)}
         />
+        </div>
       </div>
+      
+      </div>
+      <div className='btn-guardar'>
       <button className='guardar' type="submit">Guardar cambios</button>
+    </div>
     </form>
+    
     </div>
   );
 };

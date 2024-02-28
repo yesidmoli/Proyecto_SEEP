@@ -6,6 +6,71 @@ body{
     font-family: Arial, Arial, Helvetica, sans-serif;
     background-color: #fff;   
 }
+#header{
+    height: 100px;
+    background-color: #39a900;
+    font-size: 40px;
+    color: white;
+    padding: 20px;
+}
+.container-uno{
+    width: 70%;
+    background-color: #ccc;
+    margin: auto;
+    margin-top: 30px;
+    padding: 15px;
+    border-radius: 10px;
+}
+/* .contenedor-dos{
+    padding: 20px;
+    width: 60%;
+    background-color: #ccc;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 5px;
+    text-align: center;
+} */
+.botones{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+#save, #ver{
+    border-radius: 5px;
+    margin: 20px;
+    height: 70px;
+} 
+.container-btn{
+    padding: 20px;
+    gap: 100px;
+    
+}
+.tabla-uno{
+    width: 70%;
+    height: 300px;
+    margin: auto;
+    margin-top: 30px;
+    position: relative;
+}
+.tabla-reg{
+    margin-top: 30px;
+}
+#reg, #d-empresa, #regresar{
+    border-radius: 5px;
+}
+#fecha_exp, #fecha-nac, #fin{
+    display: flex;
+}
+#datos-emp{
+    margin-top: 20px;
+}
+
+.buttons-opciones{
+    display: flex;
+    justify-content: space-between;
+}
 .info-formacion{
     display: flex;
     flex-direction: row;
@@ -38,12 +103,11 @@ body{
 }
 
   
-  .botones-container {
+.botones-container {
     display: flex;
     margin-top: 2rem;
-  }
+}
 
-  
 
 .container-datos-aprendiz{
     display: grid;
@@ -92,7 +156,7 @@ input[type="text"],
 input[type="date"],
 input[type="email"],
 input[type="tel"] {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     border: none;
     background-color: #f0f0f0;

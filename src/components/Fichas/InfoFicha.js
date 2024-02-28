@@ -2,7 +2,9 @@ import React from 'react';
 
 import '../../../src/css/styleinicio.css'
 //imagenes
-import logoSena from '../../img/logo-sena.png'
+import logoSena from '../../img/logoSenaNa.png'
+import '../layout/Header';
+import '../layout/MainSection';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const InfoFicha = ({ficha }) => {

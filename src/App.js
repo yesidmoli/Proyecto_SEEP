@@ -4,11 +4,10 @@ import Header from './components/layout/Header';
 import MainSection from './components/layout/MainSection';
 import Inicio from './components/Index/Inicio';
 import Cuentas from './components/Account/Cuentas';
-// import EditarCuenta from './components/Account/EditarCuenta';
 import Calendario from './components/Calendar/Calendario';
 import FormularioFicha from './components/Fichas/FormularioFicha';
 import FormularioAprendiz from './components/Apprentice/FormularioAprendiz';
-
+import Bitacoras from './components/bitacoras/Bitacoras';
 import ListaAprendices from './components/Fichas/ListaAprendices';
 import Login from './components/auth/Login';
 import InfoAprediz from './components/Apprentice/InfoAprendiz';
@@ -26,10 +25,6 @@ import Documentos from './components/Documents/Documentos';
 import DocumentosAprendices from './components/Documents/DocumentosAprendices';
 import PrivateRoute from './components/auth/ PrivateRoute';
 
-
-//forma
-import ImagenPlaneacion from './components/prueb/InfoGeneral';
-import PDFGenerator from './components/prueb/pdfCovert';
 function App() {
   return (
     <Router>
@@ -39,20 +34,22 @@ function App() {
        
         {/* <MainSection /> */}
           <Switch>
-            <PrivateRoute exact path="/" component={Inicio} />
+            <Route exact path="/" component={Inicio} />
             <Route exact path= "/login" component={Login}  />
             <Route exact path= "/calendario" component={CalendarPage}  />
             {/* <Route path="/calendar" element={<CalendarPage />} /> */}
-            <PrivateRoute exact path="/cuentas" component={Cuentas} />
+            <Route exact path="/cuentas" component={Cuentas} />
             {/* <Route exact path="/calendario" component={Calendario} /> */}
             <Route exact path="/fichas" component={FormularioFicha} /> 
-            <Route exact path="/nuevo-aprendiz" component={FormularioAprendiz} /> 
+            <Route exact path="/nuevo-aprendiz" component={FormularioInicial} /> 
             <Route exact path="/lista-aprendices/:numero_ficha/:programa" component={ListaAprendices} /> 
             <Route exact path="/aprendiz/:id/" component={InfoAprediz} />
             <Route exact path="/perfil-aprendiz" component={PerfilAprendiz} />
             <Route exact path="/documentos-aprendiz/:id" component={Documentos} />
-            <PrivateRoute exact path="/documentos" component={DocumentosAprendices} />
+            <Route exact path="/documentos" component={DocumentosAprendices} />
             <Route exact path="/planeacion" component={PDFGenerator} />
+            <Route exact path="/inicio-etapa-practica" component={FormularioAprendiz} />
+            <Route exact path="/bitacoras" component={Bitacoras} />
 
 
           </Switch>

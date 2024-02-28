@@ -2,6 +2,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import clienteAxios from '../../config/axios';
+import '../layout/Header';
+import '../layout/MainSection';
 import '../../../src/css/styleinicio.css'
 import Header from '../layout/Header';
 import MainSection from '../layout/MainSection';

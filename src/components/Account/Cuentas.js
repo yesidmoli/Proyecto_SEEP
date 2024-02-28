@@ -1,11 +1,10 @@
 import React, {Fragment, useState} from "react";
 import '../../css/stylecuenta.css';
+import '../layout/Header';
+import '../layout/MainSection';
 import EditarCuenta from "./EditarCuenta";
 import Header from "../layout/Header";
 import MainSection from "../layout/MainSection";
-import da from "date-fns/locale/da/index.js";
-
-import Apps from "../layout/menu/App";
 const Cuentas = () => {
   const [mostrarEdicion, setMostrarEdicion] = useState(false);
   
@@ -54,6 +53,7 @@ const Cuentas = () => {
             <p className="h3">Usuario: {datosCuenta.usuario}</p>
             <p className="h3">Correo electrónico: {datosCuenta.correo}</p>
             <p className="h3">Teléfono: {datosCuenta.telefono}</p>
+            
             <center><button className="btn-modificar btns" onClick={mostrarInterfazEdicion}>Modificar Datos</button></center>
             </>
           )}
