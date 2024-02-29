@@ -183,7 +183,6 @@ const FormularioFicha = ({history}) => {
         </div>
        
       </form>
-      <ListaFichas editarFicha={editarFicha} eliminarFicha={eliminarFicha} />
     </div>
   );
 };
