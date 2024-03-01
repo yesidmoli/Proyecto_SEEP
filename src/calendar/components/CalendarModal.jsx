@@ -28,7 +28,7 @@ const customStyles = {
     },
 };
 
-export const CalendarModal = () => {
+export const CalendarModal = ({history}) => {
 
     
 
@@ -37,7 +37,7 @@ export const CalendarModal = () => {
     const [aprendizSeleccionado , dataAprendiz] = useState('')
 
     const { isDateModalOpen, closeDateModal } = useUIStore();
-    const { startSavingEvent } = useCalendarStore();
+    const { startSavingEvent, startLoadingEvents } = useCalendarStore();
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [formValues, setFormValues] = useState({
         title: '',
@@ -114,13 +114,13 @@ export const CalendarModal = () => {
             closeDateModal();
             setFormSubmitted(false);
            
-            Swal.fire('Evento guardado correctamente', '', 'success');
-          
-
-
+           
             
+           // Recargar la página automáticamente
+                window.location.reload();
+             Swal.fire('Evento guardado correctamente', '', 'success');
 
-
+        
         } catch (error) {
             console.error('Error al guardar el evento:', error);
 
@@ -208,7 +208,7 @@ export const CalendarModal = () => {
             name="tipo_visita"
             value={formValues.tipo_visita}
             onChange={(event) => setFormValues({ ...formValues, tipo_visita: event.target.value })}
-        >
+        >   <option selected>Seleccione una opción</option>
             <option value="presencial">Presencial</option>
             <option value="virtual">Virtual</option>
         </select>
@@ -220,7 +220,7 @@ export const CalendarModal = () => {
             name="tipo_visita"
             value={formValues.numero_visita}
             onChange={(event) => setFormValues({ ...formValues, numero_visita: event.target.value })}
-        >
+        >   <option selected>Seleccione numero visita</option>
             <option value="1">Visita 1</option>
             <option value="2">Visita 2</option>
             <option value="3">Visita 3</option>
@@ -267,3 +267,4 @@ export const CalendarModal = () => {
     );
 };
 
+export default withRouter(CalendarModal);

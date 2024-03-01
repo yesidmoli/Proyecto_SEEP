@@ -1,0 +1,112 @@
+.container_seguimiento {
+    font-family: Arial, sans-serif;
+     max-width: 900px;  
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #999898;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    overflow-y: auto; /* Establece el desplazamiento vertical */
+    max-height: 780px; /* Altura máxima para mostrar el desplazamiento */
+}
+
+
+
+.h1-seguimiento {
+    text-align: center;
+    font-size: 1.5rem; /* 150% del tamaño de fuente predeterminado */
+    margin-bottom: 10px; /* Añade un espacio debajo del título */
+    font-weight: 700;
+}
+
+.h2-seguimiento {
+    text-align: center;
+    font-size: 1.2rem; /* 150% del tamaño de fuente predeterminado */
+    margin-bottom: 10px; /* Añade un espacio debajo del título */
+    font-weight: 700;
+    
+}
+
+
+.h3-seguimiento{
+    font-size: 1.2rem; /* 150% del tamaño de fuente predeterminado */
+    font-weight: 700;
+    margin-left: 200%;
+    margin-bottom: 10px;
+
+    
+}
+
+
+
+
+ td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #a9a5a5;
+    font-size: 90%;
+   
+}
+
+.thVariables {
+    background-color: #f2f2f2;
+    width: 10%;
+}
+
+#observaciones1  {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+}
+
+
+#guardar-seguimientoep, input[type="button"] {
+    background-color: #39a900;
+    margin: 0 auto; /* Esto centrará horizontalmente el botón */
+    display: block; /* Asegura que ocupe todo el ancho disponible */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 8px; /* Borde redondeado */
+    cursor: pointer; /* Cursor al pasar sobre el botón */
+}
+
+#guardar-seguimientoep:hover, input[type="button"]:hover {
+    background-color: #ccc;
+}
+
+.custom-button {
+    background-color: #39a900; /* Color de fondo */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Mostrar como bloque en línea */
+    font-size: 16px; /* Tamaño de fuente */
+    margin: 4px 2px; /* Margen */
+    cursor: pointer; /* Cursor al pasar sobre el botón */
+    border-radius: 8px; /* Borde redondeado */
+}
+
+.custom-button:hover {
+    background-color: #ccc;
+}
+
+textarea {
+    width: 100%; /* Hacer que la casilla ocupe todo el ancho disponible */
+    height: auto; /* La altura se ajustará automáticamente según el contenido */
+    font-size: 14px; /* Tamaño de fuente deseado */
+}
+
+
+
+
+
+
+
+
+
+

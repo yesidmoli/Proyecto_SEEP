@@ -80,7 +80,7 @@ const Menu = ({ open }) => {
         <div className="animated slideInLeft">Calendario</div>
       </li>
       <li>
-        <Link to={"#"} aria-label="icon" className="iconLink">
+        <Link to={"/fichas"} aria-label="icon" className="iconLink">
           <i alt="icon" className="iconMenuLateral bi-people-fill"></i>
         </Link>
         <div className="animated slideInLeft">Fichas</div>

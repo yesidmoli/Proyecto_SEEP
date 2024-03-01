@@ -1,9 +1,16 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, Fragment} from "react";
 import clienteAxios from "../../config/axios";
 import Swal from "sweetalert2";
 import "../layout/MainSection";
 import "../layout/Header";
 import AprendicesRegistrados from "./AprendicesRegistrados";
+
+import MainSection from "../layout/MainSection";
+import Apps from "../layout/menu/App";
+import Header from "../layout/Header";
+import { Link } from "react-router-dom";
+
+import atras from '../../img/atras.png'
 
 const FormularioInicial = () => {
     const initialState = {
@@ -157,16 +164,31 @@ const FormularioInicial = () => {
         return <AprendicesRegistrados />;
       }
     
+
     
       return (
-        <div className="main-container">
-          <header id="header">Formulario inicio etapa productiva</header>
-    
+
+        <Fragment>
+        
+          <Header />
+          <MainSection />
+          <Apps />
+        <div className="container cont-fichas">
+
+        <Link to={"/fichas"} aria-label="icon" className=" btn-atras">
+              <img src={atras}></img>
+
+              <b>Regresar</b>
+        </Link>
+        <div className='btn-fichas-aprendiz'>
+        <button id="ver" onClick={handleRegistroAprendices}>Aprendices registrados</button>
+      </div>
+
           <div className="container-uno">
-            <h2>Registro de Aprendices</h2>
+            <h2>Añadir  Aprendiz</h2>
             <div className="form">
               <form onSubmit={enviarDatos}>
-                <label>Número de Ficha:</label>
+                <label>Número de Ficha: <p className="rojo-label">*</p></label>
                 <input
                   type="text"
                   name="numero_ficha"
@@ -174,7 +196,7 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                   required
                 />
-                <label>Nombres:</label>
+                <label>Nombres: <p className="rojo-label">*</p></label>
                 <input
                   type="text"
                   name="nombres"
@@ -182,7 +204,7 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                   required
                 />
-                <label>Apellidos:</label>
+                <label>Apellidos: <p className="rojo-label">*</p></label>
                 <input
                   type="text"
                   name="apellidos"
@@ -190,7 +212,7 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                   required
                 />
-                <label>Tipo de Documento:</label>
+                <label>Tipo de Documento: <p className="rojo-label">*</p></label>
                 <input
                   type="text"
                   name="tipo_documento"
@@ -198,7 +220,7 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                   required
                 />
-                <label>Número de Documento:</label>
+                <label>Número de Documento: <p className="rojo-label">*</p></label>
                 <input
                   type="text"
                   name="numero_documento"
@@ -206,7 +228,7 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                   required
                 />
-                <label>Fecha de Expedición:</label>
+                <label>Fecha de Expedición: <p className="rojo-label">*</p></label>
                 <input
                   id="fecha_exp"
                   type="date"
@@ -215,7 +237,7 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                   required
                 />
-                <label>Lugar de Expedición:</label>
+                <label>Lugar de Expedición: <p className="rojo-label">*</p></label>
                 <input
                   type="text"
                   name="lugar_expedicion"
@@ -223,7 +245,7 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                   required
                 />
-                <label>Fecha de Nacimiento:</label>
+                <label>Fecha de Nacimiento: <p className="rojo-label">*</p></label>
                 <input
                   id="fecha-nac"
                   type="date"
@@ -232,7 +254,7 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                   required
                 />
-                <label>Sexo:</label>
+                <label>Sexo: <p className="rojo-label">*</p></label>
                 <input
                   type="text"
                   name="sexo"
@@ -240,7 +262,7 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                   required
                 />
-                <label>Dirección Domicilio:</label>
+                <label>Dirección Domicilio: <p className="rojo-label">*</p></label>
                 <input
                   type="text"
                   name="direccion_domicilio"
@@ -248,7 +270,7 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                   required
                 />
-                <label>Municipio:</label>
+                <label>Municipio: <p className="rojo-label">*</p></label>
                 <input
                   type="text"
                   name="municipio"
@@ -256,7 +278,7 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                   required
                 />
-                <label>Departamento:</label>
+                <label>Departamento: <p className="rojo-label">*</p></label>
                 <input
                   type="text"
                   name="departamento"
@@ -264,7 +286,7 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                   required
                 />
-                <label>Número de Celular 1:</label>
+                <label>Número de Celular 1: <p className="rojo-label">*</p></label>
                 <input
                   type="text"
                   name="numero_celular1"
@@ -286,7 +308,7 @@ const FormularioInicial = () => {
                   value={aprendiz.telefono_fijo}
                   onChange={actualizarState}
                 />
-                <label>Correo Principal:</label>
+                <label>Correo Principal: <p className="rojo-label">*</p></label>
                 <input
                   type="text"
                   name="correo_principal"
@@ -301,7 +323,7 @@ const FormularioInicial = () => {
                   value={aprendiz.correo_secundario}
                   onChange={actualizarState}
                 />
-                <label>Finalización Lectiva:</label>
+                <label>Finalización Lectiva: <p className="rojo-label">*</p></label>
                 <input
                   id="fin"
                   type="date"
@@ -312,6 +334,7 @@ const FormularioInicial = () => {
                 />
                 <label>Estado de Aprobación:</label>
                 <input
+                placeholder="pediente"
                   type="text"
                   name="estado_aprobacion"
                   value={aprendiz.estado_aprobacion}
@@ -320,7 +343,7 @@ const FormularioInicial = () => {
                 />
                 <div className="datos-empresa">
                   <h3 id="datos-emp">Datos de la empresa</h3>
-                  <label>Nit:</label>
+                  <label>Nit: <p className="rojo-label">*</p></label>
                   <input
                     type="text"
                     name="empresa.nit"
@@ -368,13 +391,14 @@ const FormularioInicial = () => {
                     <button type="submit" id="save">             
                     Registrar
                   </button>
-                  <button id="ver" onClick={handleRegistroAprendices}>Ver aprendices registrados</button>
+                 
                   </div>
                 </div>
               </form>
             </div> 
             </div>
-            </div>         
+            </div>
+            </Fragment>         
       );
     };
 export default FormularioInicial;

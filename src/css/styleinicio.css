@@ -83,7 +83,7 @@
   padding: 15px;
 
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1.5px solid rgba(0, 0, 0, .05) ;
   margin-left: 43px;
   margin-bottom: 5px;
   height: 16rem;
@@ -181,5 +181,10 @@
   .title1{
     overflow: visible;
   }
-  
+  .buscar input{
+   margin-left: 0px;
+  }
+  .buscar label{
+    display: none;
+  }
 }

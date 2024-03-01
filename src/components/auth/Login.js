@@ -3,12 +3,14 @@ import React, { Fragment, useState } from 'react';
 import Axios from '../../config/axios';
 import '../../css/stylelogin.css'
 import '../../css/global.css'
-import cditi from '../../img/cditi.png'
-import logoSeep from '../../img/logo.png'
+// import cditi from '../../img/cditi-logo.svg'
+import cditi from '../../img/cditi-logo-v2.svg'
+// import logoSeep from '../../img/logo.png'
+import logoSeep from '../../img/seep-logo-verde.svg'
 import { useAuth } from '../context/AuthContext';
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
+import { Link } from 'react-router-dom';
 const Login = () => {
   const history = useHistory();
   const { login } = useAuth();
@@ -72,10 +74,16 @@ const Login = () => {
       
       <header class="encabezado-login">
         <img className='seep-img' src={logoSeep} alt="logo-SEEP" />
-        <img src={cditi} alt="logo-CDITI"/>  
+        <img className='cditi-img' src={cditi} alt="logo-CDITI"/>  
     </header>
 
     <main class="login-container">
+
+      <a href="https://proyect-seep-46bb6469e324.herokuapp.com/admin/" className="login-admin btn btn-success" >
+        USUARIO ADMIN
+      </a>
+
+      
         <form class="form-login" onSubmit={handleLogin}>
             <h1  class="titulo-login" >Iniciar sesión</h1>
             <label for="acount-type">Seleccione tipo de usuario</label>
@@ -92,7 +100,7 @@ const Login = () => {
             <input  class="input-login" type="password" placeholder="Contraseña" name="password"  id="contraseña" value={datos.password} onChange={actualizarState}  />
 
             <a  class="recupera-contraseña"  href="#">Recuperar contraseña</a>
-            <center><button  class="btns" > Iniciar Sesión </button></center>
+            <center className='btn-login'><button  class="btns " > Iniciar Sesión </button></center>
         </form>
 
     </main>

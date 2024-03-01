@@ -5,13 +5,16 @@
 }
   
   .container-fichas {
-    max-width: 800px;
+    width: 40%;
     margin: auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     top: 1rem !important;
-    height: 100vh;
+    margin-top: 3rem;
+    border: 1.5px solid rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    
   }
   .encabezado-fichas{
     height: 100px;
@@ -22,53 +25,51 @@
 
   }
   
-  h2 {
+  .container-fichas h2 {
     color: #333;
+    margin-bottom: 1.5rem !important;
   }
   
   /* Estilos del formulario */
-  form {
+ .container-fichas form {
     display: flex;
     flex-direction: column;
-    grid-gap: 10px;
+    grid-gap: 0px !important;
     
    
   }
   
-  label {
+  .container-fichas label {
     font-weight: bold;
+    display: flex;
+    align-items: center;
+
   }
   
-  input {
-    width: 100%;
-    padding: 10px;
+  .container-fichas input {
+    width: 100% ;
+    padding: 10px !important;
     margin-top: 5px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+    margin-bottom: 25px;
+    box-sizing: border-box !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    font-size: 16px !important;
   }
   .container-btn{
     display: flex;
     justify-content: center;
   }
-  button {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-    width: 10rem;
+  #registrar-aprendiz,.registrar-ficha, .listado-fichas, #btn-editar-fichas, #regresar-registro, #save, #ver {
+    border-radius: 10px;
+    width: 100%;
+   background-color: var(--color-iconos);
+    font-size: 18px;
+    font-weight: 500;
+
   }
-  #registrar-aprendiz,.registrar-ficha, .listado-fichas, #btn-editar-fichas, #regresar-registro {
-    border-radius: 5px;
-  }
-  
-  button:hover {
-    background-color: #45a049;
+  #registrar-aprendiz:hover,.registrar-ficha:hover, .listado-fichas:hover, #btn-editar-fichas:hover, #regresar-registro:hover, #save:hover, #ver:hover {
+    background-color: #39A900 !important;
   }
   
   /* Estilos de la lista de fichas */
@@ -142,4 +143,96 @@
   
   .List-fichas{
     margin-top: 2rem;
+  }
+  .cont-fichas{
+    display: flex;
+    margin-left: 5rem !important;
+
+  }
+  .btn-fichas{
+    display: flex;
+    flex-direction: column;
+    width: 15rem;
+    margin-top: 1.5rem;
+    padding-top: 4rem;
+    margin-left: 4rem;
+    gap: 1rem;
+    background-color: #F0EFF4;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    padding-left: 4px;
+    padding-right: 4px;
+    border: 1.5px solid rgba(0, 0, 0, .05) 
+  }
+  .btn-fichas-aprendiz{
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    margin-top: 1.5rem;
+    padding-top: 4rem;
+    margin-left: 5px;
+    gap: 1rem;
+    background-color: #F0EFF4; 
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05); 
+    padding-left: 4px;
+    padding-right: 4px;
+     border: 1.5px solid rgba(0, 0, 0, .05)
+  }
+  .rojo-label{
+    color: #f44336;
+  }
+  .btn-atras{
+    position: fixed !important;
+    top: 160px;
+    right: 50px;
+    border-radius: 100%;
+    padding: 10px;
+    width: 80px;
+    height: 25px;
+    text-align: center;
+    font-size: 13px;
+    /* font-family: helvetica neue, Helvetica, Arial, sans-serif; */
+    text-decoration: none;
+    color: #000;
+  }
+  .btn-atras:hover{
+    color: #000;
+  }
+  .btn-atras img{
+    width: 50px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .cont-fichas{
+      margin: 0px !important;
+      flex-direction: column ;
+    }
+    .btn-fichas{
+      margin: 0px;
+      width: 100%;
+      padding-top: 1rem;
+      gap: 5px;
+    }
+    .container-fichas{
+      width: 100%;
+      margin-top: 10px;
+    }
+    .btn-fichas-aprendiz{
+      margin-top: 1rem;
+      padding-top: 0px;
+    }
+    .btn-atras{
+      top: 80px;
+      position: absolute !important;
+      right: 10px;
+    }
+    #ver{
+      width: 80%;
+
+    }
+    .btn-fichas-aprendiz{
+      background-color: transparent;
+      border: none;
+    }
   }

@@ -1,0 +1,81 @@
+/* Reemplaza el selector body con el selector .containerGeneral para que los estilos se apliquen solo a la clase .containerGeneral */
+.containerGeneral {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.containerGeneral {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #999898;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    overflow-y: auto; /* Establece el desplazamiento vertical */
+    max-height: 780px; /* Altura máxima para mostrar el desplazamiento */
+    border: 1px solid #ccc;
+}
+
+/* Estilos para los títulos */
+.h1-titulo{
+    text-align: center;
+    font-size: 1.5rem; /* 150% del tamaño de fuente predeterminado */
+    margin-bottom: 10px; /* Añade un espacio debajo del título */
+    font-weight: 700;
+}
+
+.h2-titulo{
+    text-align: center;
+    font-size: 1.2rem; /* 150% del tamaño de fuente predeterminado */
+    margin-bottom: 10px; /* Añade un espacio debajo del título */
+    font-weight: 700;
+}
+
+/* Estilos para las tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9rem; /* 90% del tamaño de fuente predeterminado */
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Estilos para los campos de entrada */
+input[type="text"], textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    font-size: 0.9rem; /* 90% del tamaño de fuente predeterminado */
+}
+
+
+
+/* Estilos para el botón de guardar */
+.guardar-informaciong, .custom-button {
+    background-color: #39a900;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block; /* Hacer que el botón sea un bloque para centrarlo */
+    margin: 0 auto; /* Centrar el botón horizontalmente */
+    width: 150px; /* Ancho fijo para el botón */
+}
+
+.guardar-informaciong:hover, .custom-button:hover {
+    background-color: #ccc;
+}

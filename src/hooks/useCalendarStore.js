@@ -27,7 +27,7 @@ export const useCalendarStore = () => {
     const {token} = useAuth()
 
     useEffect(() => {
-        // startLoadingEvents()
+
       }, []);
 
 
@@ -61,7 +61,7 @@ export const useCalendarStore = () => {
                 });
                 dispatch(onAddNewEvent({ ...calendarEvent, id: response.data.id }));
             }
-            await startLoadingEvents(); // Cargar eventos después de agregar o actualizar
+             // Cargar eventos después de agregar o actualizar
             return response.data;
         } catch (error) {
             if( error && error.response.data.non_field_errors){

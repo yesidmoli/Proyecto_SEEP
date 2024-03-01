@@ -23,8 +23,15 @@ import PerfilAprendiz from './components/Account/PerfilAprendiz';
 //docuentos
 import Documentos from './components/Documents/Documentos';
 import DocumentosAprendices from './components/Documents/DocumentosAprendices';
-import PrivateRoute from './components/auth/ PrivateRoute';
+import FormularioInicial from './components/Fichas/FormularioInicial';
 
+import InformacionGeneral from './components/FormatoESP/InformacionGeneral';
+// import  from './components/auth/ PrivateRoute';
+
+
+//forma
+import ImagenPlaneacion from './components/prueb/InfoGeneral';
+import PDFGenerator from './components/prueb/pdfCovert';
 function App() {
   return (
     <Router>
@@ -50,6 +57,7 @@ function App() {
             <Route exact path="/planeacion" component={PDFGenerator} />
             <Route exact path="/inicio-etapa-practica" component={FormularioAprendiz} />
             <Route exact path="/bitacoras" component={Bitacoras} />
+            <Route exact path="/info-general" component={InformacionGeneral} />
 
 
           </Switch>
