@@ -22,9 +22,20 @@ body {
     height: 40%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
-  .bi-arrow-left-circle{
-    background-color: #39a900;
-    width: 70px;
+  .flecha-regreso{
+    width: 7%;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: #39a900;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .flecha{
+    font-size: 45px;
+
   }
   .section-one{
     margin-left: 10%;

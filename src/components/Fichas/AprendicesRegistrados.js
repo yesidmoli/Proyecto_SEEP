@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import clienteAxios from "../../config/axios";
 import FormularioInicial from "./FormularioInicial";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const AprendicesRegistrados = ({ editarAprendiz, eliminarAprendiz }) => {
   const [aprendices, setAprendices] = useState([]);

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import clienteAxios from "../../config/axios";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import "../layout/MainSection";
 import "../layout/Header";
 import AprendicesRegistrados from "./AprendicesRegistrados";
@@ -161,6 +162,9 @@ const FormularioInicial = () => {
       return (
         <div className="main-container">
           <header id="header">Formulario inicio etapa productiva</header>
+          <Link to={"/fichas"} className="flecha-regreso">
+          <span className="flecha" >&#10094;</span>
+        </Link>
     
           <div className="container-uno">
             <h2>Registro de Aprendices</h2>

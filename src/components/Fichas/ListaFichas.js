@@ -5,6 +5,9 @@ import FormularioFicha from "./FormularioFicha";
 const ListaFichas = ({ editarFicha, eliminarFicha }) => {
   const [fichas, setFichas] = useState([]);
   const [formularioFichas, setFormularioFichas] = useState(false);
+  const [ficha, setFicha] = useState(initialState);
+  const [fichas, setFichas] = useState([]);
+
   useEffect(() => {
     const obtenerFichas = async () => {
       try {
@@ -12,6 +15,84 @@ const ListaFichas = ({ editarFicha, eliminarFicha }) => {
         setFichas(consultarApi.data);
       } catch (error) {
         console.error("Error al obtener las fichas:", error);
+      }
+    };
+    const actualizarState = (e) => {
+      setFicha({
+        ...ficha,
+        [e.target.name]: e.target.value,
+      });
+    };
+    const enviarDatos = async (e) => {
+      e.preventDefault();
+  
+      try {
+        if (modoEdicion) {
+          // Actualizar ficha existente
+          await clienteAxios.put(`/fichas/${idEditar}`, ficha);
+          Swal.fire('¡Éxito!', 'La ficha se actualizó correctamente.', 'success');
+          
+        } else {
+          // Crear nueva ficha
+  
+          await clienteAxios.post('/api/fichas/', ficha);
+          Swal.fire('¡Éxito!', 'La ficha se registró correctamente.', 'success');
+          // Redirigir a la sección de listado de fichas
+          history.push('/#listado-fichas');
+  
+          
+        }
+  
+        // Actualizar la lista de fichas
+        const consultarFicha= await clienteAxios.get('api/fichas/');
+        setFichas(consultarFicha.data);
+  
+        // Limpiar el formulario y restablecer el estado
+        setFicha(initialState);
+        setModoEdicion(false);
+        setIdEditar(null);
+      } catch (error) {
+        console.error('Error al enviar el formulario:', error);
+        Swal.fire('Error', 'Hubo un error al procesar la solicitud.', 'error');
+      }
+    };
+    const editarFicha = (id) => {
+      // Buscar la ficha por ID
+      const fichaEditar = fichas.find((f) => f._id === id);
+  
+      // Establecer el estado con los datos de la ficha a editar
+      setFicha(fichaEditar);
+      setModoEdicion(true);
+      setIdEditar(id);
+    };
+    const eliminarFicha = async (id) => {
+      try {
+        // Mostrar ventana de confirmación
+        const confirmacion = await Swal.fire({
+          title: '¿Estás seguro?',
+          text: 'La ficha será eliminada permanentemente.',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Sí, eliminar',
+          cancelButtonText: 'Cancelar',
+        });
+    
+        // Si el usuario confirma la eliminación, proceder con la solicitud de eliminación
+        if (confirmacion.isConfirmed) {
+          await clienteAxios.delete(`/fichas/${id}`);
+    
+          // Actualizar la lista de fichas después de eliminar
+          const consultarFicha = await clienteAxios.get('api/fichas/');
+          setFichas(consultarFicha.data);
+    
+          // Mostrar mensaje de éxito
+          Swal.fire('¡Éxito!', 'La ficha se eliminó correctamente.', 'success');
+        }
+      } catch (error) {
+        console.error('Error al eliminar la ficha:', error);
+        Swal.fire('Error', 'Hubo un error al procesar la solicitud.', 'error');
       }
     };
 

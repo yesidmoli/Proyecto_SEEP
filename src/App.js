@@ -22,6 +22,7 @@ import PerfilAprendiz from './components/Account/PerfilAprendiz';
 import Documentos from './components/Documents/Documentos';
 import DocumentosAprendices from './components/Documents/DocumentosAprendices';
 import FormularioInicial from './components/Fichas/FormularioInicial';
+import ListaFichas from './components/Fichas/ListaFichas';
 // import  from './components/auth/ PrivateRoute';
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
             <Route exact path="/documentos" component={DocumentosAprendices} />
             <Route exact path="/inicio-etapa-practica" component={FormularioAprendiz} />
             <Route exact path="/bitacoras" component={Bitacoras} />
+            <Route exact path="/lista-fichas" component={ListaFichas}/>
 
 
           </Switch>
