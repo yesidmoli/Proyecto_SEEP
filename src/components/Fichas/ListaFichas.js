@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import clienteAxios from "../../config/axios";
 import FormularioFicha from "./FormularioFicha";
-
+import Swal from "sweetalert2";
 const ListaFichas = ({ editarFicha, eliminarFicha }) => {
   const [fichas, setFichas] = useState([]);
   const [formularioFichas, setFormularioFichas] = useState(false);
-  const [ficha, setFicha] = useState(initialState);
-  const [fichas, setFichas] = useState([]);
-
+  const [ficha, setFicha] = useState();
+  
+  const initialState = {
+    numero_ficha: "",
+    nombre_programa: "",
+    nivel_formacion: "",
+    horario_formacion: "",
+  };
   useEffect(() => {
     const obtenerFichas = async () => {
       try {
