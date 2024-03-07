@@ -23,6 +23,7 @@ export const FabAddNew = () => {
         <button
             className="btn btn-primary fab"
             onClick={handleClickNew}
+            onTouchStart={handleClickNew}
         >
             <i className="fas fa-plus" />
         </button>

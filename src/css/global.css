@@ -5,15 +5,19 @@
 }
 
 :root{
-    --color-primario:#39A900;
+    --color-primario:#70B22D;
     --color-menu-iconos: #e2e2e2;
     /* --color-iconos: #00955c; */
      /* --color-iconos: #39A900;  */
-    --color-iconos: #39A900; 
+    --color-iconos: #70B22D; 
     /* --color-iconos: #00324D;  */
+    --color-corp-azul :#04324D;
     
 }
 
+body, .container{
+    background-color: #f8f8f8 !important;
+}
 .menu-iconos{
     display: flex;
     flex-direction: column;
@@ -56,20 +60,34 @@
     display: flex;
     height: 7rem;
     justify-content: space-evenly;
-    border-bottom: 8px solid var(--color-iconos) ;
+    border-bottom: 8px solid #70B22D ;
     align-items: center;  
     position: sticky;
-    background-color: var(--color-iconos);
+    background-color: var(--color-corp-azul);
     width: 100%;
     
 }
 .encabezado h4{
-    color: #fbfbfb;
+    color: white;
     font-weight: 600;
 }
 .encabezado .logo{
-    max-width: 280px; 
+    max-width: 260px; 
     height: auto;
     margin: 0; 
 }
  
+@media only screen and (max-width: 768px) {
+    .encabezado .logo{
+        width: 11rem;
+    }
+    .mensaje-bienvenida{
+        display: none;
+    }
+    .encabezado{
+        justify-content: center;
+        height: 5rem;
+        border-radius: 0px 0px 20px 20px;
+        border: none;
+    }
+}

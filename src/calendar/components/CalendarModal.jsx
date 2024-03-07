@@ -11,6 +11,7 @@ import '../../css/styles.css'
 import { useCalendarStore, useUIStore } from '../../hooks';
 import AprendizSelector from '../../components/Apprentice/AprendizSelector';
 
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -27,7 +28,7 @@ const customStyles = {
     },
 };
 
-export const CalendarModal = () => {
+export const CalendarModal = ({history}) => {
 
     
 
@@ -36,12 +37,13 @@ export const CalendarModal = () => {
     const [aprendizSeleccionado , dataAprendiz] = useState('')
 
     const { isDateModalOpen, closeDateModal } = useUIStore();
-    const { startSavingEvent } = useCalendarStore();
+    const { startSavingEvent, startLoadingEvents } = useCalendarStore();
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [formValues, setFormValues] = useState({
         title: '',
         lugar: '',
         notes: '',
+        motivo_cancelacion: '',
         start: new Date(),
         end: addHours(new Date(), 2),
         tipo_visita: 'presencial', // valor por defecto para tipo_visita
@@ -49,6 +51,7 @@ export const CalendarModal = () => {
         estado: 'programada', // valor por defecto para estado
     });
 
+    console.log("este es el estado", formValues)
     
     const titleClass = useMemo(() => {
         if (!formSubmitted) return '';
@@ -111,17 +114,30 @@ export const CalendarModal = () => {
             closeDateModal();
             setFormSubmitted(false);
            
-            Swal.fire('Evento guardado correctamente', '', 'success');
+           
             
+           // Recargar la página automáticamente
+                window.location.reload();
+             Swal.fire('Evento guardado correctamente', '', 'success');
 
-
+        
         } catch (error) {
             console.error('Error al guardar el evento:', error);
-            Swal.fire({
-                icon: 'error',
-                title: error.response.data.non_field_errors,
-                text: "Intenta Nuevamente",
-            });
+
+            if(error &&  error.response.data.non_field_errors){
+                Swal.fire({
+                    icon: 'error',
+                    title: error.response.data.non_field_errors,
+                    text: "Intenta Nuevamente",
+                });
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: "Verifica que no hayan campos vacios",
+                    text: "Intenta Nuevamente",
+                });
+            }
+            
         }
     };
 
@@ -139,14 +155,15 @@ export const CalendarModal = () => {
             overlayClassName='modal-fondo'
             closeTimeoutMS={200}
         >
-            <h1> Nuevo evento </h1>
-            <hr />
-            <form onSubmit={onSubmit} className="container">
-                <div className="form-group mb-2">
-                    <label>Fecha y hora inicio</label>
+            <div className='titulo-event'>
+            <h1> Nueva Visita </h1>
+            <i class="bi bi-x-circle-fill" onClick={onCloseModal} ></i></div> 
+            <form onSubmit={onSubmit} className=" cont-form">
+                <div className="fecha">
+                    <label>Fecha y hora inicio <span className='is_rojo'>*</span></label>
                     <DatePicker
                         selected={formValues.start}
-                        className='form-control'
+                        className='form-contro'
                         onChange={(event) => onDateChanged(event, 'start')}
                         dateFormat='Pp'
                         showTimeSelect
@@ -168,15 +185,15 @@ export const CalendarModal = () => {
                     />
     </div> */}
                   <div className="form-group mb-2">
-                    <label>Aprendiz</label>
+                    <label>Aprendiz <span className='is_rojo'>*</span></label>
                     <AprendizSelector  onAprendizSeleccionada={AprendizSeleccionado}/>
                     </div>
 
                 <div className="form-group mb-2">
-                    <label>Lugar</label>
+                    <label>Lugar <span className='is_rojo'>*</span></label>
                     <input
                         type="text"
-                        className={`form-control ${titleClass}`}
+                        className={`form-contro ${titleClass}`}
                         placeholder="Ingrese el lugar"
                         name="lugar"
                         autoComplete="off"
@@ -185,30 +202,31 @@ export const CalendarModal = () => {
                     />
                 </div>
                 <div className="form-group mb-2">
-        <label>Tipo de visita</label>
+        <label>Tipo de visita  <span className='is_rojo'>*</span></label>
         <select
-            className="form-control"
+            className="form-contro"
             name="tipo_visita"
             value={formValues.tipo_visita}
             onChange={(event) => setFormValues({ ...formValues, tipo_visita: event.target.value })}
-        >
+        >   <option selected>Seleccione una opción</option>
             <option value="presencial">Presencial</option>
             <option value="virtual">Virtual</option>
         </select>
     </div>
     <div className="form-group mb-2">
-        <label>Número de visita</label>
-        <input
-            type="number"
-            className="form-control"
-            placeholder="Número de visita"
-            name="numero_visita"
+        <label>Número de visita  <span className='is_rojo'>*</span></label>
+        <select
+            className="form-contro"
+            name="tipo_visita"
             value={formValues.numero_visita}
             onChange={(event) => setFormValues({ ...formValues, numero_visita: event.target.value })}
-        />
+        >   <option selected>Seleccione numero visita</option>
+            <option value="1">Visita 1</option>
+            <option value="2">Visita 2</option>
+            <option value="3">Visita 3</option>
+        </select>
     </div>
-                <hr />
-                <div className="form-group mb-2">
+                {/* <div className="form-group mb-2">
                     <label>Titulo y notas</label>
                     <input
                         type="text"
@@ -220,19 +238,21 @@ export const CalendarModal = () => {
                         onChange={(event) => setFormValues({ ...formValues, title: event.target.value })}
                     />
                     <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
-                </div>
+                </div> */}
                 <div className="form-group mb-2">
+                <label>Observaciones</label>
                     <textarea
                         type="text"
-                        className="form-control"
-                        placeholder="Notas"
+                        className="form-contro"
+                        placeholder="Observaciones"
                         rows="5"
                         name="notes"
                         value={formValues.notes}
                         onChange={(event) => setFormValues({ ...formValues, notes: event.target.value })}
                     ></textarea>
-                    <small id="emailHelp" className="form-text text-muted">Información adicional</small>
+                    {/* <small id="emailHelp" className="form-text text-muted">Información adicional</small> */}
                 </div>
+                <div className='btn-guardar'>
                 <button
                     type="submit"
                     className="btn btn-outline-primary btn-block"
@@ -240,7 +260,11 @@ export const CalendarModal = () => {
                     <i className="far fa-save"></i>
                     <span> Guardar</span>
                 </button>
+                </div>
+                
             </form>
         </Modal>
     );
 };
+
+export default withRouter(CalendarModal);

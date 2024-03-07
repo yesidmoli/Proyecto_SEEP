@@ -1,6 +1,8 @@
-/* Modal */
+
 .ReactModalPortal > div{
   opacity: 0 !important;
+  
+
 }
 
 .ReactModalPortal .ReactModal__Overlay {
@@ -9,6 +11,7 @@
   justify-content: center !important;
   transition: opacity .2s ease-in-out !important;
   z-index: 999 !important;
+  
 }
 
 .modal-fondo {
@@ -18,6 +21,7 @@
   right: 0 !important;
   top: 0 !important;
   position: fixed !important;
+
 }
 
 .ReactModalPortal .ReactModal__Overlay--after-open {
@@ -36,7 +40,6 @@
   max-height: 620px !important;
   max-width: 500px !important;
   outline: none !important;
-  padding: 10px !important;
 }
 
 .fab{
@@ -48,6 +51,7 @@
   right: 25px !important;
   width: 5rem;
   height: 5rem;
+  z-index: 1000;
 }
 
 .fab-danger{
@@ -61,4 +65,14 @@
 }
 .calendario {
   padding-top: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .modal{
+    width: 90%;
+    height: 33rem;
+    transform: translate(-50%, -55%) !important;
+  }
+  
+  
 }

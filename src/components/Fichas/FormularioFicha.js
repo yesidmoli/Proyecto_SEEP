@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import clienteAxios from '../../config/axios';
 import ListaFichas from './ListaFichas';
 import '../../../src/css/formularioFichas.css'
@@ -10,8 +10,9 @@ import '../../css/bitacoras.css';
 import '../layout/Header';
 import '../layout/MainSection';
 
-
-
+import MainSection from '../layout/MainSection';
+import Header from '../layout/Header';
+import Apps from '../layout/menu/App';
 const FormularioFicha = ({history}) => {
 
 
@@ -138,21 +139,39 @@ const FormularioFicha = ({history}) => {
 
 
   return (
-    <div className='container-fichas'> 
-    <div className='links'>
-     <Link to={"/nuevo-aprendiz"} aria-label="icon" className="iconLink">
+    <Fragment>
+
+     
+      <Header />
+      <MainSection />
+      <Apps />
+    <div className='container cont-fichas'>
+
+    <div className='btn-fichas'>
+
+
+    <Link to={"/nuevo-aprendiz"} aria-label="icon" className="iconLink ">
+     <button id='registrar-aprendiz'>Registrar Aprendiz</button>
+        </Link>
+      <button className='listado-fichas' onClick={handleCargarFichas} >Listado de Fichas</button>
+
+        <Link to={"/nuevo-aprendiz"} aria-label="icon" className="iconLink ">
      <button id='registrar-aprendiz'>Registrar Aprendiz</button>
         </Link>
         <Link to={"/"} className="flecha-regreso">
           <span className="flecha" >&#10094;</span>
         </Link>
         </div>
+    </div>
     
-      <h2>Registro de Fichas</h2>
+
+    
+    <div className='container-fichas'> 
+      <h2>Añadir Ficha</h2>
 
       
       <form onSubmit={enviarDatos}>
-        <label>Número de Ficha:</label>
+        <label>Número de Ficha <p className="rojo-label">*</p></label>
         <input
           type="text"
           name="numero_ficha"
@@ -160,7 +179,7 @@ const FormularioFicha = ({history}) => {
           onChange={actualizarState}
         />
 
-        <label>Nombre del Programa:</label>
+        <label>Nombre del Programa <p className="rojo-label">*</p></label>
         <input
           type="text"
           name="nombre_programa"
@@ -168,7 +187,7 @@ const FormularioFicha = ({history}) => {
           onChange={actualizarState}
         />
 
-        <label>Nivel de Formación:</label>
+        <label>Nivel de Formación <p className="rojo-label">*</p></label>
         <input
           type="text"
           name="nivel_formacion"
@@ -176,7 +195,7 @@ const FormularioFicha = ({history}) => {
           onChange={actualizarState}
         />
 
-        <label>Horario de Formación:</label>
+        <label>Horario de Formación <p className="rojo-label">*</p></label>
         <input
           type="text"
           name="horario_formacion"
@@ -186,11 +205,11 @@ const FormularioFicha = ({history}) => {
 
         <div className='container-btn'>
         <button className='registrar-ficha' type="submit">{modoEdicion ? 'Actualizar' : 'Registrar'}</button>
-        <button className='listado-fichas' onClick={handleCargarFichas} >Listado de Fichas</button>
         </div>
        
       </form>
     </div>
+    </Fragment>
   );
 };
 

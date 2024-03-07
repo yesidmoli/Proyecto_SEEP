@@ -8,18 +8,48 @@ body{
 }
 #header{
     height: 100px;
-    background-color: #39a900;
-    font-size: 40px;
+    background-color: var(--color-iconos);
+    font-size:40px;
     color: white;
-    padding: 20px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 0px 0px 30px 30px;
+    font-weight: 500;
 }
 .container-uno{
-    width: 70%;
-    background-color: #ccc;
+    width: 50%;
+    background-color: #fff;
     margin: auto;
     margin-top: 30px;
     padding: 15px;
     border-radius: 10px;
+    border: 1.5px solid rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    height: 48rem;
+    overflow: scroll;
+}
+.container-uno form{
+    gap: 0px;
+}
+.container-uno h2 ,#datos-emp{
+    margin-bottom: 1.5rem !important;
+    border-bottom: 1.5px solid rgba(0, 0, 0, .05);
+    background-color: #f8f8f8;
+    padding: 10px;
+    color: #04324D;
+}
+#save{
+    margin-top: 1rem;
+}
+.container-uno input{
+    margin-bottom: 20px;
+    background-color: #f8f8f8 !important;
+    height: 2rem;
+}
+.container-uno label{
+    display: flex;
+    gap: 5px;
+    align-items: center;
 }
 /* .contenedor-dos{
     padding: 20px;
@@ -37,11 +67,12 @@ body{
     justify-content: center;
     
 }
-#save, #ver{
+/* #save, #ver{
     border-radius: 5px;
     margin: 20px;
     height: 70px;
-} 
+    width: 100%;
+}  */
 .container-btn{
     padding: 20px;
     gap: 100px;
@@ -170,4 +201,36 @@ input[type="tel"] {
     text-align: center;
     font-weight: 500;
     padding: 2px;
+}
+@media only screen and (max-width: 768px) {
+    .nombre-documento{
+        margin: 0px;
+        width: 100%;
+        justify-content: space-evenly;
+        border-bottom: 1px solid #f8f8f8;
+    }
+    .info-formacion img{
+        width: 100px;
+        display: none;
+    }
+    .info-formacion{
+        gap: 0px;
+        margin-top: 1rem;
+        /* flex-direction: column;
+        align-items: normal;
+        justify-content: center; */
+        margin-bottom: 10px;
+    }
+    .container-datos-aprendiz{
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+        gap: 8px;
+    }
+    .container-uno{
+        width: 100%;
+    }
+    #header{
+        font-size: 25px;
+    }
+
 }

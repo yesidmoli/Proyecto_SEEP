@@ -9,17 +9,26 @@ body{
 }
 .encabezado-login {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    align-items: center; 
-    height: 13.5rem;
+    grid-template-columns: 50% 50%; 
+    place-items: center;
+    /* height: 13.5rem; */
     border-bottom: 8px solid var(--color-primario);
+    background-color: var(--color-corp-azul);
 }
 .encabezado-login img {
     max-width: 80%; 
    
     margin: 0; 
 }
-
+.cditi-img{
+    width: 50%; 
+}
+.encabezado-login .seep-img{
+    
+}
+.btn-login{
+    padding: 10px !important;
+}
 .login-container{
     display: grid;
     place-content: center;
@@ -29,7 +38,7 @@ body{
 }
 
 .form-login{
-    width: 300px;
+    width: 300px; 
     background: #D2D2D2;
     margin-top: 1.5rem;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2); 
@@ -41,7 +50,7 @@ body{
 .titulo-login {
     font-size: 30px;
     margin-bottom: 20px;
-    text-align: center;
+
     color: black;
 
 }
@@ -55,10 +64,36 @@ label {
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    height: 3rem !important;
 }
 
 .recupera-contraseña {
     text-decoration: none;
     color: var(--color-primario);
 }
+.login-admin{
+    background-color: var(--color-primario) !important;
+    border: none !important;
+    margin-top: 1rem;
+}
 
+@media only screen and (max-width: 768px) {
+    .encabezado-login img{
+       max-width: 100%;
+    }
+    .encabezado-login{
+        height: 8rem;
+        border-bottom: none;
+        border-radius: 0px 0px 20px 20px;
+    }
+    .seep-img{
+        width: 30rem;
+    }
+    .cditi-img{
+        width: 100%; 
+    }
+    .login-admin{
+        margin-top: 10px;
+    }
+   
+}

@@ -10,7 +10,7 @@ import '../../css/documentos.css';
 
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
-
+import Apps from "../layout/menu/App";
 function DocumentosAprendices (){
 
     const {token} = useAuth()
@@ -53,12 +53,14 @@ function DocumentosAprendices (){
       };
     return(
         <Fragment>
+          <Apps />
 
             <Header />
             
-            <section className="container conten-documentos">
+        <section className="container conten-documentos">
                 <MainSection />
                 <div className="react-search-box ">
+                
                 <ReactSearchBox
         placeholder="Buscar Aprendiz..."
         value={searchValue}
@@ -72,7 +74,9 @@ function DocumentosAprendices (){
       />
                 </div>
 
-    <ul className="list-aprendices">{searchValue ? (
+    <ul className="list-aprendices">
+      
+      {searchValue ? (
     // Si hay un valor de búsqueda, aplica el filtro a deudas
     aprendices.filter((item) =>
         item.nombres.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -87,7 +91,7 @@ function DocumentosAprendices (){
 
         <li className="item-aprendiz" key={filteredItem.key}>
         <i class="bi bi-file-earmark-pdf-fill"></i>
-        <div className="datos-aprendiz">
+        <div className="datos-aprendiz-doc">
        
         <h5>{filteredItem.nombres} {filteredItem.apellidos}</h5>
         <h6> {filteredItem.tipo_documento}:{filteredItem.numero_documento}</h6>
@@ -106,7 +110,7 @@ function DocumentosAprendices (){
         <Link to={`/documentos-aprendiz/${item.id}`} className="item-link">
       <li className="item-aprendiz" key={item.key}> 
       <i class="bi bi-file-earmark-pdf-fill"></i>
-      <div className="datos-aprendiz">
+      <div className="datos-aprendiz-doc">
       
         <h5>{item.nombres} {item.apellidos}</h5>
         <h6>{item.tipo_documento}: {item.numero_documento}</h6>

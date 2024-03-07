@@ -1,13 +1,18 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import '../../css/documentos.css';
 import VisualizarDocumentos from "./VisualizarDocumentos";
 import Header from "../layout/Header";
 import MainSection from "../layout/MainSection";
 import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
+import Apps from "../layout/menu/App";
+import { useAuth } from "../context/AuthContext";
+
 const Documentos = (props) => {
 
     const {id} = props.match.params;
+
+    const {token} = useAuth()
     
     const [seleccion, setSeleccion] = useState('');
     const [mostrarCampoAdicional, setMostrarCampoAdicional] = useState(false);
@@ -18,6 +23,8 @@ const Documentos = (props) => {
         "is_bitacora": false,
         "aprendiz": id
     });
+
+    const [documentos, setDocumentos] = useState([]);
 
     console.log("ESto es lo que se va a enviar" , datosForm)
 
@@ -80,6 +87,9 @@ const Documentos = (props) => {
           // Manejar la respuesta de la API
           console.log('Documento cargado con éxito:', response.data);
           Swal.fire('¡Éxito!', 'Registro Exitoso.', 'success');
+          setMostrarDocumentos(true);
+
+          fetchDocumentos();
   
           // // Actualizar el estado para mostrar el componente de VisualizarDocumentos
           // setMostrarDocumentos(true);
@@ -98,13 +108,37 @@ const Documentos = (props) => {
       }
   }
 
-    if (mostrarDocumentos) {
-        // Si mostrarDocumentos es verdadero, renderiza el componente VisualizarDocumentos
-        return <VisualizarDocumentos />;
-    }
+    // if (mostrarDocumentos) {
+    //     // Si mostrarDocumentos es verdadero, renderiza el componente VisualizarDocumentos
+    //     return <VisualizarDocumentos />;
+    // }
 
+   
+        const fetchDocumentos = async () => {
+            try {
+              
+                // Realizar la solicitud GET a la API con Axios, incluyendo el parámetro aprendiz_id y el token
+                const response = await clienteAxios.get(`api/documentacion-aprendiz/?aprendiz_id=${id}`, {
+                    headers: {
+                        Authorization: `Token ${token}`
+                    }
+                });
+
+                setDocumentos(response.data);
+            } catch (error) {
+                console.error("Error al obtener los documentos:", error);
+            }
+        };
+
+        
+   
+    useEffect(() => {
+        fetchDocumentos();
+    }, [id]);
+    
     return (
         <Fragment>
+          <Apps />
             <Header />
             <div className="container cont-doc">
                 <MainSection />
@@ -154,7 +188,7 @@ const Documentos = (props) => {
                         </div>
                     </form>
                 </section>
-                <VisualizarDocumentos  id_aprendiz={id}/>
+                <VisualizarDocumentos documentos={documentos} />
             </div>
         </Fragment>
     )

@@ -12,7 +12,9 @@
     /* background-color: #f8f8f8; */
   }
   #file{
-    height: 50px;
+  
+    width: 100%;
+   
   }
   #date{
     display: flex;
@@ -103,7 +105,10 @@
     /* box-shadow: 0 0 10px rgba(48, 48, 48, 0.1); */
     /* margin-bottom: 5px; */
     /* border-radius: 10px; */
-    border-bottom: 1px solid rgb(185, 184, 184);
+    border: 1.5px solid rgba(0, 0, 0, .05);
+    background-color: #F0EFF4;
+    border-radius: 10px;
+    margin-bottom: 5px;
  
   }
   .item-aprendiz i {
@@ -123,7 +128,7 @@
     padding: 0px;
     margin-top: 3rem;
   }
-  .datos-aprendiz{
+  .datos-aprendiz-doc{
     display: flex;
 
     flex-direction: column;
@@ -171,3 +176,27 @@
  overflow: scroll;
 
  }
+ .my-custom-input-class{
+  width: auto!important;
+}
+
+@media only screen and (max-width: 768px) {
+  .document-container{
+    width: 100%;
+  }
+  .input-doc label{
+    width: 100%;
+  }
+  .input-doc{
+    display: block;
+  }
+  .item-link{
+    width: 100% !important;
+  }
+  /* .input-doc select, .file{
+
+    width: 15rem;
+
+  } */
+}
+

@@ -1,5 +1,6 @@
 
 import React, { Fragment, useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import clienteAxios from '../../config/axios';
 import '../layout/Header';
 import '../layout/MainSection';
@@ -7,14 +8,20 @@ import '../../../src/css/styleinicio.css'
 import Header from '../layout/Header';
 import MainSection from '../layout/MainSection';
 
+import ReactSearchBox from "react-search-box";
+
+import logoSena from '../../img/logo-sena.png'
 //imagenes
 import iconoBuscar from'../../img/buscar.jpeg' 
 
 import InfoFicha from '../Fichas/InfoFicha';
-
 import { useAuth } from '../context/AuthContext';
-
+import Apps from '../layout/menu/App';
 const Inicio = () => {
+
+
+  const [searchValue, setSearchValue] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
 
   const [fichas, guardarFicha] = useState([]) 
 
@@ -38,8 +45,14 @@ const Inicio = () => {
   //es un hook, me controla toda la vida de los componentes, es decir me permite interactuar con todos los componentes
   useEffect( () => {
       consultarApi();
+      setFilteredData(fichas);
   }, []);
 
+  //   actualizar el estado searchValue con el valor de búsqueda ingresado por el usuario
+  const handleSearch = (name) => {
+    setSearchValue(name);
+
+  };
 
   // const [fichas, setFichas] = useState([]);
 
@@ -52,6 +65,7 @@ const Inicio = () => {
 
   return (
     <Fragment>
+      <Apps />
     <Header />
    <main className='container'> 
    <MainSection />
@@ -62,23 +76,75 @@ const Inicio = () => {
       <div className="fichas">
         <h1>Programas y fichas de formación</h1>
           <div className="buscar">
-            <img src={iconoBuscar} alt="icon-buscar"/>
+            <i class="bi bi-search"></i>
             <label htmlFor="buscar">Palabras clave:</label>
-            <input  type="search" className="form-control" />
-            <button  className="btn-buscar">Buscar</button>
+            {/* <input  type="search" className="form-control" />
+            <button  className="btn-buscar">Buscar</button> */}
+             <ReactSearchBox
+        placeholder="Buscar ..."
+        value={searchValue}
+        onChange={handleSearch}
+        data={filteredData}
+        fuseConfigs={{ threshold: 0.2 }}
+        inputHeight="3rem"
+        
+        iconBoxSize={"5rem"}
+        inputFontSize="1.3rem"
+      />
           </div>
+
     </div>
+    
 
     <section class="info-fichas">
-    {fichas.map(ficha => (
-        <InfoFicha
-          key={ficha.id}
-          ficha = {ficha}
-        />
-      ))}
-      
-    </section>
-    
+  {searchValue ? (
+    // Si hay un valor de búsqueda, aplica el filtro a deudas
+    fichas
+      .filter(
+        (item) =>
+          item.nombre_programa
+            .toLowerCase()
+            .includes(searchValue.toLowerCase()) ||
+          item.nivel_formacion
+            .toLowerCase()
+            .includes(searchValue.toLowerCase()) ||
+          item.numero_ficha.includes(searchValue.toLowerCase())
+      )
+      .map((filteredItem) => (
+        <Link
+          className="ficha-info"
+          to={`/lista-aprendices/${filteredItem.numero_ficha}/${filteredItem.nombre_programa}`}
+        >
+          <div className="rectangulo-ficha">
+            <div className="logo-info">
+              <img src={logoSena} width="90" alt="lista" />
+            </div>
+            <div className="texto-info">
+              <Link
+                className="title1"
+                to={`/lista-aprendices/${filteredItem.numero_ficha}/${filteredItem.nombre_programa}`}
+              >
+                {filteredItem.nombre_programa}
+              </Link>
+              <p className="title2">{filteredItem.nombre_programa}</p>
+              <p className="aprendiz">{filteredItem.nivel_formacion}</p>
+              <div className="codigo-ficha">
+                <p className="ficha">Ficha:</p>
+                <p className="numero-ficha">{filteredItem.numero_ficha}</p>
+              </div>
+            </div>
+          </div>
+        </Link>
+      ))
+  ) : (
+    // Si no hay un valor de búsqueda, muestra todas las fichas
+    fichas.map((ficha) => (
+      <InfoFicha key={ficha.id} ficha={ficha} />
+    ))
+  )}
+</section>
+
+  
     </section>
     
     </main>

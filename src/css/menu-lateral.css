@@ -4,7 +4,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    background: var(--color-iconos);
+    background: var(--color-corp-azul);
     display: inline-block;
     height: 100vh;
     position: absolute;
@@ -51,7 +51,7 @@
 .navMenuLat li div {
     display: none;
     z-index: 1;
-    background: #8fc73e;
+    background: var( --color-primario);
     height: 8vh !important;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .navMenuLat li:hover i {
-    background: #8fc73e;
+    background: var( --color-primario);
     color: white;
 }
 
@@ -77,9 +77,35 @@
     line-height: 8vh !important;
     
 }
+.navMenuLa{
+    list-style: none;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    /* #168A45 */
+}
+.navMenuLa li{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 
+.navMenuLa div{
+    color: white;
+    font-weight: 600;
+}
+
+.a-logout{
+    font-size: 3rem;
+    margin-top: 1.5rem;
+    color: white;
+}
 @media all and (max-width: 25em) {
     .navMenuLat {
+        
         list-style: none;
         padding: 0;
         margin: 0;
@@ -92,4 +118,10 @@
         resize: both;
         zoom: 110%;
     }
+}
+@media only screen and (max-width: 768px) {
+    .navMenuLat{
+        display: none;
+    }
+    
 }

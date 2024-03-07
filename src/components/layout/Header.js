@@ -4,7 +4,8 @@ import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useHistory } from 'react-router-dom';
 import '../../../src/css/global.css'
-import logo from '../../img/seepLogo.png';
+import logo from '../../img/seep-logo-verde.svg';
+// import logo from '../../img/seep-logo-v2.svg';
 
 
 const Header = () => {
@@ -35,7 +36,7 @@ if (localStorage.getItem('datosPerfil')) {
   return (
     <header className="encabezado">
       <img className="logo" src={logo} alt="logo-SEEP" />
-      <div>
+      <div className='mensaje-bienvenida'>
         <h4>Bienvenido(a) {nombre} {apellidos}</h4>
         <a onClick={handleLogout} className="cerrar-sesion" href="#">Cerrar sesión</a>
       </div>

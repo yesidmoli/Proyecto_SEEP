@@ -4,7 +4,7 @@ import EditarCuenta from "./EditarCuenta";
 import Header from "../layout/Header";
 import MainSection from "../layout/MainSection";
 import da from "date-fns/locale/da/index.js";
-
+import Apps from "../layout/menu/App";
 const PerfilAprendiz = () => {
   const [mostrarEdicion, setMostrarEdicion] = useState(false);
   
@@ -33,6 +33,7 @@ const PerfilAprendiz = () => {
   };
     return (
       <Fragment>
+        <Apps />
         <Header />
         <main className="container">
           <MainSection />

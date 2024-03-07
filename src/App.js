@@ -12,6 +12,8 @@ import ListaAprendices from './components/Fichas/ListaAprendices';
 import Login from './components/auth/Login';
 import InfoAprediz from './components/Apprentice/InfoAprendiz';
 
+import Apps from './components/layout/menu/App';
+
 import MyCalendar from './components/calendario';
 import CalendarPage from './calendar/pages/CalendarPage';
 
@@ -23,12 +25,19 @@ import Documentos from './components/Documents/Documentos';
 import DocumentosAprendices from './components/Documents/DocumentosAprendices';
 import FormularioInicial from './components/Fichas/FormularioInicial';
 import ListaFichas from './components/Fichas/ListaFichas';
+
+import InformacionGeneral from './components/FormatoESP/InformacionGeneral';
 // import  from './components/auth/ PrivateRoute';
 
+
+//forma
+import ImagenPlaneacion from './components/prueb/InfoGeneral';
+import PDFGenerator from './components/prueb/pdfCovert';
 function App() {
   return (
     <Router>
       <Fragment>
+        {/* <Apps/> */}
         {/* <Header /> */}
        
         {/* <MainSection /> */}
@@ -46,9 +55,11 @@ function App() {
             <Route exact path="/perfil-aprendiz" component={PerfilAprendiz} />
             <Route exact path="/documentos-aprendiz/:id" component={Documentos} />
             <Route exact path="/documentos" component={DocumentosAprendices} />
+            <Route exact path="/planeacion" component={PDFGenerator} />
             <Route exact path="/inicio-etapa-practica" component={FormularioAprendiz} />
             <Route exact path="/bitacoras" component={Bitacoras} />
             <Route exact path="/lista-fichas" component={ListaFichas}/>
+            <Route exact path="/info-general" component={InformacionGeneral} />
 
 
           </Switch>

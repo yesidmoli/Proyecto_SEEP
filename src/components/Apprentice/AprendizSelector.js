@@ -55,8 +55,6 @@ const AprendizSelector = ({onAprendizSeleccionada}) => {
   }
   return (
     <div className='select-venta classN'>
-      <label for="venta"></label>
-
       <Select 
                   className="select"
                   styles={customStyles}

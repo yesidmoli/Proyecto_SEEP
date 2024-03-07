@@ -8,6 +8,7 @@ import '../../css/styleaprendiz.css'
 import React, { useState, useEffect } from 'react';
 import clienteAxios from '../../config/axios';
 import Swal from 'sweetalert2'
+import Apps from "../layout/menu/App";
 function InfoAprediz(props){
    
  //Extrae la propiedad numero de ficha
@@ -67,6 +68,7 @@ function InfoAprediz(props){
     return(
 
         <Fragment>
+            <Apps />
             <Header />
             <main className="container">
             <MainSection />

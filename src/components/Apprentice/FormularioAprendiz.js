@@ -153,10 +153,10 @@ const FormularioAprendiz = () => {
       <header id="header">Formulario inicio etapa productiva</header>
 
       <div className="container-uno">
-        <h2>Registro de Aprendices</h2>
+        <h2>Datos del Aprendiz</h2>
         <div className="form">
           <form onSubmit={enviarDatos}>
-            <label>Número de Ficha:</label>
+            <label>Número de Ficha <p className="rojo-label">*</p></label>
             <input
               type="text"
               name="numero_ficha"
@@ -164,7 +164,7 @@ const FormularioAprendiz = () => {
               onChange={actualizarState}
               required
             />
-            <label>Nombres:</label>
+            <label>Nombres <p className="rojo-label">*</p></label>
             <input
               type="text"
               name="nombres"
@@ -172,7 +172,7 @@ const FormularioAprendiz = () => {
               onChange={actualizarState}
               required
             />
-            <label>Apellidos:</label>
+            <label>Apellidos <p className="rojo-label">*</p></label>
             <input
               type="text"
               name="apellidos"
@@ -180,7 +180,7 @@ const FormularioAprendiz = () => {
               onChange={actualizarState}
               required
             />
-            <label>Tipo de Documento:</label>
+            <label>Tipo de Documento <p className="rojo-label">*</p></label>
             <input
               type="text"
               name="tipo_documento"
@@ -188,7 +188,7 @@ const FormularioAprendiz = () => {
               onChange={actualizarState}
               required
             />
-            <label>Número de Documento:</label>
+            <label>Número de Documento <p className="rojo-label">*</p></label>
             <input
               type="text"
               name="numero_documento"
@@ -196,7 +196,7 @@ const FormularioAprendiz = () => {
               onChange={actualizarState}
               required
             />
-            <label>Fecha de Expedición:</label>
+            <label>Fecha de Expedición <p className="rojo-label">*</p></label>
             <input
               id="fecha_exp"
               type="date"
@@ -205,7 +205,7 @@ const FormularioAprendiz = () => {
               onChange={actualizarState}
               required
             />
-            <label>Lugar de Expedición:</label>
+            <label>Lugar de Expedición <p className="rojo-label">*</p></label>
             <input
               type="text"
               name="lugar_expedicion"
@@ -213,7 +213,7 @@ const FormularioAprendiz = () => {
               onChange={actualizarState}
               required
             />
-            <label>Fecha de Nacimiento:</label>
+            <label>Fecha de Nacimiento <p className="rojo-label">*</p></label>
             <input
               id="fecha-nac"
               type="date"
@@ -222,7 +222,7 @@ const FormularioAprendiz = () => {
               onChange={actualizarState}
               required
             />
-            <label>Sexo:</label>
+            <label>Sexo <p className="rojo-label">*</p></label>
             <input
               type="text"
               name="sexo"
@@ -230,7 +230,7 @@ const FormularioAprendiz = () => {
               onChange={actualizarState}
               required
             />
-            <label>Dirección Domicilio:</label>
+            <label>Dirección Domicilio <p className="rojo-label">*</p></label>
             <input
               type="text"
               name="direccion_domicilio"
@@ -238,7 +238,7 @@ const FormularioAprendiz = () => {
               onChange={actualizarState}
               required
             />
-            <label>Municipio:</label>
+            <label>Municipio <p className="rojo-label">*</p></label>
             <input
               type="text"
               name="municipio"
@@ -246,7 +246,7 @@ const FormularioAprendiz = () => {
               onChange={actualizarState}
               required
             />
-            <label>Departamento:</label>
+            <label>Departamento <p className="rojo-label">*</p></label>
             <input
               type="text"
               name="departamento"
@@ -254,7 +254,7 @@ const FormularioAprendiz = () => {
               onChange={actualizarState}
               required
             />
-            <label>Número de Celular 1:</label>
+            <label>Número de Celular 1 <p className="rojo-label">*</p></label>
             <input
               type="text"
               name="numero_celular1"
@@ -276,7 +276,7 @@ const FormularioAprendiz = () => {
               value={aprendiz.telefono_fijo}
               onChange={actualizarState}
             />
-            <label>Correo Principal:</label>
+            <label>Correo Principal <p className="rojo-label">*</p></label>
             <input
               type="text"
               name="correo_principal"
@@ -291,7 +291,7 @@ const FormularioAprendiz = () => {
               value={aprendiz.correo_secundario}
               onChange={actualizarState}
             />
-            <label>Finalización Lectiva:</label>
+            <label>Finalización Lectiva <p className="rojo-label">*</p></label>
             <input
               id="fin"
               type="date"
@@ -302,6 +302,7 @@ const FormularioAprendiz = () => {
             />
             <label>Estado de Aprobación:</label>
             <input
+            placeholder="Pendiente"
               type="text"
               name="estado_aprobacion"
               value={aprendiz.estado_aprobacion}
@@ -310,7 +311,7 @@ const FormularioAprendiz = () => {
             />
             <div className="datos-empresa">
               <h3 id="datos-emp">Datos de la empresa</h3>
-              <label>Nit:</label>
+              <label>Nit <p className="rojo-label">*</p></label>
               <input
                 type="text"
                 name="empresa.nit"
@@ -318,7 +319,7 @@ const FormularioAprendiz = () => {
                 onChange={actualizarState}
                 required
               ></input>
-              <label>Empresa:</label>
+              <label>Empresa </label>
               <input
                 type="text"
                 name="empresa.razon_social"

@@ -7,6 +7,7 @@ import {Link } from "react-router-dom";
 import Header from "../layout/Header";
 import MainSection from "../layout/MainSection";
 import logoverde  from '../../../src/img/logo-sena.png'
+import Apps from "../layout/menu/App";
 function ListaAprendices(props){
 
     //Extrae la propiedad numero de ficha
@@ -37,6 +38,7 @@ function ListaAprendices(props){
     }
     return(
         <Fragment>
+            <Apps />
             <Header />
             <main className="container">
                 <MainSection />

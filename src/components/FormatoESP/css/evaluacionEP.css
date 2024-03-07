@@ -1,0 +1,105 @@
+.container_evaluacionEP {
+    font-family: Arial, sans-serif;
+     max-width: 900px;  
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #999898;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    overflow-y: auto; /* Establece el desplazamiento vertical */
+    max-height: 780px; /* Altura máxima para mostrar el desplazamiento */
+}
+
+.h1-evaluacion {
+    text-align: center;
+    font-size: 1.5rem; /* 150% del tamaño de fuente predeterminado */
+    margin-bottom: 10px; /* Añade un espacio debajo del título */
+    font-weight: 700;
+}
+
+.h2-evaluacion {
+    margin-right: 60%;
+    font-size: 1.1rem; /* 150% del tamaño de fuente predeterminado */
+    margin-bottom: 10px; /* Añade un espacio debajo del título */
+    font-weight: 700;
+    
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 1px solid #ccc; /* Hacer los bordes más sutiles */
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc; /* Hacer los bordes más sutiles */
+    font-size: 90%;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+input[type="text"], textarea{
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    text-align: center; /* Alinear al centro */
+}
+
+#guardar-evaluacionep[type="button"] {
+    background-color: #39a900;
+    margin: 20px auto;/* Alinear al centro */
+    margin-left: 40%;
+    display: block;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#guardar-evaluacionep[type="button"]:hover {
+    background-color: #949693; /* Cambiar color al pasar el ratón */
+}
+
+#observaciones{
+    width: 128%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#observaciones th {
+    width: 20%;
+    padding: 10px;
+    background-color: #ddd;
+
+}
+
+
+#ciudad-y-fecha {
+    margin-bottom: 20px; /* Espacio entre este div y otros elementos */
+}
+
+#ciudad-y-fecha p {
+    margin-bottom: 10px; /* Espacio entre el párrafo y el input */
+    font-size: 16px; /* Tamaño de fuente */
+    color: #333; /* Color del texto */
+}
+
+#fechaElaboracion {
+    width: 100%; /* Ancho completo del contenedor */
+    padding: 8px; /* Espaciado interno */
+    border-radius: 4px; /* Bordes redondeados */
+    border: 1px solid #ccc; /* Borde del input */
+    box-sizing: border-box; /* Considerar borde y padding en el ancho */
+}
+
+
+  

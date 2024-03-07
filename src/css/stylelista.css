@@ -118,3 +118,35 @@ body{
     color: #00324D;
     text-align: center;
 }
+@media only screen and (max-width: 768px) {
+    .contenedor-lista{
+        flex-direction: column;
+        height: auto;
+    }
+    .ficha .info{
+        width: 100%;
+        margin-top: 5px;
+        padding: 10px;
+    }
+    .info img{
+        display: none;
+    }
+    .seleccion{
+        display: none;
+    }
+    .texto{
+        margin-top: 0px;
+    }
+    .lista{
+        width: 100%;
+        margin: 0px;
+    }
+    .titulo-aprendices{
+
+        margin: 0px;
+        font-size: 2rem;
+    }
+    .lista-aprendices li a{
+        color: var(--color-iconos);
+    }
+}

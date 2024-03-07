@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../../../src/css/styleinicio.css'
 //imagenes
-import logoSena from '../../img/logoSenaNa.png'
+import logoSena from '../../img/sena-logo.svg'
 import '../layout/Header';
 import '../layout/MainSection';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';

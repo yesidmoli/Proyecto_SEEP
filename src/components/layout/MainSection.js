@@ -8,8 +8,9 @@ import { Link } from 'react-router-dom';
 
 
 const MainSection = () => {
+
   return (
-    <ul className="navMenuLat" role="list" style={{ zIndex: 1033 }}>
+    <ul className={"navMenuLat "} role="list" style={{ zIndex: 1033 }}>
       <li>
         <Link to={"/"} aria-label="icon" className="iconLink">
           <i alt="icon" className="iconTamano iconMenuLateral bi bi-house"></i>

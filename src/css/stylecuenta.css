@@ -55,7 +55,7 @@ body{
     margin-left: 20px;
     
 }
-input{
+.container-info-cuenta2 input{
     height: 29px;
     width: 30%;
     display: grid;
@@ -105,4 +105,19 @@ input{
 center{
     padding: 40px;
 } 
-  
+@media only screen and (max-width: 768px) {
+    .bienvenido{
+        text-align: center;
+        font-weight: 400;
+    }
+    .nombre-usuario{
+        text-align: center;
+        margin: 0px;
+        margin-top: 2rem;
+        
+    }
+    .datos{
+        width: 100%;
+        height: 40%;
+    }
+}
