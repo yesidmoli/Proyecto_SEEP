@@ -86,7 +86,7 @@ function DocumentosAprendices (){
       )
       .map((filteredItem) => (
 
-        <Link to={`/documentos-aprendiz/${filteredItem.id}`} className="item-link">
+        <div  className="item-link">
 
 
         <li className="item-aprendiz" key={filteredItem.key}>
@@ -95,30 +95,41 @@ function DocumentosAprendices (){
        
         <h5>{filteredItem.nombres} {filteredItem.apellidos}</h5>
         <h6> {filteredItem.tipo_documento}:{filteredItem.numero_documento}</h6>
-        <h6>{filteredItem.ficha.numero_ficha}</h6>
+        <h6> Ficha: {filteredItem.ficha.numero_ficha}</h6>
         </div>
+        <div className="btns-doc-aprendiz">
+        <Link  to={`/documentos-aprendiz/${filteredItem.id}`} className="btn btn-success">Documentos</Link>
+        <Link to={`/formato-etapa-productiva/${filteredItem.id}/${'index'}`} className="btn btn-formato">Formato</Link>
+      </div>
        
 
 
         </li>
-        </Link>
+        </div>
         
       ))
   ) : (
     // Si no hay valor de búsqueda, muestra todas las deudas
     aprendices.map((item) => (
-        <Link to={`/documentos-aprendiz/${item.id}`} className="item-link">
+        <div className="item-link">
       <li className="item-aprendiz" key={item.key}> 
       <i class="bi bi-file-earmark-pdf-fill"></i>
+
       <div className="datos-aprendiz-doc">
       
         <h5>{item.nombres} {item.apellidos}</h5>
         <h6>{item.tipo_documento}: {item.numero_documento}</h6>
         <h6> Ficha: {item.ficha.numero_ficha}</h6>
       </div>
+
+      <div className="btns-doc-aprendiz">
+        <Link  to={`/documentos-aprendiz/${item.id}`} className="btn btn-success">Documentos</Link>
+        <Link to={`/formato-etapa-productiva/${item.id}/${'index'}`} className="btn btn-formato">Formato Productiva</Link>
+      </div>
+    
       
       </li>
-      </Link>
+      </div>
     ))
   )}
       </ul>

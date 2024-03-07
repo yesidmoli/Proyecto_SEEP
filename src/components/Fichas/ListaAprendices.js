@@ -79,8 +79,14 @@ function ListaAprendices(props){
         <div className="img-aprendiz">
             <img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" alt="img aprendiz" />
             <Link className="nombre-aprendiz" to={`/aprendiz/${aprendiz.id}`}>{`${aprendiz.nombres} ${aprendiz.apellidos}`}</Link>
-          </div>
-          <p>Aprendiz</p>
+            <p>Aprendiz</p>
+              </div>
+         
+
+          <div className="btns-doc-aprendiz-lista">
+        <Link  to={`/documentos-aprendiz/${aprendiz.id}`} className="btn btn-success">Documentos</Link>
+        <Link to={`/formato-etapa-productiva/${aprendiz.id}/${'index'}`} className="btn btn-formato">Formato Productiva</Link>
+      </div>
                     {/* <div>
       {aprendices.map(aprendiz => (
         <div key={aprendiz.id}>

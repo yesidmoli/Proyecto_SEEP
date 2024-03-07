@@ -9,6 +9,8 @@ import React, { useState, useEffect } from 'react';
 import clienteAxios from '../../config/axios';
 import Swal from 'sweetalert2'
 import Apps from "../layout/menu/App";
+import { Link } from "react-router-dom";
+
 function InfoAprediz(props){
    
  //Extrae la propiedad numero de ficha
@@ -65,12 +67,49 @@ function InfoAprediz(props){
   const visita2Realizada = aprendiz && aprendiz.visitas && aprendiz.visitas.includes(2);
   const visita3Realizada = aprendiz && aprendiz.visitas && aprendiz.visitas.includes(3);
   
+  const [activeButton, setActiveButton] = useState(null);
+
+  const handleButtonClick = (buttonName) => {
+    setActiveButton(buttonName);
+  };
     return(
 
         <Fragment>
             <Apps />
             <Header />
             <main className="container">
+            <div className="btn-group">
+      <Link to={`/formato-etapa-productiva/${id}/${'Planeacion'}`}
+        className={`btn btn-success ${activeButton === 'Planeación' ? 'active' : ''}`}
+        onClick={() => handleButtonClick('Planeación')}
+      >
+        Planeación
+      </Link>
+      <Link to={`/formato-etapa-productiva/${id}/${'Seguimiento'}`}
+        className={`btn  btn-success ${activeButton === 'Seguimiento' ? 'active' : ''}`}
+        onClick={() => handleButtonClick('Seguimiento')}
+      >
+        Seguimiento
+      </Link>
+      <Link to={`/formato-etapa-productiva/${id}/${'Evaluacion'}`}
+        className={`btn  btn-success ${activeButton === 'Evaluación' ? 'active' : ''}`}
+        onClick={() => handleButtonClick('Evaluación')}
+      >
+        Evaluación
+      </Link>
+      <Link to={`/documentos-aprendiz/${id}`}
+        className={`btn  btn-success ${activeButton === 'Documentación' ? 'active' : ''}`}
+        onClick={() => handleButtonClick('Documentación')}
+      >
+        Documentación
+      </Link>
+      <a href="#"
+        className={`btn  btn-success ${activeButton === 'Bitacoras' ? 'active' : ''}`}
+        onClick={() => handleButtonClick('Bitacoras')}
+      >
+        Bitácoras
+      </a>
+    </div>
             <MainSection />
             <section class="informacion-aprendiz">
                     <div class="info-formacion">

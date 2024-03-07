@@ -25,13 +25,18 @@ import Documentos from './components/Documents/Documentos';
 import DocumentosAprendices from './components/Documents/DocumentosAprendices';
 import FormularioInicial from './components/Fichas/FormularioInicial';
 
-import InformacionGeneral from './components/FormatoESP/InformacionGeneral';
+
+
+import FormartoEtapaProductiva from './components/FormatoESP/Index';
+
+
+import FormatoE from './components/prueb/Formato';
+// import EvaluacionEP from './components/FormatoESP/EvaluacionEP';
+
 // import  from './components/auth/ PrivateRoute';
 
 
-//forma
-import ImagenPlaneacion from './components/prueb/InfoGeneral';
-import PDFGenerator from './components/prueb/pdfCovert';
+
 function App() {
   return (
     <Router>
@@ -54,12 +59,13 @@ function App() {
             <Route exact path="/perfil-aprendiz" component={PerfilAprendiz} />
             <Route exact path="/documentos-aprendiz/:id" component={Documentos} />
             <Route exact path="/documentos" component={DocumentosAprendices} />
-            <Route exact path="/planeacion" component={PDFGenerator} />
+          
             <Route exact path="/inicio-etapa-practica" component={FormularioAprendiz} />
             <Route exact path="/bitacoras" component={Bitacoras} />
-            <Route exact path="/info-general" component={InformacionGeneral} />
-
-
+            <Route exact path="/formato-etapa-productiva/:id/:componente" component={FormartoEtapaProductiva} />
+            <Route exact path="/formato-etapa-productiva-pdf/:id" component={FormatoE} />
+            
+        
           </Switch>
     
       

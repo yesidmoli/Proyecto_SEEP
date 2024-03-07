@@ -1,7 +1,7 @@
 .container_evaluacionEP {
-    font-family: Arial, sans-serif;
-     max-width: 900px;  
-    margin: 20px auto;
+ 
+
+    margin-top: 1rem !important ;
     padding: 20px;
     border: 1px solid #999898;
     border-radius: 5px;
@@ -43,13 +43,7 @@ th {
     background-color: #f2f2f2;
 }
 
-input[type="text"], textarea{
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    text-align: center; /* Alinear al centro */
-}
+
 
 #guardar-evaluacionep[type="button"] {
     background-color: #39a900;
@@ -100,6 +94,34 @@ input[type="text"], textarea{
     border: 1px solid #ccc; /* Borde del input */
     box-sizing: border-box; /* Considerar borde y padding en el ancho */
 }
+.reconocimientos-lista{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    align-items: center;
+}
+.btn-visualizar-formato{
+    background-color: var(--color-corp-azul) !important;
+    height: 100% !important;
+    border-radius: 0px !important;
+    color: white !important;
+    font-weight: 600 !important;
+}
+.btn-visualizar-formato:hover{
+    background-color: #70B22D !important;
+}
+.btn-pdf-formato{
+    background-color: #70B22D !important;
+    height: 100% !important;
+    border-radius: 0px !important;
+    color: white !important;
+    font-weight: 600 !important;
+}
+.btn-pdf-formato:hover{
+    background-color: var(--color-corp-azul) !important;
+}
+
 
 
   

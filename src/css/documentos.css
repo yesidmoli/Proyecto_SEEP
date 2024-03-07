@@ -136,7 +136,7 @@
   }
   .item-link{
     text-decoration: none;
-    width: 60% !important;
+    width: 100% !important;
     display: flex;
   }
   .react-search-box input{
@@ -179,7 +179,19 @@
  .my-custom-input-class{
   width: auto!important;
 }
+.btns-doc-aprendiz{
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+.btn-formato{
+  background-color: var(--color-corp-azul) !important;
+  color: white !important;
+}
+.btn-formato:hover{
 
+background-color: #012639 !important;
+}
 @media only screen and (max-width: 768px) {
   .document-container{
     width: 100%;
@@ -192,6 +204,23 @@
   }
   .item-link{
     width: 100% !important;
+  }
+  .btns-doc-aprendiz{
+    flex-direction: column;
+    gap: 3px;
+  }
+  .item-aprendiz i{
+    font-size: 3rem;
+  }
+  .item-aprendiz{
+    padding: 5px;
+  }
+  .popup-content{
+    width: 100% !important;
+  }
+  .signature-canvas{
+    width: 245px;
+    height: 246px;
   }
   /* .input-doc select, .file{
 

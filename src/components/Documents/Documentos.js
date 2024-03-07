@@ -7,9 +7,11 @@ import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
 import Apps from "../layout/menu/App";
 import { useAuth } from "../context/AuthContext";
+import atras from '../../img/atras.png'
+import { Link , useHistory } from "react-router-dom";
 
 const Documentos = (props) => {
-
+    const history = useHistory();
     const {id} = props.match.params;
 
     const {token} = useAuth()
@@ -141,6 +143,11 @@ const Documentos = (props) => {
           <Apps />
             <Header />
             <div className="container cont-doc">
+            <Link to={"#"} aria-label="icon" className=" btn-atras" onClick={() => history.goBack()}>
+              <img src={atras}></img>
+
+              <b>Regresar</b>
+        </Link>
                 <MainSection />
                 <section className="document-container">
                     <h4>Cargue de Documentos</h4>

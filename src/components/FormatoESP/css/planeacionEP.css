@@ -32,36 +32,45 @@
     font-weight: 700;
 }
 
-table {
+/* .planeacion-cont table {
     width: 130%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-th, td {
+.planeacion-cont th, td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
     font-size: 90%;
+   
+} */
+
+.header-table-planeacion{
+    background-color: #39a900 !important;
+    height: 10rem;
+}
+.header-table-planeacion tr th{
+    border-right: 1px solid #ccc ;
+}
+#planForm tbody tr td {
+    border-right: 1px solid #ccc ;
 }
 
-th {
+/* th {
     background-color: #f2f2f2;
-}
+} */
 
-input[type="text"], textarea {
+/* input[type="text"], textarea {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
     margin-bottom: 10px;
     
-}
+} */
 
 
-#planForm td {
-    padding: 8px;
- 
-}
+
 
 
 #planForm #observaciones {
@@ -131,8 +140,148 @@ input[type="text"], textarea {
     background-color: #ccc;
 }
 
-textarea {
+.textarea {
     width: 100%; /* Hacer que la casilla ocupe todo el ancho disponible */
     height: auto; /* La altura se ajustará automáticamente según el contenido */
     font-size: 14px; /* Tamaño de fuente deseado */
+}
+.signature-canvas{
+    width: 100% !important;
+   
+}
+.campo-firma{
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    /* border: 1px solid rgb(231, 231, 231); */
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+   
+}
+.campo-firma i{
+    font-size: 2rem !important;
+    /* position: absolute; */
+    right: 5%;
+    color: red;
+    cursor: pointer;
+   
+    
+
+    
+}
+.campo-firma .close{
+    font-size: 3rem;
+    background-color: transparent;
+    color: black;
+    padding: 0px;
+    padding-left: 10px;
+}
+.head-signature{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.btn-guardar-firma{
+    display: flex;
+    width: 100% !important;
+    justify-content: end !important;
+    
+}
+.btn-success{
+    background-color: #39a900 !important;
+
+}
+.btn-success:hover{
+    background-color: var(--color-corp-azul) !important;
+}
+.h6-table{
+    margin-bottom: 3px !important;
+}
+.recolecion-evidencias{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    
+}
+.recolecion-evidencias h6{
+    text-align: center;
+}
+.recolecion-evidencias tr th{
+    height: 100% !important;
+}
+.recolecion-evidencias .evi-recoleccion{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    
+}
+
+
+.input-planeacion{
+    width: 100% !important;
+    height: 3rem;
+    border: 1px solid #ccc !important;
+}
+.observaciones-planeacion{
+    display: flex;
+    flex-direction: column;
+}
+.observaciones-planeacion textarea{
+    text-align: initial !important;
+}
+.camp-firma{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1.5px solid rgba(0, 0, 0, .05);
+    background-color: #F0EFF4;
+    padding: 10px;
+}
+.camp-firma .nombre-ente, .nombre-aprendiz-ep, .nombre-instructor{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.camp-firma .nombre-ente input{
+    width: 50%;
+}
+.campo-firma-planeacion{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 5px;
+    width: 20%;
+}
+.img-signature{
+    width: 100%;
+    height: 6rem;
+    background-color: #ddd;
+    padding: 5px;
+}
+.btns-sigue-atras{
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    padding-top: 1rem;
+}
+.btns-sigue-atras button{
+    background-color: #70B22D !important;
+    font-weight: 600;
+}
+.btns-sigue-atras button:hover{
+    background-color: var(--color-corp-azul) !important;
+}
+.planeacion-cont{
+    overflow-x: scroll !important;
+    max-height: 780px;
+    padding-bottom: 4rem;
+    padding-top: 2rem !important;
+    border: 1px solid #ccc !important;
+    margin-top: 10px !important;
+    
 }

@@ -158,9 +158,7 @@ body{
     font-size: 20px;
     margin-bottom: 10px;
 }
-input[type="checkbox"] {
-    margin-right: 10px;
-}
+
 
 /* .bitacoras {
     grid-column: 1/ span 3;
@@ -179,17 +177,12 @@ input[type="checkbox"] {
     margin: 0 0 10px; /* Agrega un margen inferior para separar el título de los checkboxes */
 }
 
-input[type="checkbox"] + label {
-    cursor: pointer;
-}
 
-input[type="text"],
-input[type="date"],
-input[type="email"],
-input[type="tel"] {
-    width: 50%;
+
+.input-field input{
+    width: 100% !important;
     padding: 10px;
-    border: none;
+   
     background-color: #f0f0f0;
     border-radius: 5px;
 }
@@ -202,12 +195,39 @@ input[type="tel"] {
     font-weight: 500;
     padding: 2px;
 }
+.btn-group{
+    width: 100%;
+    margin-top: 1rem;
+    
+   
+   
+}
+.btn-group a:hover{
+    border: none !important;
+}
+.btn-group a {
+    background-color: transparent !important;
+    border: 1px solid #f8f8f8;
+    font-weight: 600;
+    background-color: var(--color-iconos) !important;
+}
+/* Cambiar el color de fondo de los botones cuando están activos */
+.btn-group a.active,
+.btn-group a:focus {
+    background-color: #39A900 !important; /* Reemplaza "your_color" con el color deseado */
+    color: #fff !important; /* Cambia el color del texto si es necesario */
+    border: none !important;
+    outline: none !important;
+}
+
+
 @media only screen and (max-width: 768px) {
     .nombre-documento{
         margin: 0px;
         width: 100%;
-        justify-content: space-evenly;
-        border-bottom: 1px solid #f8f8f8;
+       
+        border-bottom: 1px solid #ccc ;
+        margin-bottom: 5px;
     }
     .info-formacion img{
         width: 100px;
@@ -220,6 +240,8 @@ input[type="tel"] {
         align-items: normal;
         justify-content: center; */
         margin-bottom: 10px;
+        flex-direction: column;
+        align-items:initial;
     }
     .container-datos-aprendiz{
         grid-template-columns: repeat(2, 1fr);
@@ -232,5 +254,23 @@ input[type="tel"] {
     #header{
         font-size: 25px;
     }
+    .btn-group{
+       display: grid !important;
+       grid-template-columns: 1fr 1fr;
+       margin-top: 3px;
+       border-bottom: #ccc 1px solid;
+     
+    }
+    .btn-group a{
+        height: 2rem !important;
+        border-radius: 5px;
+        margin-bottom: 10px;
+       
+     }
+     .nombre-aprendiz{
+        font-size: 18px;
+     }
+    
+    
 
 }

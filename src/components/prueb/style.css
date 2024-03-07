@@ -13,16 +13,40 @@ body {
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 60rem;
+    overflow: scroll;
   
   }
+  .input-check{
+    width: 3rem !important;
+  }
+  .imagen-planeacion input[type='checkbox']{
+    height: 2rem !important;
+  }
+  .factores-tecnicos input[type='checkbox']{
+    height: 2rem !important;
+  }
   .hearder-formato{
-    display: grid;
+    /* display: grid;
     grid-template-columns: 20rem 1fr ;
     border: 1px solid black;
     justify-content: space-between;
     width: 100%;
     place-content: center;
-    padding: 10px;
+    padding: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .img-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .img-header img{
+    width: 10rem;
   }
   .hearder-formato h4{
     display: flex;
@@ -30,7 +54,6 @@ body {
     align-items: center;
     text-align: center;
     width: 100%;
-    border-left: 1px solid black;
     height: 100%;
    
   }
@@ -65,10 +88,13 @@ body {
     height: 98%;
     display: flex;
     align-items: center;
-    background-color: #ccc;
-    border: 1px solid black ;
+    background-color: #dcdcdc
+
+;
+    border-right: 1px solid black ;
     margin: 0px;
     font-size: 16px;
+    padding-left: 12px;
 
   }
   .informacion-general input{
@@ -100,27 +126,44 @@ body {
 .datos-aprendiz h5, .ente-coformador h5 {
     display: flex;
     align-items: center;
-    background-color: #ccc;
+    background-color: #dcdcdc
+;
     padding: 0px;
     border: 1px solid black;
     margin-bottom: 0px;
+}
+.datos-aprendiz h5{
+  border-bottom: none;
+  border-top: none;
 }
 
 .datos-aprendiz li, .ente-coformador li {
     display: grid;
     grid-template-columns: 8rem 1fr;
-    border: 0.5px solid #ccc;
+    border-bottom: 0.5px solid #000;
+    border-right: 0.5px solid #000
+
+;
 }
 
+.input-centro{
+  border-right: 1px solid black;
+}
 .datos-aprendiz label, .ente-coformador label {
-    border: 1px solid black;
-    background-color: #ccc;
-}
+    border-right: 1px solid black;
+    background-color: #dcdcdc;
+    padding-left: 5px
+    
+    
 
+;
+}
+.th-head-planeacion{
+  background-color: #dcdcdc !important;
+}
 .datos-aprendiz input, .ente-coformador input {
     background-color: #fff;
     border: none;
-    border-top: 1px solid black;
     border-radius: 0px;
 }
   
@@ -149,7 +192,9 @@ body {
   
 .btn-generar-alerta {
     padding: 10px 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #dcdcdc
+
+;
     border-radius: 5px;
     background-color: #ddd;
     cursor: pointer;
@@ -162,8 +207,8 @@ body {
   .informacion-general,
   .datos-aprendiz,
   .ente-coformador {
-    border: 1px solid #ddd;
     border-radius: 5px;
+    /* border-collapse: collapse; */
   }
   
 
@@ -210,7 +255,7 @@ body {
   } */
   
   .planeacion{
-    display: grid;
+   
     border: 1px solid black;
 
     margin-top: 1rem;
@@ -232,13 +277,17 @@ body {
   .actividades{
     grid-area: actividad;
     height: 7rem;
-    background-color: #ccc;
+    background-color: #dcdcdc
+
+;
   }
   .evidencias{
     grid-area: evidencia;
     display: flex;
     align-items: center;
-    background-color: #ccc;
+    background-color: #dcdcdc
+
+;
   }
   .recoleccion{
     grid-area: recoleccion;
@@ -246,7 +295,9 @@ body {
     padding: 0px;
     /* grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr; */
-    background-color: #ccc;
+    background-color: #dcdcdc
+
+;
   }
   .subtitulo h6{
     text-align: center;
@@ -260,7 +311,9 @@ body {
     justify-content: center;
     height: 100%;
     width: 100%;
-    background-color: #ccc;
+    background-color: #dcdcdc
+
+;
 
     /* border-right: 1px solid black; */
   }
@@ -287,7 +340,9 @@ body {
  .evidencia-section{
   grid-area: hola;
   display: grid;
-  grid-template-columns: 50% 1fr 1fr;
+  grid-template-columns: 50% 40% 1fr;
+  grid-template-areas: 
+  "ev ev ev";
   /* border-bottom: 1px solid black;
   border-left: 1px solid black;
   border-right: 1px solid black; */
@@ -380,8 +435,9 @@ body {
   display: flex;
   align-items: center;
   margin: 0px;
-  background-color: #ccc;
+  background-color: #dcdcdc;
   width: 100%;
+  padding-left: 10px !important;
 
 
 
@@ -396,6 +452,7 @@ body {
 .parcial input{
   margin: 0px;
   border: none;
+  width: 100%;
 }
 
 .margin-botton{
@@ -435,7 +492,9 @@ body {
   padding: 10px;
   border-bottom: 1px solid black;
   width: 100%;
-  background-color: #ccc;
+  background-color: #dcdcdc
+
+;
   grid-area: h;
 }
 .title-factores-tecnicos{
@@ -444,7 +503,9 @@ body {
   padding: 10px;
   border-bottom: 1px solid black;
   width: 100%;
-  background-color: #ccc;
+  background-color: #dcdcdc
+
+;
 }
 .head-factores{
   grid-area: h-fact;
@@ -455,7 +516,9 @@ body {
   place-items: center;
   height: 6rem;
   border-bottom: 1px solid black;
-  background-color: #ccc;
+  background-color: #dcdcdc
+
+;
 }
 
 .head-factores-tecnicos{
@@ -467,7 +530,9 @@ body {
   place-items: center;
   height: 6rem;
   border-bottom: 1px solid black;
-  background-color: #ccc;
+  background-color: #dcdcdc
+
+;
 }
 .valoracion{
   height: 100%;
@@ -535,7 +600,9 @@ justify-content: center;
   height: 100%;
 }
 .t-variables{
-  background-color: #ccc;
+  background-color: #dcdcdc
+
+;
   width: 100%;
   height: 100%;
   display: flex;
@@ -601,7 +668,9 @@ justify-content: center;
 .espacio-div{
   grid-area: header;
   width: 100%;
-  background-color: #ccc;
+  background-color: #dcdcdc
+
+;
   height: 2rem;
   border-bottom: 1px solid black;
 }
@@ -618,6 +687,7 @@ align-items: center;
 .div-juicio{
   display: flex;
   align-items: center;
+  gap: 10px;
   
 }
 .div-juicio input{
@@ -643,4 +713,22 @@ align-items: center;
 }
 .especificacion{
   padding: 5px;
+}
+.especificacion li{
+  margin-left: 1rem;
+}
+.firmas-evaluacion{
+    grid-area: firmas;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 10px;
+}
+.btns-descargar-pdf{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 1.5rem;
+  margin-bottom: 1rem;
 }

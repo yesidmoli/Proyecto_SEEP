@@ -11,8 +11,7 @@ import MainSection from '../layout/MainSection';
 import ReactSearchBox from "react-search-box";
 
 import logoSena from '../../img/logo-sena.png'
-//imagenes
-import iconoBuscar from'../../img/buscar.jpeg' 
+
 
 import InfoFicha from '../Fichas/InfoFicha';
 import { useAuth } from '../context/AuthContext';

@@ -1,0 +1,97 @@
+.recolecta-evidencia{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1.3rem;
+}
+.recolecta-evidencia .fecha-lugar{
+    display: flex;
+    justify-content: space-around;
+}
+.recolecta-evidencia .fecha-lugar th{
+    width: 100% ;
+    height: 100%;
+    background-color: #dcdcdc !important;
+}
+.actividad-titulo{
+    width: 50%;
+    border-right: 1px solid black;
+}
+.fecha-lugar-evidencia{
+  
+    text-align: center;
+    padding: 0px !important;
+}
+.td-evidencia{
+    border-right: 1px solid black !important;
+}
+
+.fecha-lugar-evidencia tr{
+    display: flex;
+}
+.fecha-lugar-evidencia tr th{
+    width: 100%;
+    height: 100% !important;
+    background-color: #fff !important;
+}
+.input-check-tabla{
+    width: 2rem;
+    height: 2rem;
+}
+.campo-check-actividades{
+    display: flex;
+    justify-content: center;
+    border-left: 1px solid black;
+    border-right:  1px solid black;
+}
+.table-planeacion{
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-collapse: collapse;
+}
+
+.table-planeacion th, td {
+    /* border: 1px solid #dddddd;  */
+   
+    padding: 8px;
+  }
+.table-tr-planeacion{
+    border-bottom: 1px solid black;
+}
+
+.table-planeacion thead{
+    border-bottom: 1px solid black;
+}
+.observaciones-planeacion{
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+.observaciones-planeacion textarea{
+    width: 100%;
+    border: none;
+    
+    
+}
+.h4-planeacion{
+    text-align: center;
+    margin-bottom: 0px;
+}
+.firmas-planeacion{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 10px;
+}
+.imagen-firma{
+    height: 8rem;
+    width: 12rem;
+    object-fit:cover contain;
+}
+.camp-firma-planeacion{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 5px;
+
+}
