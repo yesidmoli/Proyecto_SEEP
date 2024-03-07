@@ -15,7 +15,7 @@ const VisualizarDocumentos = () =>{
   }
     
     return(
-        <div class="container-dos">
+        <div className="container-dos">
     <h2>Documentación del Aprendiz</h2>
     <table id="documentTable">
       <thead>

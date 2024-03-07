@@ -90,7 +90,7 @@ function DocumentosAprendices (){
 
 
         <li className="item-aprendiz" key={filteredItem.key}>
-        <i class="bi bi-file-earmark-pdf-fill"></i>
+        <i className="bi bi-file-earmark-pdf-fill"></i>
         <div className="datos-aprendiz-doc">
        
         <h5>{filteredItem.nombres} {filteredItem.apellidos}</h5>
@@ -109,7 +109,7 @@ function DocumentosAprendices (){
     aprendices.map((item) => (
         <Link to={`/documentos-aprendiz/${item.id}`} className="item-link">
       <li className="item-aprendiz" key={item.key}> 
-      <i class="bi bi-file-earmark-pdf-fill"></i>
+      <i className="bi bi-file-earmark-pdf-fill"></i>
       <div className="datos-aprendiz-doc">
       
         <h5>{item.nombres} {item.apellidos}</h5>
