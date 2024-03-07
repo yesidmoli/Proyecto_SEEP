@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import clienteAxios from "../../config/axios";
 import FormularioFicha from "./FormularioFicha";
 import Swal from "sweetalert2";
+
 const ListaFichas = ({ editarFicha, eliminarFicha }) => {
   const [fichas, setFichas] = useState([]);
   const [formularioFichas, setFormularioFichas] = useState(false);
   const [ficha, setFicha] = useState();
+  const [modoEdicion, setModoEdicion] = useState(false);
+  const [idEditar, setIdEditar] = useState(null);
   
   const initialState = {
     numero_ficha: "",
@@ -43,8 +46,6 @@ const ListaFichas = ({ editarFicha, eliminarFicha }) => {
           await clienteAxios.post('/api/fichas/', ficha);
           Swal.fire('¡Éxito!', 'La ficha se registró correctamente.', 'success');
           // Redirigir a la sección de listado de fichas
-          history.push('/#listado-fichas');
-  
           
         }
   
