@@ -156,6 +156,10 @@ const FormularioFicha = ({history}) => {
         <Link to={"/nuevo-aprendiz"} aria-label="icon" className="iconLink ">
      <button id='registrar-aprendiz'>Registrar Aprendiz</button>
         </Link>
+        <Link to={"/"} className="flecha-regreso">
+          <span className="flecha" >&#10094;</span>
+        </Link>
+        </div>
     </div>
     
 
@@ -202,9 +206,11 @@ const FormularioFicha = ({history}) => {
         </div>
        
       </form>
-      {/* <ListaFichas editarFicha={editarFicha} eliminarFicha={eliminarFicha} /> */}
     </div>
-    </div>
+    
+
+    
+    
     </Fragment>
   );
 };
