@@ -33,6 +33,7 @@ import InformacionGeneral from './components/FormatoESP/InformacionGeneral';
 //forma
 import ImagenPlaneacion from './components/prueb/InfoGeneral';
 import PDFGenerator from './components/prueb/pdfCovert';
+import AprendizBitacoraIndividual from './components/bitacoras/AprendizBitacoraIndividual';
 function App() {
   return (
     <Router>
@@ -60,7 +61,7 @@ function App() {
             <Route exact path="/bitacoras" component={Bitacoras} />
             <Route exact path="/lista-fichas" component={ListaFichas}/>
             <Route exact path="/info-general" component={InformacionGeneral} />
-
+            <Route exact path="/bitacora-aprendiz/:id" component={AprendizBitacoraIndividual} />
 
           </Switch>
     

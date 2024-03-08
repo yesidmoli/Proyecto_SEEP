@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import clienteAxios from "../../config/axios";
 import '../../css/documentos.css';
-import { useAuth } from "../context/AuthContext";
 import JSZip from 'jszip';
 import Swal from "sweetalert2";
 const VisualizarDocumentos = ({ documentos }) => {
@@ -12,20 +11,20 @@ const VisualizarDocumentos = ({ documentos }) => {
             try {
                 const documentosConArchivoTemp = await Promise.all(
                     documentos.map(async (documento) => {
-                        try {
-                            await clienteAxios.head(documento.archivo); // Realizamos una petición HEAD para verificar si el archivo existe
-                            return documento;
-                        } catch (error) {
-                            // console.error('Error al verificar el archivo:', error);
-                            return null; // Si hay un error, retornamos null
-                        }
+                      try {
+                        await clienteAxios.head(documento.archivo);
+                        return documento;
+                      } catch (error) {
+                        return null;
+                      }
                     })
-                );
+                  );
+                  
                 setDocumentosConArchivo(documentosConArchivoTemp.filter(doc => doc)); // Filtramos los documentos que no sean null
             } catch (error) {
-                console.error('Error al obtener los documentos:', error);
-
+                return null
             }
+            
         };
 
         fetchDocumentosConArchivo();
@@ -76,8 +75,8 @@ const VisualizarDocumentos = ({ documentos }) => {
                     </tr>
                 </thead>
                 <tbody id="documentBody">
-                    {documentosConArchivo.map((documento, index) => (
-                        <tr key={index}>
+                    {documentos.map((documento) => (
+                        <tr key={documento.id}>
                             <td>{documento.tipo_documento}</td>
                             <td>{documento.id}</td>
                             <td>
