@@ -36,6 +36,7 @@ import FormatoE from './components/prueb/Formato';
 // import  from './components/auth/ PrivateRoute';
 
 import PrivateRoute from './components/auth/ PrivateRoute';
+import AprendizBitacoraIndividual from './components/bitacoras/AprendizBitacoraIndividual';
 
 
 function App() {
