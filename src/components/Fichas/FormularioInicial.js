@@ -1,14 +1,13 @@
 import React, {useState, useEffect, Fragment} from "react";
 import clienteAxios from "../../config/axios";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import "../layout/MainSection";
 import "../layout/Header";
 import AprendicesRegistrados from "./AprendicesRegistrados";
-
 import MainSection from "../layout/MainSection";
 import Apps from "../layout/menu/App";
 import Header from "../layout/Header";
-import { Link } from "react-router-dom";
 
 import atras from '../../img/atras.png'
 

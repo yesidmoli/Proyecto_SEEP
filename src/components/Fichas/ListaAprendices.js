@@ -42,8 +42,8 @@ function ListaAprendices(props){
             <Header />
             <main className="container">
                 <MainSection />
-             <div class="contenedor-lista">
-                <div class="ficha">
+             <div className="contenedor-lista">
+                <div className="ficha">
                     <section className="info">
                     <img src={logoverde}  className="img-logo" alt="img"/>
                     <h4>{programa}</h4>
@@ -52,8 +52,8 @@ function ListaAprendices(props){
                    
                    <br></br>
 
-                    <div class="texto">
-                        {/* <select class="seleccion"  name="acount-type">
+                    <div className="texto">
+                        {/* <select className="seleccion"  name="acount-type">
                             <option value="" disabled selected hidden>Filtrar</option>
                             <option value="aprobado">Aprobado</option>
                             <option value="No aprobado">No aprobado</option>
@@ -64,15 +64,15 @@ function ListaAprendices(props){
                             <option value="Visita 3">Visita 3</option>
                             
                         </select> */}
-                        <div class="seleccion"><h6> Aprobado</h6></div>
-                        <div class="seleccion">Pendiente Aprobar</div>
+                        <div className="seleccion"><h6> Aprobado</h6></div>
+                        <div className="seleccion">Pendiente Aprobar</div>
                         </div>
                 </div>
 
-                <div class="lista">
-                <h3 class="titulo-aprendices">Aprendices</h3>
+                <div className="lista">
+                <h3 className="titulo-aprendices">Aprendices</h3>
                 <hr></hr>
-                <ul class="lista-aprendices">
+                <ul className="lista-aprendices">
                 {aprendices.map(aprendiz => (
                     <li  key={aprendiz.id}>
 

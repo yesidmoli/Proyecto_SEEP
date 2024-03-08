@@ -72,35 +72,35 @@ const Login = () => {
   return (
     <Fragment>
       
-      <header class="encabezado-login">
+      <header className="encabezado-login">
         <img className='seep-img' src={logoSeep} alt="logo-SEEP" />
         <img className='cditi-img' src={cditi} alt="logo-CDITI"/>  
     </header>
 
-    <main class="login-container">
+    <main className="login-container">
 
       <a href="https://proyect-seep-46bb6469e324.herokuapp.com/admin/" className="login-admin btn btn-success" >
         USUARIO ADMIN
       </a>
 
       
-        <form class="form-login" onSubmit={handleLogin}>
-            <h1  class="titulo-login" >Iniciar sesión</h1>
+        <form className="form-login" onSubmit={handleLogin}>
+            <h1  className="titulo-login" >Iniciar sesión</h1>
             <label for="acount-type">Seleccione tipo de usuario</label>
-            <select value={datos.rol} onChange={actualizarState} class="input-login" id="acount-type"  name="rol">
+            <select value={datos.rol} onChange={actualizarState} className="input-login" id="acount-type"  name="rol">
                 <option selected hidden>Seleccione una opción</option>
                 <option value="aprendiz" >Aprendiz</option>
                 {/* <option value="admin">Administrador</option> */}
                 <option value="instructor">Instructor</option>
             </select>
             <label for="numeroId">N° Identificación:</label>
-            <input class="input-login"  placeholder="N° Identificación" name="documento"  id="numeroId" value={datos.documento} onChange={actualizarState} />
+            <input className="input-login"  placeholder="N° Identificación" name="documento"  id="numeroId" value={datos.documento} onChange={actualizarState} />
 
             <label for="contraseña">Contraseña:</label>
-            <input  class="input-login" type="password" placeholder="Contraseña" name="password"  id="contraseña" value={datos.password} onChange={actualizarState}  />
+            <input  className="input-login" type="password" placeholder="Contraseña" name="password"  id="contraseña" value={datos.password} onChange={actualizarState}  />
 
-            <a  class="recupera-contraseña"  href="#">Recuperar contraseña</a>
-            <center className='btn-login'><button  class="btns " > Iniciar Sesión </button></center>
+            <a  className="recupera-contraseña"  href="#">Recuperar contraseña</a>
+            <center className='btn-login'><button  className="btns " > Iniciar Sesión </button></center>
         </form>
 
     </main>

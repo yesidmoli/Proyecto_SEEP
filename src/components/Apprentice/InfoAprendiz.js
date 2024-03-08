@@ -111,18 +111,18 @@ function InfoAprediz(props){
       </a>
     </div>
             <MainSection />
-            <section class="informacion-aprendiz">
-                    <div class="info-formacion">
+            <section className="informacion-aprendiz">
+                    <div className="info-formacion">
                         
 
-                        <div class="nombre-documento">
+                        <div className="nombre-documento">
                             <img src={logo} alt="Logo-sena" />
-                            <p class="nombre-aprendiz">
+                            <p className="nombre-aprendiz">
                                 <b>{aprendiz.nombres} {aprendiz.apellidos}</b> <br></br>
                             <b>CC:</b> {aprendiz.numero_documento}</p>
                         </div>
                        
-                        <div class="info-ficha">
+                        <div className="info-ficha">
                             <p><b>Ficha:</b> {aprendiz.ficha?.numero_ficha || ''}
 
 <br></br>
@@ -131,79 +131,79 @@ function InfoAprediz(props){
                         </div>
                     </div>
                     
-                    <div class="container-datos-aprendiz">
-                    <div class="input-field">
+                    <div className="container-datos-aprendiz">
+                    <div className="input-field">
                             <label for="tipoDocumento">Tipo de Documento:</label>
                             <input type="text" id="tipoDocumento" value={aprendiz.tipo_documento} readOnly/>
                         </div>
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="fechaExpedicion">Fecha de Expedición:</label>
                             <input type="text" id="fechaExpedicion" value={aprendiz.fecha_expedicion} readOnly/>
                         </div>
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="lugarExpedicion">Lugar de Expedición:</label>
                             <input type="text" id="lugarExpedicion" value={aprendiz.lugar_expedicion} readOnly/>
                         </div>
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="fechaNacimiento">Fecha de Nacimiento:</label>
                             <input type="text" id="fechaNacimiento" value={aprendiz.fecha_nacimiento} readOnly/>
                         </div>
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="sexo">Sexo:</label>
                             <input type="text" id="sexo" value={aprendiz.sexo} readOnly/>
                         </div>
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="direccion">Dirección de Domicilio:</label>
                             <input type="text" id="direccion" value={aprendiz.direccion_domicilio} readOnly/>
                         </div>
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="municipio">Municipio:</label>
                             <input type="text" id="municipio" value={aprendiz.municipio} readOnly/>
                         </div>
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="departamento">Departamento:</label>
                             <input type="text" id="departamento" value={aprendiz.departamento} readOnly/>
                         </div>
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="telefonoFijo">Teléfono Fijo:</label>
                             <input type="text" id="telefonoFijo" value={aprendiz.telefono_fijo} readOnly/>
                         </div>
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="telefonoCelular">Teléfono Celular:</label>
                             <input type="text" id="telefonoCelular" value={aprendiz.numero_celular1} readOnly/>
                         </div>
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="correo">Correo Electrónico:</label>
                             <input type="text" id="correo" value={aprendiz.correo_principal} readOnly/>
                         </div>
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="correoSecundario">Correo Electrónico Secundario:</label>
                             <input type="text" id="correoSecundario" value={aprendiz.correo_secundario} readOnly/>
                         </div>
                 
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="visita1">Visita 1:</label>
                             <input type="text" id="visita1" value={visita1Realizada ? "Realizada" : "Pendiente"} readOnly/>
                         </div>
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="visita2">Visita 2:</label>
                             <input type="text" id="visita2" value={visita2Realizada ? "Realizada" : "Pendiente"} readOnly/>
                         </div>
                 
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="visita3">Visita 3:</label>
                             <input type="text" id="visita3" value={visita3Realizada ? "Realizada" : "Pendiente"} readOnly/>
                         </div>
@@ -215,27 +215,27 @@ function InfoAprediz(props){
             <section className="informacion-aprendiz">
                 <h4 className="titulo-empresa">Datos de la Empresa</h4>
             <div className="container-datos-aprendiz">
-            <div class="input-field">
+            <div className="input-field">
                             <label for="correoSecundario">Empresa:</label>
                             <input type="text" id="correoSecundario" value={empresa.razon_social} readOnly/>
                         </div>
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="correoSecundario">Nit</label>
                             <input type="text" id="correoSecundario" value={empresa.nit} readOnly/>
                         </div>
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="correoSecundario">Jefe Inmediato</label>
                             <input type="text" id="correoSecundario" value={empresa.nombre_jefe_inmediato} readOnly/>
                         </div>
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="correoSecundario">Dirección</label>
                             <input type="text" id="correoSecundario" value={empresa.direccion} readOnly/>
                         </div>
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="correoSecundario">Correo</label>
                             <input type="text" id="correoSecundario" value={empresa.correo} readOnly/>
                         </div>
-                        <div class="input-field">
+                        <div className="input-field">
                             <label for="correoSecundario">Telefono</label>
                             <input type="text" id="correoSecundario" value={empresa.telefono} readOnly/>
                         </div>

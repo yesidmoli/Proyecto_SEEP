@@ -5,6 +5,8 @@ import '../../../src/css/formularioFichas.css'
 import Swal from 'sweetalert2';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+//para la flecha de regreso
+import '../../css/bitacoras.css';
 import '../layout/Header';
 import '../layout/MainSection';
 
@@ -156,6 +158,10 @@ const FormularioFicha = ({history}) => {
         <Link to={"/nuevo-aprendiz"} aria-label="icon" className="iconLink ">
      <button id='registrar-aprendiz'>Registrar Aprendiz</button>
         </Link>
+        <Link to={"/"} className="flecha-regreso">
+          <span className="flecha" >&#10094;</span>
+        </Link>
+        </div>
     </div>
     
 
@@ -202,8 +208,6 @@ const FormularioFicha = ({history}) => {
         </div>
        
       </form>
-      {/* <ListaFichas editarFicha={editarFicha} eliminarFicha={eliminarFicha} /> */}
-    </div>
     </div>
     </Fragment>
   );

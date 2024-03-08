@@ -157,7 +157,7 @@ export const CalendarModal = ({history}) => {
         >
             <div className='titulo-event'>
             <h1> Nueva Visita </h1>
-            <i class="bi bi-x-circle-fill" onClick={onCloseModal} ></i></div> 
+            <i className="bi bi-x-circle-fill" onClick={onCloseModal} ></i></div> 
             <form onSubmit={onSubmit} className=" cont-form">
                 <div className="fecha">
                     <label>Fecha y hora inicio <span className='is_rojo'>*</span></label>

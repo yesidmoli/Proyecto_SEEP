@@ -24,6 +24,7 @@ import PerfilAprendiz from './components/Account/PerfilAprendiz';
 import Documentos from './components/Documents/Documentos';
 import DocumentosAprendices from './components/Documents/DocumentosAprendices';
 import FormularioInicial from './components/Fichas/FormularioInicial';
+import ListaFichas from './components/Fichas/ListaFichas';
 
 
 
@@ -38,6 +39,7 @@ import FormatoE from './components/prueb/Formato';
 import PrivateRoute from './components/auth/ PrivateRoute';
 
 
+import AprendizBitacoraIndividual from './components/bitacoras/AprendizBitacoraIndividual';
 function App() {
   return (
     <Router>
@@ -63,9 +65,10 @@ function App() {
           
             <Route exact path="/inicio-etapa-practica" component={FormularioAprendiz} />
             <Route exact path="/bitacoras" component={Bitacoras} />
+            <Route exact path="/lista-fichas" component={ListaFichas}/>
             <Route exact path="/formato-etapa-productiva/:id/:componente" component={FormartoEtapaProductiva} />
             <Route exact path="/formato-etapa-productiva-pdf/:id" component={FormatoE} />
-            
+                        <Route exact path="/bitacora-aprendiz/:id" component={AprendizBitacoraIndividual} />
         
           </Switch>
     

@@ -75,7 +75,7 @@ const Inicio = () => {
       <div className="fichas">
         <h1>Programas y fichas de formación</h1>
           <div className="buscar">
-            <i class="bi bi-search"></i>
+            <i className="bi bi-search"></i>
             <label htmlFor="buscar">Palabras clave:</label>
             {/* <input  type="search" className="form-control" />
             <button  className="btn-buscar">Buscar</button> */}
@@ -95,7 +95,7 @@ const Inicio = () => {
     </div>
     
 
-    <section class="info-fichas">
+    <section className="info-fichas">
   {searchValue ? (
     // Si hay un valor de búsqueda, aplica el filtro a deudas
     fichas
