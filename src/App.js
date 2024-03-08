@@ -68,7 +68,7 @@ function App() {
             <Route exact path="/lista-fichas" component={ListaFichas}/>
             <Route exact path="/formato-etapa-productiva/:id/:componente" component={FormartoEtapaProductiva} />
             <Route exact path="/formato-etapa-productiva-pdf/:id" component={FormatoE} />
-                        <Route exact path="/bitacora-aprendiz/:id" component={AprendizBitacoraIndividual} />
+            <Route exact path="/bitacora-aprendiz/:id" component={AprendizBitacoraIndividual} />
         
           </Switch>
     

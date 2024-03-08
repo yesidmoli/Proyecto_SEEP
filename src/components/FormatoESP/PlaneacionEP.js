@@ -362,7 +362,7 @@ function PlaneacionEP({ goToNextComponent, data }) {
 
 
           <div className="btn btn-success" onClick={handleGuardarDatos}>
-            <h5>Guardar y continuar</h5>
+            <h5>Guardar</h5>
           </div>
         </form>
         {/* <Link to="/seguimiento_EP" className="custom-button">
