@@ -9,10 +9,11 @@ import Header from "../layout/Header";
 import clienteAxios from "../../config/axios";
 
 import { useFormContext } from "./FormProvide";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import { useParams } from "react-router-dom";
+
 function FormartoEtapaProductiva(props) {
 
   const { componente } = useParams();
@@ -24,7 +25,7 @@ function FormartoEtapaProductiva(props) {
 
   const [currentComponent, setCurrentComponent] = useState("Planeacion");
 
-  const {formData, updateFormData } = useFormContext();
+  const {formData, updateFormData, resetFormData } = useFormContext();
  
 
   //datos que llegan desde el componente hijo planeacion
@@ -51,12 +52,32 @@ function FormartoEtapaProductiva(props) {
   //   evaluaci:evaluacion
   // })
 
+//definimos un estado para enviar los datos del formato para su creacion, estos los obtenemos del contexto
+  const[datosFormato, setDatosFormato] = useState({
 
-  const[datosFormato, setDatosFormato] = useState([])
+    "planeacion": formData.planeacion,
+    "seguimiento": formData.seguimiento,
+    "evaluacion": formData.evaluacion,
+    "ciudad": "Dosquebradas",
+    "fecha_elaboracion": "2024-02-29",
+    "aprendiz": id
+
+  })
+
+  console.log("Datos formato", datosFormato)
   const[gurdarFormato, guardarDatosFormato] = useState(false)
 
-  console.log("los datos ", formData)
-  console.log("el id", formData.id)
+  useEffect(() => {
+    setDatosFormato({
+      planeacion: formData.planeacion,
+      seguimiento: formData.seguimiento,
+      evaluacion: formData.evaluacion,
+      ciudad: formData.ciudad || "Dosquebradas",
+      fecha_elaboracion: formData.fecha_elaboracion || "2024-02-29",
+      aprendiz: formData.aprendiz || id
+    });
+  }, [formData]);
+  
 
   useEffect(() => {
     // Validar que el componente pasado como parámetro sea uno de los permitidos
@@ -68,6 +89,7 @@ function FormartoEtapaProductiva(props) {
     }
   }, [componente]);
   
+ 
 
   const goToNextComponent = (data) => {
     if (currentComponent === "Planeacion") {
@@ -106,12 +128,17 @@ function FormartoEtapaProductiva(props) {
       setCurrentComponent("Seguimiento");
     }
   };
+  const reiniciarPage = () => {
+    // Recargar la página actual
+    window.location.reload();
+  };
 
 
  
   
  useEffect(() => {
     const fetchData = async () => {
+      
       try {
         const response = await clienteAxios.get(`/api/formato/?aprendiz_id=${id}`);
         const responseData = response.data;
@@ -126,13 +153,22 @@ function FormartoEtapaProductiva(props) {
           updateFormData('fecha_elaboracion', data.fecha_elaboracion);
           updateFormData('aprendiz', data.aprendiz); // Actualizar el contexto con los datos obtenidos de la API
         }
+
       } catch (error) {
+        if(error.response && error.response.status === 404){
+          resetFormData();  
+        }
         console.error('Error al obtener los datos de la API:', error);
       }
     };
 
     fetchData();
+    
   }, []);
+
+  
+
+
 
 
   
@@ -143,8 +179,11 @@ function FormartoEtapaProductiva(props) {
         await clienteAxios.put(`/api/formato/${formData.id}/`, formData);
          // Actualiza los datos existentes
       } else {
+        //Actualizamos formData con el id del aprendiz, para que no hayan errores de nulidad
+        
+        console.log("datooooooo", datosFormato)
         // Si no existe un ID en el formData, significa que es un nuevo registro y debemos crearlo
-        await clienteAxios.post('/api/formato/', formData); // Crea nuevos datos
+        await clienteAxios.post('/api/formato/', datosFormato); // Crea nuevos datos
       }
       // Manejar éxito de la solicitud si es necesario
       console.log('Datos enviados correctamente');

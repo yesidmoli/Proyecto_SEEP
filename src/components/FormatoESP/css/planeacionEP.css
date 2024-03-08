@@ -146,17 +146,22 @@
     font-size: 14px; /* Tamaño de fuente deseado */
 }
 .signature-canvas{
-    width: 100% !important;
+    cursor: crosshair;
+    background-color: #f8f8f8;
+
    
 }
 .campo-firma{
-    width: 100%;
+    /* width: 100%;
     background-color: rgb(255, 255, 255);
     /* border: 1px solid rgb(231, 231, 231); */
-    border-radius: 16px;
+    /* border-radius: 16px;  */
     padding: 16px;
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
+    overflow: scroll;
+    
+    
    
 }
 .campo-firma i{
@@ -284,4 +289,10 @@
     border: 1px solid #ccc !important;
     margin-top: 10px !important;
     
+}
+.popup-content{
+   display: flex;
+   /* justify-content: center;
+   align-items: center; */
+   width: auto !important;
 }

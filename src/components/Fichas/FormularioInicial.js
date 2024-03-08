@@ -332,7 +332,7 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                   required
                 />
-                <label>Estado de Aprobación:</label>
+                {/* <label>Estado de Aprobación:</label>
                 <input
                 placeholder="pediente"
                   type="text"
@@ -340,7 +340,7 @@ const FormularioInicial = () => {
                   value={aprendiz.estado_aprobacion}
                   onChange={actualizarState}
                   required
-                />
+                /> */}
                 <div className="datos-empresa">
                   <h3 id="datos-emp">Datos de la empresa</h3>
                   <label>Nit: <p className="rojo-label">*</p></label>

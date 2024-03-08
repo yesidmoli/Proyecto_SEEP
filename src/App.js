@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch,  Redirect } from 'react-router-dom';
 import Header from './components/layout/Header';
 import MainSection from './components/layout/MainSection';
 import Inicio from './components/Index/Inicio';
@@ -35,6 +35,7 @@ import FormatoE from './components/prueb/Formato';
 
 // import  from './components/auth/ PrivateRoute';
 
+import PrivateRoute from './components/auth/ PrivateRoute';
 
 
 function App() {
@@ -46,19 +47,19 @@ function App() {
        
         {/* <MainSection /> */}
           <Switch>
-            <Route exact path="/" component={Inicio} />
+            <PrivateRoute exact path="/" component={Inicio} />
             <Route exact path= "/login" component={Login}  />
             <Route exact path= "/calendario" component={CalendarPage}  />
             {/* <Route path="/calendar" element={<CalendarPage />} /> */}
-            <Route exact path="/cuentas" component={Cuentas} />
+            <PrivateRoute exact path="/cuentas" component={Cuentas} />
             {/* <Route exact path="/calendario" component={Calendario} /> */}
-            <Route exact path="/fichas" component={FormularioFicha} /> 
-            <Route exact path="/nuevo-aprendiz" component={FormularioInicial} /> 
+            <PrivateRoute exact path="/fichas" component={FormularioFicha} /> 
+            <PrivateRoute exact path="/nuevo-aprendiz" component={FormularioInicial} /> 
             <Route exact path="/lista-aprendices/:numero_ficha/:programa" component={ListaAprendices} /> 
             <Route exact path="/aprendiz/:id/" component={InfoAprediz} />
             <Route exact path="/perfil-aprendiz" component={PerfilAprendiz} />
             <Route exact path="/documentos-aprendiz/:id" component={Documentos} />
-            <Route exact path="/documentos" component={DocumentosAprendices} />
+            <PrivateRoute exact path="/documentos" component={DocumentosAprendices} />
           
             <Route exact path="/inicio-etapa-practica" component={FormularioAprendiz} />
             <Route exact path="/bitacoras" component={Bitacoras} />

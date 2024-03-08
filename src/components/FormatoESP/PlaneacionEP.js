@@ -18,13 +18,13 @@ function PlaneacionEP({ goToNextComponent, data }) {
     firma_instructor: ""
   });
 
-  
+
 
 
   const [signatureRef, setSignatureRef] = useState(null);
   const [aprendizRef, setAprendizSignatureRef] = useState(null);
   const [instructorRef, setInstructorSignatureRef] = useState(null);
-   
+
 
   const handleAddActividad = () => {
     setFormData((prevState) => ({
@@ -68,7 +68,7 @@ function PlaneacionEP({ goToNextComponent, data }) {
       return { ...prevState, actividades };
     });
   };
-  
+
 
   const handleGuardarDatos = () => {
     console.log("Form Data:", formData);
@@ -76,19 +76,19 @@ function PlaneacionEP({ goToNextComponent, data }) {
     updateFormData('planeacion', formData)
     updateFormData('fecha_elaboracion', '2003-10-02')
   };
-  
+
   useEffect(() => {
 
     //vsalidamos que si haya algo en lo que llega del contexo, si es asi se actuliza el formData de los contratio no
     if (contextFormData && Object.keys(contextFormData).length !== 0) {
-        setFormData(contextFormData);
+      setFormData(contextFormData);
     }
-}, [contextFormData]);
+  }, [contextFormData]);
 
 
   const clearSignature = (ref) => {
     ref.clear();
-    
+
   };
 
   // const saveSignature = () => {
@@ -117,27 +117,27 @@ function PlaneacionEP({ goToNextComponent, data }) {
               <tr >
                 <th><h5 className="h6-table">ACTIVIDADES A DESARROLLAR</h5><i>Relacionar funciones o actividades que respondan al resultado de aprendizaje de la Etapa Productiva y al Perfil del egresado establecido en el programa de formación.</i></th>
                 <th>Evidencia de Aprendizaje</th>
-                
+
                 <th>Fecha de recoleccion</th>
                 <th>Lugar de recoleccion</th>
                 <th></th>
               </tr>
             </thead>
-            
+
             <tbody  >
               {formData.actividades.map((actividad, index) => (
                 <tr key={index}>
                   <td>
                     <input className="name-actividad input-planeacion" placeholder="Ingrese la actividad"
                       name="nombre_actividad"
-                
+
                       value={actividad.nombre_actividad}
                       onChange={(e) => handleChange(e, index)}
                     ></input>
                   </td>
                   <td>
-                    <input type="checkbox" className="input-si-evidencia input-planeacion" 
-                    
+                    <input type="checkbox" className="input-si-evidencia input-planeacion"
+
                       name="tiene_evidencia_aprendizaje"
                       rows="2"
                       checked={actividad.tiene_evidencia_aprendizaje}
@@ -146,7 +146,7 @@ function PlaneacionEP({ goToNextComponent, data }) {
                   </td>
                   <td>
                     <input type="date" className="input-planeacion "
-                    
+
                       name="fecha_recoleccion_evidencia"
                       rows="2"
                       value={actividad.fecha_recoleccion_evidencia}
@@ -155,7 +155,7 @@ function PlaneacionEP({ goToNextComponent, data }) {
                   </td>
                   <td>
                     <input className="input-planeacion"
-                    placeholder="Ingrese el lugar"
+                      placeholder="Ingrese el lugar"
                       name="lugar_recoleccion_evidencia"
                       rows="2"
                       value={actividad.lugar_recoleccion_evidencia}
@@ -176,183 +176,192 @@ function PlaneacionEP({ goToNextComponent, data }) {
           </button>
 
           <div className="observaciones-planeacion">
-          <h5>OBSERVACIONES</h5>
-          <textarea
-            name="observaciones"
-            rows="4"
-            value={formData.observaciones}
-            onChange={(e) => setFormData({ ...formData, observaciones: e.target.value })}
-          ></textarea>
+            <h5>OBSERVACIONES</h5>
+            <textarea
+              name="observaciones"
+              rows="4"
+              value={formData.observaciones}
+              onChange={(e) => setFormData({ ...formData, observaciones: e.target.value })}
+            ></textarea>
           </div>
 
           <div className="camp-firma">
-          <div className="nombre-ente">
-          <label> <h5>Nombre y firma del ente Conformador</h5></label>
-          <input placeholder="Nombre ente conformador"  className="input-planeacion" value={formData.nombre_enteconformador}
-            onChange={(e) => setFormData({ ...formData, nombre_enteconformador: e.target.value })}></input>
-          </div>
-          
-          <div className="campo-firma-planeacion">
-          
-          <section className="img-signature">
-          {formData.firma_enteconformador ? (
-            <img
-              src={formData.firma_enteconformador}
-              alt="Firma del Ente Conformador"
-              style={{
-                display: "block",
-                margin: "0 auto",
-               
-                width: "100%",
-                height: "100%"
-              }}
-            />
-        ) : null}
-          </section>
-          
-          <Popup trigger={<button type="button">Firmar</button>} modal>
-          {(close) => (
-            <div className="popup campo-firma">
-              <section className="head-signature">
-              <button className="close" onClick={close}> 
-                &times;
-              </button>
-              
-              <h2>Firma ente Conformador</h2>
-              <i class="bi bi-trash3-fill" onClick={() => clearSignature(signatureRef)}></i>
-              </section>
-             
-              <SignatureCanvas
-                penColor="black"
-                canvasProps={{ width: 590, height: 246,className: "signature-canvas" }}
-                ref={(ref) => setSignatureRef(ref)}
-                penOptions={{
-                  minWidth: 2,  // Grosor mínimo del trazo
-                  maxWidth: 4,  // Grosor máximo del trazo
-                  throttle: 0.5, // Velocidad de actualización del trazo
-                }}
-              />
-               
-               <div className="btn-guardar-firma">
-               <button className="btn btn-success " onClick={() => { saveSignature(signatureRef, "firma_enteconformador"); close(); }}>
-                Guardar Firma
-              </button>
-               </div>
-              
-             
-              
+            <div className="nombre-ente">
+              <label> <h5>Nombre y firma del ente Conformador</h5></label>
+              <input placeholder="Nombre ente conformador" className="input-planeacion" value={formData.nombre_enteconformador}
+                onChange={(e) => setFormData({ ...formData, nombre_enteconformador: e.target.value })}></input>
             </div>
-          )}
-    </Popup>
-    </div>
-    </div>
-    <div className="camp-firma">
-  <div className="nombre-aprendiz-ep">
-    <label><h5>Firma del Aprendiz</h5></label>
-  </div>
-  
-  <div className="campo-firma-planeacion">
-    <section className="img-signature">
-      {formData.firma_aprendiz ? (
-        <img
-          src={formData.firma_aprendiz}
-          alt="Firma del Aprendiz"
-          style={{
-            display: "block",
-            margin: "0 auto",
-            width: "100%",
-            height: "100%"
-          }}
-        />
-      ) : null}
-    </section>
-    
-    <Popup trigger={<button type="button">Firmar</button>} modal>
-      {(close) => (
-        <div className="popup campo-firma">
-          <section className="head-signature">
-            <button className="close" onClick={close}> 
-              &times;
-            </button>
-            <h2>Firma del Aprendiz</h2>
-            <i className="bi bi-trash3-fill" onClick={() => clearSignature(aprendizRef)}></i>
-          </section>
-         
-          <SignatureCanvas
-            penColor="black"
-            canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
-            ref={(ref) => setAprendizSignatureRef(ref)}
-          />
-           
-          <div className="btn-guardar-firma">
-            <button className="btn btn-success" onClick={() => { saveSignature(aprendizRef, "firma_aprendiz"); close(); }}>
-              Guardar Firma
-            </button>
-          </div>
-        </div>
-      )}
-    </Popup>
-  </div>
-</div>
-<div className="camp-firma">
-  <div className="nombre-instructor">
-    <label><h5>Nombre y firma del Instructor</h5></label>
-    <input 
-    value={formData.nombre_instructor}
-    onChange={(e) => setFormData({ ...formData, nombre_instructor: e.target.value })}
-      placeholder="Nombre del Instructor"  
-      className="input-planeacion" 
-    />
-  </div>
-  
-  <div className="campo-firma-planeacion">
-    <section className="img-signature">
-      {formData.firma_instructor ? (
-        <img
-          src={formData.firma_instructor}
-          alt="Firma del Instructor"
-          style={{
-            display: "block",
-            margin: "0 auto",
-            width: "100%",
-            height: "100%"
-          }}
-        />
-      ) : null}
-    </section>
-    
-    <Popup trigger={<button type="button">Firmar</button>} modal>
-      {(close) => (
-        <div className="popup campo-firma">
-          <section className="head-signature">
-            <button className="close" onClick={close}> 
-              &times;
-            </button>
-            <h2>Firma del Instructor</h2>
-            <i className="bi bi-trash3-fill" onClick={() => clearSignature(instructorRef)}></i>
-          </section>
-         
-          <SignatureCanvas
-            penColor="black"
-            canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
-            ref={(ref) => setInstructorSignatureRef(ref)}
-          />
-           
-          <div className="btn-guardar-firma">
-            <button className="btn btn-success" onClick={() => { saveSignature(instructorRef, "firma_instructor"); close(); }}>
-              Guardar Firma
-            </button>
-          </div>
-        </div>
-      )}
-    </Popup>
-  </div>
-</div>
 
-      
-    
-          
-           <div className="btn btn-success" onClick={handleGuardarDatos}>
+            <div className="campo-firma-planeacion">
+
+              <section className="img-signature">
+                {formData.firma_enteconformador ? (
+                  <img
+                    src={formData.firma_enteconformador}
+                    alt="Firma del Ente Conformador"
+                    style={{
+                      display: "block",
+                      margin: "0 auto",
+
+                      width: "100%",
+                      height: "100%"
+                    }}
+                  />
+                ) : null}
+              </section>
+
+              <Popup trigger={<button type="button">Firmar</button>} modal>
+                {(close) => (
+                  <div className="popup campo-firma">
+                    <section className="head-signature">
+                      <button className="close" onClick={close}>
+                        &times;
+                      </button>
+
+                      <h2>Firma ente Conformador</h2>
+                      <i class="bi bi-trash3-fill" onClick={() => clearSignature(signatureRef)}></i>
+                    </section>
+
+                    <SignatureCanvas
+                      penColor="black"
+                      canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
+                      ref={(ref) => setSignatureRef(ref)}
+                      // penOptions={{
+                      //   minWidth: 2,  // Grosor mínimo del trazo
+                      //   maxWidth: 4,  // Grosor máximo del trazo
+                      //   throttle: 0.5, // Velocidad de actualización del trazo
+                      // }}
+                      minWidth={1}
+                      maxWidth={1}
+                      velocityFilterWeight ={0.1}
+                    />
+
+                    <div className="btn-guardar-firma">
+                      <button className="btn btn-success " onClick={() => { saveSignature(signatureRef, "firma_enteconformador"); close(); }}>
+                        Guardar Firma
+                      </button>
+                    </div>
+
+
+
+                  </div>
+                )}
+              </Popup>
+            </div>
+          </div>
+          <div className="camp-firma">
+            <div className="nombre-aprendiz-ep">
+              <label><h5>Firma del Aprendiz</h5></label>
+            </div>
+
+            <div className="campo-firma-planeacion">
+              <section className="img-signature">
+                {formData.firma_aprendiz ? (
+                  <img
+                    src={formData.firma_aprendiz}
+                    alt="Firma del Aprendiz"
+                    style={{
+                      display: "block",
+                      margin: "0 auto",
+                      width: "100%",
+                      height: "100%"
+                    }}
+                  />
+                ) : null}
+              </section>
+
+              <Popup trigger={<button type="button">Firmar</button>} modal>
+                {(close) => (
+                  <div className="popup campo-firma">
+                    <section className="head-signature">
+                      <button className="close" onClick={close}>
+                        &times;
+                      </button>
+                      <h2>Firma del Aprendiz</h2>
+                      <i className="bi bi-trash3-fill" onClick={() => clearSignature(aprendizRef)}></i>
+                    </section>
+
+                    <SignatureCanvas
+                      penColor="black"
+                      canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
+                      ref={(ref) => setAprendizSignatureRef(ref)}
+                      minWidth={1}
+                      maxWidth={1}
+                      velocityFilterWeight ={0.1}
+                    />
+
+                    <div className="btn-guardar-firma">
+                      <button className="btn btn-success" onClick={() => { saveSignature(aprendizRef, "firma_aprendiz"); close(); }}>
+                        Guardar Firma
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </Popup>
+            </div>
+          </div>
+          <div className="camp-firma">
+            <div className="nombre-instructor">
+              <label><h5>Nombre y firma del Instructor</h5></label>
+              <input
+                value={formData.nombre_instructor}
+                onChange={(e) => setFormData({ ...formData, nombre_instructor: e.target.value })}
+                placeholder="Nombre del Instructor"
+                className="input-planeacion"
+              />
+            </div>
+
+            <div className="campo-firma-planeacion">
+              <section className="img-signature">
+                {formData.firma_instructor ? (
+                  <img
+                    src={formData.firma_instructor}
+                    alt="Firma del Instructor"
+                    style={{
+                      display: "block",
+                      margin: "0 auto",
+                      width: "100%",
+                      height: "100%"
+                    }}
+                  />
+                ) : null}
+              </section>
+
+              <Popup trigger={<button type="button">Firmar</button>} modal>
+                {(close) => (
+                  <div className="popup campo-firma">
+                    <section className="head-signature">
+                      <button className="close" onClick={close}>
+                        &times;
+                      </button>
+                      <h2>Firma del Instructor</h2>
+                      <i className="bi bi-trash3-fill" onClick={() => clearSignature(instructorRef)}></i>
+                    </section>
+
+                    <SignatureCanvas
+                      penColor="black"
+                      canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
+                      ref={(ref) => setInstructorSignatureRef(ref)}
+                      minWidth={1}
+                      maxWidth={1}
+                      velocityFilterWeight ={0.1}
+                    />
+
+                    <div className="btn-guardar-firma">
+                      <button className="btn btn-success" onClick={() => { saveSignature(instructorRef, "firma_instructor"); close(); }}>
+                        Guardar Firma
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </Popup>
+            </div>
+          </div>
+
+
+
+
+          <div className="btn btn-success" onClick={handleGuardarDatos}>
             <h5>Guardar y continuar</h5>
           </div>
         </form>

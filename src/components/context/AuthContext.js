@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setToken(null);
     localStorage.removeItem('token');
-    localStorage.clear();
+    localStorage.removeItem('formData');
   };
 
   useEffect(() => {

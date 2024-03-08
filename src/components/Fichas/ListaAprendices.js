@@ -85,7 +85,7 @@ function ListaAprendices(props){
 
           <div className="btns-doc-aprendiz-lista">
         <Link  to={`/documentos-aprendiz/${aprendiz.id}`} className="btn btn-success">Documentos</Link>
-        <Link to={`/formato-etapa-productiva/${aprendiz.id}/${'index'}`} className="btn btn-formato">Formato Productiva</Link>
+        <a href={`/formato-etapa-productiva/${aprendiz.id}/${'index'}`} className="btn btn-formato">Formato Productiva</a>
       </div>
                     {/* <div>
       {aprendices.map(aprendiz => (

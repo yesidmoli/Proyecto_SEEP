@@ -124,7 +124,7 @@ function DocumentosAprendices (){
 
       <div className="btns-doc-aprendiz">
         <Link  to={`/documentos-aprendiz/${item.id}`} className="btn btn-success">Documentos</Link>
-        <Link to={`/formato-etapa-productiva/${item.id}/${'index'}`} className="btn btn-formato">Formato Productiva</Link>
+        <a href={`/formato-etapa-productiva/${item.id}/${'index'}`} className="btn btn-formato">Formato Productiva</a>
       </div>
     
       

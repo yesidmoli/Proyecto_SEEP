@@ -217,15 +217,26 @@ background-color: #012639 !important;
   }
   .popup-content{
     width: 100% !important;
+    display: initial !important;
+    overflow-y: auto;
+    overflow-x:scroll ;
+  
   }
   .signature-canvas{
-    width: 245px;
-    height: 246px;
+    width: auto;
+    height: auto;
   }
+  
   /* .input-doc select, .file{
 
     width: 15rem;
 
   } */
+}
+@media (max-width: 767px) and (orientation: landscape) {
+  .campo-firma{
+    height: 20rem;
+  }
+
 }
 

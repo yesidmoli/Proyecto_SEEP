@@ -149,11 +149,11 @@ const FormatoE = () => {
                         </li>
                         <li>
                             <label for="programa-formacion">Programa de Formación:</label>
-                            <input type="text" id="programa-formacion" value={formData.aprendiz?.ficha?.nombre_programa ?? ""} name="programa-formacion" />
+                            <input type="text" id="programa-formacion" value={formData.aprendiz_data?.ficha?.nombre_programa ?? ""} name="programa-formacion" />
                         </li>
                         <li className='input-centro'>
                             <label for="numero-ficha">No. de Ficha:</label>
-                            <input type="text" id="numero-ficha" value={formData.aprendiz?.ficha?.numero_ficha ?? ""} name="numero-ficha" />
+                            <input type="text" id="numero-ficha" value={formData.aprendiz_data?.ficha?.numero_ficha ?? ""} name="numero-ficha" />
                         </li>
                     </ul>
                 </div>
@@ -163,24 +163,24 @@ const FormatoE = () => {
                         <li>
                             <label for="nombre">Nombre:</label>
                             {/* <input type="text" id="nombre" name="nombre"  value={"Yesid Molina"}/> */}
-                            <h6>{formData.aprendiz?.nombres ?? ""} {formData.aprendiz?.apellidos ?? ""}</h6>
+                            <h6>{formData.aprendiz?.nombres ?? ""} {formData.aprendiz_data?.apellidos ?? ""}</h6>
 
                         </li>
                         <li>
                             <label for="identificacion">Identificación:</label>
-                            <input type="text" id="identificacion" value={formData.aprendiz?.numero_documento ?? ""} name="identificacion" />
+                            <input type="text" id="identificacion" value={formData.aprendiz_data?.numero_documento ?? ""} name="identificacion" />
                         </li>
                         <li>
                             <label for="telefono">Teléfono:</label>
-                            <input type="text" id="telefono" value={formData.aprendiz?.numero_celular1 ?? ""} name="telefono" />
+                            <input type="text" id="telefono" value={formData.aprendiz_data?.numero_celular1 ?? ""} name="telefono" />
                         </li>
                         <li>
                             <label for="email">E-mail:</label>
-                            <input type="email" id="email" name="email" value={formData.aprendiz?.correo_principal ?? ""} />
+                            <input type="email" id="email" name="email" value={formData.aprendiz_data?.correo_principal ?? ""} />
                         </li>
                         <li>
                             <label for="email">Alternativa registrada en sofia plus:</label>
-                            <input type="email" id="email" name="email" value={formData.aprendiz?.correo_secundario ?? ""} />
+                            <input type="email" id="email" name="email" value={formData.aprendiz_data?.correo_secundario ?? ""} />
                         </li>
                     </ul>
                 </div>
@@ -189,15 +189,15 @@ const FormatoE = () => {
                     <ul>
                         <li>
                             <label for="razon-social">Razón social:</label>
-                            <input type="text" id="razon-social" name="razon-social" value={formData.aprendiz?.empresa?.razon_social ?? ""} />
+                            <input type="text" id="razon-social" name="razon-social" value={formData.aprendiz_data?.empresa?.razon_social ?? ""} />
                         </li>
                         <li>
                             <label for="nombre-empresa">Nit:</label>
-                            <input type="text" id="nombre-empresa" name="nombre-empresa" value={formData.aprendiz?.empresa?.nit ?? ""} />
+                            <input type="text" id="nombre-empresa" name="nombre-empresa" value={formData.aprendiz_data?.empresa?.nit ?? ""} />
                         </li>
                         <li>
                             <label for="nombre-jefe">Nombre del Jefe Inmediato del Aprendiz:</label>
-                            <input type="text" id="nombre-jefe" name="nombre-jefe" value={formData.aprendiz?.empresa?.nombre_jefe_inmediato ?? ""} />
+                            <input type="text" id="nombre-jefe" name="nombre-jefe" value={formData.aprendiz_data?.empresa?.nombre_jefe_inmediato ?? ""} />
                         </li>
                         <li>
                             <label for="cargo-jefe">Cargo:</label>
@@ -205,11 +205,11 @@ const FormatoE = () => {
                         </li>
                         <li>
                             <label for="telefono-jefe">Teléfono:</label>
-                            <input type="text" id="telefono-jefe" name="telefono-jefe" value={formData.aprendiz?.empresa?.telefono ?? ""} />
+                            <input type="text" id="telefono-jefe" name="telefono-jefe" value={formData.aprendiz_data?.empresa?.telefono ?? ""} />
                         </li>
                         <li>
                             <label for="email-jefe">E-mail:</label>
-                            <input type="email" id="email-jefe" name="email-jefe" value={formData.aprendiz?.empresa?.correo ?? ""} />
+                            <input type="email" id="email-jefe" name="email-jefe" value={formData.aprendiz_data?.empresa?.correo ?? ""} />
                         </li>
                     </ul>
                 </div>
@@ -598,7 +598,7 @@ const FormatoE = () => {
                 <div className='btns-descargar-pdf' >
                     <button className='btn btn-pdf-formato' onClick={generatePDF}>Generar PDF</button>
 
-                    <PDFDownloadLink document={imagePage.length > 0 ? <ImagenPDF imagePages={imagePage} /> : null} fileName={ `(${formData.aprendiz?.numero_documento ?? ""}) FORMATO PLANEACIÓN, SEGUIMIENTO Y EVALUACIÓN ETAPA PRODUCTIVA.pdf`}>
+                    <PDFDownloadLink document={imagePage.length > 0 ? <ImagenPDF imagePages={imagePage} /> : null} fileName={ `(${formData.aprendiz_data?.numero_documento ?? ""}) FORMATO PLANEACIÓN, SEGUIMIENTO Y EVALUACIÓN ETAPA PRODUCTIVA.pdf`}>
                         {({ loading }) =>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                             {loading && <Spinner animation="grow" size="lg" />} {/* Muestra el spinner si loading es true */}

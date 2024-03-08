@@ -35,8 +35,15 @@ export const FormProvider = ({ children }) => {
     }));
   };
 
+  const resetFormData = () => {
+    setFormData({});
+    // Eliminar los datos del almacenamiento local
+    localStorage.removeItem('formData');
+  };
+  
+
   return (
-    <FormContext.Provider value={{ formData, updateFormData }}>
+    <FormContext.Provider value={{ formData, updateFormData, resetFormData }}>
       {children}
     </FormContext.Provider>
   );

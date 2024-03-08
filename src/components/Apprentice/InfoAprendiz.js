@@ -79,24 +79,24 @@ function InfoAprediz(props){
             <Header />
             <main className="container">
             <div className="btn-group">
-      <Link to={`/formato-etapa-productiva/${id}/${'Planeacion'}`}
+      <a href={`/formato-etapa-productiva/${id}/${'Planeacion'}`}
         className={`btn btn-success ${activeButton === 'Planeación' ? 'active' : ''}`}
         onClick={() => handleButtonClick('Planeación')}
       >
         Planeación
-      </Link>
-      <Link to={`/formato-etapa-productiva/${id}/${'Seguimiento'}`}
+      </a>
+      <a href={`/formato-etapa-productiva/${id}/${'Seguimiento'}`}
         className={`btn  btn-success ${activeButton === 'Seguimiento' ? 'active' : ''}`}
         onClick={() => handleButtonClick('Seguimiento')}
       >
         Seguimiento
-      </Link>
-      <Link to={`/formato-etapa-productiva/${id}/${'Evaluacion'}`}
+      </a>
+      <a href={`/formato-etapa-productiva/${id}/${'Evaluacion'}`}
         className={`btn  btn-success ${activeButton === 'Evaluación' ? 'active' : ''}`}
         onClick={() => handleButtonClick('Evaluación')}
       >
         Evaluación
-      </Link>
+      </a>
       <Link to={`/documentos-aprendiz/${id}`}
         className={`btn  btn-success ${activeButton === 'Documentación' ? 'active' : ''}`}
         onClick={() => handleButtonClick('Documentación')}

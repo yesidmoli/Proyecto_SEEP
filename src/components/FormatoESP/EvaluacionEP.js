@@ -143,16 +143,16 @@ function EvaluacionEP({ goToNextComponent, data }) {
 
     console.log("datos evaluacion", formData)
 
-    
+
     useEffect(() => {
         if (contextFormData) {
-           
+
             setFormData(contextFormData);
         }
         // Actualizamos el estado local con los datos del contexto
     }, [contextFormData]);
 
-   
+
     const [signatureRef, setSignatureRef] = useState(null);
     const [aprendizRef, setAprendizSignatureRef] = useState(null);
     const [instructorRef, setInstructorSignatureRef] = useState(null);
@@ -167,7 +167,7 @@ function EvaluacionEP({ goToNextComponent, data }) {
         // console.log("Signature Image:", signatureImage);
         setFormData((prevState) => ({ ...prevState, [fieldName]: signatureImage }));
     };
-   
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -198,8 +198,8 @@ function EvaluacionEP({ goToNextComponent, data }) {
 
         goToNextComponent(formData)
         updateFormData('evaluacion', formData)
-     
-       
+
+
     };
     const handleEliminarReconocimiento = (index) => {
         const reconocimientosArray = formData.reconocimientos_detalle.split('-');
@@ -213,7 +213,7 @@ function EvaluacionEP({ goToNextComponent, data }) {
     return (
         <Fragment>
             <div className="container container_evaluacionEP">
-            
+
                 <div className="module">
                     <h1 className="h1-evaluacion">4. EVALUACIÓN ETAPA PRODUCTIVA</h1>
                     <table>
@@ -262,7 +262,7 @@ function EvaluacionEP({ goToNextComponent, data }) {
                                         <strong>Reconocimientos:</strong>
                                         <ul>
                                             {formData.reconocimientos_detalle.split('-').map((reconocimiento, index) => (
-                                                <li className='reconocimientos-lista'  key={index}>{reconocimiento}
+                                                <li className='reconocimientos-lista' key={index}>{reconocimiento}
                                                     <td>
                                                         <button onClick={() => handleEliminarReconocimiento(index)}>Eliminar</button>
                                                     </td>
@@ -284,7 +284,7 @@ function EvaluacionEP({ goToNextComponent, data }) {
                     <div className="camp-firma">
                         <div className="nombre-ente">
                             <label> <h5>Nombre y firma del ente Conformador</h5></label>
-                            <input placeholder="Nombre ente conformador"  name="nombre_enteconformador" className="input-planeacion" value={formData.nombre_enteconformador} onChange={handleChange}></input>
+                            <input placeholder="Nombre ente conformador" name="nombre_enteconformador" className="input-planeacion" value={formData.nombre_enteconformador} onChange={handleChange}></input>
                         </div>
 
                         <div className="campo-firma-planeacion">
@@ -321,6 +321,9 @@ function EvaluacionEP({ goToNextComponent, data }) {
                                             penColor="black"
                                             canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
                                             ref={(ref) => setSignatureRef(ref)}
+                                            minWidth={1}
+                                            maxWidth={1}
+                                            velocityFilterWeight={0.1}
                                         />
 
                                         <div className="btn-guardar-firma">
@@ -372,6 +375,9 @@ function EvaluacionEP({ goToNextComponent, data }) {
                                             penColor="black"
                                             canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
                                             ref={(ref) => setAprendizSignatureRef(ref)}
+                                            minWidth={1}
+                                            maxWidth={1}
+                                            velocityFilterWeight={0.1}
                                         />
 
                                         <div className="btn-guardar-firma">
@@ -387,9 +393,9 @@ function EvaluacionEP({ goToNextComponent, data }) {
                     <div className="camp-firma">
                         <div className="nombre-instructor">
                             <label><h5>Nombre y firma del Instructor</h5></label>
-                            <input 
-                            name="nombre_instructor"
-                            value={formData.nombre_instructor} onChange={handleChange}
+                            <input
+                                name="nombre_instructor"
+                                value={formData.nombre_instructor} onChange={handleChange}
                                 placeholder="Nombre del Instructor"
                                 className="input-planeacion"
                             />
@@ -426,6 +432,9 @@ function EvaluacionEP({ goToNextComponent, data }) {
                                             penColor="black"
                                             canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
                                             ref={(ref) => setInstructorSignatureRef(ref)}
+                                            minWidth={1}
+                                            maxWidth={1}
+                                            velocityFilterWeight={0.1}
                                         />
 
                                         <div className="btn-guardar-firma">
@@ -438,7 +447,7 @@ function EvaluacionEP({ goToNextComponent, data }) {
                             </Popup>
                         </div>
                     </div>
-                    
+
                     <button type="button" id="guardar-evaluacionep" onClick={guardarDatos}>Guardar</button>
                 </div>
             </div>
