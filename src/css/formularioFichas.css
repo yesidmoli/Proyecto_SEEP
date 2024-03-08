@@ -107,7 +107,6 @@
   }
 
   .title-button{
-    align-items: center;
     display: flex;
     justify-content: space-between;
   }
@@ -119,17 +118,6 @@
     padding: 8px;
     cursor: pointer;
     border-radius: 4px;
-  }
-  .links{
-
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .enlace-con-icono{
-    width: 50px;
-    height: 30px;
   }
   .btn-editar{
     background: var(--color-iconos); 

@@ -1,105 +1,78 @@
-import React, { useState, Fragment } from "react";
-import { useEffect } from "react"
-import Apps from "../layout/menu/App";
-import Header from "../layout/Header"
-import MainSection from "../layout/MainSection"
-import ReactSearchBox from "react-search-box";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import "../../css/bitacoras.css";
-import clienteAxios from "../../config/axios";
-import { useAuth } from "../context/AuthContext";
+import React from "react";
+import '../../css/bitacoras.css';
+import { Fragment } from "react";
+import MainSection from "../layout/MainSection";
+import Header from "../layout/Header";
+
 const Bitacoras = () => {
-
-  const[aprendices, dataAprendices] = useState([])
-  const [searchValue, setSearchValue] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
-  const token = useAuth()
-  const consultarDatosAprendiz = async () => {
-    try {
-      const response = await clienteAxios.get(`/api/aprendices/`, {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      });
-      dataAprendices(response.data.results);
-    } catch (error) {
-      console.error('Error al consultar los aprendices:', error);
-    }
-  };
-  useEffect(() => {
-    consultarDatosAprendiz();
-    setFilteredData(aprendices);
-  }, []);
-
-  //actualizar el estado searchValue con el valor de búsqueda ingresado por el usuario
-  const handleSearch = (name) => {
-    setSearchValue(name);
-
-  };
   return (
     <div className="contenedor-main">
-        <Fragment>
-          <Apps />
-            <Header />
-        <section className="container conten-documentos">
-                <MainSection />
-                <div className="react-search-box ">
-                  <ReactSearchBox
-                  placeholder="Buscar Aprendiz..."
-                  value={searchValue}
-                  onChange={handleSearch}
-                  data={filteredData}
-                  fuseConfigs={{ threshold: 0.2 }}
-                  inputHeight="3rem"
-                  iconBoxSize={"5rem"}
-                  inputFontSize="1.3rem"
-                  />
-                </div>
-
-    <ul className="list-aprendices">
-      <h1>Listado de aprendices</h1>
-      {searchValue ? (
-    // Si hay un valor de búsqueda, aplica el filtro a deudas
-    aprendices.filter((item) =>
-        item.nombres.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.apellidos.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.ficha.numero_ficha.includes(searchValue.toLowerCase()) ||
-        item.numero_documento.includes(searchValue.toLowerCase())
-      )
-      .map((filteredItem) => (
-
-        <Link to={`/bitacora-aprendiz/${filteredItem.id}`} className="item-link">
-        <li className="item-aprendiz" key={filteredItem.key}>
-          <i className="bi bi-file-earmark-pdf-fill"></i>
-          <div className="datos-aprendiz-doc">
-            <h5>{filteredItem.nombres} {filteredItem.apellidos}</h5>
-            <h6> {filteredItem.tipo_documento}:{filteredItem.numero_documento}</h6>
-            <h6>{filteredItem.ficha.numero_ficha}</h6>
-          </div>
-        </li>
-        </Link>
-        
-      ))
-  ) : (
-    // Si no hay valor de búsqueda, muestra todas las deudas
-    aprendices.map((item) => (
-        <Link to={`/bitacora-aprendiz/${item.id}`} className="item-link">
-      <li className="item-aprendiz" key={item.key}> 
-      <i className="bi bi-file-earmark-pdf-fill"></i>
-      <div className="datos-aprendiz-doc">
-        <h5>{item.nombres} {item.apellidos}</h5>
-        <h6>{item.tipo_documento}: {item.numero_documento}</h6>
-        <h6> Ficha: {item.ficha.numero_ficha}</h6>
-      </div>
+      <header className="header">Bitácoras del aprendiz</header>
+      <i class="bi bi-arrow-left-circle"></i>
+    <div className="container-checklist">
       
-      </li>
-      </Link>
-    ))
-  )}
+      <h2>Lista de verificación de bitácoras</h2>
+      <div className="list-checklist">
+      <ul>
+        <div className="section-one">
+        <li>
+          <input type="checkbox" id="tbitacora1" />
+          <label for="tbitacora1">Bitácora 1</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora2" />
+          <label for="bitacora2">Bitácora 2</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora3" />
+          <label for="bitacora3">Bitácora 3</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora4" />
+          <label for="bitacora4">Bitácora 4</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora5" />
+          <label for="bitacora5">Bitácora 5</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora6" />
+          <label for="bitacora6">Bitácora 6</label>
+        </li>
+        </div>
+        <div className="section-two">
+        <li>
+          <input type="checkbox" id="bitacora7" />
+          <label for="bitacora7">Bitácora 7</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora8" />
+          <label for="bitacora8">Bitácora 8</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora9" />
+          <label for="bitacora9">Bitácora 9</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora10" />
+          <label for="bitacora10">Bitácora 10</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora11" />
+          <label for="bitacora11">Bitácora 11</label>
+        </li>
+        <li>
+          <input type="checkbox" id="bitacora12" />
+          <label for="bitacora12">Bitácora 12</label>
+        </li>
+        </div>
       </ul>
-            </section>
-        </Fragment>
+      </div>
+      <div className="boton-guardar-bitacora">
+      <button id="guardar-bitacora" type="button">Guardar</button>
+      </div>
     </div>
+      </div>
   );
 };
 

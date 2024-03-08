@@ -99,7 +99,7 @@ const Menu = ({ open }) => {
       </li>
 
       <li>
-      <Link  onClick={handleLogout} className='a-logout' to="/"><i className="bi bi-box-arrow-left"></i></Link>
+      <Link  onClick={handleLogout} className='a-logout' to="/"><i class="bi bi-box-arrow-left"></i></Link>
      
       </li>
     </ul>

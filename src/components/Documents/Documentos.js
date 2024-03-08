@@ -25,8 +25,13 @@ const Documentos = (props) => {
         "is_bitacora": false,
         "aprendiz": id
     });
+
     const [documentos, setDocumentos] = useState([]);
-    const opciones = ['Bitácora', 'Documento de identidad', 'Carta Laboral', 'Certificado Agencia Publica', 'Carnet Destruido', 'Prubas TyT'];
+
+    console.log("ESto es lo que se va a enviar" , datosForm)
+
+    const opciones = ['Bitácora', 'Documento de identidad', 'Carta Laboral', 'Certificado Agencia Publica', 'Carnet Destruido', 'Prubas TyT', 'Carta Laboral'];
+
     const handleSeleccion = (e) => {
         const nuevaSeleccion = e.target.value;
         setSeleccion(nuevaSeleccion);
@@ -40,6 +45,12 @@ const Documentos = (props) => {
               tipo_documento: nuevaSeleccion
           }));
   }
+
+        // // Actualizar el estado de datosForm
+        // setDatosForm(prevState => ({
+        //     ...prevState,
+        //     is_bitacora: true
+        // }));
     }
 
     const handleSeleccionBitacora = (event) => {
@@ -55,7 +66,10 @@ const Documentos = (props) => {
     };
 
     const handleSeleccionArchivo = (event) => {
+      // Obtiene el archivo seleccionado del input de tipo file
       const archivo = event.target.files[0];
+  
+      // Actualiza el estado de datosForm con el nuevo archivo
       setDatosForm(prevState => ({
           ...prevState,
           archivo: archivo
@@ -65,6 +79,7 @@ const Documentos = (props) => {
 
     const handleCargarDocumentos = async () => {
       try {
+          // Realizar la solicitud POST a la API con Axios
           const response = await clienteAxios.post('api/documentacion-aprendiz/', datosForm, {
               headers: {
                   'Content-Type':  'multipart/form-data' 
@@ -95,6 +110,10 @@ const Documentos = (props) => {
       }
   }
 
+    // if (mostrarDocumentos) {
+    //     // Si mostrarDocumentos es verdadero, renderiza el componente VisualizarDocumentos
+    //     return <VisualizarDocumentos />;
+    // }
 
    
         const fetchDocumentos = async () => {
