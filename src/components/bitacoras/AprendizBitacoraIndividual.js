@@ -86,7 +86,7 @@ const AprendizBitacoraIndividual = () => {
       <Header></Header>
       <MainSection></MainSection>
 
-      <div className="bitacoras-container">
+      <div className=" bitacoras-container">
 
         <h4>Bitácoras del aprendiz</h4>
         <div className="table-container">
