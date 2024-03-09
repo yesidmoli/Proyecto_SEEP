@@ -86,17 +86,17 @@ const Login = () => {
       
         <form className="form-login" onSubmit={handleLogin}>
             <h1  className="titulo-login" >Iniciar sesión</h1>
-            <label for="acount-type">Seleccione tipo de usuario</label>
+            <label className='label-login' for="acount-type">Seleccione tipo de usuario</label>
             <select value={datos.rol} onChange={actualizarState} className="input-login" id="acount-type"  name="rol">
                 <option selected hidden>Seleccione una opción</option>
                 <option value="aprendiz" >Aprendiz</option>
                 {/* <option value="admin">Administrador</option> */}
                 <option value="instructor">Instructor</option>
             </select>
-            <label for="numeroId">N° Identificación:</label>
+            <label className='label-login' for="numeroId">N° Identificación:</label>
             <input className="input-login"  placeholder="N° Identificación" name="documento"  id="numeroId" value={datos.documento} onChange={actualizarState} />
 
-            <label for="contraseña">Contraseña:</label>
+            <label className='label-login' for="contraseña">Contraseña:</label>
             <input  className="input-login" type="password" placeholder="Contraseña" name="password"  id="contraseña" value={datos.password} onChange={actualizarState}  />
 
             <a  className="recupera-contraseña"  href="#">Recuperar contraseña</a>
