@@ -61,7 +61,7 @@ const AprendizSelector = ({onAprendizSeleccionada}) => {
                   placeholder="Seleccione el aprendiz"
                   options={aprendiz.map(aprendiz => ({
                     value: aprendiz.id,
-                    label: aprendiz.nombres,
+                    label: `${aprendiz.nombres} ${aprendiz.apellidos} ${aprendiz.numero_documento}`,
                     key: aprendiz.id
                   }))}
   

@@ -13,9 +13,13 @@ import '../layout/MainSection';
 import MainSection from '../layout/MainSection';
 import Header from '../layout/Header';
 import Apps from '../layout/menu/App';
+
+import { useAuth } from '../context/AuthContext';
+
 const FormularioFicha = ({history}) => {
 
-
+  const token = localStorage.getItem('token')
+  console.log("este es el token", token)
 
   const initialState = {
     numero_ficha: '',
@@ -36,7 +40,11 @@ const FormularioFicha = ({history}) => {
     // Lógica para obtener las fichas existentes 
     const obtenerFichas = async () => {
       try {
-        const consultarFicha = await clienteAxios.get('/api/fichas/');
+        const consultarFicha = await clienteAxios.get('/api/fichas/', {
+          headers: {
+              Authorization: `Token ${token}`,
+          }
+      });
         setFichas(consultarFicha.data);
       } catch (error) {
         console.error('Error al obtener las fichas:', error);
@@ -59,13 +67,21 @@ const FormularioFicha = ({history}) => {
     try {
       if (modoEdicion) {
         // Actualizar ficha existente
-        await clienteAxios.put(`/fichas/${idEditar}`, ficha);
+        await clienteAxios.put(`/fichas/${idEditar}`, ficha, {
+          headers: {
+              Authorization: `Token ${token}`,
+          }
+      });
         Swal.fire('¡Éxito!', 'La ficha se actualizó correctamente.', 'success');
         
       } else {
         // Crear nueva ficha
 
-        await clienteAxios.post('/api/fichas/', ficha);
+        await clienteAxios.post('/api/fichas/', ficha, {
+          headers: {
+              Authorization: `Token ${token}`,
+          }
+      });
         Swal.fire('¡Éxito!', 'La ficha se registró correctamente.', 'success');
         // Redirigir a la sección de listado de fichas
         history.push('/#listado-fichas');
@@ -74,7 +90,11 @@ const FormularioFicha = ({history}) => {
       }
 
       // Actualizar la lista de fichas
-      const consultarFicha= await clienteAxios.get('api/fichas/');
+      const consultarFicha= await clienteAxios.get('api/fichas/', {
+        headers: {
+            Authorization: `Token ${token}`,
+        }
+    });
       setFichas(consultarFicha.data);
 
       // Limpiar el formulario y restablecer el estado
@@ -83,7 +103,7 @@ const FormularioFicha = ({history}) => {
       setIdEditar(null);
     } catch (error) {
       console.error('Error al enviar el formulario:', error);
-      Swal.fire('Error', 'Hubo un error al procesar la solicitud.', 'error');
+      Swal.fire('Error', `Hubo un error al procesar la solicitud - ${error.response.data}`, 'error');
     }
   };
   
@@ -118,7 +138,11 @@ const FormularioFicha = ({history}) => {
         await clienteAxios.delete(`/fichas/${id}`);
   
         // Actualizar la lista de fichas después de eliminar
-        const consultarFicha = await clienteAxios.get('api/fichas/');
+        const consultarFicha = await clienteAxios.get('api/fichas/', {
+          headers: {
+              Authorization: `Token ${token}`,
+          }
+      });
         setFichas(consultarFicha.data);
   
         // Mostrar mensaje de éxito
@@ -155,10 +179,7 @@ const FormularioFicha = ({history}) => {
         </Link>
       <button className='listado-fichas' onClick={handleCargarFichas} >Listado de Fichas</button>
 
-        <Link to={"/nuevo-aprendiz"} aria-label="icon" className="iconLink ">
-     <button id='registrar-aprendiz'>Registrar Aprendiz</button>
-        </Link>
-      
+        
         </div>
 
         <div className='container-fichas'> 
