@@ -5,6 +5,7 @@ import '../../../src/css/formularioFichas.css'
 import Swal from 'sweetalert2';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import AprendicesRegistrados from './AprendicesRegistrados';
 //para la flecha de regreso
 import '../../css/bitacoras.css';
 import '../layout/Header';
@@ -29,6 +30,7 @@ const FormularioFicha = ({history}) => {
   const [modoEdicion, setModoEdicion] = useState(false);
   const [idEditar, setIdEditar] = useState(null);
   const [listaFichas, setListaFichas] = useState(false);
+  const [registroAprendices, setRegistroAprendices] = useState(false);
 
  
 
@@ -136,7 +138,15 @@ const FormularioFicha = ({history}) => {
   if (listaFichas) {
     return <ListaFichas />;
   }
+  const handleRegistroAprendices = () => {
+    // Actualiza el estado para mostrar el componente de VisualizarDocumentos
+    setRegistroAprendices(true);
+  }
 
+  if (registroAprendices) {
+    // Si mostrarDocumentos es verdadero, renderiza el componente VisualizarDocumentos
+    return <AprendicesRegistrados />;
+  }
 
   return (
     <Fragment>
@@ -145,6 +155,7 @@ const FormularioFicha = ({history}) => {
       <Header />
       <MainSection />
       <Apps />
+    <div className='main-container-form'>
     <div className='container cont-fichas'>
 
     <div className='btn-fichas'>
@@ -154,10 +165,8 @@ const FormularioFicha = ({history}) => {
      <button id='registrar-aprendiz'>Registrar Aprendiz</button>
         </Link>
       <button className='listado-fichas' onClick={handleCargarFichas} >Listado de Fichas</button>
-
-        <Link to={"/nuevo-aprendiz"} aria-label="icon" className="iconLink ">
-     <button id='registrar-aprendiz'>Registrar Aprendiz</button>
-        </Link>
+      
+      <button className='listado-fichas' onClick={handleRegistroAprendices} >Listado de Aprendices</button>
         <Link to={"/"} className="flecha-regreso">
           <span className="flecha" >&#10094;</span>
         </Link>
@@ -208,6 +217,7 @@ const FormularioFicha = ({history}) => {
         </div>
        
       </form>
+    </div>
     </div>
     </Fragment>
   );

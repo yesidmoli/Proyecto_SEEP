@@ -49,8 +49,6 @@ const AprendizBitacoraIndividual = () => {
     <MainSection></MainSection>
     
     <div className="bitacoras-container">
-      
-      <h4>Bitácoras del aprendiz</h4>
       <div className="table-container">
         <table id="bitacoras-table">
           <thead className="thead">

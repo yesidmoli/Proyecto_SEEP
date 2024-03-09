@@ -8,12 +8,11 @@ body{
 }
 #header{
     height: 100px;
-    background-color: var(--color-iconos);
+    background-color: #04324D;
     font-size:40px;
     color: white;
     padding: 10px;
     text-align: center;
-    border-radius: 0px 0px 30px 30px;
     font-weight: 500;
 }
 .container-uno{
@@ -94,8 +93,31 @@ body{
 #fecha_exp, #fecha-nac, #fin{
     display: flex;
 }
+#eliminar-aprendiz{
+    border-radius: 5px;
+    background-color: #f44336;
+}
+#editar-aprendiz{
+    border-radius: 5px;
+}
 #datos-emp{
     margin-top: 20px;
+}
+.swal2-actions input{
+    margin: 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+.swal2-label{
+    width: 100%;
+    text-align: left;
+    margin-bottom: 8px;
 }
 
 .buttons-opciones{
@@ -185,7 +207,7 @@ input[type="checkbox"] + label {
 
 input[type="text"],
 input[type="date"],
-input[type="email"],
+#email input[type="email"],
 input[type="tel"] {
     width: 50%;
     padding: 10px;
