@@ -39,6 +39,9 @@ import PrivateRoute from './components/auth/ PrivateRoute';
 import AprendizBitacoraIndividual from './components/bitacoras/AprendizBitacoraIndividual';
 
 
+//reste password
+import PasswordResetForm from './components/auth/resetPassword/PasswordResetForm';
+import PasswordResetConfirmForm from './components/auth/resetPassword/PasswordResetConfirmForm';
 function App() {
   return (
     <Router>
@@ -68,6 +71,8 @@ function App() {
             <Route exact path="/formato-etapa-productiva-pdf/:id" component={FormatoE} />
             
             <Route exact path="/bitacora-aprendiz/:id" component={AprendizBitacoraIndividual} />
+            <Route exact path="/password/reset/" component={PasswordResetForm} />
+            <Route exact path="/password/reset/confirm/:uid/:token" component={PasswordResetConfirmForm} />
         
           </Switch>
     

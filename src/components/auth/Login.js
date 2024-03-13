@@ -99,7 +99,7 @@ const Login = () => {
             <label for="contraseña">Contraseña:</label>
             <input  class="input-login" type="password" placeholder="Contraseña" name="password"  id="contraseña" value={datos.password} onChange={actualizarState}  />
 
-            <a  class="recupera-contraseña"  href="#">Recuperar contraseña</a>
+            <Link  class="recupera-contraseña"  to="/password/reset/">Recuperar contraseña</Link>
             <center className='btn-login'><button  class="btns " > Iniciar Sesión </button></center>
         </form>
 

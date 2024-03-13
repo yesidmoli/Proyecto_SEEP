@@ -18,7 +18,7 @@
   }
   .encabezado-fichas{
     height: 100px;
-    background-color: #39a900;
+    background-color: #04324D;
     font-size: 40px;
     color: white;
     padding: 20px;
@@ -56,17 +56,25 @@
     border-radius: 4px !important;
     font-size: 16px !important;
   }
+  .main-container-form{
+    display: flex;
+    width: 100%;
+  }
   .container-btn{
     display: flex;
     justify-content: center;
   }
-  #registrar-aprendiz,.registrar-ficha, .listado-fichas, #btn-editar-fichas, #regresar-registro, #save, #ver {
+  #registrar-aprendiz,.registrar-ficha, .listado-fichas, #save, #ver {
     border-radius: 10px;
     width: 100%;
    background-color: var(--color-iconos);
     font-size: 18px;
     font-weight: 500;
 
+  }
+  #btn-editar-fichas, #regresar-registro{
+    width: 100px;
+    border-radius: 5px;
   }
   #registrar-aprendiz:hover,.registrar-ficha:hover, .listado-fichas:hover, #btn-editar-fichas:hover, #regresar-registro:hover, #save:hover, #ver:hover {
     background-color: #39A900 !important;
@@ -145,14 +153,15 @@
     margin-top: 2rem;
   }
   .cont-fichas{
-    display: flex;
+    width: 30%;
+     display: flex; 
     margin-left: 5rem !important;
 
   }
   .btn-fichas{
     display: flex;
     flex-direction: column;
-    width: 15rem;
+    width: 20rem;
     margin-top: 1.5rem;
     padding-top: 4rem;
     margin-left: 4rem;
@@ -203,7 +212,7 @@
     width: 50px;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 600px) {
     .cont-fichas{
       margin: 0px !important;
       flex-direction: column ;
