@@ -203,6 +203,9 @@
   .rojo-label{
     color: #f44336;
   }
+  .descargar-excel{
+    border-radius: 5px;
+  }
   .btn-atras{
     position: fixed !important;
     top: 160px;
@@ -223,6 +226,7 @@
   .btn-atras img{
     width: 50px;
   }
+  
 
   @media only screen and (max-width: 600px) {
     .cont-fichas{
