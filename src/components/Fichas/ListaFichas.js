@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import clienteAxios from "../../config/axios";
 import FormularioFicha from "./FormularioFicha";
 import Swal from "sweetalert2";
+import { useAuth } from "../context/AuthContext";
+import * as XLSX from 'xlsx';
 
 const ListaFichas = () => {
   const [fichas, setFichas] = useState([]);
   const [formularioFichas, setFormularioFichas] = useState(false);
 
+  const {token} = useAuth()
   const editarFicha = (id) => {
     // Buscar la ficha por ID
     const fichaEditar = listaFichas.find((f) => f.id === id);
@@ -36,9 +39,17 @@ const ListaFichas = () => {
           nivel_formacion: nivelFormacion,
           horario_formacion: horarioFormacion,
         }
-        await clienteAxios.put(`/api/fichas/${id}/`, fichaEditada)
+        await clienteAxios.put(`/api/fichas/${id}/`, fichaEditada, {
+          headers: {
+              Authorization: `Token ${token}`,
+          }
+      })
         Swal.fire('¡Cambios guardados!', '', 'success');
-        const consultarFicha = await clienteAxios.get('api/fichas/');
+        const consultarFicha = await clienteAxios.get('api/fichas/', {
+          headers: {
+              Authorization: `Token ${token}`,
+          }
+      });
         setFichas(consultarFicha.data);
       }
     });
@@ -60,10 +71,18 @@ const ListaFichas = () => {
   
       // Si el usuario confirma la eliminación, proceder con la solicitud de eliminación
       if (confirmacion.isConfirmed) {
-        await clienteAxios.delete(`/api/fichas/${id}/`);
+        await clienteAxios.delete(`/api/fichas/${id}/`, {
+          headers: {
+              Authorization: `Token ${token}`,
+          }
+      });
   
         // Actualizar la lista de fichas después de eliminar
-        const consultarFicha = await clienteAxios.get('api/fichas/');
+        const consultarFicha = await clienteAxios.get('api/fichas/' , {
+          headers: {
+              Authorization: `Token ${token}`,
+          }
+      });
         setFichas(consultarFicha.data);
   
         // Mostrar mensaje de éxito
@@ -78,7 +97,11 @@ const ListaFichas = () => {
   useEffect(() => {
     const obtenerFichas = async () => {
       try {
-        const consultarApi = await clienteAxios.get("api/fichas/");
+        const consultarApi = await clienteAxios.get("api/fichas/" , {
+          headers: {
+              Authorization: `Token ${token}`,
+          }
+      });
         setFichas(consultarApi.data);
       } catch (error) {
         console.error("Error al obtener las fichas:", error);
@@ -93,6 +116,30 @@ const ListaFichas = () => {
     const handleCargarFormulario = () => {
       setFormularioFichas(true);
     }
+    const descargarExcel = () => {
+      const columnas = [
+        "Numero ficha",
+        "Nombre del programa",
+        "Nivel de formación",
+        "Horario de formación",
+      ];
+      
+      const NombresColumnas = listaFichas.map(ficha => ({
+        "Numero ficha": ficha.numero_ficha,
+        "Nombre del programa": ficha.nombre_programa,
+        "Nivel de formación": ficha.nivel_formacion,
+        "Horario de formación": ficha.horario_formacion,
+      }));
+    
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.json_to_sheet(NombresColumnas, { header: columnas });
+    
+      ws['!cols'] = [{ wpx: 80 }, { wpx: 170 }, { wpx: 100 }, { wpx: 120 }, { wpx: 120 }];
+    
+      XLSX.utils.book_append_sheet(wb, ws, 'Fichas');
+      XLSX.writeFile(wb, 'Lista_Fichas.xlsx');
+    }
+    
   
     if (formularioFichas) {
       return <FormularioFicha />;
@@ -119,6 +166,7 @@ const ListaFichas = () => {
         
         ))}
       </div>
+      <button className='descargar-excel' onClick={descargarExcel}>Reporte de fichas</button>
     </div>
   );
 };

@@ -1,11 +1,15 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import clienteAxios from "../../config/axios";
 import Swal from "sweetalert2";
 import MainSection from "../layout/MainSection";
 import Header from "../layout/Header";
 import { useAuth } from "../context/AuthContext";
+import atras from '../../img/atras.png'
+import Apps from "../layout/menu/App";
 
+
+import bitacora from '../../../src/components/bitacoras/BitacoraDoc.xlsx'
 const AprendizBitacoraIndividual = () => {
   const { id } = useParams();
   const [documentos, setDocumentos] = useState([]);
@@ -13,6 +17,9 @@ const AprendizBitacoraIndividual = () => {
   const [bitacoras, setBitacoras] = useState([]);
   const [checkboxesMarcados, setCheckboxesMarcados] = useState([]);
 
+
+
+  const history = useHistory()
   const fetchDocumentos = async () => {
     try {
       const response = await clienteAxios.get(
@@ -83,49 +90,72 @@ const AprendizBitacoraIndividual = () => {
 
   return (
     <>
-      <Header></Header>
-      <MainSection></MainSection>
+      <Header />
 
-      <div className="bitacoras-container">
+      <MainSection />
+      <Apps />
+      <div className="container  cont-fichas cont-bitacoras">
+        <Link to={"#"} aria-label="icon" className=" btn-atras btn-atras-bitacora" onClick={() => history.goBack()}>
+          <img src={atras}></img>
 
-        <h4>Bitácoras del aprendiz</h4>
-        <div className="table-container">
-          <table id="bitacoras-table">
-            <thead className="thead">
-              <tr>
-                <th>Número bitácora</th>
-                <th>Identificador Documento</th>
-                <th>Descargar Archivo</th>
-                <th>Check</th>
-              </tr>
-            </thead>
-            <tbody id="documentBody">
-              {bitacoras.map((documento) => (
-                <tr key={documento.id}>
-                  <td>{documento.tipo_documento}</td>
-                  <td>{documento.id}</td>
-                  <td>
-                    <a href={documento.archivo} download>
-                      {documento.tipo_documento}
-                    </a>
-                  </td>
-                  <td>
-                    <input
-                      type="checkbox"
-                      id={documento.id}
-                      checked={checkboxesMarcados[documento.id]}
-                      onChange={() => handleCheckboxChange(documento.id)}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <b>Regresar</b>
+        </Link>
+
+        <div className='btn-fichas btn-bitacoras'>
+
+
+          <Link to={`/documentos-aprendiz/${id}`} aria-label="icon" className="iconLink ">
+            <button id='registrar-aprendiz'>Cargar Bitácora</button>
+          </Link>
+          <a href={bitacora} download="Bitácora Formato Actualizado-JUN-2023.xlsx"  className="iconLink">
+            <button  id='registrar-aprendiz'>Descargar Bitácora</button>
+          </a>
+
+
         </div>
-        <div className="button-guardar-check">
-          <button id="guardar--check" onClick={bitacorasValidas}>Guardar</button>
+
+        <div className="bitacoras-container">
+
+          <h3>Bitácoras del aprendiz</h3>
+          <div className="table-container">
+            <table id="bitacoras-table">
+              <thead className="thead">
+                <tr>
+                  <th>Número bitácora</th>
+                  <th>Identificador Documento</th>
+                  <th>Descargar Archivo</th>
+                  <th>Check</th>
+                </tr>
+              </thead>
+              <tbody id="documentBody">
+                {bitacoras.map((documento) => (
+                  <tr key={documento.id}>
+                    <td> <strong>{documento.tipo_documento}</strong> </td>
+                    <td>{documento.id}</td>
+                    <td>
+                      <a href={documento.archivo} download>
+                        {documento.tipo_documento}
+                      </a>
+                    </td>
+                    <td>
+                      <input className="check-bitacora"
+                        type="checkbox"
+                        id={documento.id}
+                        checked={checkboxesMarcados[documento.id]}
+                        onChange={() => handleCheckboxChange(documento.id)}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="button-guardar-check">
+            <button id="guardar--check" onClick={bitacorasValidas}>Guardar</button>
+          </div>
         </div>
       </div>
+
     </>
   );
 };

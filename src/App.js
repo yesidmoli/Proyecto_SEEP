@@ -24,7 +24,6 @@ import PerfilAprendiz from './components/Account/PerfilAprendiz';
 import Documentos from './components/Documents/Documentos';
 import DocumentosAprendices from './components/Documents/DocumentosAprendices';
 import FormularioInicial from './components/Fichas/FormularioInicial';
-import ListaFichas from './components/Fichas/ListaFichas';
 
 
 
@@ -37,9 +36,13 @@ import FormatoE from './components/prueb/Formato';
 // import  from './components/auth/ PrivateRoute';
 
 import PrivateRoute from './components/auth/ PrivateRoute';
-
-
 import AprendizBitacoraIndividual from './components/bitacoras/AprendizBitacoraIndividual';
+
+
+//reste password
+import PasswordResetForm from './components/auth/resetPassword/PasswordResetForm';
+import PasswordResetConfirmForm from './components/auth/resetPassword/PasswordResetConfirmForm';
+import ListaFichas from './components/Fichas/ListaFichas';
 function App() {
   return (
     <Router>

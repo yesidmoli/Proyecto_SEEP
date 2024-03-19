@@ -18,8 +18,13 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#fff",
+  "background_color": "#04324D",
+  "splash_screen": {
+    "src": "seep-logo-verde.svg",
+    "sizes": "800x800",
+    "type": "image/png"
+  }
 }

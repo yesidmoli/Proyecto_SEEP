@@ -78,7 +78,8 @@ body{
     flex-direction: column;
     gap: 2rem;
 }
-
-.cont-form{
-    
+#download-pdf{
+    margin-top: 15px;
+    border-radius: 5px;
+    padding: 5px;
 }

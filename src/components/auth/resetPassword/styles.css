@@ -1,0 +1,43 @@
+.cont-form-reset{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    place-items: center;
+    place-content: center;
+    gap: 3rem;
+    
+}
+.cont-form-reset label{
+    display: flex;
+    flex-direction: column;
+}
+.label-form{
+    margin-left: 1rem;
+}
+.container-form{
+   background-color: rgb(255, 255, 255);
+    padding: 5rem;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    border: 1.5px solid rgba(0, 0, 0, .05) ;
+    
+    
+}
+.container-form h2{
+    margin-bottom: 2rem !important;
+}
+.form-reset-label{
+    background-color: transparent !important;
+}
+.h6-mensaje{
+    margin-top: 2rem !important;
+}
+.error-message{
+    margin-top: 2rem !important;
+    color: red;
+}
+@media only screen and (max-width: 600px) {
+    .container-form{
+        width: 100%;
+        padding: 15px;
+    }
+}

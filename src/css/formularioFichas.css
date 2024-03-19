@@ -64,7 +64,7 @@
     display: flex;
     justify-content: center;
   }
-  #registrar-aprendiz,.registrar-ficha, .listado-fichas, #save, #ver {
+  #registrar-aprendiz,.registrar-ficha, .listado-fichas,.listado-aprendices, #save, #ver {
     border-radius: 10px;
     width: 100%;
    background-color: var(--color-iconos);
@@ -115,7 +115,6 @@
   }
 
   .title-button{
-    align-items: center;
     display: flex;
     justify-content: space-between;
   }
@@ -127,17 +126,6 @@
     padding: 8px;
     cursor: pointer;
     border-radius: 4px;
-  }
-  .links{
-
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .enlace-con-icono{
-    width: 50px;
-    height: 30px;
   }
   .btn-editar{
     background: var(--color-iconos); 
@@ -166,7 +154,7 @@
   }
   .cont-fichas{
     width: 30%;
-    /* display: flex; */
+     display: flex; 
     margin-left: 5rem !important;
 
   }
@@ -203,6 +191,9 @@
   .rojo-label{
     color: #f44336;
   }
+  .descargar-excel{
+    border-radius: 5px;
+  }
   .btn-atras{
     position: fixed !important;
     top: 160px;
@@ -223,6 +214,7 @@
   .btn-atras img{
     width: 50px;
   }
+  
 
   @media only screen and (max-width: 600px) {
     .cont-fichas{
