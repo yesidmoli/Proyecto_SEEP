@@ -28,31 +28,34 @@ const customStyles = {
     },
 };
 
-export const CalendarModal = ({history}) => {
+export const CalendarModal = ({ history, selectedEvent }) => {
 
-    
+
 
     Modal.setAppElement('#root');
 
-    const [aprendizSeleccionado , dataAprendiz] = useState('')
+    const [aprendizSeleccionado, dataAprendiz] = useState('')
 
     const { isDateModalOpen, closeDateModal } = useUIStore();
     const { startSavingEvent, startLoadingEvents } = useCalendarStore();
     const [formSubmitted, setFormSubmitted] = useState(false);
+
     const [formValues, setFormValues] = useState({
-        title: '',
-        lugar: '',
-        notes: '',
         motivo_cancelacion: '',
-        start: new Date(),
-        end: addHours(new Date(), 2),
         tipo_visita: 'presencial', // valor por defecto para tipo_visita
         numero_visita: '', // valor por defecto para numero_visita
         estado: 'programada', // valor por defecto para estado
+        fecha_visita: new Date(), // Fecha de la visita
+        hora_visita: '', // Hora de la visita
+        lugar: '', // Lugar de la visita
+        observaciones: '', // Observaciones
+        aprendiz: '', // ID del aprendiz
+        instructor_encargado: '', // ID del instructor encargado
+
     });
 
-    console.log("este es el estado", formValues)
-    
+   
+
     const titleClass = useMemo(() => {
         if (!formSubmitted) return '';
         return formValues.title.length > 0 ? 'is-valid' : 'is-invalid';
@@ -69,11 +72,39 @@ export const CalendarModal = ({history}) => {
                 tipo_visita: 'presencial', // valor por defecto para tipo_visita
                 numero_visita: '', // valor por defecto para numero_visita
                 estado: 'programada', // valor por defecto para estado
+
             });
         }
     }, [isDateModalOpen]);
 
-    const onCloseModal = () => {
+
+
+    // useEffect(() => {
+    //     if (selectedEvent) {
+    //         console.log("esto es para editar jajajaja ", selectedEvent)
+    //         const { start, end, title, lugar, notes, tipo_visita, numero_visita, estado } = selectedEvent;
+    //         // Formatear fecha y hora de inicio
+    //         const formattedStart = format(new Date(start), "yyyy-MM-dd'T'HH:mm:ss");
+    //         const startDate = formattedStart.split('T')[0];
+    //         const startTime = formattedStart.split('T')[1];
+
+    //         setFormValues({
+    //             ...formValues,
+    //             fecha_visita: startDate,
+    //             hora_visita: startTime,
+    //             tipo_visita,
+    //             lugar,
+    //             numero_visita,
+    //             estado,
+    //             observaciones: notes,
+    //             aprendiz: aprendizSeleccionado, // Este valor puede ser fijo o dinámico
+    //             instructor_encargado: storedDatos.id,
+    //         });
+    //     }
+    // }, [selectedEvent]);
+
+
+    const onCloseModal = () => {;
         closeDateModal();
     };
 
@@ -88,14 +119,14 @@ export const CalendarModal = ({history}) => {
     //obtenemos el id almacenado del instructor encargado
     const storedDatos = JSON.parse(localStorage.getItem('datosPerfil'));
 
-    
+
 
     const onSubmit = async (event) => {
         event.preventDefault();
         setFormSubmitted(true);
         const { start, end, title, lugar, notes, tipo_visita, numero_visita, estado } = formValues;
         const formattedStart = format(start, "yyyy-MM-dd'T'HH:mm:ss");
-        
+
         const eventData = {
             fecha_visita: formattedStart.split('T')[0],
             hora_visita: formattedStart.split('T')[1],
@@ -108,40 +139,40 @@ export const CalendarModal = ({history}) => {
             instructor_encargado: storedDatos.id, // Este valor puede ser fijo o dinámico
         };
 
-        
+
         try {
             await startSavingEvent(eventData);
             closeDateModal();
             setFormSubmitted(false);
-           
-           
-            
-           // Recargar la página automáticamente
-                window.location.reload();
-             Swal.fire('Evento guardado correctamente', '', 'success');
 
-        
+
+
+            // Recargar la página automáticamente
+            window.location.reload();
+            Swal.fire('Evento guardado correctamente', '', 'success');
+
+
         } catch (error) {
             console.error('Error al guardar el evento:', error);
 
-            if(error &&  error.response.data.non_field_errors){
+            if (error && error.response.data.non_field_errors) {
                 Swal.fire({
                     icon: 'error',
                     title: error.response.data.non_field_errors,
                     text: "Intenta Nuevamente",
                 });
-            }else{
+            } else {
                 Swal.fire({
                     icon: 'error',
                     title: "Verifica que no hayan campos vacios",
                     text: "Intenta Nuevamente",
                 });
             }
-            
+
         }
     };
 
-    const AprendizSeleccionado  = (aprendizId) =>{
+    const AprendizSeleccionado = (aprendizId) => {
 
         dataAprendiz(aprendizId)
     }
@@ -156,8 +187,8 @@ export const CalendarModal = ({history}) => {
             closeTimeoutMS={200}
         >
             <div className='titulo-event'>
-            <h1> Nueva Visita </h1>
-            <i class="bi bi-x-circle-fill" onClick={onCloseModal} ></i></div> 
+                <h1> Nueva Visita </h1>
+                <i class="bi bi-x-circle-fill" onClick={onCloseModal} ></i></div>
             <form onSubmit={onSubmit} className=" cont-form">
                 <div className="fecha">
                     <label>Fecha y hora inicio <span className='is_rojo'>*</span></label>
@@ -184,10 +215,11 @@ export const CalendarModal = ({history}) => {
                         timeCaption='Hora'
                     />
     </div> */}
-                  <div className="form-group mb-2">
+                <div className="form-group mb-2">
                     <label>Aprendiz <span className='is_rojo'>*</span></label>
-                    <AprendizSelector  onAprendizSeleccionada={AprendizSeleccionado}/>
-                    </div>
+                    <AprendizSelector
+                        onAprendizSeleccionada={AprendizSeleccionado} />
+                </div>
 
                 <div className="form-group mb-2">
                     <label>Lugar <span className='is_rojo'>*</span></label>
@@ -202,30 +234,30 @@ export const CalendarModal = ({history}) => {
                     />
                 </div>
                 <div className="form-group mb-2">
-        <label>Tipo de visita  <span className='is_rojo'>*</span></label>
-        <select
-            className="form-contro"
-            name="tipo_visita"
-            value={formValues.tipo_visita}
-            onChange={(event) => setFormValues({ ...formValues, tipo_visita: event.target.value })}
-        >   <option selected>Seleccione una opción</option>
-            <option value="presencial">Presencial</option>
-            <option value="virtual">Virtual</option>
-        </select>
-    </div>
-    <div className="form-group mb-2">
-        <label>Número de visita  <span className='is_rojo'>*</span></label>
-        <select
-            className="form-contro"
-            name="tipo_visita"
-            value={formValues.numero_visita}
-            onChange={(event) => setFormValues({ ...formValues, numero_visita: event.target.value })}
-        >   <option selected>Seleccione numero visita</option>
-            <option value="1">Visita 1</option>
-            <option value="2">Visita 2</option>
-            <option value="3">Visita 3</option>
-        </select>
-    </div>
+                    <label>Tipo de visita  <span className='is_rojo'>*</span></label>
+                    <select
+                        className="form-contro"
+                        name="tipo_visita"
+                        value={formValues.tipo_visita}
+                        onChange={(event) => setFormValues({ ...formValues, tipo_visita: event.target.value })}
+                    >   <option selected>Seleccione una opción</option>
+                        <option value="presencial">Presencial</option>
+                        <option value="virtual">Virtual</option>
+                    </select>
+                </div>
+                <div className="form-group mb-2">
+                    <label>Número de visita  <span className='is_rojo'>*</span></label>
+                    <select
+                        className="form-contro"
+                        name="tipo_visita"
+                        value={formValues.numero_visita}
+                        onChange={(event) => setFormValues({ ...formValues, numero_visita: event.target.value })}
+                    >   <option selected>Seleccione numero visita</option>
+                        <option value="1">Visita 1</option>
+                        <option value="2">Visita 2</option>
+                        <option value="3">Visita 3</option>
+                    </select>
+                </div>
                 {/* <div className="form-group mb-2">
                     <label>Titulo y notas</label>
                     <input
@@ -240,7 +272,7 @@ export const CalendarModal = ({history}) => {
                     <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
                 </div> */}
                 <div className="form-group mb-2">
-                <label>Observaciones</label>
+                    <label>Observaciones</label>
                     <textarea
                         type="text"
                         className="form-contro"
@@ -253,15 +285,15 @@ export const CalendarModal = ({history}) => {
                     {/* <small id="emailHelp" className="form-text text-muted">Información adicional</small> */}
                 </div>
                 <div className='btn-guardar'>
-                <button
-                    type="submit"
-                    className="btn btn-outline-primary btn-block"
-                >
-                    <i className="far fa-save"></i>
-                    <span> Guardar</span>
-                </button>
+                    <button
+                        type="submit"
+                        className="btn btn-outline-primary btn-block"
+                    >
+                        <i className="far fa-save"></i>
+                        <span> Guardar</span>
+                    </button>
                 </div>
-                
+
             </form>
         </Modal>
     );

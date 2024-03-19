@@ -2,6 +2,8 @@
 
 export const CalendarEvent = ({event}) => {
 
+    
+    
     const { title, lugar, id, apellidos, tipo_visita , identificacion_aprendiz} = event;
 
     return (
