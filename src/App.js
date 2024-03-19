@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch,  Redirect } from 'react-router-dom';
 import Header from './components/layout/Header';
 import MainSection from './components/layout/MainSection';
 import Inicio from './components/Index/Inicio';
@@ -24,16 +24,24 @@ import PerfilAprendiz from './components/Account/PerfilAprendiz';
 import Documentos from './components/Documents/Documentos';
 import DocumentosAprendices from './components/Documents/DocumentosAprendices';
 import FormularioInicial from './components/Fichas/FormularioInicial';
-import ListaFichas from './components/Fichas/ListaFichas';
 
-import InformacionGeneral from './components/FormatoESP/InformacionGeneral';
+
+
+import FormartoEtapaProductiva from './components/FormatoESP/Index';
+
+
+import FormatoE from './components/prueb/Formato';
+// import EvaluacionEP from './components/FormatoESP/EvaluacionEP';
+
 // import  from './components/auth/ PrivateRoute';
 
-
-//forma
-import ImagenPlaneacion from './components/prueb/InfoGeneral';
-import PDFGenerator from './components/prueb/pdfCovert';
+import PrivateRoute from './components/auth/ PrivateRoute';
 import AprendizBitacoraIndividual from './components/bitacoras/AprendizBitacoraIndividual';
+
+
+//reste password
+import PasswordResetForm from './components/auth/resetPassword/PasswordResetForm';
+import PasswordResetConfirmForm from './components/auth/resetPassword/PasswordResetConfirmForm';
 function App() {
   return (
     <Router>
@@ -43,26 +51,29 @@ function App() {
        
         {/* <MainSection /> */}
           <Switch>
-            <Route exact path="/" component={Inicio} />
+            <PrivateRoute exact path="/" component={Inicio} />
             <Route exact path= "/login" component={Login}  />
             <Route exact path= "/calendario" component={CalendarPage}  />
             {/* <Route path="/calendar" element={<CalendarPage />} /> */}
-            <Route exact path="/cuentas" component={Cuentas} />
+            <PrivateRoute exact path="/cuentas" component={Cuentas} />
             {/* <Route exact path="/calendario" component={Calendario} /> */}
-            <Route exact path="/fichas" component={FormularioFicha} /> 
-            <Route exact path="/nuevo-aprendiz" component={FormularioInicial} /> 
+            <PrivateRoute exact path="/fichas" component={FormularioFicha} /> 
+            <PrivateRoute exact path="/nuevo-aprendiz" component={FormularioInicial} /> 
             <Route exact path="/lista-aprendices/:numero_ficha/:programa" component={ListaAprendices} /> 
             <Route exact path="/aprendiz/:id/" component={InfoAprediz} />
             <Route exact path="/perfil-aprendiz" component={PerfilAprendiz} />
             <Route exact path="/documentos-aprendiz/:id" component={Documentos} />
-            <Route exact path="/documentos" component={DocumentosAprendices} />
-            <Route exact path="/planeacion" component={PDFGenerator} />
+            <PrivateRoute exact path="/documentos" component={DocumentosAprendices} />
+          
             <Route exact path="/inicio-etapa-practica" component={FormularioAprendiz} />
             <Route exact path="/bitacoras" component={Bitacoras} />
-            <Route exact path="/lista-fichas" component={ListaFichas}/>
-            <Route exact path="/info-general" component={InformacionGeneral} />
+            <Route exact path="/formato-etapa-productiva/:id/:componente" component={FormartoEtapaProductiva} />
+            <Route exact path="/formato-etapa-productiva-pdf/:id" component={FormatoE} />
+            
             <Route exact path="/bitacora-aprendiz/:id" component={AprendizBitacoraIndividual} />
-
+            <Route exact path="/password/reset/" component={PasswordResetForm} />
+            <Route exact path="/password/reset/confirm/:uid/:token" component={PasswordResetConfirmForm} />
+        
           </Switch>
     
       

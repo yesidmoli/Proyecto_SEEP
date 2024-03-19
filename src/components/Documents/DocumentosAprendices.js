@@ -3,6 +3,7 @@ import { Fragment, useEffect } from "react"
 import Header from "../layout/Header"
 import MainSection from "../layout/MainSection"
 import ReactSearchBox from "react-search-box";
+import { CiSearch } from "react-icons/ci"
 import { useState } from "react";
 import clienteAxios from "../../config/axios";
 import '../../css/documentos.css';
@@ -13,7 +14,9 @@ import Apps from "../layout/menu/App";
 function DocumentosAprendices (){
 
     const {token} = useAuth()
-    const [aprendices, dataAprendices] = useState([])
+
+    const[aprendices, dataAprendices] = useState([])
+
     const [searchValue, setSearchValue] = useState('');
     const [filteredData, setFilteredData] = useState([]);
 
@@ -28,6 +31,10 @@ function DocumentosAprendices (){
     setSearchValue(name);
 
   };
+
+
+   
+
       const consultarDatosCliente = async () => {
         try {
           // Realiza la consulta a la API para obtener datos de los clientes
@@ -37,6 +44,9 @@ function DocumentosAprendices (){
             },
           });
           dataAprendices(response.data.results);
+          console.log("estos son los aprendices " ,response.data )
+         
+          
         } catch (error) {
           console.error('Error al consultar los aprendices:', error);
         }
@@ -44,20 +54,24 @@ function DocumentosAprendices (){
     return(
         <Fragment>
           <Apps />
+
             <Header />
+            
         <section className="container conten-documentos">
                 <MainSection />
                 <div className="react-search-box ">
-                  <ReactSearchBox
-                  placeholder="Buscar Aprendiz..."
-                  value={searchValue}
-                  onChange={handleSearch}
-                  data={filteredData}
-                  fuseConfigs={{ threshold: 0.2 }}
-                  inputHeight="3rem"
-                  iconBoxSize={"5rem"}
-                  inputFontSize="1.3rem"
-                  />
+                
+                <ReactSearchBox
+        placeholder="Buscar Aprendiz..."
+        value={searchValue}
+        onChange={handleSearch}
+        data={filteredData}
+        fuseConfigs={{ threshold: 0.2 }}
+        inputHeight="3rem"
+        
+        iconBoxSize={"5rem"}
+        inputFontSize="1.3rem"
+      />
                 </div>
 
     <ul className="list-aprendices">
@@ -72,35 +86,56 @@ function DocumentosAprendices (){
       )
       .map((filteredItem) => (
 
-        <Link to={`/documentos-aprendiz/${filteredItem.id}`} className="item-link">
+        <div  className="item-link">
+
+
         <li className="item-aprendiz" key={filteredItem.key}>
-          <i className="bi bi-file-earmark-pdf-fill"></i>
-          <div className="datos-aprendiz-doc">
-            <h5>{filteredItem.nombres} {filteredItem.apellidos}</h5>
-            <h6> {filteredItem.tipo_documento}:{filteredItem.numero_documento}</h6>
-            <h6>{filteredItem.ficha.numero_ficha}</h6>
-          </div>
+        <i class="bi bi-file-earmark-pdf-fill"></i>
+        <div className="datos-aprendiz-doc">
+       
+        <h5>{filteredItem.nombres} {filteredItem.apellidos}</h5>
+        <h6> {filteredItem.tipo_documento}:{filteredItem.numero_documento}</h6>
+        <h6> Ficha: {filteredItem.ficha.numero_ficha}</h6>
+        </div>
+        <div className="btns-doc-aprendiz">
+        <Link  to={`/documentos-aprendiz/${filteredItem.id}`} className="btn btn-success">Documentos</Link>
+        <Link to={`/formato-etapa-productiva/${filteredItem.id}/${'index'}`} className="btn btn-formato">Formato</Link>
+      </div>
+       
+
+
         </li>
-        </Link>
+        </div>
         
       ))
   ) : (
     // Si no hay valor de búsqueda, muestra todas las deudas
     aprendices.map((item) => (
-        <Link to={`/documentos-aprendiz/${item.id}`} className="item-link">
+        <div className="item-link">
       <li className="item-aprendiz" key={item.key}> 
-      <i className="bi bi-file-earmark-pdf-fill"></i>
+      <i class="bi bi-file-earmark-pdf-fill"></i>
+
       <div className="datos-aprendiz-doc">
+      
         <h5>{item.nombres} {item.apellidos}</h5>
         <h6>{item.tipo_documento}: {item.numero_documento}</h6>
         <h6> Ficha: {item.ficha.numero_ficha}</h6>
       </div>
+
+      <div className="btns-doc-aprendiz">
+        <Link  to={`/documentos-aprendiz/${item.id}`} className="btn btn-success">Documentos</Link>
+        <a href={`/formato-etapa-productiva/${item.id}/${'index'}`} className="btn btn-formato">Formato Productiva</a>
+      </div>
+    
       
       </li>
-      </Link>
+      </div>
     ))
   )}
       </ul>
+                
+
+
             </section>
         </Fragment>
     )

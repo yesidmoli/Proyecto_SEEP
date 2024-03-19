@@ -92,14 +92,14 @@ const Menu = ({ open }) => {
         <div className="animated slideInLeft">Documentos</div>
       </li>
       <li>
-        <Link to={"#"} aria-label="icon" className="iconLink">
+        <Link to={"/bitacoras"} aria-label="icon" className="iconLink">
           <i alt="icon" className="iconMenuLateral bi bi-card-checklist"></i>
         </Link>
         <div className="animated slideInLeft">Bitácoras</div>
       </li>
 
       <li>
-      <Link  onClick={handleLogout} className='a-logout' to="/"><i className="bi bi-box-arrow-left"></i></Link>
+      <Link  onClick={handleLogout} className='a-logout' to="/"><i class="bi bi-box-arrow-left"></i></Link>
      
       </li>
     </ul>

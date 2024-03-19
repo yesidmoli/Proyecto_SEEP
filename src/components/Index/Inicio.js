@@ -11,8 +11,7 @@ import MainSection from '../layout/MainSection';
 import ReactSearchBox from "react-search-box";
 
 import logoSena from '../../img/logo-sena.png'
-//imagenes
-import iconoBuscar from'../../img/buscar.jpeg' 
+
 
 import InfoFicha from '../Fichas/InfoFicha';
 import { useAuth } from '../context/AuthContext';
@@ -76,7 +75,7 @@ const Inicio = () => {
       <div className="fichas">
         <h1>Programas y fichas de formación</h1>
           <div className="buscar">
-            <i className="bi bi-search"></i>
+            <i class="bi bi-search"></i>
             <label htmlFor="buscar">Palabras clave:</label>
             {/* <input  type="search" className="form-control" />
             <button  className="btn-buscar">Buscar</button> */}
@@ -96,7 +95,7 @@ const Inicio = () => {
     </div>
     
 
-    <section className="info-fichas">
+    <section class="info-fichas">
   {searchValue ? (
     // Si hay un valor de búsqueda, aplica el filtro a deudas
     fichas

@@ -1,25 +1,30 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "SEEP",
+  "name": "Sistema de evaluación etapa productiva",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "logo-sena.svg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "logo-sena.svg",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "logo-sena.svg",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#fff",
+  "background_color": "#04324D",
+  "splash_screen": {
+    "src": "seep-logo-verde.svg",
+    "sizes": "800x800",
+    "type": "image/png"
+  }
 }

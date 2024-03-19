@@ -8,7 +8,6 @@ import * as XLSX from 'xlsx';
 const AprendicesRegistrados = () => {
   const [aprendices, setAprendices] = useState([]);
   const [formularioAprendiz, setFormularioAprendiz] = useState(false);
-  const [fichas, setFichas] = useState([]);
   const editarAprendiz = (id) => {
     const aprendizEditar = listaAprendices.find((f) => f.id === id);
     Swal.fire({

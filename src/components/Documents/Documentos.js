@@ -7,9 +7,13 @@ import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
 import Apps from "../layout/menu/App";
 import { useAuth } from "../context/AuthContext";
+import atras from '../../img/atras.png'
 
+import { Link , useHistory } from "react-router-dom";
+
+import bitacora from '../../../src/components/bitacoras/BitacoraDoc.xlsx'
 const Documentos = (props) => {
-
+    const history = useHistory();
     const {id} = props.match.params;
 
     const {token} = useAuth()
@@ -23,8 +27,13 @@ const Documentos = (props) => {
         "is_bitacora": false,
         "aprendiz": id
     });
+
     const [documentos, setDocumentos] = useState([]);
-    const opciones = ['Bitácora', 'Documento de identidad', 'Carta Laboral', 'Certificado Agencia Publica', 'Carnet Destruido', 'Prubas TyT'];
+
+    console.log("ESto es lo que se va a enviar" , datosForm)
+
+    const opciones = ['Bitácora', 'Documento de identidad', 'Carta Laboral', 'Certificado Agencia Publica', 'Carnet Destruido', 'Prubas TyT', 'Carta Laboral'];
+
     const handleSeleccion = (e) => {
         const nuevaSeleccion = e.target.value;
         setSeleccion(nuevaSeleccion);
@@ -38,6 +47,12 @@ const Documentos = (props) => {
               tipo_documento: nuevaSeleccion
           }));
   }
+
+        // // Actualizar el estado de datosForm
+        // setDatosForm(prevState => ({
+        //     ...prevState,
+        //     is_bitacora: true
+        // }));
     }
 
     const handleSeleccionBitacora = (event) => {
@@ -53,7 +68,10 @@ const Documentos = (props) => {
     };
 
     const handleSeleccionArchivo = (event) => {
+      // Obtiene el archivo seleccionado del input de tipo file
       const archivo = event.target.files[0];
+  
+      // Actualiza el estado de datosForm con el nuevo archivo
       setDatosForm(prevState => ({
           ...prevState,
           archivo: archivo
@@ -63,6 +81,7 @@ const Documentos = (props) => {
 
     const handleCargarDocumentos = async () => {
       try {
+          // Realizar la solicitud POST a la API con Axios
           const response = await clienteAxios.post('api/documentacion-aprendiz/', datosForm, {
               headers: {
                   'Content-Type':  'multipart/form-data' 
@@ -93,6 +112,10 @@ const Documentos = (props) => {
       }
   }
 
+    // if (mostrarDocumentos) {
+    //     // Si mostrarDocumentos es verdadero, renderiza el componente VisualizarDocumentos
+    //     return <VisualizarDocumentos />;
+    // }
 
    
         const fetchDocumentos = async () => {
@@ -122,6 +145,11 @@ const Documentos = (props) => {
           <Apps />
             <Header />
             <div className="container cont-doc">
+            <Link to={"#"} aria-label="icon" className=" btn-atras" onClick={() => history.goBack()}>
+              <img src={atras}></img>
+
+              <b>Regresar</b>
+        </Link>
                 <MainSection />
                 <section className="document-container">
                     <h4>Cargue de Documentos</h4>
@@ -157,7 +185,7 @@ const Documentos = (props) => {
                                     <option value="Bitácora 11">Bitácora 11</option>
                                     <option value="Bitácora 12">Bitácora 12</option>
                                 </select>
-                                <a href="../../files/formato-bitacora.xlsx" download="formato-bitacora.xlsx">Descargar</a>
+                                <a href={bitacora} download="Bitácora Formato Actualizado-JUN-2023.xlsx.xlsx">Descargar</a>
                             </div>
                         )}
                         <div className="input-doc">
