@@ -122,23 +122,24 @@ const ListaFichas = () => {
         "Nombre del programa",
         "Nivel de formación",
         "Horario de formación",
-        
       ];
-      const NombresColumnas = fichas.results? fichas.map(ficha => ({
+      
+      const NombresColumnas = listaFichas.map(ficha => ({
         "Numero ficha": ficha.numero_ficha,
         "Nombre del programa": ficha.nombre_programa,
         "Nivel de formación": ficha.nivel_formacion,
         "Horario de formación": ficha.horario_formacion,
-        
-      })) : [];
+      }));
+    
       const wb = XLSX.utils.book_new();
       const ws = XLSX.utils.json_to_sheet(NombresColumnas, { header: columnas });
-  
-      ws['!cols'] = [{ wpx: 80 }, { wpx: 100 }, { wpx: 100 }, { wpx: 120 }, { wpx: 120 }, { wpx: 120 }, { wpx: 140 }, { wpx: 140 }, { wpx: 140 }, { wpx: 140 }, { wpx: 80 }, { wpx: 140 }, { wpx: 140 }, { wpx: 120 }, { wpx: 120 }, { wpx: 120 }, { wpx: 120 }, { wpx: 140 }, { wpx: 140 }, { wpx: 200 }, { wpx: 140 }, { wpx: 140 }];
-  
-      XLSX.utils.book_append_sheet(wb, ws, 'Aprendices');
-      XLSX.writeFile(wb, 'Lista_Aprendices.xlsx');
+    
+      ws['!cols'] = [{ wpx: 80 }, { wpx: 170 }, { wpx: 100 }, { wpx: 120 }, { wpx: 120 }];
+    
+      XLSX.utils.book_append_sheet(wb, ws, 'Fichas');
+      XLSX.writeFile(wb, 'Lista_Fichas.xlsx');
     }
+    
   
     if (formularioFichas) {
       return <FormularioFicha />;
