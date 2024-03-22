@@ -87,134 +87,6 @@ const FormularioFinal = () => {
         <form className="formulario-final" onSubmit={handleSubmit}>
           
           <div>
-            <label htmlFor="nombres">Nombres:</label>
-            <input
-              type="text"
-              id="nombres"
-              value={formData.nombres}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="apellidos">Apellidos:</label>
-            <input
-              type="text"
-              id="apellidos"
-              value={formData.apellidos}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="numero_documento">Numero de documento (con el que se matriculó):</label>
-            <input
-              type="text"
-              id="numero_documento"
-              value={formData.numero_documento}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="tipo_documento">Tipo de documento (con el que se matriculó):</label>
-            <input
-              type="text"
-              id="tipo_documento"
-              value={formData.tipo_documento}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="fecha_expedicion">Fecha de expedición:</label>
-            <input
-              type="date"
-              id="fecha_expedicion"
-              value={formData.fecha_expedicion}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="lugar_expedicion">Lugar de expedición:</label>
-            <input
-              type="text"
-              id="lugar_expedicion"
-              value={formData.lugar_expedicion}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="fecha_nacimiento">Fecha de nacimiento:</label>
-            <input
-              type="date"
-              id="fecha_nacimiento"
-              value={formData.fecha_nacimiento}
-              onChange={handleChange}
-            />
-          </div>
-          
-          
-          <div>
-            <label htmlFor="sexo">Sexo:</label>
-            <input
-              type="text"
-              id="sexo"
-              value={formData.sexo}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="direccion_domicilio">Dirección de domicilio:</label>
-            <input
-              type="text"
-              id="direccion_domicilio"
-              value={formData.direccion_domicilio}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="municipio">Municipio:</label>
-            <input
-              type="text"
-              id="municipio"
-              value={formData.municipio}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="departamento">Departamento:</label>
-            <input
-              type="text"
-              id="departamento"
-              value={formData.departamento}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="telefono_fijo">Teléfono fijo:</label>
-            <input
-              type="text"
-              id="telefono_fijo"
-              value={formData.telefono_fijo}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="numero_celular">Número celular:</label>
-            <input
-              type="text"
-              id="numero_celular"
-              value={formData.numero_celular}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="correo">Correo:</label>
-            <input
-              type="text"
-              id="correo"
-              value={formData.correo}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
             <label htmlFor="cabeza_familia">¿Es usted madre o padre cabeza de familia?:</label>
             <select 
             id="cabeza_familia"
@@ -227,33 +99,6 @@ const FormularioFinal = () => {
             </select>
           </div>
           <div>
-            <label htmlFor="programa_formacion">Programa de formación:</label>
-            <input
-              type="text"
-              id="programa_formacion"
-              value={formData.programa_formacion}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="nivel_formacion">Nivel de formación:</label>
-            <input
-              type="text"
-              id="nivel_formacion"
-              value={formData.nivel_formacion}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="numero_ficha">Número de ficha:</label>
-            <input
-              type="text"
-              id="numero_ficha"
-              value={formData.numero_ficha}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
             <label htmlFor="titulo_obtenido">Titulo obtenido:</label>
             <input
               type="text"
@@ -263,29 +108,11 @@ const FormularioFinal = () => {
             />
           </div>
           <div>
-            <label htmlFor="horario_formacion">Horario en el que recibió la formación:</label>
-            <input
-              type="text"
-              id="horario_formacion"
-              value={formData.horario_formacion}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
             <label htmlFor="fecha_lectiva">Fecha en la que terminó la etapa lectiva:</label>
             <input
               type="date"
               id="fecha_lectiva"
               value={formData.fecha_lectiva}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="empresa">Empresa:</label>
-            <input
-              type="text"
-              id="empresa"
-              value={formData.empresa}
               onChange={handleChange}
             />
           </div>
@@ -319,42 +146,6 @@ const FormularioFinal = () => {
                 <option>Casi nada</option>
                 <option>Nada</option>
             </select>
-          </div>
-          <div>
-            <label htmlFor="jefe_inmediato">Nombre se su jefe inmediato:</label>
-            <input
-              type="text"
-              id="jefe_inmediato"
-              value={formData.jefe_inmediato}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="cargo_jefe">Cargo de su jefe inmediato:</label>
-            <input
-              type="text"
-              id="cargo_jefe"
-              value={formData.cargo_jefe}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="telefono_jefe">Teléfono de su jefe inmediato:</label>
-            <input
-              type="text"
-              id="telefono_jefe"
-              value={formData.telefono_jefe}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="correo_jefe">Correo de su jefe inmediato:</label>
-            <input
-              type="text"
-              id="correo_jefe"
-              value={formData.correo_jefe}
-              onChange={handleChange}
-            />
           </div>
           <div>
             <label htmlFor="estudios_superiores">¿Tiene usted estudios superiores adicionales?:</label>
