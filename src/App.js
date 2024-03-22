@@ -7,6 +7,7 @@ import Cuentas from './components/Account/Cuentas';
 import Calendario from './components/Calendar/Calendario';
 import FormularioFicha from './components/Fichas/FormularioFicha';
 import FormularioAprendiz from './components/Apprentice/FormularioAprendiz';
+import FormularioFinal from './components/Apprentice/FormularioFinal';
 import Bitacoras from './components/bitacoras/Bitacoras';
 import ListaAprendices from './components/Fichas/ListaAprendices';
 import Login from './components/auth/Login';
@@ -71,6 +72,9 @@ function App() {
             <Route exact path="/lista-fichas" component={ListaFichas}/>
             <Route exact path="/formato-etapa-productiva/:id/:componente" component={FormartoEtapaProductiva} />
             <Route exact path="/formato-etapa-productiva-pdf/:id" component={FormatoE} />
+
+            <Route exact path="/formulario-final" component={FormularioFinal}/>
+            
             <Route exact path="/bitacora-aprendiz/:id" component={AprendizBitacoraIndividual} />
         
           </Switch>
