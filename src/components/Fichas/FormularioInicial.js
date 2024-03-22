@@ -11,6 +11,7 @@ import Header from "../layout/Header";
 import { Link } from "react-router-dom";
 
 import atras from '../../img/atras.png'
+import Spinner from 'react-bootstrap/Spinner';
 
 const FormularioInicial = () => {
   const initialState = {
@@ -49,6 +50,9 @@ const FormularioInicial = () => {
   const [registroAprendices, setRegistroAprendices] = useState(false);
   const [idEditar, setIdEditar] = useState(null);
 
+  const [enviandoDatos, setEnviandoDatos] = useState(false);
+
+
   useEffect(() => {
     const obtenerAprendices = async () => {
       try {
@@ -85,12 +89,14 @@ const FormularioInicial = () => {
 
   const enviarDatos = async (e) => {
     e.preventDefault();
+    setEnviandoDatos(true);
 
     try {
       if (modoEdicion) {
         // Actualizar aprendiz existente
         await clienteAxios.put(`api/aprendices/${idEditar}`, aprendiz);
         Swal.fire("¡Éxito!", "Aprendiz actualizado exitosamente", "success");
+
       } else {
 
         try {
@@ -98,6 +104,8 @@ const FormularioInicial = () => {
           // Crear nuevo aprendiz
           await clienteAxios.post("/api/aprendices/", aprendiz);
           Swal.fire("¡Éxito!", "Aprendiz registrado exitosamente", "success");
+          setEnviandoDatos(false);
+
 
         } catch (error) {
           console.log("error", error)
@@ -110,6 +118,7 @@ const FormularioInicial = () => {
             errorMessage += "\n- Ha ocurrido un error inesperado.";
           }
           Swal.fire("Error", errorMessage, "error");
+          setEnviandoDatos(false);
         }
 
       }
@@ -406,7 +415,15 @@ const FormularioInicial = () => {
                 ></input>
                 <div className="botones">
                   <button type="submit" id="save">
-                    Registrar
+                    {enviandoDatos ? (
+                      <>
+                        <Spinner animation="grow" size="sm" /> 
+                         Enviando...
+                      </>
+                    ) : (
+                      "Registrar"
+                    )}
+
                   </button>
 
                 </div>
