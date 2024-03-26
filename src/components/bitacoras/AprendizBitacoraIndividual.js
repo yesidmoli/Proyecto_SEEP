@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useParams, Link, useHistory } from "react-router-dom";
-import { useParams, Link, useHistory } from "react-router-dom";
 import clienteAxios from "../../config/axios";
 import Swal from "sweetalert2";
 import MainSection from "../layout/MainSection";
