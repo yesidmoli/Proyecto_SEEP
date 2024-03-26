@@ -28,6 +28,7 @@ const Documentos = (props) => {
         "aprendiz": id
     });
 
+
     const [documentos, setDocumentos] = useState([]);
 
     console.log("ESto es lo que se va a enviar" , datosForm)

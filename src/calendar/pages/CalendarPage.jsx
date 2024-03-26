@@ -1,5 +1,6 @@
 import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import CalendarPDF from '../js/CalendarPDF';
 import moment from 'moment';
 
 import { Navbar, CalendarEvent, CalendarModal, FabAddNew, FabDelete } from "../"
@@ -329,18 +330,18 @@ const CalendarPage = () => {
 
 
           />
-
-
-
-        </div>
-
-        <CalendarModal />
-
-
-
+           
+         
+    
       </div>
-      <FabAddNew />
-
+      
+      <CalendarModal />
+      <CalendarPDF events={events} />
+      
+     
+    </div>
+    <FabAddNew />
+   
       <FabDelete />
 
       <Apps />
@@ -348,4 +349,4 @@ const CalendarPage = () => {
 
   )
 }
-export default CalendarPage
+export default CalendarPage;

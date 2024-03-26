@@ -3,6 +3,8 @@ import clienteAxios from "../../config/axios";
 import FormularioInicial from "./FormularioInicial";
 import Swal from "sweetalert2";
 
+import * as XLSX from 'xlsx';
+
 const AprendicesRegistrados = () => {
   const [aprendices, setAprendices] = useState([]);
   const [formularioAprendiz, setFormularioAprendiz] = useState(false);
@@ -187,6 +189,61 @@ const AprendicesRegistrados = () => {
   const handleFormularioAprendiz = () => {
     setFormularioAprendiz(true);
   };
+  const descargarExcel = () => {
+    const columnas = [
+      "Visitas",
+      "Empresa",
+      "Ficha",
+      "Nombres",
+      "Apellidos",
+      "Tipo de documento",
+      "Número de documento",
+      "Fecha de expedición",
+      "Lugar de expedición",
+      "Fecha de nacimiento",
+      "Sexo",
+      "Dirección domicilio",
+      "Municipio",
+      "Departamento",
+      "Número de celular 1",
+      "Número de celular 2",
+      "Teléfono fijo",
+      "Correo principal",
+      "Correo secundario",
+      "Finalización etapa lectiva",
+      "Estado de aprobación"
+    ];
+    const NombresColumnas = aprendices.results.map(aprendiz => ({
+      "Visitas": aprendiz.visitas,
+      "Empresa": aprendiz.empresa.razon_social,
+      "Ficha": aprendiz.ficha.numero_ficha,
+      "Nombres": aprendiz.nombres,
+      "Apellidos": aprendiz.apellidos,
+      "Tipo de documento": aprendiz.tipo_documento,
+      "Número de documento": aprendiz.numero_documento,
+      "Fecha de expedición": aprendiz.fecha_expedicion,
+      "Lugar de expedición": aprendiz.lugar_expedicion,
+      "Fecha de nacimiento": aprendiz.fecha_nacimiento,
+      "Sexo": aprendiz.sexo,
+      "Dirección domicilio": aprendiz.direccion_domicilio,
+      "Municipio": aprendiz.municipio,
+      "Departamento": aprendiz.departamento,
+      "Número de celular 1": aprendiz.numero_celular1,
+      "Número de celular 2": aprendiz.numero_celular2,
+      "Teléfono fijo": aprendiz.telefono_fijo,
+      "Correo principal": aprendiz.correo_principal,
+      "Correo secundario": aprendiz.correo_secundario,
+      "Finalización etapa lectiva": aprendiz.finalizacion_etapa_lectiva,
+      "Estado de aprobación": aprendiz.estado_aprobacion,
+    }));
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(NombresColumnas, { header: columnas });
+
+    ws['!cols'] = [{ wpx: 80 }, { wpx: 100 }, { wpx: 100 }, { wpx: 120 }, { wpx: 120 }, { wpx: 120 }, { wpx: 140 }, { wpx: 140 }, { wpx: 140 }, { wpx: 140 }, { wpx: 80 }, { wpx: 140 }, { wpx: 140 }, { wpx: 120 }, { wpx: 120 }, { wpx: 120 }, { wpx: 120 }, { wpx: 140 }, { wpx: 140 }, { wpx: 200 }, { wpx: 140 }, { wpx: 140 }];
+
+    XLSX.utils.book_append_sheet(wb, ws, 'Aprendices');
+    XLSX.writeFile(wb, 'Lista_Aprendices.xlsx');
+  }
   if (formularioAprendiz) {
     return <FormularioInicial />;
   }
@@ -222,11 +279,14 @@ const AprendicesRegistrados = () => {
                 </td>
               </tr>
             ))}
-            <tr className="btn-regr">
+            <tr>
               <td colSpan="5">
+                <div className="btn-regr">
                 <button id="regresar" onClick={handleFormularioAprendiz}>
                   Regresar
                 </button>
+                <button className='descargar-excel' onClick={descargarExcel}>Reporte de aprendices</button>
+                </div>
               </td>
             </tr>
           </tbody>

@@ -88,7 +88,14 @@ body {
   width: 100%;
   margin-top: 20px;
 }
-
+.btn-regr{
+  width: 100%;
+  display: flex;
+  padding: 10px;
+}
+.descargar-excel{
+  margin-left: 10px;
+}
 .button-guardar-check {
   display: flex;
   margin-top: 30px;
@@ -111,6 +118,9 @@ body {
 .check-bitacora{
   width: 2rem;
   height: 2rem;
+}
+.obs-bitacora{
+  height: 45px;
 }
 #documentBody tr{
   border-bottom: 1px solid #ccc;

@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import clienteAxios from "../../config/axios";
 import Swal from "sweetalert2";
 import MainSection from "../layout/MainSection";
@@ -126,6 +127,7 @@ const AprendizBitacoraIndividual = () => {
                   <th>Identificador Documento</th>
                   <th>Descargar Archivo</th>
                   <th>Check</th>
+                  <th>Observaciones bitácora</th>
                 </tr>
               </thead>
               <tbody id="documentBody">
@@ -145,6 +147,10 @@ const AprendizBitacoraIndividual = () => {
                         checked={checkboxesMarcados[documento.id]}
                         onChange={() => handleCheckboxChange(documento.id)}
                       />
+                    </td>
+                    <td>
+                      <textarea className="obs-bitacora" placeholder="Observaciones"
+                      type="text"></textarea>
                     </td>
                   </tr>
                 ))}
