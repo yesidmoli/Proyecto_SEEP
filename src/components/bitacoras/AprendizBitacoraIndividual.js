@@ -16,7 +16,10 @@ const AprendizBitacoraIndividual = () => {
   const { token } = useAuth();
   const [bitacoras, setBitacoras] = useState([]);
   const [checkboxesMarcados, setCheckboxesMarcados] = useState([]);
+  const [observaciones, setObservaciones] = useState('');
 
+
+  console.log("estas son las bitacoras", bitacoras)
 
 
   const history = useHistory()
@@ -32,6 +35,7 @@ const AprendizBitacoraIndividual = () => {
       );
       setDocumentos(response.data);
       const bitacoras = response.data.filter((documento) => documento.is_bitacora);
+      // Establecer el estado inicial del checkbox y las observaciones
       setBitacoras(bitacoras);
 
       // Establecer el estado inicial del checkbox basado en is_bitacora_check
@@ -61,6 +65,7 @@ const AprendizBitacoraIndividual = () => {
           documentos: bitacoras.map((documento) => ({
             id: documento.id,
             is_bitacora_check: checkboxesMarcados[documento.id],
+            observaciones: documento.observaciones, 
           })),
         },
         {
@@ -69,7 +74,7 @@ const AprendizBitacoraIndividual = () => {
           },
         }
       );
-      Swal.fire("Guardado", "Se a guardado exitosamente", "success");
+      Swal.fire("Guardado", "Se ha guardado exitosamente", "success");
     } catch (error) {
       console.error("Error al guardar:", error);
       let errorMessage = "Se produjo un error al guardar:";
@@ -83,10 +88,27 @@ const AprendizBitacoraIndividual = () => {
       Swal.fire("Error", errorMessage, "error");
     }
   };
+  
 
+  
   useEffect(() => {
     fetchDocumentos();
   }, []);
+
+  const handleChangeObservaciones = (event, documentoId) => {
+    const nuevasBitacoras = bitacoras.map((bitacora) => {
+      if (bitacora.id === documentoId) {
+        return {
+          ...bitacora,
+          observaciones: event.target.value,
+        };
+      }
+      return bitacora;
+    });
+    setBitacoras(nuevasBitacoras);
+  };
+  
+
 
 
   return (
@@ -108,8 +130,8 @@ const AprendizBitacoraIndividual = () => {
           <Link to={`/documentos-aprendiz/${id}`} aria-label="icon" className="iconLink ">
             <button id='registrar-aprendiz'>Cargar Bitácora</button>
           </Link>
-          <a href={bitacora} download="Bitácora Formato Actualizado-JUN-2023.xlsx"  className="iconLink">
-            <button  id='registrar-aprendiz'>Descargar Bitácora</button>
+          <a href={bitacora} download="Bitácora Formato Actualizado-JUN-2023.xlsx" className="iconLink">
+            <button id='registrar-aprendiz'>Descargar Bitácora</button>
           </a>
 
 
@@ -148,8 +170,13 @@ const AprendizBitacoraIndividual = () => {
                       />
                     </td>
                     <td>
-                      <textarea className="obs-bitacora" placeholder="Observaciones"
-                      type="text"></textarea>
+                      <textarea
+                        className="obs-bitacora"
+                        placeholder="Observaciones"
+                        type="text"
+                        value={documento.observaciones}
+                        onChange={(e) => handleChangeObservaciones(e, documento.id)}
+                      ></textarea>
                     </td>
                   </tr>
                 ))}
