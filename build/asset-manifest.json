@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6d873e85.css",
+    "main.js": "/static/js/main.f7c45276.js",
+    "static/js/787.38de4bcd.chunk.js": "/static/js/787.38de4bcd.chunk.js",
+    "static/media/logo-sena.png": "/static/media/logo-sena.452d8a3f57c3903f1ba9.png",
+    "static/media/cditi-logo-v2.svg": "/static/media/cditi-logo-v2.392db24f35348eb3a09b62ea45363eea.svg",
+    "static/media/logo.png": "/static/media/logo.836daca69ef3ba0cadc4.png",
+    "static/media/BitacoraDoc.xlsx": "/static/media/BitacoraDoc.ad13454c830b15a56048.xlsx",
+    "static/media/seep-logo-verde.svg": "/static/media/seep-logo-verde.3e7b03ce20fdc032e5eab080cec6db98.svg",
+    "static/media/siga.png": "/static/media/siga.8d3692d402be9ca418f9.png",
+    "static/media/sena-logo.svg": "/static/media/sena-logo.5b03c1e693bdb4ac0a854324546896ce.svg",
+    "index.html": "/index.html",
+    "main.6d873e85.css.map": "/static/css/main.6d873e85.css.map",
+    "main.f7c45276.js.map": "/static/js/main.f7c45276.js.map",
+    "787.38de4bcd.chunk.js.map": "/static/js/787.38de4bcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6d873e85.css",
+    "static/js/main.f7c45276.js"
+  ]
+}
