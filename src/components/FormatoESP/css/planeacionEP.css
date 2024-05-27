@@ -283,7 +283,7 @@
 }
 .planeacion-cont{
     overflow-x: scroll !important;
-    max-height: 780px;
+    max-height: 650px;
     padding-bottom: 4rem;
     padding-top: 2rem !important;
     border: 1px solid #ccc !important;

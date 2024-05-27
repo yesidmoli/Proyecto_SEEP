@@ -128,7 +128,7 @@ const FormularioInicial = () => {
       setAprendices(response.data);
 
       // Limpiar el formulario y restablecer el estado
-      setAprendiz(initialState);
+      // setAprendiz(initialState);
       setModoEdicion(false);
       setIdEditar(null);
     } catch (error) {
@@ -199,7 +199,7 @@ const FormularioInicial = () => {
       <Header />
       <MainSection />
       <Apps />
-      <div className="container cont-fichas">
+      <div className="container cont-fichas  " >
 
         <Link to={"/fichas"} aria-label="icon" className=" btn-atras">
           <img src={atras}></img>
@@ -239,13 +239,22 @@ const FormularioInicial = () => {
                 required
               />
               <label>Tipo de Documento: <p className="rojo-label">*</p></label>
-              <input
+              <select name="tipo_documento"  value={aprendiz.tipo_documento} onChange={actualizarState}>
+                <option value="" disabled>Seleccione el tipo de documento</option>
+                <option value="CC">Cédula de Ciudadanía</option>
+                <option value="CE">Cédula de Extranjería</option>
+                <option value="TI">Tarjeta de Identidad</option>
+                <option value="PA">Pasaporte</option>
+                {/* <option value="PEP">Permiso Especial de Permanencia</option>
+                <option value="RC">Registro Civil</option> */}
+              </select>
+              {/* <input
                 type="text"
                 name="tipo_documento"
                 value={aprendiz.tipo_documento}
                 onChange={actualizarState}
                 required
-              />
+              /> */}
               <label>Número de Documento: <p className="rojo-label">*</p></label>
               <input
                 type="text"
@@ -281,13 +290,20 @@ const FormularioInicial = () => {
                 required
               />
               <label>Sexo: <p className="rojo-label">*</p></label>
-              <input
+              <select name="sexo" value={aprendiz.sexo} onChange={actualizarState} required>
+                <option value="" disabled> Seleccione el sexo</option>
+                <option value="Masculino" >Masculino</option>
+                <option value="Femenino" >Femenino</option>
+                <option value="No binario">No binario</option>
+
+              </select>
+              {/* <input
                 type="text"
                 name="sexo"
                 value={aprendiz.sexo}
                 onChange={actualizarState}
                 required
-              />
+              /> */}
               <label>Dirección Domicilio: <p className="rojo-label">*</p></label>
               <input
                 type="text"
@@ -414,11 +430,11 @@ const FormularioInicial = () => {
                   onChange={actualizarState}
                 ></input>
                 <div className="botones">
-                  <button type="submit" id="save">
+                  <button id="save">
                     {enviandoDatos ? (
                       <>
-                        <Spinner animation="grow" size="sm" /> 
-                         Enviando...
+                        <Spinner animation="grow" size="sm" />
+                        Enviando...
                       </>
                     ) : (
                       "Registrar"

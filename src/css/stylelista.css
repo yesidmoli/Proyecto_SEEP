@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 *{
-    font-family: "Work Sans", sans-serif;
+    font-family: "Work Sans Regular", sans-serif;
 }
 body{
     font-family: Arial, Arial, Helvetica, sans-serif;
@@ -24,6 +24,7 @@ body{
    width: 100%;
     margin-top: 10px; 
     border-radius: 10px;
+    height: 100%;
   
 }
 .texto{
@@ -55,10 +56,8 @@ body{
 
 
 .titulo-aprendices{
-    margin-left: 2rem;
-    font-size: 2.5rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+   
+    font-size: 2.2rem;
     color: #00324D;
 }
 
@@ -71,6 +70,8 @@ body{
     gap: 1rem;
     padding: 0px;
     width: 100%;
+    overflow: scroll;
+    height: 40rem;
     
 }
 .img-aprendiz{

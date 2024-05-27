@@ -10,6 +10,7 @@ import Apps from "../layout/menu/App";
 
 
 import bitacora from '../../../src/components/bitacoras/BitacoraDoc.xlsx'
+import Toast from "../layout/Toast";
 const AprendizBitacoraIndividual = () => {
   const { id } = useParams();
   const [documentos, setDocumentos] = useState([]);
@@ -19,7 +20,7 @@ const AprendizBitacoraIndividual = () => {
   const [observaciones, setObservaciones] = useState('');
 
 
-  console.log("estas son las bitacoras", bitacoras)
+  const rol = localStorage.getItem('rol')
 
 
   const history = useHistory()
@@ -65,7 +66,7 @@ const AprendizBitacoraIndividual = () => {
           documentos: bitacoras.map((documento) => ({
             id: documento.id,
             is_bitacora_check: checkboxesMarcados[documento.id],
-            observaciones: documento.observaciones, 
+            observaciones: documento.observaciones,
           })),
         },
         {
@@ -88,9 +89,9 @@ const AprendizBitacoraIndividual = () => {
       Swal.fire("Error", errorMessage, "error");
     }
   };
-  
 
-  
+
+
   useEffect(() => {
     fetchDocumentos();
   }, []);
@@ -107,7 +108,7 @@ const AprendizBitacoraIndividual = () => {
     });
     setBitacoras(nuevasBitacoras);
   };
-  
+
 
 
 
@@ -117,7 +118,7 @@ const AprendizBitacoraIndividual = () => {
 
       <MainSection />
       <Apps />
-      <div className="container  cont-fichas cont-bitacoras">
+      <div className="container  cont-fichas cont-bitacoras ">
         <Link to={"#"} aria-label="icon" className=" btn-atras btn-atras-bitacora" onClick={() => history.goBack()}>
           <img src={atras}></img>
 
@@ -138,10 +139,20 @@ const AprendizBitacoraIndividual = () => {
         </div>
 
         <div className="bitacoras-container">
+          {rol !="aprendiz" ? <Toast modificada={"toast__modificado"}  mensaje={"Visualiza y aprueba las bitácoras del aprendiz. Puedes agregar observaciones si es necesario."} /> : null}
+          {/* <Toast modificada={"toast__modificado"}  mensaje={"Visualiza y aprueba las bitácoras del aprendiz. Puedes agregar observaciones si es necesario."} /> */}
+          <h3 className="titulo-bitacoras-list">Bitácoras del aprendiz</h3>
 
-          <h3>Bitácoras del aprendiz</h3>
+          <div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+              <div class="toast-body">
+                Por favor, selecciona el aprendiz para ver sus bitácoras.
+              </div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
           <div className="table-container">
-            <table id="bitacoras-table">
+            <table id="bitacoras-table" className="tabla-fichas">
               <thead className="thead">
                 <tr>
                   <th>Número bitácora</th>
@@ -167,6 +178,7 @@ const AprendizBitacoraIndividual = () => {
                         id={documento.id}
                         checked={checkboxesMarcados[documento.id]}
                         onChange={() => handleCheckboxChange(documento.id)}
+                        disabled={rol === "aprendiz"}
                       />
                     </td>
                     <td>
@@ -176,6 +188,7 @@ const AprendizBitacoraIndividual = () => {
                         type="text"
                         value={documento.observaciones}
                         onChange={(e) => handleChangeObservaciones(e, documento.id)}
+                        disabled={rol === "aprendiz"}
                       ></textarea>
                     </td>
                   </tr>
@@ -184,7 +197,10 @@ const AprendizBitacoraIndividual = () => {
             </table>
           </div>
           <div className="button-guardar-check">
-            <button id="guardar--check" onClick={bitacorasValidas}>Guardar</button>
+            {rol !=="aprendiz" ? 
+            <button id="guardar--check" onClick={bitacorasValidas}  >Guardar</button> : null
+            }
+            
           </div>
         </div>
       </div>

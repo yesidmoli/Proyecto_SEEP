@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 .header {
   height: 100px;
   background-color: #39a900;
@@ -76,17 +77,19 @@ body {
   border-radius: 5px;
 }
 .bitacoras-container {
-  margin-top: 30px;
+
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  
 }
+
 .table-container {
   display: flex;
   width: 100%;
   margin-top: 20px;
+  overflow-x: scroll;
 }
 .btn-regr{
   width: 100%;
@@ -106,9 +109,10 @@ body {
 
 .cont-bitacoras{
   display: flex;
-  height: 100vh;
+  /* height: 100vh; */
   gap: 1.5rem;
   padding-right: 3rem;
+  height: 100vh;
 }
 .btn-bitacoras{
   width: 20rem;
@@ -125,6 +129,33 @@ body {
 #documentBody tr{
   border-bottom: 1px solid #ccc;
 }
+
+.toast{
+  width: 80% !important;
+  font-size: 1.2rem !important;
+  margin-top: 10px;
+  background-color: #70B22D !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+.toast__modificado{
+  width: 100% !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  margin-bottom: 1rem;
+}
+.btn-close{
+  color: #fff !important;
+}
+.btn-close:hover{
+  background-color: transparent;
+}
+.titulo-bitacoras-list{
+  font-family: "Libre Franklin", sans-serif;
+  font-size: 2rem;
+  border-bottom: 1px solid #6f7e95;
+  margin-top: 1rem;
+}
 @media only screen and (max-width: 768px) {
   .btn-bitacoras{
     margin: 0px;
@@ -136,5 +167,11 @@ body {
   }
   .btn-atras-bitacora img{
     width: 30px;
+  }
+  .toast{
+    width: 100% !important;
+  }
+  .tabla-fichas thead th{
+    
   }
 }

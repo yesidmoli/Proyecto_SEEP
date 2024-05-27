@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 
 
 const MainSection = () => {
+  const rol = localStorage.getItem('rol')
 
   return (
     <ul className={"navMenuLat "} role="list" style={{ zIndex: 1033 }}>
@@ -29,12 +30,15 @@ const MainSection = () => {
         </Link>
         <div className="animated slideInLeft">Calendario</div>
       </li>
-      <li>
-        <Link to={"/fichas"} aria-label="icon" className="iconLink">
-          <i alt="icon" className="iconMenuLateral bi-people-fill"></i>
-        </Link>
-        <div className="animated slideInLeft">Fichas</div>
-      </li>
+      {rol !== "aprendiz" ?
+        <li>
+          <Link to={"/fichas"} aria-label="icon" className="iconLink">
+            <i alt="icon" className="iconMenuLateral bi-people-fill"></i>
+          </Link>
+          <div className="animated slideInLeft">Fichas</div>
+        </li>
+        : null}
+
       <li>
         <Link to={"/documentos"} aria-label="icon" className="iconLink">
           <i alt="icon" className="iconMenuLateral bi bi-file-earmark-zip"></i>
@@ -49,9 +53,9 @@ const MainSection = () => {
       </li>
     </ul>
 
-     
-      );
-      
-    };
+
+  );
+
+};
 
 export default MainSection;

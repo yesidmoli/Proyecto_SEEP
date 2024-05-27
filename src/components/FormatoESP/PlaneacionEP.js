@@ -26,6 +26,9 @@ function PlaneacionEP({ goToNextComponent, data }) {
   const [instructorRef, setInstructorSignatureRef] = useState(null);
 
 
+  //obtenemos el rol del usuario
+  const rol = localStorage.getItem('rol')
+
   const handleAddActividad = () => {
     setFormData((prevState) => ({
       ...prevState,
@@ -126,9 +129,9 @@ function PlaneacionEP({ goToNextComponent, data }) {
 
             <tbody  >
               {formData.actividades.map((actividad, index) => (
-                <tr key={index}>
+                <tr key={index} >
                   <td>
-                    <input className="name-actividad input-planeacion" placeholder="Ingrese la actividad"
+                    <input disabled ={rol==="aprendiz"} className="name-actividad input-planeacion" placeholder="Ingrese la actividad"
                       name="nombre_actividad"
 
                       value={actividad.nombre_actividad}
@@ -136,7 +139,7 @@ function PlaneacionEP({ goToNextComponent, data }) {
                     ></input>
                   </td>
                   <td>
-                    <input type="checkbox" className="input-si-evidencia input-planeacion"
+                    <input disabled ={rol==="aprendiz"} type="checkbox" className="input-si-evidencia input-planeacion"
 
                       name="tiene_evidencia_aprendizaje"
                       rows="2"
@@ -145,7 +148,7 @@ function PlaneacionEP({ goToNextComponent, data }) {
                     ></input>
                   </td>
                   <td>
-                    <input type="date" className="input-planeacion "
+                    <input disabled ={rol==="aprendiz"} type="date" className="input-planeacion "
 
                       name="fecha_recoleccion_evidencia"
                       rows="2"
@@ -154,7 +157,7 @@ function PlaneacionEP({ goToNextComponent, data }) {
                     ></input>
                   </td>
                   <td>
-                    <input className="input-planeacion"
+                    <input disabled ={rol==="aprendiz"} className="input-planeacion"
                       placeholder="Ingrese el lugar"
                       name="lugar_recoleccion_evidencia"
                       rows="2"
@@ -163,21 +166,27 @@ function PlaneacionEP({ goToNextComponent, data }) {
                     ></input>
                   </td>
                   <td>
-                    <button type="button" onClick={() => handleRemoveActividad(index)}>
+                    {rol !== "aprendiz" ? <button  disabled ={rol==="aprendiz"} type="button" onClick={() => handleRemoveActividad(index)}>
                       Eliminar
-                    </button>
+                    </button> 
+                    : null}
+                   
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <button type="button" onClick={handleAddActividad}>
-            Añadir Actividad
-          </button>
+          {rol !== "aprendiz" ? 
+          <button type="button" onClick={handleAddActividad} disabled ={rol==="aprendiz"}>
+          Añadir Actividad
+        </button>
+          :null}
+          
 
           <div className="observaciones-planeacion">
             <h5>OBSERVACIONES</h5>
             <textarea
+              disabled ={rol==="aprendiz"}
               name="observaciones"
               rows="4"
               value={formData.observaciones}
@@ -188,7 +197,7 @@ function PlaneacionEP({ goToNextComponent, data }) {
           <div className="camp-firma">
             <div className="nombre-ente">
               <label> <h5>Nombre y firma del ente Conformador</h5></label>
-              <input placeholder="Nombre ente conformador" className="input-planeacion" value={formData.nombre_enteconformador}
+              <input   disabled={rol==="aprendiz"}placeholder="Nombre ente conformador" className="input-planeacion" value={formData.nombre_enteconformador}
                 onChange={(e) => setFormData({ ...formData, nombre_enteconformador: e.target.value })}></input>
             </div>
 
@@ -209,8 +218,9 @@ function PlaneacionEP({ goToNextComponent, data }) {
                   />
                 ) : null}
               </section>
+              
+              <Popup trigger={<button type="button"  disabled={rol==="aprendiz"} >Firmar</button>} modal>
 
-              <Popup trigger={<button type="button">Firmar</button>} modal>
                 {(close) => (
                   <div className="popup campo-firma">
                     <section className="head-signature">
@@ -304,6 +314,7 @@ function PlaneacionEP({ goToNextComponent, data }) {
             <div className="nombre-instructor">
               <label><h5>Nombre y firma del Instructor</h5></label>
               <input
+                disabled ={rol==="aprendiz"}
                 value={formData.nombre_instructor}
                 onChange={(e) => setFormData({ ...formData, nombre_instructor: e.target.value })}
                 placeholder="Nombre del Instructor"
@@ -326,35 +337,37 @@ function PlaneacionEP({ goToNextComponent, data }) {
                   />
                 ) : null}
               </section>
-
+              {rol !== "aprendiz" ?
               <Popup trigger={<button type="button">Firmar</button>} modal>
-                {(close) => (
-                  <div className="popup campo-firma">
-                    <section className="head-signature">
-                      <button className="close" onClick={close}>
-                        &times;
-                      </button>
-                      <h2>Firma del Instructor</h2>
-                      <i className="bi bi-trash3-fill" onClick={() => clearSignature(instructorRef)}></i>
-                    </section>
+              {(close) => (
+                <div className="popup campo-firma">
+                  <section className="head-signature">
+                    <button className="close" onClick={close}>
+                      &times;
+                    </button>
+                    <h2>Firma del Instructor</h2>
+                    <i className="bi bi-trash3-fill" onClick={() => clearSignature(instructorRef)}></i>
+                  </section>
 
-                    <SignatureCanvas
-                      penColor="black"
-                      canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
-                      ref={(ref) => setInstructorSignatureRef(ref)}
-                      minWidth={1}
-                      maxWidth={1}
-                      velocityFilterWeight ={0.1}
-                    />
+                  <SignatureCanvas
+                    penColor="black"
+                    canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
+                    ref={(ref) => setInstructorSignatureRef(ref)}
+                    minWidth={1}
+                    maxWidth={1}
+                    velocityFilterWeight ={0.1}
+                  />
 
-                    <div className="btn-guardar-firma">
-                      <button className="btn btn-success" onClick={() => { saveSignature(instructorRef, "firma_instructor"); close(); }}>
-                        Guardar Firma
-                      </button>
-                    </div>
+                  <div className="btn-guardar-firma">
+                    <button className="btn btn-success" onClick={() => { saveSignature(instructorRef, "firma_instructor"); close(); }}>
+                      Guardar Firma
+                    </button>
                   </div>
-                )}
-              </Popup>
+                </div>
+              )}
+            </Popup>
+              : null}
+              
             </div>
           </div>
 

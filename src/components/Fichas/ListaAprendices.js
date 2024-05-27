@@ -15,8 +15,8 @@ function ListaAprendices(props) {
     const history = useHistory();
     //Extrae la propiedad numero de ficha
     const { numero_ficha, programa } = props.match.params;
-    //Muestra el número de la ficha
-    console.log("este es el numero ficha", numero_ficha)
+
+    const [busqueda, setBusqueda] = useState("");
 
     const [aprendices, dataAprendices] = useState([]);
 
@@ -39,6 +39,14 @@ function ListaAprendices(props) {
         }
 
     }
+    const handleBuscar = (e) => {
+        setBusqueda(e.target.value);
+    };
+
+    const aprendicesFiltrados = aprendices.filter((aprendiz) => {
+        // Filtra las fichas cuyo número de ficha o nombre del programa coincidan con el término de búsqueda
+        return aprendiz.numero_documento.includes(busqueda) || aprendiz.nombres.toLowerCase().includes(busqueda.toLowerCase()) || aprendiz.apellidos.toLowerCase().includes(busqueda.toLowerCase());;
+    });
     return (
         <Fragment>
             <Apps />
@@ -72,16 +80,22 @@ function ListaAprendices(props) {
                             <option value="Visita 3">Visita 3</option>
                             
                         </select> */}
-                            <div class="seleccion"><h6> Aprobado</h6></div>
-                            <div class="seleccion">Pendiente Aprobar</div>
+                            {/* <div class="seleccion"><h6> Aprobado</h6></div>
+                            <div class="seleccion">Pendiente Aprobar</div> */}
                         </div>
                     </div>
 
                     <div class="lista">
                         <h3 class="titulo-aprendices">Aprendices</h3>
+                        <input
+                            type="text"
+                            value={busqueda}
+                            onChange={handleBuscar}
+                            placeholder="Buscar aprendiz por número documento o nombre"
+                        />
                         <hr></hr>
                         <ul class="lista-aprendices">
-                            {aprendices.map(aprendiz => (
+                            {aprendicesFiltrados.map(aprendiz => (
                                 <li key={aprendiz.id}>
 
                                     <div className="img-aprendiz">

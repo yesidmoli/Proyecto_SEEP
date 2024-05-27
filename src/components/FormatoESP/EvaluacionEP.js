@@ -128,6 +128,7 @@ import { useFormContext } from './FormProvide';
 function EvaluacionEP({ goToNextComponent, data }) {
 
     const { formData: { evaluacion: contextFormData }, updateFormData } = useFormContext();// Renombramos el formData del contexto para evitar conflictos
+    const rol = localStorage.getItem('rol')
 
     const [formData, setFormData] = useState({
         juicio_evaluacion: '',
@@ -178,7 +179,7 @@ function EvaluacionEP({ goToNextComponent, data }) {
 
 
     const handleAgregarReconocimiento = () => {
-        if (formData.nuevoReconocimiento.trim() !== "") {
+        if (formData.nuevoReconocimiento?.trim() !== "") {
             setFormData(prevState => ({
                 ...prevState,
                 reconocimientos_detalle: prevState.reconocimientos_detalle ? prevState.reconocimientos_detalle + '-' + formData.nuevoReconocimiento : formData.nuevoReconocimiento,
@@ -221,7 +222,7 @@ function EvaluacionEP({ goToNextComponent, data }) {
                             <tr>
                                 <th>JUICIO DE ELABORACIÓN:</th>
                                 <td>
-                                    <select name="juicio_evaluacion" value={formData.juicio_evaluacion} onChange={handleChange} required>
+                                    <select disabled={rol==="aprendiz"} name="juicio_evaluacion" value={formData.juicio_evaluacion} onChange={handleChange} required>
                                         <option key="seleccionar" value="seleccionar">seleccionar</option>
                                         <option key="aprobado" value="aprobado">APROBADO</option>
                                         <option key="no_aprobado" value="no aprobado">NO APROBADO</option>
@@ -233,7 +234,7 @@ function EvaluacionEP({ goToNextComponent, data }) {
                             <tr>
                                 <th>RECONOCIMIENTOS ESPECIALES SOBRE EL  DESEMPEÑO:</th>
                                 <td>
-                                    <select name="reconocimientos_especiales" value={formData.reconocimientos_especiales} onChange={handleChange} required>
+                                    <select disabled={rol==="aprendiz"}  name="reconocimientos_especiales" value={formData.reconocimientos_especiales} onChange={handleChange} required>
                                         <option key="seleccionar" value="seleccionar">seleccionar</option>
                                         <option key="si" value="true">SI</option>
                                         <option key="no" value="false">NO</option>
@@ -248,12 +249,14 @@ function EvaluacionEP({ goToNextComponent, data }) {
                             </tr>
                             <td>
                                 <input
+                                    disabled={rol==="aprendiz"} 
                                     type="text"
                                     value={formData.nuevoReconocimiento}
                                     onChange={handleChange}
                                     name="nuevoReconocimiento"
                                 />
-                                <button onClick={handleAgregarReconocimiento}>Añadir Reconocimiento</button>
+                                {rol !== "aprendiz" && <button onClick={handleAgregarReconocimiento}>Añadir Reconocimiento</button>}
+                                
                             </td>
 
                             {formData.reconocimientos_detalle && (
@@ -263,9 +266,12 @@ function EvaluacionEP({ goToNextComponent, data }) {
                                         <ul>
                                             {formData.reconocimientos_detalle.split('-').map((reconocimiento, index) => (
                                                 <li className='reconocimientos-lista' key={index}>{reconocimiento}
-                                                    <td>
-                                                        <button onClick={() => handleEliminarReconocimiento(index)}>Eliminar</button>
-                                                    </td>
+                                                    {rol !=="aprendiz" ? 
+                                                     <td>
+                                                     <button onClick={() => handleEliminarReconocimiento(index)}>Eliminar</button>
+                                                 </td>
+                                                    : null}
+
                                                 </li>
                                             ))}
 
@@ -284,7 +290,7 @@ function EvaluacionEP({ goToNextComponent, data }) {
                     <div className="camp-firma">
                         <div className="nombre-ente">
                             <label> <h5>Nombre y firma del ente Conformador</h5></label>
-                            <input placeholder="Nombre ente conformador" name="nombre_enteconformador" className="input-planeacion" value={formData.nombre_enteconformador} onChange={handleChange}></input>
+                            <input   disabled={rol==="aprendiz"} placeholder="Nombre ente conformador" name="nombre_enteconformador" className="input-planeacion" value={formData.nombre_enteconformador} onChange={handleChange}></input>
                         </div>
 
                         <div className="campo-firma-planeacion">
@@ -305,38 +311,41 @@ function EvaluacionEP({ goToNextComponent, data }) {
                                 ) : null}
                             </section>
 
-                            <Popup trigger={<button type="button">Firmar</button>} modal>
-                                {(close) => (
-                                    <div className="popup campo-firma">
-                                        <section className="head-signature">
-                                            <button className="close" onClick={close}>
-                                                &times;
-                                            </button>
+                           {rol !== "aprendiz" ?
+                           <Popup trigger={<button type="button">Firmar</button>} modal>
+                           {(close) => (
+                               <div className="popup campo-firma">
+                                   <section className="head-signature">
+                                       <button className="close" onClick={close}>
+                                           &times;
+                                       </button>
 
-                                            <h2>Firma ente Conformador</h2>
-                                            <i class="bi bi-trash3-fill" onClick={() => clearSignature(signatureRef)}></i>
-                                        </section>
+                                       <h2>Firma ente Conformador</h2>
+                                       <i class="bi bi-trash3-fill" onClick={() => clearSignature(signatureRef)}></i>
+                                   </section>
 
-                                        <SignatureCanvas
-                                            penColor="black"
-                                            canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
-                                            ref={(ref) => setSignatureRef(ref)}
-                                            minWidth={1}
-                                            maxWidth={1}
-                                            velocityFilterWeight={0.1}
-                                        />
+                                   <SignatureCanvas
+                                       penColor="black"
+                                       canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
+                                       ref={(ref) => setSignatureRef(ref)}
+                                       minWidth={1}
+                                       maxWidth={1}
+                                       velocityFilterWeight={0.1}
+                                   />
 
-                                        <div className="btn-guardar-firma">
-                                            <button className="btn btn-success " onClick={() => { saveSignature(signatureRef, "firma_enteconformador"); close(); }}>
-                                                Guardar Firma
-                                            </button>
-                                        </div>
+                                   <div className="btn-guardar-firma">
+                                       <button className="btn btn-success " onClick={() => { saveSignature(signatureRef, "firma_enteconformador"); close(); }}>
+                                           Guardar Firma
+                                       </button>
+                                   </div>
 
 
 
-                                    </div>
-                                )}
-                            </Popup>
+                               </div>
+                           )}
+                       </Popup>
+                           :null} 
+                            
                         </div>
                     </div>
                     <div className="camp-firma">
@@ -394,6 +403,7 @@ function EvaluacionEP({ goToNextComponent, data }) {
                         <div className="nombre-instructor">
                             <label><h5>Nombre y firma del Instructor</h5></label>
                             <input
+                                disabled={rol==="aprendiz"} 
                                 name="nombre_instructor"
                                 value={formData.nombre_instructor} onChange={handleChange}
                                 placeholder="Nombre del Instructor"
@@ -417,34 +427,37 @@ function EvaluacionEP({ goToNextComponent, data }) {
                                 ) : null}
                             </section>
 
+                            {rol !== "aprendiz" ? 
                             <Popup trigger={<button type="button">Firmar</button>} modal>
-                                {(close) => (
-                                    <div className="popup campo-firma">
-                                        <section className="head-signature">
-                                            <button className="close" onClick={close}>
-                                                &times;
-                                            </button>
-                                            <h2>Firma del Instructor</h2>
-                                            <i className="bi bi-trash3-fill" onClick={() => clearSignature(instructorRef)}></i>
-                                        </section>
+                            {(close) => (
+                                <div className="popup campo-firma">
+                                    <section className="head-signature">
+                                        <button className="close" onClick={close}>
+                                            &times;
+                                        </button>
+                                        <h2>Firma del Instructor</h2>
+                                        <i className="bi bi-trash3-fill" onClick={() => clearSignature(instructorRef)}></i>
+                                    </section>
 
-                                        <SignatureCanvas
-                                            penColor="black"
-                                            canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
-                                            ref={(ref) => setInstructorSignatureRef(ref)}
-                                            minWidth={1}
-                                            maxWidth={1}
-                                            velocityFilterWeight={0.1}
-                                        />
+                                    <SignatureCanvas
+                                        penColor="black"
+                                        canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
+                                        ref={(ref) => setInstructorSignatureRef(ref)}
+                                        minWidth={1}
+                                        maxWidth={1}
+                                        velocityFilterWeight={0.1}
+                                    />
 
-                                        <div className="btn-guardar-firma">
-                                            <button className="btn btn-success" onClick={() => { saveSignature(instructorRef, "firma_instructor"); close(); }}>
-                                                Guardar Firma
-                                            </button>
-                                        </div>
+                                    <div className="btn-guardar-firma">
+                                        <button className="btn btn-success" onClick={() => { saveSignature(instructorRef, "firma_instructor"); close(); }}>
+                                            Guardar Firma
+                                        </button>
                                     </div>
-                                )}
-                            </Popup>
+                                </div>
+                            )}
+                        </Popup>
+                            : null}
+                            
                         </div>
                     </div>
 

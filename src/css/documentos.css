@@ -9,6 +9,7 @@
 
   
   .conten-documentos{
+    height: 100vh !important;
     /* background-color: #f8f8f8; */
   }
   #file{
@@ -126,7 +127,9 @@
   }
   .list-aprendices{
     padding: 0px;
-    margin-top: 3rem;
+    margin-top: 1rem;
+    overflow: scroll;
+    height: 35rem;
   }
   .datos-aprendiz-doc{
     display: flex;

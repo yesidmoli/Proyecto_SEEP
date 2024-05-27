@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
 *{
-    font-family: "Work Sans", sans-serif;
+    font-family: "Work Sans Regular", sans-serif;
 }
 body{
     font-family: Arial, Arial, Helvetica, sans-serif;
@@ -78,14 +79,37 @@ body{
     
 }
 .tabla-uno{
-    width: 70%;
-    height: 300px;
-    margin: auto;
+    width: 100%;
     margin-top: 30px;
-    position: relative;
+    border-radius: 20px;
+    font-family: "Libre Franklin", sans-serif;
+  
 }
 .tabla-reg{
-    margin-top: 30px;
+    margin-top: 15px;
+    border-radius: 10px !important;
+    border: 1px solid #F0EFF4 ;
+    overflow: scroll;
+    
+}
+.tabla-reg thead{
+    font-size: 1.2rem;
+    background-color: #F0EFF4;
+    
+}
+.tabla-reg tbody{
+    overflow: scroll;
+    height: 2rem;
+}
+.tabla-reg tbody tr{
+    border-bottom: 1px solid #dadada !important;
+}
+.tabla-reg tbody tr td{
+    font-size: 1rem;
+    font-weight: 600;
+}
+.header-fichas__aprendiz{
+    margin-bottom: 1rem;
 }
 #reg, #d-empresa, #regresar{
     border-radius: 5px;
@@ -142,6 +166,7 @@ body{
     flex-direction: column;
     width: 100%;
     align-items: center;
+  
 
 }
 .nombre-documento{
@@ -242,6 +267,19 @@ body{
     outline: none !important;
 }
 
+.tabla-scroll{
+    max-height: 700px; /* Ajusta la altura según sea necesario */
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    flex: 1;
+  
+}
+/* Estilo para el encabezado fijo */
+.tabla-reg th {
+  
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
 
 @media only screen and (max-width: 768px) {
     .nombre-documento{

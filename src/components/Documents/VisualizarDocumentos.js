@@ -67,7 +67,7 @@ const VisualizarDocumentos = ({ documentos }) => {
     return (
         <div className="document-container">
             <h4>Documentación del Aprendiz</h4>
-            <table id="documentTable">
+            <table id="documentTable" className="tabla-fichas">
                 <thead className="thead">
                     <tr>
                         <th>Tipo Documental</th>

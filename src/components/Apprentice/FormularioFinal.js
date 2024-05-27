@@ -3,60 +3,44 @@ import MainSection from "../layout/MainSection";
 import Header from "../layout/Header";
 import Swal from "sweetalert2";
 import '../../css/formulariofinal.css'
+import clienteAxios from "../../config/axios";
 
-const FormularioFinal = () => {
+const FormularioFinal = (prop) => {
+        const { id } = prop.match.params;
         const [formData, setFormData] = useState({
-          nombres: '',
-          apellidos: '',
-          numero_documento: '',
-          tipo_documento: '',
-          fecha_expedicion: '',
-          lugar_expedicion: '',
-          fecha_nacimiento: '',
-          sexo: '',
-          direccion_domicilio: '',
-          municipio: '',
-          departamento: '',
-          telefono: '',
-          numero_celular: '',
-          telefono_fijo: '',
-          correo: '',
-          cabeza_familia: 'Seleccione una opción',
-          programa_formacion: '',
-          nivel_formacion: '',
-          numero_ficha: '',
-          titulo_obtenido: '',
-          horario_formacion: '',
-          fecha_lectiva: '',
-          empresa: '',
-          cargo: '',
-          fecha_productiva: '', 
-          etapa_productiva: 'Seleccione una opción',
-          jefe_inmediato: '',
-          cargo_jefe: '',
-          telefono_jefe: '',
-          correo_jefe: '',
-          estudios_superiores: 'Seleccione una opción',
-          estudios_adicionales: '', 
-          trabaja_actualmente: 'Seleccione una opción', 
-          estado_empleo: 'Seleccione una opción', 
-          cargo_actual: '', 
-          empresa_actual: '', 
-          tiempo_trabajo: '',
-          informacion_complementaria: '',
-          estudio_actual: '',
-          estudios_actualmente: '', 
-          universidad: '', 
-          certificacion: 'Seleccione una opción', 
-          servicio_nacional_empleo: 'Seleccione una opción',
-          idea_negocio: 'Seleccione una opción', 
-          fondo_emprender: 'Seleccione una opcion', 
-          empleo: 'Seleccione una opción', 
-          sugerencias: '',
-
           
-        });
-      
+            madre_cabeza_familia: "",
+            titulo_obtenido: "",
+            fecha_fin_etapa_lectiva: "",
+            cargo_funciones: "",
+            fecha_fin_etapa_productiva: "",
+            practica_aprendido: "",
+            estudios_superiores_adicionales: "",
+            estudios: "",
+            trabaja_actualmente: "",
+            estado_actual: "",
+            cargo_actual: "",
+            empresa_labora: "",
+            antiguedad_trabajo:"",
+            area_informacion_complementaria: "",
+            actualmente_estudia: "",
+            estudia_que: "",
+            institucion_universidad: "",
+            certificar_competencias_laborales: "",
+            conoce_beneficios_sena: "",
+            idea_negocio: "",
+            conoce_servicio_fondo_emprender: "",
+            necesita_empleo: "",
+            sugerencias_comentarios: "",
+            aprendiz: id
+        }
+
+        
+          
+        );
+        console.log("este es el id",id)
+          
+      console.log("esta es la data",formData);
         const handleChange = (e) => {
           const { id, value } = e.target;
           setFormData({
@@ -65,16 +49,28 @@ const FormularioFinal = () => {
           });
         };
       
-        const handleSubmit = (e) => {
+       
+        const handleSubmit =  async (e) => {
           e.preventDefault();
-          // Aquí puedes manejar la lógica para enviar el formulario
-          console.log(formData);
-          // Mostrar ventana modal de éxito
-          Swal.fire({
-            icon: 'success',
-            title: '¡Éxito!',
-            text: 'Los datos se han guardado correctamente.',
-          });
+          try {
+            const response = await clienteAxios.post(`api/formulario-final/`, formData);
+            console.log(response.data);
+            
+            // Mostrar ventana modal de éxito
+            Swal.fire({
+              icon: 'success',
+              title: '¡Éxito!',
+              text: 'Los datos se han guardado correctamente.',
+            });
+          } catch (error) {
+            Swal.fire({
+              icon: 'error',
+              title: '¡Error!',
+              text: 'Error al enviar los datos.',
+            });
+            console.log(error.response ? error.response.data : error.message);
+          }
+
         };
       
   return (
@@ -89,13 +85,13 @@ const FormularioFinal = () => {
           <div>
             <label htmlFor="cabeza_familia">¿Es usted madre o padre cabeza de familia?:</label>
             <select 
-            id="cabeza_familia"
-            value={formData.cabeza_familia}
+            id="madre_cabeza_familia"
+            value={formData.madre_cabeza_familia}
             onChange={handleChange}
             >
-                <option>Seleccione una opción</option>
-                <option>Si</option>
-                <option>No</option>
+                <option value="">Seleccione una opción</option>
+                <option value="SI">Si</option>
+                <option value="NO">No</option>
             </select>
           </div>
           <div>
@@ -111,8 +107,8 @@ const FormularioFinal = () => {
             <label htmlFor="fecha_lectiva">Fecha en la que terminó la etapa lectiva:</label>
             <input
               type="date"
-              id="fecha_lectiva"
-              value={formData.fecha_lectiva}
+              id="fecha_fin_etapa_lectiva"
+              value={formData.fecha_fin_etapa_lectiva}
               onChange={handleChange}
             />
           </div>
@@ -120,8 +116,8 @@ const FormularioFinal = () => {
             <label htmlFor="cargo">Cargo y funciones realizadas:</label>
             <textarea
               type="text"
-              id="cargo"
-              value={formData.cargo}
+              id="cargo_funciones"
+              value={formData.cargo_funciones}
               onChange={handleChange}
             />
           </div>
@@ -129,41 +125,41 @@ const FormularioFinal = () => {
             <label htmlFor="fecha_productiva">Fecha en la que terminó o terminará la etapa productiva:</label>
             <input
               type="date"
-              id="fecha_productiva"
-              value={formData.fecha_productiva}
+              id="fecha_fin_etapa_productiva"
+              value={formData.fecha_fin_etapa_productiva}
               onChange={handleChange}
             />
           </div>
           <div>
             <label htmlFor="etapa_productiva">¿Durante la etapa productiva practicó lo aprendido en la formación?:</label>
             <select 
-            id="etapa_productiva" 
-            value={formData.etapa_productiva} 
+            id="practica_aprendido" 
+            value={formData.practica_aprendido} 
             onChange={handleChange}>
-                <option>Seleccione una opción</option>
-                <option>Totalmente</option>
-                <option>Parcialmente</option>
-                <option>Casi nada</option>
-                <option>Nada</option>
+                <option value="">Seleccione una opción</option>
+                <option value="Totalmente" >Totalmente</option>
+                <option value="Parcialmente">Parcialmente</option>
+                <option value="Casi nada">Casi nada</option>
+                <option value="Nada">Nada</option>
             </select>
           </div>
           <div>
             <label htmlFor="estudios_superiores">¿Tiene usted estudios superiores adicionales?:</label>
             <select
-            id="estudios_superiores"
-            value={formData.estudios_superiores}
+            id="estudios_superiores_adicionales"
+            value={formData.estudios_superiores_adicionales}
             onChange={handleChange}>
-                <option>Seleccione una opción</option>
-                <option>Si</option>
-                <option>No</option>
+                <option value="">Seleccione una opción</option>
+                <option value="SI">Si</option>
+                <option value="NO">No</option>
             </select>
           </div>
           <div>
             <label htmlFor="estudios_adicionales">¿Qué estudios tiene? (Si respondió "Si" a la pregunta anterior):</label>
             <input
               type="text"
-              id="estudios_adicionales"
-              value={formData.estudios_adicionales}
+              id="estudios"
+              value={formData.estudios}
               onChange={handleChange}
             />
           </div>
@@ -173,20 +169,20 @@ const FormularioFinal = () => {
             id="trabaja_actualmente"
             value={formData.trabaja_actualmente}
             onChange={handleChange}>
-                <option>Seleccione una opción</option>
-                <option>Si</option>
-                <option>No</option>
+                <option value="">Seleccione una opción</option>
+                <option value="SI">Si</option>
+                <option value="NO">No</option>
             </select>
           </div>
           <div>
           <label htmlFor="estado_empleo">¿Actualmente usted es?:</label>
             <select 
-            id="estado_empleo"
-            value={formData.estado_empleo}
+            id="estado_actual"
+            value={formData.estado_actual}
             onChange={handleChange}>
-                <option>Seleccione una opción</option>
-                <option>Empleado</option>
-                <option>Independiente</option>
+                <option value="">Seleccione una opción</option>
+                <option value="Empleado">Empleado</option>
+                <option value="Independiente">Independiente</option>
             </select>
           </div>
           <div>
@@ -202,17 +198,17 @@ const FormularioFinal = () => {
             <label htmlFor="empresa_actual">Nombre de la empresa donde labora:</label>
             <input
               type="text"
-              id="empresa_actual"
-              value={formData.empresa_actual}
+              id="empresa_labora"
+              value={formData.empresa_labora}
               onChange={handleChange}
             />
           </div>
           <div>
             <label htmlFor="tiempo_trabajo">Si es empleado ¿qué antiguedad tiene en su trabajo:</label>
             <input
-              type="text"
-              id="tiempo_trabajo"
-              value={formData.tiempo_trabajo}
+              type="number"
+              id="antiguedad_trabajo"
+              value={formData.antiguedad_trabajo}
               onChange={handleChange}
             />
           </div>
@@ -220,28 +216,28 @@ const FormularioFinal = () => {
             <label htmlFor="informacion_complementaria">¿En que área le gustaría recibir información complementaria?:</label>
             <input
               type="text"
-              id="informacion_complementaria"
-              value={formData.informacion_complementaria}
+              id="area_informacion_complementaria"
+              value={formData.area_informacion_complementaria}
               onChange={handleChange}
             />
           </div>
           <div>
           <label htmlFor="estudio_actual">¿Actualmente estudia?:</label>
             <select
-            id="estudio_actual"
-            value={formData.estudio_actual}
+            id="actualmente_estudia"
+            value={formData.actualmente_estudia}
             onChange={handleChange}>
-                <option>Seleccione una opción</option>
-                <option>Si</option>
-                <option>No</option>
+                <option value="">Seleccione una opción</option>
+                <option value="SI">Si</option>
+                <option value="NO">No</option>
             </select>
           </div>
           <div>
             <label htmlFor="estudios_actualmente">¿Qué se encuentra estudiando?:</label>
             <input
               type="text"
-              id="estudios_actualmente"
-              value={formData.estudios_actualmente}
+              id="estudia_que"
+              value={formData.estudia_que}
               onChange={handleChange}
             />
           </div>
@@ -249,31 +245,31 @@ const FormularioFinal = () => {
             <label htmlFor="universidad">Nombre de la institución o universidad :</label>
             <input
               type="text"
-              id="universidad"
-              value={formData.universidad}
+              id="institucion_universidad"
+              value={formData.institucion_universidad}
               onChange={handleChange}
             />
           </div>
           <div>
           <label htmlFor="certificacion">¿Requiere certificar sus competencias laborales?:</label>
             <select
-            id="certificacion"
-            value={formData.certificacion}
+            id="certificar_competencias_laborales"
+            value={formData.certificar_competencias_laborales}
             onChange={handleChange}>
-                <option>Seleccione una opción</option>
-                <option>Si</option>
-                <option>No</option>
+                <option value="">Seleccione una opción</option>
+                <option value="SI">Si</option>
+                <option value="NO">No</option>
             </select>
           </div>
           <div>
           <label htmlFor="servicio_nacional_empleo">¿Conoce los beneficios que ofrece el SENA a través del servicio nacional de empleo?:</label>
             <select
-            id="servicio_nacional_empleo"
-            value={formData.servicio_nacional_empleo}
+            id="conoce_beneficios_sena"
+            value={formData.conoce_beneficios_sena}
             onChange={handleChange}>
-                <option>Seleccione una opción</option>
-                <option>Si</option>
-                <option>No</option>
+                <option value="">Seleccione una opción</option>
+                <option value="SI">Si</option>
+                <option value="NO">No</option>
             </select>
           </div>
           <div>
@@ -282,38 +278,38 @@ const FormularioFinal = () => {
             id="idea_negocio"
             value={formData.idea_negocio}
             onChange={handleChange}>
-                <option>Seleccione una opción</option>
-                <option>Si</option>
-                <option>No</option>
+                <option value="">Seleccione una opción</option>
+                <option value="SI">Si</option>
+                <option value="NO">No</option>
             </select>
           </div><div>
           <label htmlFor="fondo_emprender">¿Conoce el servicio que presta el SENA a través del fondo emprender?:</label>
             <select
-            id="fondo_emprender"
-            value={formData.fondo_emprender}
+            id="conoce_servicio_fondo_emprender"
+            value={formData.conoce_servicio_fondo_emprender}
             onChange={handleChange}>
-                <option>Seleccione una opción</option>
-                <option>Si</option>
-                <option>No</option>
+                <option value="">Seleccione una opción</option>
+                <option value="SI">Si</option>
+                <option value="NO">No</option>
             </select>
           </div>
           <div>
           <label htmlFor="empleo">¿En la actualidad necesita empleo?:</label>
             <select 
-            id="empleo"
-            value={formData.empleo}
+            id="necesita_empleo"
+            value={formData.necesita_empleo}
             onChange={handleChange}>
-                <option>Seleccione una opción</option>
-                <option>Si</option>
-                <option>No</option>
+                <option value="">Seleccione una opción</option>
+                <option value="SI">Si</option>
+                <option value="NO">No</option>
             </select>
           </div>
           <div>
             <label htmlFor="sugerencias">Sugerencias o comentarios:</label>
             <textarea
               type="text"
-              id="sugerencias"
-              value={formData.sugerencias}
+              id="sugerencias_comentarios"
+              value={formData.sugerencias_comentarios}
               onChange={handleChange}
             />
           </div>

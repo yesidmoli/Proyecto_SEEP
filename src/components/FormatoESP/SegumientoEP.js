@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useFormContext } from './FormProvide';
 function SeguimientoEP({ goToNextComponent, data }) {
 
+    const rol = localStorage.getItem('rol')
 
 
     const [factoresActitudinales, setFactoresActitudinales] = useState([
@@ -203,7 +204,7 @@ function SeguimientoEP({ goToNextComponent, data }) {
                         <tbody>
                             <tr>
                                 <td>
-                                    <select value={formData.tipo_informe} id="tipo-informe" name="tipo-informe" required onChange={(e) => handleChange('tipo_informe', e.target.value)}>
+                                    <select disabled={rol==="aprendiz"} value={formData.tipo_informe} id="tipo-informe" name="tipo-informe" required onChange={(e) => handleChange('tipo_informe', e.target.value)}>
                                         <option value="seleccionar">seleccionar</option>
                                         <option value="Parcial">Parcial</option>
                                         <option value="Final">Final</option>
@@ -211,7 +212,7 @@ function SeguimientoEP({ goToNextComponent, data }) {
                                 </td>
                                 <td>
                                     <th>Inicio
-                                        <input value={formData.periodo_evaluado_inicio} type='date' onChange={(e) => handleChange('periodo_evaluado_inicio', e.target.value)}></input>
+                                        <input  disabled={rol==="aprendiz"} value={formData.periodo_evaluado_inicio} type='date' onChange={(e) => handleChange('periodo_evaluado_inicio', e.target.value)}></input>
                                     </th>
                                     <th>Finalización <input value={formData.periodo_evaluado_final} type='date' onChange={(e) => handleChange('periodo_evaluado_final', e.target.value)}></input></th>
                                 </td>
@@ -236,6 +237,7 @@ function SeguimientoEP({ goToNextComponent, data }) {
                                     <td>{factor.descripcion}</td>
                                     <td>
                                         <input
+                                            disabled={rol==="aprendiz"}
                                             className='input-planeacion'
                                             type="checkbox"
                                             id={`satisfactorio_actitudinal_${index}`}
@@ -246,6 +248,7 @@ function SeguimientoEP({ goToNextComponent, data }) {
                                     </td>
                                     <td>
                                         <input
+                                            disabled={rol==="aprendiz"}
                                             className='input-planeacion'
                                             type="text"
                                             id={`observacion_actitudinal_${index}`}
@@ -276,6 +279,7 @@ function SeguimientoEP({ goToNextComponent, data }) {
                                     <td>{factor.descripcion}</td>
                                     <td>
                                         <input
+                                            disabled={rol==="aprendiz"}
                                             className='input-planeacion'
                                             type="checkbox"
                                             id={`satisfactorio_tecnico_${index}`}
@@ -286,6 +290,7 @@ function SeguimientoEP({ goToNextComponent, data }) {
                                     </td>
                                     <td>
                                         <input
+                                            disabled={rol==="aprendiz"}
                                             className='input-planeacion'
                                             type="text"
                                             id={`observacion_tecnico_${index}`}

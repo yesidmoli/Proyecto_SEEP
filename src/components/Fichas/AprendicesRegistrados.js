@@ -2,12 +2,20 @@ import React, { useState, useEffect } from "react";
 import clienteAxios from "../../config/axios";
 import FormularioInicial from "./FormularioInicial";
 import Swal from "sweetalert2";
-
+import Header from "../layout/Header";
+import MainSection from "../layout/MainSection";
 import * as XLSX from 'xlsx';
+import atras from '../../img/atras.png'
+import { Link } from "react-router-dom";
+import ListaAprendices from "./ListaAprendices";
 
 const AprendicesRegistrados = () => {
   const [aprendices, setAprendices] = useState([]);
+  console.log("estos son los aprendicesssssssssss", aprendices)
   const [formularioAprendiz, setFormularioAprendiz] = useState(false);
+
+const [busqueda, setBusqueda] = useState("");
+
   const editarAprendiz = (id) => {
     const aprendizEditar = listaAprendices.find((f) => f.id === id);
     Swal.fire({
@@ -100,7 +108,7 @@ const AprendicesRegistrados = () => {
         const telefono = Swal.getPopup().querySelector('#telefono').value;
         const direccion = Swal.getPopup().querySelector('#direccion').value;
 
-        
+
         const aprendizEditado = {
           nombres: nombres,
           apellidos: apellidos,
@@ -121,7 +129,7 @@ const AprendicesRegistrados = () => {
           correo_secundario: correoSecundario,
           finalizacion_etapa_lectiva: finalizacionLectiva,
           estado_aprobacion: estadoAprobacion,
-          empresa:{
+          empresa: {
             nit: nit,
             razon_social: razonSocial,
             nombre_jefe_inmediato: nombreJefeInmediato,
@@ -136,7 +144,7 @@ const AprendicesRegistrados = () => {
         setAprendices(consultarAprendiz.data);
       }
     });
-    
+
   };
   const eliminarAprendiz = async (id) => {
     try {
@@ -151,15 +159,15 @@ const AprendicesRegistrados = () => {
         confirmButtonText: 'Sí, eliminar',
         cancelButtonText: 'Cancelar',
       });
-  
+
       // Si el usuario confirma la eliminación, proceder con la solicitud de eliminación
       if (confirmacion.isConfirmed) {
         await clienteAxios.delete(`/api/aprendices/${id}/`);
-  
+
         // Actualizar la lista de fichas después de eliminar
         const consultarAprendiz = await clienteAxios.get('api/aprendices/');
-        setAprendices(consultarAprendiz.data);
-  
+        setAprendices(consultarAprendiz.data.results);
+
         // Mostrar mensaje de éxito
         Swal.fire('¡Éxito!', 'El aprendiz se eliminó correctamente.', 'success');
       }
@@ -172,7 +180,8 @@ const AprendicesRegistrados = () => {
     const obtenerAprendices = async () => {
       try {
         const consultarApi = await clienteAxios.get("api/aprendices/");
-        setAprendices(consultarApi.data);
+        setAprendices(consultarApi.data.results);
+        console.log("estos son los aprendices", consultarApi.data)
       } catch (error) {
         console.error("Error al obtener los aprendices:", error);
       }
@@ -184,7 +193,7 @@ const AprendicesRegistrados = () => {
     ? aprendices.results
     : [];
 
-  
+
 
   const handleFormularioAprendiz = () => {
     setFormularioAprendiz(true);
@@ -213,7 +222,7 @@ const AprendicesRegistrados = () => {
       "Finalización etapa lectiva",
       "Estado de aprobación"
     ];
-    const NombresColumnas = aprendices.results.map(aprendiz => ({
+    const NombresColumnas = aprendices.map(aprendiz => ({
       "Visitas": aprendiz.visitas,
       "Empresa": aprendiz.empresa.razon_social,
       "Ficha": aprendiz.ficha.numero_ficha,
@@ -247,52 +256,94 @@ const AprendicesRegistrados = () => {
   if (formularioAprendiz) {
     return <FormularioInicial />;
   }
+
+  const handleBuscar = (e) => {
+    setBusqueda(e.target.value);
+  };
+
+  const aprendicesFiltrados = aprendices.filter((aprendiz) => {
+    // Filtra las fichas cuyo número de ficha o nombre del programa coincidan con el término de búsqueda
+    return aprendiz.numero_documento.includes(busqueda) || aprendiz.nombres.toLowerCase().includes(busqueda.toLowerCase())  || aprendiz.apellidos.toLowerCase().includes(busqueda.toLowerCase());;
+  });
   return (
-    <div className="container-reg">
-      <header id="header">Lista de aprendices registrados</header>
-      <div className="tabla-uno">
-        <h1>Aprendices Registrados</h1>
-        <table className="tabla-reg">
-          <thead>
-            <tr>
-              <th>Nombres</th>
-              <th>Apellidos</th>
-              <th>Documento</th>
-              <th>Numero de ficha</th>
-              <th>Opciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {listaAprendices.map((aprendiz) => (
-              <tr key={aprendiz.id}>
-                <td>{aprendiz.nombres}</td>
-                <td>{aprendiz.apellidos}</td>
-                <td>{aprendiz.numero_documento}</td>
-                <td>{aprendiz.ficha.numero_ficha}</td>
-                <td className="buttons-opciones">
-                  <button id="editar-aprendiz" onClick={() => editarAprendiz(aprendiz.id)}>
-                    Editar
-                  </button>
-                  <button id="eliminar-aprendiz" onClick={() => eliminarAprendiz(aprendiz.id)}>
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-            ))}
-            <tr>
-              <td colSpan="5">
-                <div className="btn-regr">
-                <button id="regresar" onClick={handleFormularioAprendiz}>
+    <>
+      <Header />
+      <MainSection />
+      <div className="container  container-reg">
+
+        <div style={{ "cursor": "pointer" }} aria-label="icon" className=" btn-atras" onClick={handleFormularioAprendiz}>
+          <img src={atras}></img>
+
+          <b>Regresar</b>
+        </div>
+
+        <div className="tabla-uno">
+          {/* <h1 style={{ "textAlign": "center", "borderBottom": "1px solid #ccc" }}>Aprendices Registrados</h1> */}
+          {/* <div className="btn-regr">
+             <button id="regresar" onClick={handleFormularioAprendiz}>
                   Regresar
                 </button>
-                <button className='descargar-excel' onClick={descargarExcel}>Reporte de aprendices</button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+          
+          </div> */}
+          <div className="header-fichas header-fichas__aprendiz">
+
+            <input
+              type="text"
+              value={busqueda}
+              onChange={handleBuscar}
+              placeholder="Buscar aprendiz por número documento o nombre"
+            />
+            <div>
+            <button className='descargar-excel' onClick={descargarExcel}>Reporte de aprendices</button>
+
+              <button className='btn-add-ficha' onClick={handleFormularioAprendiz} > + Añadir Aprendiz</button>
+            </div>
+
+          </div>
+          <div className="tabla-scroll tabla-fichas">
+            <table className="tabla-reg">
+              <thead>
+                <tr>
+                  <th>Nombres</th>
+                  <th>Apellidos</th>
+                  <th>Documento</th>
+                  <th>Numero de ficha</th>
+                  <th>Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {aprendicesFiltrados.map((aprendiz) => (
+                  <tr key={aprendiz.id}>
+                    <td>{aprendiz.nombres}</td>
+                    <td>{aprendiz.apellidos}</td>
+                    <td>{aprendiz.numero_documento}</td>
+                    <td>{aprendiz.ficha.numero_ficha}</td>
+                    <td className="buttons-opciones">
+                      <button id="editar-aprendiz" onClick={() => editarAprendiz(aprendiz.id)}>
+                        Editar
+                      </button>
+                      <button id="eliminar-aprendiz" onClick={() => eliminarAprendiz(aprendiz.id)}>
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                <tr>
+                  <td colSpan="5">
+                    <div className="btn-regr">
+                      {/* <button id="regresar" onClick={handleFormularioAprendiz}>
+                  Regresar
+                </button> */}
+                      {/* <button className='descargar-excel' onClick={descargarExcel}>Reporte de aprendices</button> */}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 export default AprendicesRegistrados;

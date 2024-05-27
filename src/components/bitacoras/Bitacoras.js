@@ -8,9 +8,13 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import "../../css/bitacoras.css";
 import clienteAxios from "../../config/axios";
 import { useAuth } from "../context/AuthContext";
+import Toast from "../layout/Toast";
+
+
+
 const Bitacoras = () => {
 
-  const[aprendices, dataAprendices] = useState([])
+  const [aprendices, dataAprendices] = useState([])
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const token = useAuth()
@@ -36,70 +40,102 @@ const Bitacoras = () => {
     setSearchValue(name);
 
   };
+  // Obtener el elemento del toast y el botón de cerrar
+  const toast = document.querySelector('.toast');
+  const closeButton = toast ? toast.querySelector('.btn-close') : null;
+
+  // Función para mostrar el toast
+  const showToast = () => {
+    if (toast) {
+      toast.classList.add('show');
+    }
+  };
+
+  // Función para ocultar el toast
+  const hideToast = () => {
+    if (toast) {
+      toast.classList.remove('show');
+    }
+  };
+
+  // Agregar evento de clic al botón de cerrar
+  if (closeButton) {
+    closeButton.addEventListener('click', hideToast);
+  }
+
+  // Llamar a la función para mostrar el toast
+  showToast();
+
+
+
   return (
-    <div className="contenedor-main">
-        <Fragment>
-          <Apps />
-            <Header />
+    
+      <Fragment>
+        <Apps />
+        <Header />
+        <MainSection />
         <section className="container conten-documentos">
-                <MainSection />
-                <div className="react-search-box ">
-                  <ReactSearchBox
-                  placeholder="Buscar Aprendiz..."
-                  value={searchValue}
-                  onChange={handleSearch}
-                  data={filteredData}
-                  fuseConfigs={{ threshold: 0.2 }}
-                  inputHeight="3rem"
-                  iconBoxSize={"5rem"}
-                  inputFontSize="1.3rem"
-                  />
-                </div>
 
-    <ul className="list-aprendices">
-      <h1>Listado de aprendices</h1>
-      {searchValue ? (
-    // Si hay un valor de búsqueda, aplica el filtro a deudas
-    aprendices.filter((item) =>
-        item.nombres.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.apellidos.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.ficha.numero_ficha.includes(searchValue.toLowerCase()) ||
-        item.numero_documento.includes(searchValue.toLowerCase())
-      )
-      .map((filteredItem) => (
-
-        <Link to={`/bitacora-aprendiz/${filteredItem.id}`} className="item-link">
-        <li className="item-aprendiz" key={filteredItem.key}>
-          <i className="bi bi-file-earmark-pdf-fill"></i>
-          <div className="datos-aprendiz-doc">
-            <h5>{filteredItem.nombres} {filteredItem.apellidos}</h5>
-            <h6> {filteredItem.tipo_documento}:{filteredItem.numero_documento}</h6>
-            <h6>{filteredItem.ficha.numero_ficha}</h6>
+          <div className="react-search-box ">
+            <ReactSearchBox
+              placeholder="Buscar Aprendiz..."
+              value={searchValue}
+              onChange={handleSearch}
+              data={filteredData}
+              fuseConfigs={{ threshold: 0.2 }}
+              inputHeight="3rem"
+              iconBoxSize={"5rem"}
+              inputFontSize="1.3rem"
+            />
           </div>
-        </li>
-        </Link>
-        
-      ))
-  ) : (
-    // Si no hay valor de búsqueda, muestra todas las deudas
-    aprendices.map((item) => (
-        <Link to={`/bitacora-aprendiz/${item.id}`} className="item-link">
-      <li className="item-aprendiz" key={item.key}> 
-      <i className="bi bi-file-earmark-pdf-fill"></i>
-      <div className="datos-aprendiz-doc">
-        <h5>{item.nombres} {item.apellidos}</h5>
-        <h6>{item.tipo_documento}: {item.numero_documento}</h6>
-        <h6> Ficha: {item.ficha.numero_ficha}</h6>
-      </div>
-      
-      </li>
-      </Link>
-    ))
-  )}
-      </ul>
-            </section>
-        </Fragment>
-    </div>
+          <Toast mensaje={"Por favor, selecciona el aprendiz para ver sus bitácoras."}/>
+         
+          <ul className="list-aprendices">
+
+
+            {/* <h1>Listado de aprendices</h1> */}
+            {searchValue ? (
+              // Si hay un valor de búsqueda, aplica el filtro a deudas
+              aprendices.filter((item) =>
+                item.nombres.toLowerCase().includes(searchValue.toLowerCase()) ||
+                item.apellidos.toLowerCase().includes(searchValue.toLowerCase()) ||
+                item.ficha.numero_ficha.includes(searchValue.toLowerCase()) ||
+                item.numero_documento.includes(searchValue.toLowerCase())
+              )
+                .map((filteredItem) => (
+
+                  <Link to={`/bitacora-aprendiz/${filteredItem.id}`} className="item-link">
+                    <li className="item-aprendiz" key={filteredItem.key}>
+                      <i className="bi bi-file-earmark-pdf-fill"></i>
+                      <div className="datos-aprendiz-doc">
+                        <h5>{filteredItem.nombres} {filteredItem.apellidos}</h5>
+                        <h6> {filteredItem.tipo_documento}:{filteredItem.numero_documento}</h6>
+                        <h6>{filteredItem.ficha.numero_ficha}</h6>
+                      </div>
+                    </li>
+                  </Link>
+
+                ))
+            ) : (
+              // Si no hay valor de búsqueda, muestra todas las deudas
+              aprendices.map((item) => (
+                <Link to={`/bitacora-aprendiz/${item.id}`} className="item-link">
+                  <li className="item-aprendiz" key={item.key}>
+                    <i className="bi bi-file-earmark-pdf-fill"></i>
+                    <div className="datos-aprendiz-doc">
+                      <h5>{item.nombres} {item.apellidos}</h5>
+                      <h6>{item.tipo_documento}: {item.numero_documento}</h6>
+                      <h6> Ficha: {item.ficha.numero_ficha}</h6>
+                    </div>
+
+                  </li>
+                </Link>
+              ))
+            )}
+          </ul>
+        </section>
+      </Fragment>
+ 
   );
 };
 

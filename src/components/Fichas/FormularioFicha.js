@@ -16,7 +16,7 @@ import Apps from '../layout/menu/App';
 import Spinner from 'react-bootstrap/Spinner';
 import { useAuth } from '../context/AuthContext';
 
-const FormularioFicha = ({history}) => {
+const FormularioFicha = ({ history }) => {
 
   const token = localStorage.getItem('token')
   const [enviandoDatos, setEnviandoDatos] = useState(false);
@@ -35,7 +35,7 @@ const FormularioFicha = ({history}) => {
   const [listaFichas, setListaFichas] = useState(false);
   const [registroAprendices, setRegistroAprendices] = useState(false);
   const [aprendiz, setAprendiz] = useState(false);
- 
+
 
   useEffect(() => {
     // Lógica para obtener las fichas existentes 
@@ -43,9 +43,9 @@ const FormularioFicha = ({history}) => {
       try {
         const consultarFicha = await clienteAxios.get('/api/fichas/', {
           headers: {
-              Authorization: `Token ${token}`,
+            Authorization: `Token ${token}`,
           }
-      });
+        });
         setFichas(consultarFicha.data);
       } catch (error) {
         console.error('Error al obtener las fichas:', error);
@@ -53,7 +53,7 @@ const FormularioFicha = ({history}) => {
     };
 
     obtenerFichas();
-  }, []); 
+  }, []);
 
   const actualizarState = (e) => {
     setFicha({
@@ -71,33 +71,33 @@ const FormularioFicha = ({history}) => {
         // Actualizar ficha existente
         await clienteAxios.put(`/fichas/${idEditar}`, ficha, {
           headers: {
-              Authorization: `Token ${token}`,
+            Authorization: `Token ${token}`,
           }
-      });
+        });
         Swal.fire('¡Éxito!', 'La ficha se actualizó correctamente.', 'success');
         setEnviandoDatos(false);
-        
+
       } else {
         // Crear nueva ficha
 
         await clienteAxios.post('/api/fichas/', ficha, {
           headers: {
-              Authorization: `Token ${token}`,
+            Authorization: `Token ${token}`,
           }
-      });
+        });
         Swal.fire('¡Éxito!', 'La ficha se registró correctamente.', 'success');
         // Redirigir a la sección de listado de fichas
         history.push('/#listado-fichas');
 
-        
+
       }
 
       // Actualizar la lista de fichas
-      const consultarFicha= await clienteAxios.get('api/fichas/', {
+      const consultarFicha = await clienteAxios.get('api/fichas/', {
         headers: {
-            Authorization: `Token ${token}`,
+          Authorization: `Token ${token}`,
         }
-    });
+      });
       setFichas(consultarFicha.data);
 
       // Limpiar el formulario y restablecer el estado
@@ -111,65 +111,22 @@ const FormularioFicha = ({history}) => {
         nivel_formacion: 'El nivel de formación seleccionado no es válido.',
         nombre_programa: 'El nombre del programa no puede estar en blanco.',
         numero_ficha: 'El número de ficha no puede estar en blanco.'
-    };
-    
-    const erroresMostrados = Object.keys(error.response.data).map(key => {
+      };
+
+      const erroresMostrados = Object.keys(error.response.data).map(key => {
         return errores[key] || `Error en ${key}: ${error.response.data[key].join(', ')}`;
-    }).join(' - '); // Separador de guión
-    
-    Swal.fire('Error', `Hubo un error al procesar la solicitud: ${erroresMostrados}`, 'error');
-    
+      }).join(' - '); // Separador de guión
+
+      Swal.fire('Error', `Hubo un error al procesar la solicitud: ${erroresMostrados}`, 'error');
+
       setEnviandoDatos(false);
     }
   };
-  
-  
 
-  const editarFicha = (id) => {
-    // Buscar la ficha por ID
-    const fichaEditar = fichas.find((f) => f._id === id);
 
-    // Establecer el estado con los datos de la ficha a editar
-    setFicha(fichaEditar);
-    setModoEdicion(true);
-    setIdEditar(id);
-  };
 
-  const eliminarFicha = async (id) => {
-    try {
-      // Mostrar ventana de confirmación
-      const confirmacion = await Swal.fire({
-        title: '¿Estás seguro?',
-        text: 'La ficha será eliminada permanentemente.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sí, eliminar',
-        cancelButtonText: 'Cancelar',
-      });
-  
-      // Si el usuario confirma la eliminación, proceder con la solicitud de eliminación
-      if (confirmacion.isConfirmed) {
-        await clienteAxios.delete(`/fichas/${id}`);
-  
-        // Actualizar la lista de fichas después de eliminar
-        const consultarFicha = await clienteAxios.get('api/fichas/', {
-          headers: {
-              Authorization: `Token ${token}`,
-          }
-      });
-        setFichas(consultarFicha.data);
-  
-        // Mostrar mensaje de éxito
-        Swal.fire('¡Éxito!', 'La ficha se eliminó correctamente.', 'success');
-      }
-    } catch (error) {
-      console.error('Error al eliminar la ficha:', error);
-      Swal.fire('Error', 'Hubo un error al procesar la solicitud.', 'error');
-    }
-  };
 
+  
   // const agregarAprendiz = () => {
   //   //Formulario de registro aprendiz
   //   Swal.fire({
@@ -262,8 +219,8 @@ const FormularioFicha = ({history}) => {
   //       const correo = Swal.getPopup().querySelector('#correo').value;
   //       const telefono = Swal.getPopup().querySelector('#telefono').value;
   //       const direccion = Swal.getPopup().querySelector('#direccion').value;
-        
-  
+
+
   //       // Crea el objeto del nuevo aprendiz
   //       const nuevoAprendiz = {
   //         nombres: nombres,
@@ -294,7 +251,7 @@ const FormularioFicha = ({history}) => {
   //           direccion: direccion,
   //         }
   //       };
-  
+
   //       // Envía el objeto a tu API para guardar el nuevo aprendiz
   //       try {
   //         const response = await clienteAxios.post('/api/aprendices/', nuevoAprendiz);
@@ -307,7 +264,7 @@ const FormularioFicha = ({history}) => {
   //     }
   //   });
   // };
-  
+
   const handleCargarFichas = () => {
     setListaFichas(true);
   }
@@ -320,7 +277,7 @@ const FormularioFicha = ({history}) => {
     setRegistroAprendices(true);
   }
 
-  
+
 
   if (registroAprendices) {
     // Si mostrarDocumentos es verdadero, renderiza el componente VisualizarDocumentos
@@ -330,75 +287,92 @@ const FormularioFicha = ({history}) => {
   return (
     <Fragment>
 
-     
+
       <Header />
-      <MainSection />
+     
       <Apps />
- 
-    <div className='container cont-fichas cont-bitacoras'>
 
-    <div className='btn-fichas'>
+      <div className='container cont-fichas cont-bitacoras'>
+      <MainSection />
+
+        <div className='btn-fichas'>
 
 
-    
-     <Link to="/nuevo-aprendiz"> <button id='registrar-aprendiz'>Registrar Aprendiz</button></Link>
-    
-      <button className='listado-fichas' onClick={handleCargarFichas} >Listado de Fichas</button>
 
-        
+          <Link to="/nuevo-aprendiz"> <button id='registrar-aprendiz'>Registrar Aprendiz</button></Link>
+
+          <button className='listado-fichas' onClick={handleCargarFichas} >Listado de Fichas</button>
+
+
         </div>
 
-        <div className='container-fichas'> 
-      <h2>Añadir Ficha</h2>
+        <div className='container-fichas'>
+          <h2>Añadir Ficha</h2>
 
-      
-      <form onSubmit={enviarDatos}>
-        <label>Número de Ficha <p className="rojo-label">*</p></label>
-        <input
-          type="text"
-          name="numero_ficha"
-          value={ficha.numero_ficha}
-          onChange={actualizarState}
-        />
 
-        <label>Nombre del Programa <p className="rojo-label">*</p></label>
-        <input
-          type="text"
-          name="nombre_programa"
-          value={ficha.nombre_programa}
-          onChange={actualizarState}
-        />
+          <form onSubmit={enviarDatos}>
+            <label>Número de Ficha <p className="rojo-label">*</p></label>
+            <input
+              type="text"
+              name="numero_ficha"
+              value={ficha.numero_ficha}
+              onChange={actualizarState}
+            />
 
-        <label>Nivel de Formación <p className="rojo-label">*</p></label>
-        <input
-          type="text"
-          name="nivel_formacion"
-          value={ficha.nivel_formacion}
-          onChange={actualizarState}
-        />
+            <label>Nombre del Programa <p className="rojo-label">*</p></label>
+            <select  name="nombre_programa" value={ficha.nombre_programa} onChange={actualizarState}>
+              <option value="" disabled>Seleccione el programa</option>
+              <option value="Análisis y Desarrollo de Software">Análisis y Desarrollo de Software</option>
+              <option value="Técnico en Sistemas">Técnico en Sistemas</option>
+            </select>
+            {/* <input
+              type="text"
+              name="nombre_programa"
+            
+              onChange={actualizarState}
+            /> */}
 
-        <label>Horario de Formación <p className="rojo-label">*</p></label>
-        <input
-          type="text"
-          name="horario_formacion"
-          value={ficha.horario_formacion}
-          onChange={actualizarState}
-        />
+            <label>Nivel de Formación <p className="rojo-label">*</p></label>
+            <select name="nivel_formacion" value={ficha.nivel_formacion} onChange={actualizarState}>
+              <option value={""} selected>Seleccione el nivel</option>
+              <option value="Tecnico">Técnico</option>
+              <option value="Tecnologo">Tecnólogo</option>
+            </select> 
+            {/* <input
+              type="text"
+              name="nivel_formacion"
+              value={ficha.nivel_formacion}
+              onChange={actualizarState}
+            /> */}
 
-        <div className='container-btn'>
-        <button className='registrar-ficha' type="submit">{enviandoDatos ? (
-                      <>
-                        <Spinner animation="grow" size="sm" /> 
-                         Enviando...
-                      </>
-                    ) : (
-                      "Registrar"
-                    )}</button>
+            <label>Horario de Formación <p className="rojo-label">*</p></label>
+            <select name='horario_formacion' value={ficha.horario_formacion} onChange={actualizarState}>
+              <option value="" select>Seleccione el horario</option>
+              <option value={"Diurna"}>Diurna</option>
+              <option value="Mixta">Mixta</option>
+              {/* <option value={"Nocturna"}>Nocturna</option> */}
+            </select>
+            {/* <input
+              type="text"
+              name="horario_formacion"
+              value={ficha.horario_formacion}
+              onChange={actualizarState}
+            /> */}
+
+            <div className='container-btn'>
+              <button className='registrar-ficha' type="submit">{enviandoDatos ? (
+                <>
+                  <Spinner animation="grow" size="sm" />
+                  Enviando...
+                </>
+              ) : (
+                "Registrar"
+              )}</button>
+            </div>
+
+          </form>
         </div>
-       
-      </form>
-    </div>
-    </div>
+      </div>
     </Fragment>
   );
 };

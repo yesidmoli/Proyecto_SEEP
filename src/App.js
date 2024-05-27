@@ -56,26 +56,26 @@ function App() {
           <Switch>
             <PrivateRoute exact path="/" component={Inicio} />
             <Route exact path= "/login" component={Login}  />
-            <Route exact path= "/calendario" component={CalendarPage}  />
+            <PrivateRoute exact path= "/calendario" component={CalendarPage}  />
             {/* <Route path="/calendar" element={<CalendarPage />} /> */}
             <PrivateRoute exact path="/cuentas" component={Cuentas} />
             {/* <Route exact path="/calendario" component={Calendario} /> */}
             <PrivateRoute exact path="/fichas" component={FormularioFicha} /> 
             <PrivateRoute exact path="/nuevo-aprendiz" component={FormularioInicial} /> 
-            <Route exact path="/lista-aprendices/:numero_ficha/:programa" component={ListaAprendices} /> 
-            <Route exact path="/aprendiz/:id/" component={InfoAprediz} />
-            <Route exact path="/perfil-aprendiz" component={PerfilAprendiz} />
-            <Route exact path="/documentos-aprendiz/:id" component={Documentos} />
+            <PrivateRoute exact path="/lista-aprendices/:numero_ficha/:programa" component={ListaAprendices} /> 
+            <PrivateRoute exact path="/aprendiz/:id/" component={InfoAprediz} />
+            <PrivateRoute exact path="/perfil-aprendiz" component={PerfilAprendiz} />
+            <PrivateRoute exact path="/documentos-aprendiz/:id" component={Documentos} />
             <PrivateRoute exact path="/documentos" component={DocumentosAprendices} />
           
             <Route exact path="/inicio-etapa-practica" component={FormularioAprendiz} />
-            <Route exact path="/bitacoras" component={Bitacoras} />
-            <Route exact path="/formato-etapa-productiva/:id/:componente" component={FormartoEtapaProductiva} />
-            <Route exact path="/formato-etapa-productiva-pdf/:id" component={FormatoE} />
+            <PrivateRoute exact path="/bitacoras" component={Bitacoras} />
+            <PrivateRoute exact path="/formato-etapa-productiva/:id/:componente" component={FormartoEtapaProductiva} />
+            <PrivateRoute exact path="/formato-etapa-productiva-pdf/:id" component={FormatoE} />
 
-            <Route exact path="/formulario-final" component={FormularioFinal}/>
+            <Route exact path="/formulario-final/:id" component={FormularioFinal}/>
             
-            <Route exact path="/bitacora-aprendiz/:id" component={AprendizBitacoraIndividual} />
+            <PrivateRoute exact path="/bitacora-aprendiz/:id" component={AprendizBitacoraIndividual} />
             <Route exact path="/password/reset/" component={PasswordResetForm} />
             <Route exact path="/password/reset/confirm/:uid/:token" component={PasswordResetConfirmForm} />
         
