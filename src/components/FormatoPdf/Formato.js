@@ -34,6 +34,8 @@ const FormatoE = () => {
     };
 
 
+  
+
     // const generatePDF = async () => {
     //     const images = {};
     //     for (const key in imageRefs) {
@@ -65,15 +67,19 @@ const FormatoE = () => {
                             const canvas = await html2canvas(ref.current, {
                                 scale: 2, // Duplica la resolución de la imagen
                                 useCORS: true, // Habilita el uso de CORS para mejorar la calidad de las imágenes externas
-                                logging: true // Habilita el registro para obtener información de depuración en la consola
+                                logging: true,
+                                 // Habilita el registro para obtener información de depuración en la consola
                             });
                             const image = { key, dataURL: canvas.toDataURL('image/png') };
                             images.push(image);
+                            console.log('Ancho:', ref.current.offsetWidth, 'Altura:', ref.current.offsetHeight, 'Contenido:', ref.current.textContent.trim());
+
                         }
                     }
                 }
             }
             setImagePages(images);
+            
         } catch (error) {
             console.error('Error al generar el PDF:', error);
         };
@@ -122,7 +128,7 @@ const FormatoE = () => {
                 <Page key={index} size="A4" style={styles.page}>
                     <HeaderPDF />
                     <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-                        <Image src={image.dataURL} style={{ width: '100%', border: '1px solid black' }} />
+                        <Image src={image.dataURL} style={{ width: '75%', border: '1px solid black' }} />
                     </View>
                     <Footer />
                 </Page>
@@ -587,6 +593,11 @@ const FormatoE = () => {
         fetchData();
     }, [id]); //
 
+    function Hola(){
+        
+       
+    }
+
     return (
         <Fragment >
             <Header />
@@ -599,6 +610,7 @@ const FormatoE = () => {
                 </Link>
                 <MainSection />
 
+             
                 <div className='btns-descargar-pdf' >
                     <button className='btn btn-pdf-formato' onClick={generatePDF}>Generar PDF</button>
 
@@ -612,8 +624,8 @@ const FormatoE = () => {
                     </PDFDownloadLink>
                 </div>
 
-                <section className='section-pdf'>
-                    <div className="imagen-planeacion">
+                <section className='section-pdf' >
+                    <div className="imagen-planeacion" >
 
                         <div className='img-header'>
                             <img src={logo}></img>
