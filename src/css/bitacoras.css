@@ -157,6 +157,9 @@ body {
   margin-top: 1rem;
 }
 @media only screen and (max-width: 768px) {
+  .cont-bitacoras{
+    gap: 0px;
+  }
   .btn-bitacoras{
     margin: 0px;
     width: 100%;
@@ -170,6 +173,10 @@ body {
   }
   .toast{
     width: 100% !important;
+  }
+  .toast-body{
+    font-size: 13px;
+
   }
   .tabla-fichas thead th{
     

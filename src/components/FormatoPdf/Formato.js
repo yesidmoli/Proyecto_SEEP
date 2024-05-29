@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect, useState, useRef } from 'react';
 import './style.css';
 import siga from './siga.png'
+import imgPdf from '../FormatoPdf/pdf-computador.png'
+
 import { useFormContext } from '../FormatoESP/FormProvide';
 import { PDFDownloadLink, Document, Page, Image, View, Text } from '@react-pdf/renderer';
 import html2canvas from 'html2canvas';
@@ -13,6 +15,8 @@ import MainSection from '../layout/MainSection';
 import atras from '../../img/atras.png'
 import { Link, useHistory } from 'react-router-dom';
 import './styleTablas.css'
+
+import Apps from '../layout/menu/App';
 const FormatoE = () => {
 
     const history = useHistory();
@@ -49,31 +53,32 @@ const FormatoE = () => {
 
 
     const generatePDF = async () => {
-
-
         try {
             const images = [];
             for (const key in imageRefs) {
                 if (Object.hasOwnProperty.call(imageRefs, key)) {
                     const ref = imageRefs[key];
                     if (ref.current) {
-                        // Ajusta las opciones de configuración de html2canvas para mejorar la calidad
-                        const canvas = await html2canvas(ref.current, {
-                            scale: 2, // Duplica la resolución de la imagen
-                            useCORS: true, // Habilita el uso de CORS para mejorar la calidad de las imágenes externas
-                            logging: true // Habilita el registro para obtener información de depuración en la consola
-                        });
-                        const image = { key, dataURL: canvas.toDataURL('image/png') };
-                        images.push(image);
+                        // Verifica si el elemento es visible y tiene contenido
+                        if (ref.current.offsetWidth > 0 && ref.current.offsetHeight > 0 && ref.current.textContent.trim().length > 0) {
+                            // Ajusta las opciones de configuración de html2canvas para mejorar la calidad
+                            const canvas = await html2canvas(ref.current, {
+                                scale: 2, // Duplica la resolución de la imagen
+                                useCORS: true, // Habilita el uso de CORS para mejorar la calidad de las imágenes externas
+                                logging: true // Habilita el registro para obtener información de depuración en la consola
+                            });
+                            const image = { key, dataURL: canvas.toDataURL('image/png') };
+                            images.push(image);
+                        }
                     }
                 }
             }
             setImagePages(images);
         } catch (error) {
             console.error('Error al generar el PDF:', error);
-
         };
     }
+
 
     const styles = {
         page: {
@@ -149,11 +154,11 @@ const FormatoE = () => {
                         </li>
                         <li>
                             <label for="programa-formacion">Programa de Formación:</label>
-                            <input type="text" id="programa-formacion" value={formData.aprendiz_data?.ficha?.nombre_programa ?? ""} name="programa-formacion" />
+                            <input type="text" id="programa-formacion" value={formData.ficha?.nombre_programa ?? ""} name="programa-formacion" />
                         </li>
                         <li className='input-centro'>
                             <label for="numero-ficha">No. de Ficha:</label>
-                            <input type="text" id="numero-ficha" value={formData.aprendiz_data?.ficha?.numero_ficha ?? ""} name="numero-ficha" />
+                            <input type="text" id="numero-ficha" value={formData.ficha?.numero_ficha ?? ""} name="numero-ficha" />
                         </li>
                     </ul>
                 </div>
@@ -163,24 +168,24 @@ const FormatoE = () => {
                         <li>
                             <label for="nombre">Nombre:</label>
                             {/* <input type="text" id="nombre" name="nombre"  value={"Yesid Molina"}/> */}
-                            <h6>{formData.aprendiz?.nombres ?? ""} {formData.aprendiz_data?.apellidos ?? ""}</h6>
+                            <h6>{formData?.nombres ?? ""} {formData?.apellidos ?? ""}</h6>
 
                         </li>
                         <li>
                             <label for="identificacion">Identificación:</label>
-                            <input type="text" id="identificacion" value={formData.aprendiz_data?.numero_documento ?? ""} name="identificacion" />
+                            <input type="text" id="identificacion" value={formData?.numero_documento ?? ""} name="identificacion" />
                         </li>
                         <li>
                             <label for="telefono">Teléfono:</label>
-                            <input type="text" id="telefono" value={formData.aprendiz_data?.numero_celular1 ?? ""} name="telefono" />
+                            <input type="text" id="telefono" value={formData?.numero_celular1 ?? ""} name="telefono" />
                         </li>
                         <li>
                             <label for="email">E-mail:</label>
-                            <input type="email" id="email" name="email" value={formData.aprendiz_data?.correo_principal ?? ""} />
+                            <input type="email" id="email" name="email" value={formData?.correo_principal ?? ""} />
                         </li>
                         <li>
                             <label for="email">Alternativa registrada en sofia plus:</label>
-                            <input type="email" id="email" name="email" value={formData.aprendiz_data?.correo_secundario ?? ""} />
+                            <input type="email" id="email" name="email" value={formData?.correo_secundario ?? ""} />
                         </li>
                     </ul>
                 </div>
@@ -189,15 +194,15 @@ const FormatoE = () => {
                     <ul>
                         <li>
                             <label for="razon-social">Razón social:</label>
-                            <input type="text" id="razon-social" name="razon-social" value={formData.aprendiz_data?.empresa?.razon_social ?? ""} />
+                            <input type="text" id="razon-social" name="razon-social" value={formData?.empresa?.razon_social ?? ""} />
                         </li>
                         <li>
                             <label for="nombre-empresa">Nit:</label>
-                            <input type="text" id="nombre-empresa" name="nombre-empresa" value={formData.aprendiz_data?.empresa?.nit ?? ""} />
+                            <input type="text" id="nombre-empresa" name="nombre-empresa" value={formData?.empresa?.nit ?? ""} />
                         </li>
                         <li>
                             <label for="nombre-jefe">Nombre del Jefe Inmediato del Aprendiz:</label>
-                            <input type="text" id="nombre-jefe" name="nombre-jefe" value={formData.aprendiz_data?.empresa?.nombre_jefe_inmediato ?? ""} />
+                            <input type="text" id="nombre-jefe" name="nombre-jefe" value={formData?.empresa?.nombre_jefe_inmediato ?? ""} />
                         </li>
                         <li>
                             <label for="cargo-jefe">Cargo:</label>
@@ -205,11 +210,11 @@ const FormatoE = () => {
                         </li>
                         <li>
                             <label for="telefono-jefe">Teléfono:</label>
-                            <input type="text" id="telefono-jefe" name="telefono-jefe" value={formData.aprendiz_data?.empresa?.telefono ?? ""} />
+                            <input type="text" id="telefono-jefe" name="telefono-jefe" value={formData?.empresa?.telefono ?? ""} />
                         </li>
                         <li>
                             <label for="email-jefe">E-mail:</label>
-                            <input type="email" id="email-jefe" name="email-jefe" value={formData.aprendiz_data?.empresa?.correo ?? ""} />
+                            <input type="email" id="email-jefe" name="email-jefe" value={formData?.empresa?.correo ?? ""} />
                         </li>
                     </ul>
                 </div>
@@ -564,18 +569,16 @@ const FormatoE = () => {
     const [formData, setFormData] = useState([]); // Estado para almacenar los datos de la API
 
 
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await clienteAxios.get(`/api/formato/?aprendiz_id=${id}`);
+                const response = await clienteAxios.get(`/api/formato/visualizar/?aprendiz_id=${id}`);
                 const responseData = response.data;
 
-                if (responseData.length > 0) {
-                    const data = responseData[0];
-                    setFormData(data); // Actualiza el estado formData con los datos obtenidos de la API
-                    console.log("la dat", data);
-                    console.log("evaluacion", data.evaluacion)
-                }
+                setFormData(responseData); // Actualiza el estado formData con los datos obtenidos de la API
+
+
             } catch (error) {
                 console.error('Error al obtener los datos de la API:', error);
             }
@@ -587,48 +590,59 @@ const FormatoE = () => {
     return (
         <Fragment >
             <Header />
+            <Apps />
             <section className='container'>
-            <Link to={"#"} aria-label="icon" className=" btn-atras" onClick={() => history.goBack()}>
-              <img src={atras}></img>
+                <Link to={"#"} aria-label="icon" className=" btn-atras" onClick={() => history.goBack()}>
+                    <img src={atras}></img>
 
-              <b>Regresar</b>
-        </Link>
+                    <b>Regresar</b>
+                </Link>
                 <MainSection />
-                
+
                 <div className='btns-descargar-pdf' >
                     <button className='btn btn-pdf-formato' onClick={generatePDF}>Generar PDF</button>
 
-                    <PDFDownloadLink document={imagePage.length > 0 ? <ImagenPDF imagePages={imagePage} /> : null} fileName={ `(${formData.aprendiz_data?.numero_documento ?? ""}) FORMATO PLANEACIÓN, SEGUIMIENTO Y EVALUACIÓN ETAPA PRODUCTIVA.pdf`}>
+                    <PDFDownloadLink document={imagePage.length > 0 ? <ImagenPDF imagePages={imagePage} /> : null} fileName={`(${formData?.numero_documento ?? ""}) FORMATO PLANEACIÓN, SEGUIMIENTO Y EVALUACIÓN ETAPA PRODUCTIVA.pdf`}>
                         {({ loading }) =>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                            {loading && <Spinner animation="grow" size="lg" />} {/* Muestra el spinner si loading es true */}
-                            <span style={{ marginLeft: '8px' }}>{loading ? 'Generando PDF' : 'Descargar documento'}</span> {/* Muestra el texto dependiendo de si loading es true o false */}
-                        </div>
+                                {loading && <Spinner animation="grow" size="lg" />} {/* Muestra el spinner si loading es true */}
+                                <span style={{ marginLeft: '8px' }}>{loading ? 'Generando PDF' : 'Descargar documento'}</span> {/* Muestra el texto dependiendo de si loading es true o false */}
+                            </div>
                         }
                     </PDFDownloadLink>
                 </div>
 
-                <div className="imagen-planeacion">
+                <section className='section-pdf'>
+                    <div className="imagen-planeacion">
 
-                    <div className='img-header'>
-                        <img src={logo}></img>
+                        <div className='img-header'>
+                            <img src={logo}></img>
+                        </div>
+
+
+
+                        <div ref={imageRefs.informacionGeneral}><InformacionGeneral /></div>
+
+                        <div ref={imageRefs.planeacion}>  <Planeacion formData={formData} /></div>
+
+                        <div ref={imageRefs.seguimiento}> <Seguimiento formData={formData} /></div>
+
+                        <div ref={imageRefs.evaluacion}><Evaluacion formData={formData} /></div>
+
+
+
                     </div>
 
 
-
-                    <div ref={imageRefs.informacionGeneral}><InformacionGeneral /></div>
-
-                    <div ref={imageRefs.planeacion}>  <Planeacion formData={formData} /></div>
-
-                    <div ref={imageRefs.seguimiento}> <Seguimiento formData={formData} /></div>
-
-                    <div ref={imageRefs.evaluacion}><Evaluacion formData={formData} /></div>
-
-
-
+                </section>
+                <div class="container container__img">
+                    <div class="message">
+                        La generación de PDF solo está permitida en computadoras.
+                    </div>
+                    <div class="image-container">
+                        <img src={imgPdf} alt="Computer Icon" />
+                    </div>
                 </div>
-
-
             </section>
 
 

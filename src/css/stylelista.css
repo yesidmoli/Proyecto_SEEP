@@ -71,7 +71,7 @@ body{
     padding: 0px;
     width: 100%;
     overflow: scroll;
-    height: 40rem;
+    height: 32rem;
     
 }
 .img-aprendiz{
@@ -171,12 +171,17 @@ body{
     .lista{
         width: 100%;
         margin: 0px;
+      
+    }
+    .lista hr{
+        display: none;
     }
     .titulo-aprendices{
 
         margin: 0px;
-        font-size: 1.5rem;
-        text-align: center;
+        font-size: 1.8rem;
+        text-align: left;
+        margin-bottom: 5px;
     }
     .lista-aprendices li a{
         color: var(--color-iconos);
@@ -184,12 +189,21 @@ body{
         margin-left: 0px;
     }
     .btns-doc-aprendiz-lista{
-        flex-direction: column;
+        flex-direction: row;
         gap: 5px;
+        justify-content: end ;
+        width: 100%;
+
+    }
+    .btns-doc-aprendiz-lista a{
+        height: 2rem;
+        text-align: center;
+        font-size: 12px !important;
     }
     .lista-aprendices li{
         padding: 5px;
         justify-content: center;
+        flex-direction: column;
         gap: 0px;
        
     }
@@ -205,5 +219,8 @@ body{
     }
     .lista-aprendices li p{
         margin-left: 0px !important;
+    }
+    .lista-aprendices{
+        margin-top: 5px;
     }
 }

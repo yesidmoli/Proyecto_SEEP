@@ -190,6 +190,7 @@
 .btn-formato{
   background-color: var(--color-corp-azul) !important;
   color: white !important;
+  font-size: 10px;
 }
 .btn-formato:hover{
 
@@ -229,7 +230,17 @@ background-color: #012639 !important;
     width: auto;
     height: auto;
   }
-  
+  .tabla-fichas .thead tr th{
+    font-size: 15px;
+
+  }
+  .tabla-fichas tbody tr td{
+    font-size: 14px;
+  }
+  #registrar-aprendiz{
+    height: 2rem;
+    font-size: 13px;
+  }
   /* .input-doc select, .file{
 
     width: 15rem;

@@ -321,7 +321,10 @@
     .btn-atras{
       top: 80px;
       position: absolute !important;
-      right: 10px;
+      right: 0px;
+    }
+    .btn-atras img{
+      width:  30px;
     }
     #ver{
       width: 80%;
@@ -330,5 +333,8 @@
     .btn-fichas-aprendiz{
       background-color: transparent;
       border: none;
+    }
+    .ficha-info{
+      width: 100%;
     }
   }

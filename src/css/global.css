@@ -58,21 +58,23 @@ body, .container{
 
 .encabezado{
     display: flex;
-    height: 7rem;
+    height: 5rem;
     justify-content: space-evenly;
     border-bottom: 8px solid #70B22D ;
     align-items: center;  
     position: sticky;
     background-color: var(--color-corp-azul);
     width: 100%;
+    padding: 5px;
     
 }
 .encabezado h4{
     color: white;
     font-weight: 600;
+    font-size: 1.2rem;
 }
 .encabezado .logo{
-    max-width: 260px; 
+    max-width: 180px; 
     height: auto;
     margin: 0; 
 }

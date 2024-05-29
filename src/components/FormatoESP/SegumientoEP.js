@@ -2,10 +2,14 @@ import React, { Fragment, useEffect, useState } from 'react';
 import './css/seguimientoEP.css'; // Asegúrate de importar tu archivo de estilos
 import { Link } from 'react-router-dom';
 import { useFormContext } from './FormProvide';
-function SeguimientoEP({ goToNextComponent, data }) {
+import Swal from 'sweetalert2';
+import clienteAxios from '../../config/axios';
+function SeguimientoEP({ goToNextComponent, data, id }) {
 
     const rol = localStorage.getItem('rol')
 
+    //id del registro seguimiento si esta creado
+    const [idSeguimiento, setIdSeguimiento] = useState(null)
 
     const [factoresActitudinales, setFactoresActitudinales] = useState([
         {
@@ -112,8 +116,7 @@ function SeguimientoEP({ goToNextComponent, data }) {
     const [observacionesEnte, setObservacionesEnte] = useState('');
     const [observacionesAprendiz, setObservacionesAprendiz] = useState('');
 
-    const { formData: { seguimiento: contextFormData }, updateFormData } = useFormContext();; // Renombramos el formData del contexto para evitar conflictos
-    
+
 
     // console.log("los tecnicos", factoresTecnicos)
     // console.log("los actitud", factoresActitudinales)
@@ -124,24 +127,13 @@ function SeguimientoEP({ goToNextComponent, data }) {
         periodo_evaluado_inicio: "",
         periodo_evaluado_final: "",
         observaciones_ente_conformador: "",
-        observaciones_aprendiz: ""
+        observaciones_aprendiz: "",
+        aprendiz: id
+        
     })
 
 
 
-    useEffect(() => {
-
-        //vsalidamos que si haya algo en lo que llega del contexo, si es asi se actuliza el formData de los contratio no
-        if (contextFormData && Object.keys(contextFormData).length !== 0) {
-            setSeguimiento(contextFormData);
-        }
-    }, [contextFormData]);
-
-    //   useEffect(() => {
-    //     updateFormData(formData); // Actualizamos el contexto con los datos del formulario local
-    //   }, []);
-
-  
 
     const handleChange = (field, value) => {
         setSeguimiento(prevState => ({
@@ -155,7 +147,7 @@ function SeguimientoEP({ goToNextComponent, data }) {
             const updatedFactoresActitudinales = [...prevState.factores_actitudinales];
             updatedFactoresActitudinales[index].satisfactorio = isChecked;
             return { ...prevState, factores_actitudinales: updatedFactoresActitudinales };
-          });
+        });
     };
 
     const handleChangeObservacionActitudinal = (index, value) => {
@@ -163,7 +155,7 @@ function SeguimientoEP({ goToNextComponent, data }) {
             const updatedFactoresActitudinales = [...prevState.factores_actitudinales];
             updatedFactoresActitudinales[index].observacion = value;
             return { ...prevState, factores_actitudinales: updatedFactoresActitudinales };
-          });
+        });
     };
 
     const handleChangeTecnico = (index, isChecked) => {
@@ -171,7 +163,7 @@ function SeguimientoEP({ goToNextComponent, data }) {
             const updatedFactoresTecnicos = [...prevState.factores_tecnicos];
             updatedFactoresTecnicos[index].satisfactorio = isChecked;
             return { ...prevState, factores_tecnicos: updatedFactoresTecnicos };
-          });
+        });
     };
 
     const handleChangeObservacionTecnico = (index, value) => {
@@ -179,15 +171,64 @@ function SeguimientoEP({ goToNextComponent, data }) {
         updatedFactoresTecnicos[index].observacion = value;
         setFactoresTecnicos(updatedFactoresTecnicos);
     };
+
+
+
+
+    const guardarDatos = async () => {
+
+        try {
+            if (idSeguimiento) {
+              // Si existe un ID en el formData, significa que ya existe un registro y debemos actualizarlo
+              await clienteAxios.put(`/api/formato/seguimiento/${idSeguimiento}/`,formData);
+              // Actualiza los datos existentes
+            } else {
+              //Actualizamos formData con el id del aprendiz, para que no hayan errores de nulidad
+              // Si no existe un ID en el formData, significa que es un nuevo registro y debemos crearlo
+              await clienteAxios.post('/api/formato/seguimiento/', formData); // Crea nuevos datos
+            }
+            // Manejar éxito de la solicitud si es necesario
+            console.log('Datos enviados correctamente');
+            Swal.fire({
+              title: "Exitoso",
+              text: "Datos guardados correctamente!",
+              icon: "success"
+            });
+          } catch (error) {
+            // Manejar errores de la solicitud si es necesario
+            console.error('Error al enviar los datos:', error);
+            let errorMessage = "Error al enviar los datos:";
+            
+            Swal.fire("Error", errorMessage, "error");
+          }
+        };
+
+        useEffect(() => {
+            const fetchData = async () => {
+        
+              try {
+                const response = await clienteAxios.get(`/api/formato/seguimiento/?aprendiz_id=${id}`);
+                const responseData = response.data;
+        
+                console.log("estos son los datos de seguimiento", responseData)
+                if (responseData.length > 0) {
+                  const data = responseData[0];
+                  setSeguimiento(data);
+                  setIdSeguimiento(data.id)
+                }
+        
+              } catch (error) {
+                // if (error.response && error.response.status === 404) {
+                //   resetFormData();
+                // }
+                console.error('Error al obtener los datos de la API:', error);
+              }
+            };
+        
+            fetchData();
+        
+          }, [idSeguimiento, id]);
     
-
-
-
-    const guardarDatos = () => {
-        console.log('Guardando datos...');
-        goToNextComponent(formData);
-        updateFormData('seguimiento',formData)
-    };
 
     return (
         <Fragment>
@@ -204,7 +245,7 @@ function SeguimientoEP({ goToNextComponent, data }) {
                         <tbody>
                             <tr>
                                 <td>
-                                    <select disabled={rol==="aprendiz"} value={formData.tipo_informe} id="tipo-informe" name="tipo-informe" required onChange={(e) => handleChange('tipo_informe', e.target.value)}>
+                                    <select disabled={rol === "aprendiz"} value={formData.tipo_informe} id="tipo-informe" name="tipo-informe" required onChange={(e) => handleChange('tipo_informe', e.target.value)}>
                                         <option value="seleccionar">seleccionar</option>
                                         <option value="Parcial">Parcial</option>
                                         <option value="Final">Final</option>
@@ -212,7 +253,7 @@ function SeguimientoEP({ goToNextComponent, data }) {
                                 </td>
                                 <td>
                                     <th>Inicio
-                                        <input  disabled={rol==="aprendiz"} value={formData.periodo_evaluado_inicio} type='date' onChange={(e) => handleChange('periodo_evaluado_inicio', e.target.value)}></input>
+                                        <input disabled={rol === "aprendiz"} value={formData.periodo_evaluado_inicio} type='date' onChange={(e) => handleChange('periodo_evaluado_inicio', e.target.value)}></input>
                                     </th>
                                     <th>Finalización <input value={formData.periodo_evaluado_final} type='date' onChange={(e) => handleChange('periodo_evaluado_final', e.target.value)}></input></th>
                                 </td>
@@ -237,18 +278,18 @@ function SeguimientoEP({ goToNextComponent, data }) {
                                     <td>{factor.descripcion}</td>
                                     <td>
                                         <input
-                                            disabled={rol==="aprendiz"}
+                                            disabled={rol === "aprendiz"}
                                             className='input-planeacion'
                                             type="checkbox"
                                             id={`satisfactorio_actitudinal_${index}`}
                                             name={`satisfactorio_actitudinal_${index}`}
-                                            checked={formData.factores_actitudinales[index] && formData.factores_actitudinales[index].satisfactorio }
+                                            checked={formData.factores_actitudinales[index] && formData.factores_actitudinales[index].satisfactorio}
                                             onChange={(e) => handleChangeActitudinal(index, e.target.checked)}
                                         />
                                     </td>
                                     <td>
                                         <input
-                                            disabled={rol==="aprendiz"}
+                                            disabled={rol === "aprendiz"}
                                             className='input-planeacion'
                                             type="text"
                                             id={`observacion_actitudinal_${index}`}
@@ -279,18 +320,18 @@ function SeguimientoEP({ goToNextComponent, data }) {
                                     <td>{factor.descripcion}</td>
                                     <td>
                                         <input
-                                            disabled={rol==="aprendiz"}
+                                            disabled={rol === "aprendiz"}
                                             className='input-planeacion'
                                             type="checkbox"
                                             id={`satisfactorio_tecnico_${index}`}
                                             name={`satisfactorio_tecnico_${index}`}
-                                            checked={formData.factores_tecnicos[index] && formData.factores_tecnicos[index].satisfactorio } // Aquí establecemos el valor del checkbox
+                                            checked={formData.factores_tecnicos[index] && formData.factores_tecnicos[index].satisfactorio} // Aquí establecemos el valor del checkbox
                                             onChange={(e) => handleChangeTecnico(index, e.target.checked)}
                                         />
                                     </td>
                                     <td>
                                         <input
-                                            disabled={rol==="aprendiz"}
+                                            disabled={rol === "aprendiz"}
                                             className='input-planeacion'
                                             type="text"
                                             id={`observacion_tecnico_${index}`}

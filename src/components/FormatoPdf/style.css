@@ -4,6 +4,10 @@ body {
     padding: 0;
   }
   
+  .section-pdf{
+    width: 100%;
+    overflow: scroll;
+  }
   .imagen-planeacion {
     width: 100%;
     max-width: 1200px;
@@ -13,8 +17,9 @@ body {
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 60rem;
+    height: 100vh;
     overflow: scroll;
+    overflow-x: scroll;
   
   }
   .input-check{
@@ -729,6 +734,29 @@ align-items: center;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding-top: 1.5rem;
-  margin-bottom: 1rem;
+  padding-top: 10px;
+  margin-bottom: 5px;
+}
+.container__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem !important;
+}
+.container__img .message{
+  margin-top: 1rem;
+}
+.container__img img{
+  width: 20rem;
+
+}
+
+@media only screen and (max-width: 768px) {
+
+  .section-pdf{
+    display: none;
+  }
 }

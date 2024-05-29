@@ -14,7 +14,7 @@ const ImagenPlaneacion = (id) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await clienteAxios.get(`/api/formato/?aprendiz_id=${1}`);
+        const response = await clienteAxios.get(`/api/formato/visualizar/?aprendiz_id=${id}`);
         const responseData = response.data;
 
         if (responseData.length > 0) {

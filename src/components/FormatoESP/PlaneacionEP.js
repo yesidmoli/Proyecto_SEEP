@@ -4,10 +4,12 @@ import "./css/planeacionEP.css";
 import { Link } from "react-router-dom";
 import { Popup } from "reactjs-popup";
 import { useFormContext } from './FormProvide';
+import clienteAxios from "../../config/axios";
+import Swal from "sweetalert2";
+function PlaneacionEP({ goToNextComponent, data , id}) {
 
-function PlaneacionEP({ goToNextComponent, data }) {
-
-  const { formData: { planeacion: contextFormData }, updateFormData } = useFormContext();// Renombramos el formData del contexto para evitar conflictos
+  
+  // const { formData: { planeacion: contextFormData }, updateFormData } = useFormContext();// Renombramos el formData del contexto para evitar conflictos
   const [formData, setFormData] = useState({
     actividades: [],
     observaciones: "",
@@ -15,8 +17,11 @@ function PlaneacionEP({ goToNextComponent, data }) {
     firma_enteconformador: "",
     firma_aprendiz: "",
     nombre_instructor: "",
-    firma_instructor: ""
+    firma_instructor: "",
+    aprendiz: id
   });
+
+  const [idPlaneacion, setIdPlaneacion] = useState(null)
 
 
 
@@ -73,21 +78,58 @@ function PlaneacionEP({ goToNextComponent, data }) {
   };
 
 
-  const handleGuardarDatos = () => {
-    console.log("Form Data:", formData);
-    goToNextComponent(formData);
-    updateFormData('planeacion', formData)
-    updateFormData('fecha_elaboracion', '2003-10-02')
+  const handleGuardarDatos = async () => {
+    try {
+      if (idPlaneacion) {
+        // Si existe un ID en el formData, significa que ya existe un registro y debemos actualizarlo
+        await clienteAxios.put(`/api/formato/planeacion/${idPlaneacion}/`,formData);
+        // Actualiza los datos existentes
+      } else {
+        //Actualizamos formData con el id del aprendiz, para que no hayan errores de nulidad
+        // Si no existe un ID en el formData, significa que es un nuevo registro y debemos crearlo
+        await clienteAxios.post('/api/formato/planeacion/', formData); // Crea nuevos datos
+      }
+      // Manejar éxito de la solicitud si es necesario
+      console.log('Datos enviados correctamente');
+      Swal.fire({
+        title: "Exitoso",
+        text: "Datos guardados correctamente!",
+        icon: "success"
+      });
+    } catch (error) {
+      // Manejar errores de la solicitud si es necesario
+      console.error('Error al enviar los datos:', error);
+      let errorMessage = "Error al enviar los datos:";
+      
+      Swal.fire("Error", errorMessage, "error");
+    }
   };
 
   useEffect(() => {
+    const fetchData = async () => {
 
-    //vsalidamos que si haya algo en lo que llega del contexo, si es asi se actuliza el formData de los contratio no
-    if (contextFormData && Object.keys(contextFormData).length !== 0) {
-      setFormData(contextFormData);
-    }
-  }, [contextFormData]);
+      try {
+        const response = await clienteAxios.get(`/api/formato/planeacion/?aprendiz_id=${id}`);
+        const responseData = response.data;
 
+  
+        if (responseData.length > 0) {
+          const data = responseData[0];
+          setFormData(data);
+          setIdPlaneacion(data.id)
+        }
+
+      } catch (error) {
+        // if (error.response && error.response.status === 404) {
+        //   resetFormData();
+        // }
+        console.error('Error al obtener los datos de la API:', error);
+      }
+    };
+
+    fetchData();
+
+  }, [idPlaneacion, id]);
 
   const clearSignature = (ref) => {
     ref.clear();

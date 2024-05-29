@@ -122,12 +122,13 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import SignatureCanvas from "react-signature-canvas";
 import { useFormContext } from './FormProvide';
+import clienteAxios from '../../config/axios';
+import Swal from 'sweetalert2';
 
 
+function EvaluacionEP({ goToNextComponent, data , id }) {
 
-function EvaluacionEP({ goToNextComponent, data }) {
 
-    const { formData: { evaluacion: contextFormData }, updateFormData } = useFormContext();// Renombramos el formData del contexto para evitar conflictos
     const rol = localStorage.getItem('rol')
 
     const [formData, setFormData] = useState({
@@ -139,19 +140,13 @@ function EvaluacionEP({ goToNextComponent, data }) {
         firma_enteconformador: "",
         firma_aprendiz: "",
         nombre_instructor: "",
-        firma_instructor: ""
+        firma_instructor: "",
+        fecha_elaboracion: "",
+        ciudad: "",
+        aprendiz: id
     });
 
-    console.log("datos evaluacion", formData)
-
-
-    useEffect(() => {
-        if (contextFormData) {
-
-            setFormData(contextFormData);
-        }
-        // Actualizamos el estado local con los datos del contexto
-    }, [contextFormData]);
+    const [idEvaluacion, setIdEvaluacion] = useState(null);
 
 
     const [signatureRef, setSignatureRef] = useState(null);
@@ -195,13 +190,60 @@ function EvaluacionEP({ goToNextComponent, data }) {
         }
     };
 
-    const guardarDatos = () => {
+    const guardarDatos = async () => {
+      
+        try {
+            if (idEvaluacion) {
+              // Si existe un ID en el formData, significa que ya existe un registro y debemos actualizarlo
+              await clienteAxios.put(`/api/formato/evaluacion/${idEvaluacion}/`,formData);
+              // Actualiza los datos existentes
+            } else {
+              //Actualizamos formData con el id del aprendiz, para que no hayan errores de nulidad
+              // Si no existe un ID en el formData, significa que es un nuevo registro y debemos crearlo
+              await clienteAxios.post('/api/formato/evaluacion/', formData); // Crea nuevos datos
+            }
+            // Manejar éxito de la solicitud si es necesario
+            console.log('Datos enviados correctamente');
+            Swal.fire({
+              title: "Exitoso",
+              text: "Datos guardados correctamente!",
+              icon: "success"
+            });
+          } catch (error) {
+            // Manejar errores de la solicitud si es necesario
+            console.error('Error al enviar los datos:', error);
+            let errorMessage = "Error al enviar los datos:";
+            
+            Swal.fire("Error", errorMessage, "error");
+          }
+        };
 
-        goToNextComponent(formData)
-        updateFormData('evaluacion', formData)
-
-
-    };
+        useEffect(() => {
+            const fetchData = async () => {
+        
+              try {
+                const response = await clienteAxios.get(`/api/formato/evaluacion/?aprendiz_id=${id}`);
+                const responseData = response.data;
+        
+                console.log("estos son los datos de evaluacion", responseData)
+                if (responseData.length > 0) {
+                  const data = responseData[0];
+                  setFormData(data);
+                  setIdEvaluacion(data.id)
+                }
+        
+              } catch (error) {
+                // if (error.response && error.response.status === 404) {
+                //   resetFormData();
+                // }
+                console.error('Error al obtener los datos de la API:', error);
+              }
+            };
+        
+            fetchData();
+        
+          }, [idEvaluacion, id]);
+    
     const handleEliminarReconocimiento = (index) => {
         const reconocimientosArray = formData.reconocimientos_detalle.split('-');
         reconocimientosArray.splice(index, 1);
@@ -459,6 +501,27 @@ function EvaluacionEP({ goToNextComponent, data }) {
                             : null}
                             
                         </div>
+                    </div>
+                    <div>
+                        <label><h5>Ciudad y fecha de elaboración</h5></label>
+                        <input
+                            disabled={rol==="aprendiz"} 
+                            type="text"
+                            name="ciudad"
+                            value={formData.ciudad}
+                            onChange={handleChange}
+                            placeholder="Ciudad"
+                            className="input-planeacion"
+                        />
+                        <input
+                            disabled={rol==="aprendiz"} 
+                            type="date"
+                            name="fecha_elaboracion"
+                            value={formData.fecha_elaboracion}
+                            onChange={handleChange}
+                            placeholder="Fecha elaboracion"
+                            className="input-planeacion"
+                        />
                     </div>
 
                     <button type="button" id="guardar-evaluacionep" onClick={guardarDatos}>Guardar</button>

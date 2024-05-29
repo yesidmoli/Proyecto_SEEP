@@ -14,16 +14,17 @@ body{
     /* height: 13.5rem; */
     border-bottom: 8px solid var(--color-primario);
     background-color: var(--color-corp-azul);
+    
 }
 .encabezado-login img {
-    max-width: 80%; 
-   
+    max-width: 50%; 
     margin: 0; 
 }
 .cditi-img{
     width: 50%; 
 }
 .encabezado-login .seep-img{
+
     
 }
 .btn-login{
@@ -40,16 +41,16 @@ body{
 .form-login{
     width: 300px; 
     background: #D2D2D2;
-    margin-top: 1.5rem;
+    margin-top: 5px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2); 
     padding: 1rem;
     border-radius: 10px;
-    grid-gap: 10px;
+    grid-gap: 5px;
     display: grid;
 }
 .titulo-login {
     font-size: 30px;
-    margin-bottom: 20px;
+  
 
     color: black;
 

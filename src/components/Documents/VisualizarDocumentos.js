@@ -71,7 +71,7 @@ const VisualizarDocumentos = ({ documentos }) => {
                 <thead className="thead">
                     <tr>
                         <th>Tipo Documental</th>
-                        <th>Identificador Documento</th>
+                        <th>Id</th>
                         <th>Descargar Archivo</th>
                     </tr>
                 </thead>

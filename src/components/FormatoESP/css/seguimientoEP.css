@@ -6,7 +6,7 @@
     border-radius: 5px;
     background-color: #f9f9f9;
     overflow-y: auto; /* Establece el desplazamiento vertical */
-    max-height: 780px; /* Altura máxima para mostrar el desplazamiento */
+    max-height: 600px; /* Altura máxima para mostrar el desplazamiento */
     margin-top: 1rem !important;
 }
 

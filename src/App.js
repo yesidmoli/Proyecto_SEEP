@@ -31,7 +31,7 @@ import FormularioInicial from './components/Fichas/FormularioInicial';
 import FormartoEtapaProductiva from './components/FormatoESP/Index';
 
 
-import FormatoE from './components/prueb/Formato';
+import FormatoE from './components/FormatoPdf/Formato';
 // import EvaluacionEP from './components/FormatoESP/EvaluacionEP';
 
 // import  from './components/auth/ PrivateRoute';

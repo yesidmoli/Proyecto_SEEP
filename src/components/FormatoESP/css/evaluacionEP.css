@@ -6,8 +6,10 @@
     border: 1px solid #999898;
     border-radius: 5px;
     background-color: #f9f9f9;
-    overflow-y: auto; /* Establece el desplazamiento vertical */
-    max-height: 780px; /* Altura máxima para mostrar el desplazamiento */
+    overflow-y: scroll; /* Establece el desplazamiento vertical */
+    overflow-x: scroll;
+    max-height: 600px; /* Altura máxima para mostrar el desplazamiento */
+    width: 100%;
 }
 
 .h1-evaluacion {
@@ -121,6 +123,12 @@ th {
 }
 .btn-pdf-formato:hover{
     background-color: var(--color-corp-azul) !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .module{
+        width: 600px;
+    }
 }
 
 
