@@ -122,7 +122,7 @@ const FormatoE = () => {
                 <Page key={index} size="A4" style={styles.page}>
                     <HeaderPDF />
                     <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-                        <Image src={image.dataURL} style={{ width: '90%', border: '1px solid black' }} />
+                        <Image src={image.dataURL} style={{ width: '100%', border: '1px solid black' }} />
                     </View>
                     <Footer />
                 </Page>
