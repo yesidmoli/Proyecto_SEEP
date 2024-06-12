@@ -15,12 +15,13 @@ import MainSection from '../layout/MainSection';
 import atras from '../../img/atras.png'
 import { Link, useHistory } from 'react-router-dom';
 import './styleTablas.css'
-
+import { useAuth } from '../context/AuthContext';
 import Apps from '../layout/menu/App';
 const FormatoE = () => {
 
     const history = useHistory();
     const { id } = useParams();
+    const {token} = useAuth()
 
 
 
@@ -579,7 +580,11 @@ const FormatoE = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await clienteAxios.get(`/api/formato/visualizar/?aprendiz_id=${id}`);
+                const response = await clienteAxios.get(`/api/formato/visualizar/?aprendiz_id=${id}`, {
+                    headers: {
+                        Authorization: `Token ${token}`
+                    }
+                });
                 const responseData = response.data;
 
                 setFormData(responseData); // Actualiza el estado formData con los datos obtenidos de la API

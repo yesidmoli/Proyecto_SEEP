@@ -216,7 +216,7 @@ const FormularioInicial = () => {
             <form onSubmit={enviarDatos}>
               <label>Número de Ficha: <p className="rojo-label">*</p></label>
               <input
-                type="text"
+                type="number"
                 name="numero_ficha"
                 value={aprendiz.numero_ficha}
                 onChange={actualizarState}
@@ -257,7 +257,7 @@ const FormularioInicial = () => {
               /> */}
               <label>Número de Documento: <p className="rojo-label">*</p></label>
               <input
-                type="text"
+                type="number"
                 name="numero_documento"
                 value={aprendiz.numero_documento}
                 onChange={actualizarState}
@@ -330,7 +330,7 @@ const FormularioInicial = () => {
               />
               <label>Número de Celular 1: <p className="rojo-label">*</p></label>
               <input
-                type="text"
+                type="number"
                 name="numero_celular1"
                 value={aprendiz.numero_celular1}
                 onChange={actualizarState}
@@ -338,21 +338,21 @@ const FormularioInicial = () => {
               />
               <label>Número de Celular 2:</label>
               <input
-                type="text"
+                type="number"
                 name="numero_celular2"
                 value={aprendiz.numero_celular2}
                 onChange={actualizarState}
               />
               <label>Teléfono Fijo:</label>
               <input
-                type="text"
+                type="number"
                 name="telefono_fijo"
                 value={aprendiz.telefono_fijo}
                 onChange={actualizarState}
               />
               <label>Correo Principal: <p className="rojo-label">*</p></label>
               <input
-                type="text"
+                type="mail"
                 name="correo_principal"
                 value={aprendiz.correo_principal}
                 onChange={actualizarState}
@@ -360,7 +360,7 @@ const FormularioInicial = () => {
               />
               <label>Correo Secundario:</label>
               <input
-                type="text"
+                type="mail"
                 name="correo_secundario"
                 value={aprendiz.correo_secundario}
                 onChange={actualizarState}
@@ -384,22 +384,22 @@ const FormularioInicial = () => {
                   required
                 /> */}
               <div className="datos-empresa">
-                <h3 id="datos-emp">Datos de la empresa</h3>
+                <h3 id="datos-emp">Datos de la empresa </h3>
+                <p>(Si el aprendiz no cuenta con empresa coloque el numero 1)</p>
                 <label>Nit: <p className="rojo-label">*</p></label>
                 <input
-                  type="text"
+                  type="number"
                   name="empresa.nit"
                   value={aprendiz.empresa.nit}
                   onChange={actualizarState}
                   required
                 ></input>
-                <label>Empresa:</label>
+                <label>Empresa: </label>
                 <input
                   type="text"
                   name="empresa.razon_social"
                   value={aprendiz.empresa.razon_social}
                   onChange={actualizarState}
-                  required
                 ></input>
                 <label>Jefe inmediato:</label>
                 <input
@@ -417,14 +417,14 @@ const FormularioInicial = () => {
                 ></input>
                 <label>Correo:</label>
                 <input
-                  type="text"
+                  type="mail"
                   name="empresa.correo"
                   value={aprendiz.empresa.correo}
                   onChange={actualizarState}
                 ></input>
                 <label>Telefono</label>
                 <input
-                  type="text"
+                  type="number"
                   name="empresa.telefono"
                   value={aprendiz.empresa.telefono}
                   onChange={actualizarState}

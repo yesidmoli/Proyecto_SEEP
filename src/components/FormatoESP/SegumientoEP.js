@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import { useFormContext } from './FormProvide';
 import Swal from 'sweetalert2';
 import clienteAxios from '../../config/axios';
+import { useAuth } from '../context/AuthContext';
 function SeguimientoEP({ goToNextComponent, data, id }) {
 
     const rol = localStorage.getItem('rol')
-
+    const {token}= useAuth()
     //id del registro seguimiento si esta creado
     const [idSeguimiento, setIdSeguimiento] = useState(null)
 
@@ -180,12 +181,20 @@ function SeguimientoEP({ goToNextComponent, data, id }) {
         try {
             if (idSeguimiento) {
               // Si existe un ID en el formData, significa que ya existe un registro y debemos actualizarlo
-              await clienteAxios.put(`/api/formato/seguimiento/${idSeguimiento}/`,formData);
+              await clienteAxios.put(`/api/formato/seguimiento/${idSeguimiento}/`,formData, {
+                headers: {
+                    Authorization: `Token ${token}`
+                }
+            });
               // Actualiza los datos existentes
             } else {
               //Actualizamos formData con el id del aprendiz, para que no hayan errores de nulidad
               // Si no existe un ID en el formData, significa que es un nuevo registro y debemos crearlo
-              await clienteAxios.post('/api/formato/seguimiento/', formData); // Crea nuevos datos
+              await clienteAxios.post('/api/formato/seguimiento/', formData, {
+                headers: {
+                    Authorization: `Token ${token}`
+                }
+            }); // Crea nuevos datos
             }
             // Manejar éxito de la solicitud si es necesario
             console.log('Datos enviados correctamente');
@@ -207,7 +216,11 @@ function SeguimientoEP({ goToNextComponent, data, id }) {
             const fetchData = async () => {
         
               try {
-                const response = await clienteAxios.get(`/api/formato/seguimiento/?aprendiz_id=${id}`);
+                const response = await clienteAxios.get(`/api/formato/seguimiento/?aprendiz_id=${id}`, {
+                    headers: {
+                        Authorization: `Token ${token}`
+                    }
+                });
                 const responseData = response.data;
         
                 console.log("estos son los datos de seguimiento", responseData)

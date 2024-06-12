@@ -8,16 +8,46 @@ import * as XLSX from 'xlsx';
 import atras from '../../img/atras.png'
 import { Link } from "react-router-dom";
 import ListaAprendices from "./ListaAprendices";
-
+import Apps from "../layout/menu/App";
+import { useAuth } from "../context/AuthContext";
 const AprendicesRegistrados = () => {
   const [aprendices, setAprendices] = useState([]);
-  console.log("estos son los aprendicesssssssssss", aprendices)
+
+ 
+
   const [formularioAprendiz, setFormularioAprendiz] = useState(false);
 
-const [busqueda, setBusqueda] = useState("");
+  const [busqueda, setBusqueda] = useState("");
 
+  const {token} = useAuth()
+
+  useEffect(() => {
+    const obtenerAprendices = async () => {
+      try {
+        const consultarApi = await clienteAxios.get("api/aprendices/", {
+          headers: {
+              Authorization: `Token ${token}`
+          }
+      });
+        if (Array.isArray(consultarApi.data.results)) {
+          setAprendices(consultarApi.data.results);
+        } else {
+          console.error("Los datos de los aprendices no son un array:", consultarApi.data.results);
+        }
+      } catch (error) {
+        console.error("Error al obtener los aprendices:", error);
+      }
+    };
+  
+    obtenerAprendices();
+  }, []);
+  const listaAprendices = Array.isArray(aprendices)
+    ? aprendices
+    : [];
+  
   const editarAprendiz = (id) => {
     const aprendizEditar = listaAprendices.find((f) => f.id === id);
+   
     Swal.fire({
       title: 'Editar Aprendiz',
       html: `
@@ -138,10 +168,18 @@ const [busqueda, setBusqueda] = useState("");
             direccion: direccion,
           }
         }
-        await clienteAxios.put(`/api/aprendices/${id}/`, aprendizEditado);
+        await clienteAxios.put(`/api/aprendices/${id}/`, aprendizEditado, {
+          headers: {
+              Authorization: `Token ${token}`
+          }
+      });
         Swal.fire('¡Cambios guardados!', '', 'success');
-        const consultarAprendiz = await clienteAxios.get('/api/aprendices/');
-        setAprendices(consultarAprendiz.data);
+        const consultarAprendiz = await clienteAxios.get('/api/aprendices/', {
+          headers: {
+              Authorization: `Token ${token}`
+          }
+      });
+        setAprendices(consultarAprendiz.data.results);
       }
     });
 
@@ -162,10 +200,18 @@ const [busqueda, setBusqueda] = useState("");
 
       // Si el usuario confirma la eliminación, proceder con la solicitud de eliminación
       if (confirmacion.isConfirmed) {
-        await clienteAxios.delete(`/api/aprendices/${id}/`);
+        await clienteAxios.delete(`/api/aprendices/${id}/`, {
+          headers: {
+              Authorization: `Token ${token}`
+          }
+      });
 
         // Actualizar la lista de fichas después de eliminar
-        const consultarAprendiz = await clienteAxios.get('api/aprendices/');
+        const consultarAprendiz = await clienteAxios.get('api/aprendices/', {
+          headers: {
+              Authorization: `Token ${token}`
+          }
+      });
         setAprendices(consultarAprendiz.data.results);
 
         // Mostrar mensaje de éxito
@@ -176,22 +222,7 @@ const [busqueda, setBusqueda] = useState("");
       Swal.fire('Error', 'Hubo un error al procesar la solicitud.', 'error');
     }
   };
-  useEffect(() => {
-    const obtenerAprendices = async () => {
-      try {
-        const consultarApi = await clienteAxios.get("api/aprendices/");
-        setAprendices(consultarApi.data.results);
-        console.log("estos son los aprendices", consultarApi.data)
-      } catch (error) {
-        console.error("Error al obtener los aprendices:", error);
-      }
-    };
 
-    obtenerAprendices();
-  }, []);
-  const listaAprendices = Array.isArray(aprendices.results)
-    ? aprendices.results
-    : [];
 
 
 
@@ -263,12 +294,15 @@ const [busqueda, setBusqueda] = useState("");
 
   const aprendicesFiltrados = aprendices.filter((aprendiz) => {
     // Filtra las fichas cuyo número de ficha o nombre del programa coincidan con el término de búsqueda
-    return aprendiz.numero_documento.includes(busqueda) || aprendiz.nombres.toLowerCase().includes(busqueda.toLowerCase())  || aprendiz.apellidos.toLowerCase().includes(busqueda.toLowerCase());;
+    return aprendiz.numero_documento.includes(busqueda) || aprendiz.nombres.toLowerCase().includes(busqueda.toLowerCase()) || aprendiz.apellidos.toLowerCase().includes(busqueda.toLowerCase());;
   });
+
+  
   return (
     <>
       <Header />
       <MainSection />
+      <Apps />
       <div className="container  container-reg">
 
         <div style={{ "cursor": "pointer" }} aria-label="icon" className=" btn-atras" onClick={handleFormularioAprendiz}>
@@ -294,9 +328,9 @@ const [busqueda, setBusqueda] = useState("");
               placeholder="Buscar aprendiz por número documento o nombre"
             />
             <div>
-            <button className='descargar-excel' onClick={descargarExcel}>Reporte de aprendices</button>
+              <button className=' btn descargar-excel' onClick={descargarExcel}>Reporte de aprendices</button>
 
-              <button className='btn-add-ficha' onClick={handleFormularioAprendiz} > + Añadir Aprendiz</button>
+              <button className=' btn btn-add-ficha' onClick={handleFormularioAprendiz} > + Añadir Aprendiz</button>
             </div>
 
           </div>

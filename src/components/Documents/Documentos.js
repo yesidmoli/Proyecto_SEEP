@@ -9,15 +9,15 @@ import Apps from "../layout/menu/App";
 import { useAuth } from "../context/AuthContext";
 import atras from '../../img/atras.png'
 
-import { Link , useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import bitacora from '../../../src/components/bitacoras/BitacoraDoc.xlsx'
 const Documentos = (props) => {
     const history = useHistory();
-    const {id} = props.match.params;
+    const { id } = props.match.params;
 
-    const {token} = useAuth()
-    
+    const { token } = useAuth()
+
     const [seleccion, setSeleccion] = useState('');
     const [mostrarCampoAdicional, setMostrarCampoAdicional] = useState(false);
     const [mostrarDocumentos, setMostrarDocumentos] = useState(false);
@@ -31,7 +31,7 @@ const Documentos = (props) => {
 
     const [documentos, setDocumentos] = useState([]);
 
-    console.log("ESto es lo que se va a enviar" , datosForm)
+    console.log("ESto es lo que se va a enviar", datosForm)
 
     const opciones = ['Bitácora', 'Documento de identidad', 'Carta Laboral', 'Certificado Agencia Publica', 'Carnet Destruido', 'Prubas TyT', 'Carta Laboral'];
 
@@ -43,11 +43,11 @@ const Documentos = (props) => {
         setMostrarCampoAdicional(nuevaSeleccion === 'Bitácora');
         // Actualizar el estado de datosForm si no es una bitácora
         if (nuevaSeleccion !== 'Bitácora') {
-          setDatosForm(prevState => ({
-              ...prevState,
-              tipo_documento: nuevaSeleccion
-          }));
-  }
+            setDatosForm(prevState => ({
+                ...prevState,
+                tipo_documento: nuevaSeleccion
+            }));
+        }
 
         // // Actualizar el estado de datosForm
         // setDatosForm(prevState => ({
@@ -62,100 +62,102 @@ const Documentos = (props) => {
             ...prevState,
             tipo_documento: bitacoraSeleccionada,
             is_bitacora: true,
-            
+
             bitacora: bitacoraSeleccionada
-            
+
         }));
     };
 
     const handleSeleccionArchivo = (event) => {
-      // Obtiene el archivo seleccionado del input de tipo file
-      const archivo = event.target.files[0];
-  
-      // Actualiza el estado de datosForm con el nuevo archivo
-      setDatosForm(prevState => ({
-          ...prevState,
-          archivo: archivo
-      }));
-  };
-  
+        // Obtiene el archivo seleccionado del input de tipo file
+        const archivo = event.target.files[0];
+
+        // Actualiza el estado de datosForm con el nuevo archivo
+        setDatosForm(prevState => ({
+            ...prevState,
+            archivo: archivo
+        }));
+    };
+
 
     const handleCargarDocumentos = async () => {
-      try {
-          // Realizar la solicitud POST a la API con Axios
-          const response = await clienteAxios.post('api/documentacion-aprendiz/', datosForm, {
-              headers: {
-                  'Content-Type':  'multipart/form-data' 
-              }
-          });
-  
-          // Manejar la respuesta de la API
-          console.log('Documento cargado con éxito:', response.data);
-          Swal.fire('¡Éxito!', 'Registro Exitoso.', 'success');
-          setMostrarDocumentos(true);
+        try {
+            // Realizar la solicitud POST a la API con Axios
+            const response = await clienteAxios.post('api/documentacion-aprendiz/', datosForm, {
+                headers: {
+                    Authorization: `Token ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+            );
 
-          fetchDocumentos();
-  
-          // // Actualizar el estado para mostrar el componente de VisualizarDocumentos
-          // setMostrarDocumentos(true);
-      } catch (error) {
-          // Manejar errores
-          console.error('Error al cargar el documento:', error);
+            // Manejar la respuesta de la API
+            console.log('Documento cargado con éxito:', response.data);
+            Swal.fire('¡Éxito!', 'Registro Exitoso.', 'success');
+            setMostrarDocumentos(true);
 
-          if (error.response && error.response.data.archivo) {
-            // Si hay un mensaje de error específico sobre el archivo, muestra ese mensaje
-            const errorMessage = error.response.data.archivo[0];
-            Swal.fire('Error', errorMessage, 'error');
-        } else {
-            // Si no hay un mensaje específico, muestra un mensaje genérico de error
-            Swal.fire('Error', 'Error al cargar el documento. Revise que no hayan campos vacios', 'error');
+            fetchDocumentos();
+
+            // // Actualizar el estado para mostrar el componente de VisualizarDocumentos
+            // setMostrarDocumentos(true);
+        } catch (error) {
+            // Manejar errores
+            console.error('Error al cargar el documento:', error);
+
+            if (error.response && error.response.data.archivo) {
+                // Si hay un mensaje de error específico sobre el archivo, muestra ese mensaje
+                const errorMessage = error.response.data.archivo[0];
+                Swal.fire('Error', errorMessage, 'error');
+            } else {
+                // Si no hay un mensaje específico, muestra un mensaje genérico de error
+                Swal.fire('Error', 'Error al cargar el documento. Revise que no hayan campos vacios', 'error');
+            }
         }
-      }
-  }
+    }
 
     // if (mostrarDocumentos) {
     //     // Si mostrarDocumentos es verdadero, renderiza el componente VisualizarDocumentos
     //     return <VisualizarDocumentos />;
     // }
 
-   
-        const fetchDocumentos = async () => {
-            try {
-              
-                // Realizar la solicitud GET a la API con Axios, incluyendo el parámetro aprendiz_id y el token
-                const response = await clienteAxios.get(`api/documentacion-aprendiz/?aprendiz_id=${id}`, {
-                    headers: {
-                        Authorization: `Token ${token}`
-                    }
-                });
 
-                setDocumentos(response.data);
-            } catch (error) {
-                console.error("Error al obtener los documentos:", error);
-            }
-        };
+    const fetchDocumentos = async () => {
+        try {
 
-        
-   
+            // Realizar la solicitud GET a la API con Axios, incluyendo el parámetro aprendiz_id y el token
+            const response = await clienteAxios.get(`api/documentacion-aprendiz/?aprendiz_id=${id}`, {
+                headers: {
+                    Authorization: `Token ${token}`
+                }
+            });
+
+            setDocumentos(response.data);
+        } catch (error) {
+            console.error("Error al obtener los documentos:", error);
+        }
+    };
+
+
+
     useEffect(() => {
         fetchDocumentos();
     }, [id]);
-    
+
     return (
         <Fragment>
-          <Apps />
+            <Apps />
             <Header />
             <div className="container cont-doc">
-            <Link to={"#"} aria-label="icon" className=" btn-atras" onClick={() => history.goBack()}>
-              <img src={atras}></img>
+                <Link to={"#"} aria-label="icon" className=" btn-atras" onClick={() => history.goBack()}>
+                    <img src={atras}></img>
 
-              <b>Regresar</b>
-        </Link>
+                    <b>Regresar</b>
+                </Link>
                 <MainSection />
                 <section className="document-container">
                     <h4>Cargue de Documentos</h4>
 
-                    <form id="uploadForm"  encType="multipart/form-data">
+                    <form id="uploadForm" encType="multipart/form-data">
                         <div className="input-doc">
                             <label htmlFor="title">Tipo Documental:</label>
                             <select value={seleccion} onChange={handleSeleccion}>

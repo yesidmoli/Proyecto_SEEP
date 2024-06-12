@@ -55,7 +55,7 @@ const Cuentas = () => {
             <p className="h3">Correo electrónico: {datosCuenta.correo}</p>
             <p className="h3">Teléfono: {datosCuenta.telefono}</p>
             
-            <center><button className="btn-modificar btns" onClick={mostrarInterfazEdicion}>Modificar Datos</button></center>
+            {/* <center><button className="btn-modificar btns" onClick={mostrarInterfazEdicion}>Modificar Datos</button></center> */}
             </>
           )}
         </div>

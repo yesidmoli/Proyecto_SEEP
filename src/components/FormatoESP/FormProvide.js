@@ -13,7 +13,6 @@ export const FormProvider = ({ children }) => {
     aprendiz: ''
   });
 
-  console.log("Esto del contex", formData)
 
   useEffect(() => {
     // Cargar datos almacenados al cargar el componente

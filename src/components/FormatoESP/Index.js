@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 import { set } from "date-fns";
 import Apps from '../layout/menu/App';
-
+import { useAuth } from "../context/AuthContext";
 
 function FormartoEtapaProductiva(props) {
 
@@ -23,6 +23,7 @@ function FormartoEtapaProductiva(props) {
   console.log("este es el para", componente)
 
   const { id } = props.match.params;
+  const {token}=useAuth()
 
   const history = useHistory();
 
@@ -135,7 +136,11 @@ function FormartoEtapaProductiva(props) {
     const fetchData = async () => {
 
       try {
-        const response = await clienteAxios.get(`/api/formato/principal/?aprendiz_id=${id}`);
+        const response = await clienteAxios.get(`/api/formato/principal/?aprendiz_id=${id}`, {
+          headers: {
+              Authorization: `Token ${token}`
+          }
+      });
         const responseData = response.data;
 
         console.log("estos son los datos", responseData)

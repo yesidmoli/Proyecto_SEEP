@@ -37,23 +37,6 @@ const FormularioFicha = ({ history }) => {
   const [aprendiz, setAprendiz] = useState(false);
 
 
-  useEffect(() => {
-    // Lógica para obtener las fichas existentes 
-    const obtenerFichas = async () => {
-      try {
-        const consultarFicha = await clienteAxios.get('/api/fichas/', {
-          headers: {
-            Authorization: `Token ${token}`,
-          }
-        });
-        setFichas(consultarFicha.data);
-      } catch (error) {
-        console.error('Error al obtener las fichas:', error);
-      }
-    };
-
-    obtenerFichas();
-  }, []);
 
   const actualizarState = (e) => {
     setFicha({
@@ -67,19 +50,7 @@ const FormularioFicha = ({ history }) => {
     setEnviandoDatos(true);
 
     try {
-      if (modoEdicion) {
-        // Actualizar ficha existente
-        await clienteAxios.put(`/fichas/${idEditar}`, ficha, {
-          headers: {
-            Authorization: `Token ${token}`,
-          }
-        });
-        Swal.fire('¡Éxito!', 'La ficha se actualizó correctamente.', 'success');
-        setEnviandoDatos(false);
-
-      } else {
         // Crear nueva ficha
-
         await clienteAxios.post('/api/fichas/', ficha, {
           headers: {
             Authorization: `Token ${token}`,
@@ -89,36 +60,25 @@ const FormularioFicha = ({ history }) => {
         // Redirigir a la sección de listado de fichas
         history.push('/#listado-fichas');
 
-
-      }
-
-      // Actualizar la lista de fichas
-      const consultarFicha = await clienteAxios.get('api/fichas/', {
-        headers: {
-          Authorization: `Token ${token}`,
-        }
-      });
-      setFichas(consultarFicha.data);
-
-      // Limpiar el formulario y restablecer el estado
-      setFicha(initialState);
-      setModoEdicion(false);
-      setIdEditar(null);
     } catch (error) {
+
       console.error('Error al enviar el formulario:', error);
+      
       const errores = {
         horario_formacion: 'El horario de formación seleccionado no es válido.',
         nivel_formacion: 'El nivel de formación seleccionado no es válido.',
         nombre_programa: 'El nombre del programa no puede estar en blanco.',
         numero_ficha: 'El número de ficha no puede estar en blanco.'
       };
-
-      const erroresMostrados = Object.keys(error.response.data).map(key => {
-        return errores[key] || `Error en ${key}: ${error.response.data[key].join(', ')}`;
+      const erroresMostrados = Object.keys(error.response?.data || {}).map(key => {
+        const errorMessageFromServer = Array.isArray(error.response.data[key])
+          ? error.response.data[key].join(', ')
+          : error.response.data[key];
+        return errores[key] || ` ${errorMessageFromServer}`;
       }).join(' - '); // Separador de guión
-
+  
       Swal.fire('Error', `Hubo un error al procesar la solicitud: ${erroresMostrados}`, 'error');
-
+  
       setEnviandoDatos(false);
     }
   };
@@ -313,7 +273,8 @@ const FormularioFicha = ({ history }) => {
           <form onSubmit={enviarDatos}>
             <label>Número de Ficha <p className="rojo-label">*</p></label>
             <input
-              type="text"
+            required
+              type="number"
               name="numero_ficha"
               value={ficha.numero_ficha}
               onChange={actualizarState}

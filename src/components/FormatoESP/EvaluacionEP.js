@@ -124,13 +124,13 @@ import SignatureCanvas from "react-signature-canvas";
 import { useFormContext } from './FormProvide';
 import clienteAxios from '../../config/axios';
 import Swal from 'sweetalert2';
+import { useAuth } from '../context/AuthContext';
 
-
-function EvaluacionEP({ goToNextComponent, data , id }) {
+function EvaluacionEP({ goToNextComponent, data, id }) {
 
 
     const rol = localStorage.getItem('rol')
-
+    const { token } = useAuth()
     const [formData, setFormData] = useState({
         juicio_evaluacion: '',
         reconocimientos_especiales: '',
@@ -191,59 +191,71 @@ function EvaluacionEP({ goToNextComponent, data , id }) {
     };
 
     const guardarDatos = async () => {
-      
+
         try {
             if (idEvaluacion) {
-              // Si existe un ID en el formData, significa que ya existe un registro y debemos actualizarlo
-              await clienteAxios.put(`/api/formato/evaluacion/${idEvaluacion}/`,formData);
-              // Actualiza los datos existentes
+                // Si existe un ID en el formData, significa que ya existe un registro y debemos actualizarlo
+                await clienteAxios.put(`/api/formato/evaluacion/${idEvaluacion}/`, formData, {
+                    headers: {
+                        Authorization: `Token ${token}`
+                    }
+                });
+                // Actualiza los datos existentes
             } else {
-              //Actualizamos formData con el id del aprendiz, para que no hayan errores de nulidad
-              // Si no existe un ID en el formData, significa que es un nuevo registro y debemos crearlo
-              await clienteAxios.post('/api/formato/evaluacion/', formData); // Crea nuevos datos
+                //Actualizamos formData con el id del aprendiz, para que no hayan errores de nulidad
+                // Si no existe un ID en el formData, significa que es un nuevo registro y debemos crearlo
+                await clienteAxios.post('/api/formato/evaluacion/', formData, {
+                    headers: {
+                        Authorization: `Token ${token}`
+                    }
+                }); // Crea nuevos datos
             }
             // Manejar éxito de la solicitud si es necesario
             console.log('Datos enviados correctamente');
             Swal.fire({
-              title: "Exitoso",
-              text: "Datos guardados correctamente!",
-              icon: "success"
+                title: "Exitoso",
+                text: "Datos guardados correctamente!",
+                icon: "success"
             });
-          } catch (error) {
+        } catch (error) {
             // Manejar errores de la solicitud si es necesario
             console.error('Error al enviar los datos:', error);
             let errorMessage = "Error al enviar los datos:";
-            
-            Swal.fire("Error", errorMessage, "error");
-          }
-        };
 
-        useEffect(() => {
-            const fetchData = async () => {
-        
-              try {
-                const response = await clienteAxios.get(`/api/formato/evaluacion/?aprendiz_id=${id}`);
+            Swal.fire("Error", errorMessage, "error");
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+
+            try {
+                const response = await clienteAxios.get(`/api/formato/evaluacion/?aprendiz_id=${id}`, {
+                    headers: {
+                        Authorization: `Token ${token}`
+                    }
+                });
                 const responseData = response.data;
-        
+
                 console.log("estos son los datos de evaluacion", responseData)
                 if (responseData.length > 0) {
-                  const data = responseData[0];
-                  setFormData(data);
-                  setIdEvaluacion(data.id)
+                    const data = responseData[0];
+                    setFormData(data);
+                    setIdEvaluacion(data.id)
                 }
-        
-              } catch (error) {
+
+            } catch (error) {
                 // if (error.response && error.response.status === 404) {
                 //   resetFormData();
                 // }
                 console.error('Error al obtener los datos de la API:', error);
-              }
-            };
-        
-            fetchData();
-        
-          }, [idEvaluacion, id]);
-    
+            }
+        };
+
+        fetchData();
+
+    }, [idEvaluacion, id]);
+
     const handleEliminarReconocimiento = (index) => {
         const reconocimientosArray = formData.reconocimientos_detalle.split('-');
         reconocimientosArray.splice(index, 1);
@@ -264,7 +276,7 @@ function EvaluacionEP({ goToNextComponent, data , id }) {
                             <tr>
                                 <th>JUICIO DE ELABORACIÓN:</th>
                                 <td>
-                                    <select disabled={rol==="aprendiz"} name="juicio_evaluacion" value={formData.juicio_evaluacion} onChange={handleChange} required>
+                                    <select disabled={rol === "aprendiz"} name="juicio_evaluacion" value={formData.juicio_evaluacion} onChange={handleChange} required>
                                         <option key="seleccionar" value="seleccionar">seleccionar</option>
                                         <option key="aprobado" value="aprobado">APROBADO</option>
                                         <option key="no_aprobado" value="no aprobado">NO APROBADO</option>
@@ -276,7 +288,7 @@ function EvaluacionEP({ goToNextComponent, data , id }) {
                             <tr>
                                 <th>RECONOCIMIENTOS ESPECIALES SOBRE EL  DESEMPEÑO:</th>
                                 <td>
-                                    <select disabled={rol==="aprendiz"}  name="reconocimientos_especiales" value={formData.reconocimientos_especiales} onChange={handleChange} required>
+                                    <select disabled={rol === "aprendiz"} name="reconocimientos_especiales" value={formData.reconocimientos_especiales} onChange={handleChange} required>
                                         <option key="seleccionar" value="seleccionar">seleccionar</option>
                                         <option key="si" value="true">SI</option>
                                         <option key="no" value="false">NO</option>
@@ -291,14 +303,14 @@ function EvaluacionEP({ goToNextComponent, data , id }) {
                             </tr>
                             <td>
                                 <input
-                                    disabled={rol==="aprendiz"} 
+                                    disabled={rol === "aprendiz"}
                                     type="text"
                                     value={formData.nuevoReconocimiento}
                                     onChange={handleChange}
                                     name="nuevoReconocimiento"
                                 />
                                 {rol !== "aprendiz" && <button onClick={handleAgregarReconocimiento}>Añadir Reconocimiento</button>}
-                                
+
                             </td>
 
                             {formData.reconocimientos_detalle && (
@@ -308,11 +320,11 @@ function EvaluacionEP({ goToNextComponent, data , id }) {
                                         <ul>
                                             {formData.reconocimientos_detalle.split('-').map((reconocimiento, index) => (
                                                 <li className='reconocimientos-lista' key={index}>{reconocimiento}
-                                                    {rol !=="aprendiz" ? 
-                                                     <td>
-                                                     <button onClick={() => handleEliminarReconocimiento(index)}>Eliminar</button>
-                                                 </td>
-                                                    : null}
+                                                    {rol !== "aprendiz" ?
+                                                        <td>
+                                                            <button onClick={() => handleEliminarReconocimiento(index)}>Eliminar</button>
+                                                        </td>
+                                                        : null}
 
                                                 </li>
                                             ))}
@@ -332,7 +344,7 @@ function EvaluacionEP({ goToNextComponent, data , id }) {
                     <div className="camp-firma">
                         <div className="nombre-ente">
                             <label> <h5>Nombre y firma del ente Conformador</h5></label>
-                            <input   disabled={rol==="aprendiz"} placeholder="Nombre ente conformador" name="nombre_enteconformador" className="input-planeacion" value={formData.nombre_enteconformador} onChange={handleChange}></input>
+                            <input disabled={rol === "aprendiz"} placeholder="Nombre ente conformador" name="nombre_enteconformador" className="input-planeacion" value={formData.nombre_enteconformador} onChange={handleChange}></input>
                         </div>
 
                         <div className="campo-firma-planeacion">
@@ -353,41 +365,41 @@ function EvaluacionEP({ goToNextComponent, data , id }) {
                                 ) : null}
                             </section>
 
-                           {rol !== "aprendiz" ?
-                           <Popup trigger={<button type="button">Firmar</button>} modal>
-                           {(close) => (
-                               <div className="popup campo-firma">
-                                   <section className="head-signature">
-                                       <button className="close" onClick={close}>
-                                           &times;
-                                       </button>
+                            {rol !== "aprendiz" ?
+                                <Popup trigger={<button type="button">Firmar</button>} modal>
+                                    {(close) => (
+                                        <div className="popup campo-firma">
+                                            <section className="head-signature">
+                                                <button className="close" onClick={close}>
+                                                    &times;
+                                                </button>
 
-                                       <h2>Firma ente Conformador</h2>
-                                       <i class="bi bi-trash3-fill" onClick={() => clearSignature(signatureRef)}></i>
-                                   </section>
+                                                <h2>Firma ente Conformador</h2>
+                                                <i class="bi bi-trash3-fill" onClick={() => clearSignature(signatureRef)}></i>
+                                            </section>
 
-                                   <SignatureCanvas
-                                       penColor="black"
-                                       canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
-                                       ref={(ref) => setSignatureRef(ref)}
-                                       minWidth={1}
-                                       maxWidth={1}
-                                       velocityFilterWeight={0.1}
-                                   />
+                                            <SignatureCanvas
+                                                penColor="black"
+                                                canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
+                                                ref={(ref) => setSignatureRef(ref)}
+                                                minWidth={1}
+                                                maxWidth={1}
+                                                velocityFilterWeight={0.1}
+                                            />
 
-                                   <div className="btn-guardar-firma">
-                                       <button className="btn btn-success " onClick={() => { saveSignature(signatureRef, "firma_enteconformador"); close(); }}>
-                                           Guardar Firma
-                                       </button>
-                                   </div>
+                                            <div className="btn-guardar-firma">
+                                                <button className="btn btn-success " onClick={() => { saveSignature(signatureRef, "firma_enteconformador"); close(); }}>
+                                                    Guardar Firma
+                                                </button>
+                                            </div>
 
 
 
-                               </div>
-                           )}
-                       </Popup>
-                           :null} 
-                            
+                                        </div>
+                                    )}
+                                </Popup>
+                                : null}
+
                         </div>
                     </div>
                     <div className="camp-firma">
@@ -445,7 +457,7 @@ function EvaluacionEP({ goToNextComponent, data , id }) {
                         <div className="nombre-instructor">
                             <label><h5>Nombre y firma del Instructor</h5></label>
                             <input
-                                disabled={rol==="aprendiz"} 
+                                disabled={rol === "aprendiz"}
                                 name="nombre_instructor"
                                 value={formData.nombre_instructor} onChange={handleChange}
                                 placeholder="Nombre del Instructor"
@@ -469,43 +481,43 @@ function EvaluacionEP({ goToNextComponent, data , id }) {
                                 ) : null}
                             </section>
 
-                            {rol !== "aprendiz" ? 
-                            <Popup trigger={<button type="button">Firmar</button>} modal>
-                            {(close) => (
-                                <div className="popup campo-firma">
-                                    <section className="head-signature">
-                                        <button className="close" onClick={close}>
-                                            &times;
-                                        </button>
-                                        <h2>Firma del Instructor</h2>
-                                        <i className="bi bi-trash3-fill" onClick={() => clearSignature(instructorRef)}></i>
-                                    </section>
+                            {rol !== "aprendiz" ?
+                                <Popup trigger={<button type="button">Firmar</button>} modal>
+                                    {(close) => (
+                                        <div className="popup campo-firma">
+                                            <section className="head-signature">
+                                                <button className="close" onClick={close}>
+                                                    &times;
+                                                </button>
+                                                <h2>Firma del Instructor</h2>
+                                                <i className="bi bi-trash3-fill" onClick={() => clearSignature(instructorRef)}></i>
+                                            </section>
 
-                                    <SignatureCanvas
-                                        penColor="black"
-                                        canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
-                                        ref={(ref) => setInstructorSignatureRef(ref)}
-                                        minWidth={1}
-                                        maxWidth={1}
-                                        velocityFilterWeight={0.1}
-                                    />
+                                            <SignatureCanvas
+                                                penColor="black"
+                                                canvasProps={{ width: 590, height: 246, className: "signature-canvas" }}
+                                                ref={(ref) => setInstructorSignatureRef(ref)}
+                                                minWidth={1}
+                                                maxWidth={1}
+                                                velocityFilterWeight={0.1}
+                                            />
 
-                                    <div className="btn-guardar-firma">
-                                        <button className="btn btn-success" onClick={() => { saveSignature(instructorRef, "firma_instructor"); close(); }}>
-                                            Guardar Firma
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-                        </Popup>
-                            : null}
-                            
+                                            <div className="btn-guardar-firma">
+                                                <button className="btn btn-success" onClick={() => { saveSignature(instructorRef, "firma_instructor"); close(); }}>
+                                                    Guardar Firma
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </Popup>
+                                : null}
+
                         </div>
                     </div>
                     <div>
                         <label><h5>Ciudad y fecha de elaboración</h5></label>
                         <input
-                            disabled={rol==="aprendiz"} 
+                            disabled={rol === "aprendiz"}
                             type="text"
                             name="ciudad"
                             value={formData.ciudad}
@@ -514,7 +526,7 @@ function EvaluacionEP({ goToNextComponent, data , id }) {
                             className="input-planeacion"
                         />
                         <input
-                            disabled={rol==="aprendiz"} 
+                            disabled={rol === "aprendiz"}
                             type="date"
                             name="fecha_elaboracion"
                             value={formData.fecha_elaboracion}

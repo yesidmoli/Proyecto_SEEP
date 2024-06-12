@@ -30,7 +30,7 @@
   
   }
   .tabla-fichas thead tr{
-    font-size: 1.2rem;
+    font-size: 1rem;
     border-radius: 10px;
     border-collapse: separate;
     
@@ -240,8 +240,10 @@
     color: #f44336;
   }
   .descargar-excel{
-    border-radius: 5px;
+    border-radius: 5px !important;
     margin: 0px  !important;
+    background-color: #39A900 !important;
+    color: #fff !important;
 
   }
 
@@ -271,15 +273,16 @@
     width: 50px;
   }
   .btn-add-ficha{
-    background-color: #d0dbe6;
-    color: #6f7e95;
-    border-radius: 0.28571rem;
-    font-weight: 600;
-    transition: all 0.3s;
+    background-color: #d0dbe6 !important;
+    color: #6f7e95 !important;
+    border-radius: 0.28571rem !important;
+    font-weight: 600 !important;
+    transition: all 0.3s !important;
+    height: 2.5rem;
   }
   .btn-add-ficha:hover{
-    background-color: #59677e;
-    color: white;
+    background-color: #59677e !important;
+    color: white !important;
   } 
   
   .header-fichas{
@@ -292,6 +295,7 @@
     border: none !important;
     background-color: #fff !important;
     border: 0.07143rem solid #ecf2f6 !important;
+    height: 1re;
   }
   .header-fichas div{
     display: flex;
@@ -336,5 +340,20 @@
     }
     .ficha-info{
       width: 100%;
+    }
+    .header-fichas{
+     display: flex;
+     flex-direction: column;
+    }
+    .header-fichas input{
+      width: 100% !important;
+      margin-top: 1rem;
+    }
+    .header-fichas button{
+      height: 2rem;
+      font-size: 13px;
+    }
+    .header-fichas div{
+      gap: 5px;
     }
   }

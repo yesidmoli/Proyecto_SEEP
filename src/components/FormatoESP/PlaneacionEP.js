@@ -6,9 +6,10 @@ import { Popup } from "reactjs-popup";
 import { useFormContext } from './FormProvide';
 import clienteAxios from "../../config/axios";
 import Swal from "sweetalert2";
+import { useAuth } from "../context/AuthContext";
 function PlaneacionEP({ goToNextComponent, data , id}) {
 
-  
+  const {token} = useAuth()
   // const { formData: { planeacion: contextFormData }, updateFormData } = useFormContext();// Renombramos el formData del contexto para evitar conflictos
   const [formData, setFormData] = useState({
     actividades: [],
@@ -82,12 +83,20 @@ function PlaneacionEP({ goToNextComponent, data , id}) {
     try {
       if (idPlaneacion) {
         // Si existe un ID en el formData, significa que ya existe un registro y debemos actualizarlo
-        await clienteAxios.put(`/api/formato/planeacion/${idPlaneacion}/`,formData);
+        await clienteAxios.put(`/api/formato/planeacion/${idPlaneacion}/`,formData, {
+          headers: {
+              Authorization: `Token ${token}`
+          }
+      });
         // Actualiza los datos existentes
       } else {
         //Actualizamos formData con el id del aprendiz, para que no hayan errores de nulidad
         // Si no existe un ID en el formData, significa que es un nuevo registro y debemos crearlo
-        await clienteAxios.post('/api/formato/planeacion/', formData); // Crea nuevos datos
+        await clienteAxios.post('/api/formato/planeacion/', formData, {
+          headers: {
+              Authorization: `Token ${token}`
+          }
+      }); // Crea nuevos datos
       }
       // Manejar éxito de la solicitud si es necesario
       console.log('Datos enviados correctamente');
@@ -109,7 +118,11 @@ function PlaneacionEP({ goToNextComponent, data , id}) {
     const fetchData = async () => {
 
       try {
-        const response = await clienteAxios.get(`/api/formato/planeacion/?aprendiz_id=${id}`);
+        const response = await clienteAxios.get(`/api/formato/planeacion/?aprendiz_id=${id}`, {
+          headers: {
+              Authorization: `Token ${token}`
+          }
+      });
         const responseData = response.data;
 
   

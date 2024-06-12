@@ -10,12 +10,13 @@ import clienteAxios from '../../config/axios';
 import Swal from 'sweetalert2'
 import Apps from "../layout/menu/App";
 import { Link } from "react-router-dom";
-
+import { useAuth } from "../context/AuthContext";
 function InfoAprediz(props) {
 
   //Extrae la propiedad numero de ficha
   const { id, ficha } = props.match.params;
 
+  const {token} = useAuth()
   const initialState = {
     ficha: '',
     nombres: '',
@@ -50,11 +51,15 @@ function InfoAprediz(props) {
   useEffect(() => {
     const obtenerAprendices = async () => {
       try {
-        const consultarApi = await clienteAxios.get(`/api/aprendices/${id}`);
+        const consultarApi = await clienteAxios.get(`/api/aprendices/${id}`, {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        });
         setAprendiz(consultarApi.data);
         dataEmpresa(consultarApi.data.empresa)
 
-        console.log("Este es el aprendiz", consultarApi.data)
+       
       } catch (error) {
         console.error('Error al obtener los aprendices:', error);
       }

@@ -5,8 +5,8 @@ import axios from "axios";
 
 const clienteAxios = axios.create(
     {
-        baseURL:'https://proyect-seep-46bb6469e324.herokuapp.com',
-        //baseURL:'http://localhost:8000'
+        //baseURL:'https://proyect-seep-46bb6469e324.herokuapp.com',
+        baseURL:'http://localhost:8000'
         // baseURL: 'http://3.149.252.137'
     }
 );

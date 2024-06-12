@@ -44,6 +44,7 @@ import AprendizBitacoraIndividual from './components/bitacoras/AprendizBitacoraI
 import PasswordResetForm from './components/auth/resetPassword/PasswordResetForm';
 import PasswordResetConfirmForm from './components/auth/resetPassword/PasswordResetConfirmForm';
 import ListaFichas from './components/Fichas/ListaFichas';
+import Calendar from './components/Calendar/Calendario';
 
 function App() {
   return (
@@ -78,6 +79,7 @@ function App() {
             <PrivateRoute exact path="/bitacora-aprendiz/:id" component={AprendizBitacoraIndividual} />
             <Route exact path="/password/reset/" component={PasswordResetForm} />
             <Route exact path="/password/reset/confirm/:uid/:token" component={PasswordResetConfirmForm} />
+            
         
           </Switch>
     
