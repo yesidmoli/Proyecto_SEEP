@@ -110,10 +110,24 @@ const FormularioInicial = () => {
         } catch (error) {
           console.log("error", error)
           let errorMessage = "Se produjo un error al guardar:";
-          if (error.response && error.response.data && error.response.data.error) {
-            errorMessage += `\n- ${error.response.data.error}`;
-          } else if (error.response && error.response.data && Array.isArray(error.response.data)) {
-            errorMessage += error.response.data.map((error) => `\n- ${error}`).join('');
+          if (error.response && error.response.data) {
+            const data = error.response.data;
+        
+            if (data.error) {
+              errorMessage += `\n- ${data.error}`;
+            } else if (Array.isArray(data)) {
+              errorMessage += data.map((error) => `\n- ${error}`).join('');
+            } else {
+              Object.keys(data).forEach(key => {
+                if (Array.isArray(data[key])) {
+                  data[key].forEach(message => {
+                    errorMessage += ` ${message}`;
+                  });
+                } else {
+                  errorMessage += `\n- ${key}: ${data[key]}`;
+                }
+              });
+            }
           } else {
             errorMessage += "\n- Ha ocurrido un error inesperado.";
           }
