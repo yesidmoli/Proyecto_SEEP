@@ -127,7 +127,7 @@ const CalendarPage = () => {
         <input type="date" id="fecha_visita" class="swal2-input" value="${fechaVisita}" placeholder="Fecha de visita (AAAA-MM-DD)">
         <input type="time" id="hora_visita" class="swal2-input" value="${horaVisita}" placeholder="Hora de visita (HH:MM:SS)">
         <select id="tipo_visita" class="swal2-input">
-        <option value="presencial" ${event.tipo_visita === 'presencial' ? 'selected' : ''}>Precencial</option>
+        <option value="presencial" ${event.tipo_visita === 'presencial' ? 'selected' : ''}>Presencial</option>
         <option value="virtual" ${event.tipo_visita === 'virtual' ? 'selected' : ''}>Virtual</option>
       </select>
         <input type="text" id="lugar" class="swal2-input" value="${event.lugar}" placeholder="Lugar">
