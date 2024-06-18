@@ -249,7 +249,7 @@ const FormularioAprendiz = () => {
                 onChange={actualizarState}
                 required
               />
-              <label>Sexo: <p className="rojo-label">*</p></label>
+              <label>Genero: <p className="rojo-label">*</p></label>
               <select name="sexo" value={aprendiz.sexo} onChange={actualizarState} required>
                 <option value="" disabled> Seleccione el sexo</option>
                 <option value="Masculino" >Masculino</option>
@@ -345,7 +345,7 @@ const FormularioAprendiz = () => {
         /> */}
               <div className="datos-empresa">
                 <h3 id="datos-emp">Datos de la empresa </h3>
-                <p>(Si el aprendiz no cuenta con empresa coloque el numero 1)</p>
+                <p>(Si el aprendiz no cuenta con empresa coloque el numero 0)</p>
                 <label>Nit: <p className="rojo-label">*</p></label>
                 <input
                   type="number"
