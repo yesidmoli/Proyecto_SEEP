@@ -132,7 +132,7 @@ const AprendizBitacoraIndividual = () => {
             <button id='registrar-aprendiz'>Cargar Bitácora</button>
           </Link>
           <a href={bitacora} download="Bitácora Formato Actualizado-JUN-2023.xlsx" className="iconLink">
-            <button id='registrar-aprendiz'>Descargar Bitácora</button>
+            <button id='registrar-aprendiz'>Descargar Formato Bitácora</button>
           </a>
 
 
