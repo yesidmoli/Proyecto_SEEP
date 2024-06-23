@@ -76,7 +76,9 @@ function InfoAprediz(props) {
 
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
+
   };
+  
   return (
 
     <Fragment>

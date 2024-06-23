@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch,  Redirect } from 'react-router-dom';
 import Header from './components/layout/Header';
 import MainSection from './components/layout/MainSection';
@@ -46,7 +46,11 @@ import PasswordResetConfirmForm from './components/auth/resetPassword/PasswordRe
 import ListaFichas from './components/Fichas/ListaFichas';
 import Calendar from './components/Calendar/Calendario';
 
+import ChangePasswordPage from './components/auth/ChangePasswordPopup';
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
 function App() {
+  
   return (
     <Router>
       <Fragment>
@@ -77,11 +81,13 @@ function App() {
             <Route exact path="/formulario-final/:id" component={FormularioFinal}/>
             
             <PrivateRoute exact path="/bitacora-aprendiz/:id" component={AprendizBitacoraIndividual} />
+            <PrivateRoute exact path="/update-password" component={ChangePasswordPage} />
             <Route exact path="/password/reset/" component={PasswordResetForm} />
             <Route exact path="/password/reset/confirm/:uid/:token" component={PasswordResetConfirmForm} />
             
         
           </Switch>
+          
     
       
       </Fragment>

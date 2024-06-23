@@ -19,7 +19,7 @@ const PasswordResetForm = () => {
         e.preventDefault();
         setLoading(true); // Establecer el estado de carga a true
         try {
-            const response = await clienteAxios.post('http://localhost:8000/dj-rest-auth/password/reset/', { email });
+            const response = await clienteAxios.post('/dj-rest-auth/password/reset/', { email });
             setMessage(response.data.detail);
             setSent(true);
         } catch (error) {
