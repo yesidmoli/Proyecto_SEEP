@@ -1,143 +1,128 @@
-
-import { Fragment, useEffect } from "react"
-import Header from "../layout/Header"
-import MainSection from "../layout/MainSection"
+import React, { Fragment, useEffect, useState } from "react";
+import Header from "../layout/Header";
+import MainSection from "../layout/MainSection";
 import ReactSearchBox from "react-search-box";
-import { CiSearch } from "react-icons/ci"
-import { useState } from "react";
 import clienteAxios from "../../config/axios";
-import '../../css/documentos.css';
-
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import Apps from "../layout/menu/App";
-function DocumentosAprendices (){
 
-    const {token} = useAuth()
+function DocumentosAprendices() {
+  const { token } = useAuth();
 
-    const[aprendices, dataAprendices] = useState([])
-
-    const [searchValue, setSearchValue] = useState('');
-    const [filteredData, setFilteredData] = useState([]);
-
+  const [aprendices, setAprendices] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(2); // Inicializar con 5 ítems por página
 
   useEffect(() => {
     consultarDatosCliente();
-    setFilteredData(aprendices);
   }, []);
 
-//   actualizar el estado searchValue con el valor de búsqueda ingresado por el usuario
-  const handleSearch = (name) => {
-    setSearchValue(name);
-
+  const consultarDatosCliente = async () => {
+    try {
+      const response = await clienteAxios.get(`/api/aprendices/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      setAprendices(response.data.results);
+      setFilteredData(response.data.results);
+    } catch (error) {
+      console.error('Error al consultar los aprendices:', error);
+    }
   };
 
+  const handleSearch = (name) => {
+    setSearchValue(name);
+    filterAprendices(name);
+  };
 
-   
+  const filterAprendices = (searchTerm) => {
+    const filtered = aprendices.filter((item) =>
+      item.nombres.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.apellidos.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.ficha.numero_ficha.includes(searchTerm.toLowerCase()) ||
+      item.numero_documento.includes(searchTerm.toLowerCase())
+    );
+    setFilteredData(filtered);
+    setCurrentPage(1); // Volver a la página 1 al filtrar
+  };
 
-      const consultarDatosCliente = async () => {
-        try {
-          // Realiza la consulta a la API para obtener datos de los clientes
-          const response = await clienteAxios.get(`/api/aprendices/`, {
-            headers: {
-              Authorization: `Token ${token}`,
-            },
-          });
-          dataAprendices(response.data.results);
-          console.log("estos son los aprendices " ,response.data )
-         
-          
-        } catch (error) {
-          console.error('Error al consultar los aprendices:', error);
-        }
-      };
-    return(
-        <Fragment>
-          <Apps />
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
-            <Header />
-            
-        <section className="container conten-documentos">
-                <MainSection />
-                <div className="react-search-box ">
-                
-                <ReactSearchBox
-        placeholder="Buscar Aprendiz..."
-        value={searchValue}
-        onChange={handleSearch}
-        data={filteredData}
-        fuseConfigs={{ threshold: 0.2 }}
-        inputHeight="3rem"
-        
-        iconBoxSize={"5rem"}
-        inputFontSize="1.3rem"
-      />
+  const nextPage = () => {
+    if (currentPage < Math.ceil(filteredData.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const changeItemsPerPage = (e) => {
+    setItemsPerPage(Number(e.target.value));
+    setCurrentPage(1); // Volver a la página 1 al cambiar el número de ítems por página
+  };
+
+  return (
+    <Fragment>
+      <Apps />
+      <Header />
+      <section className="container conten-documentos">
+        <MainSection />
+        <div className="react-search-box ">
+          <ReactSearchBox
+            placeholder="Buscar Aprendiz..."
+            value={searchValue}
+            onChange={handleSearch}
+            data={filteredData}
+            fuseConfigs={{ threshold: 0.2 }}
+            inputHeight="3rem"
+            iconBoxSize={"5rem"}
+            inputFontSize="1.3rem"
+          />
+        </div>
+
+        <ul className="list-aprendices">
+          {currentItems.map((item) => (
+            <div className="item-link" key={item.id}>
+              <li className="item-aprendiz">
+                <i className="bi bi-file-earmark-pdf-fill"></i>
+                <div className="datos-aprendiz-doc">
+                  <h5>{item.nombres} {item.apellidos}</h5>
+                  <h6>{item.tipo_documento}: {item.numero_documento}</h6>
+                  <h6>Ficha: {item.ficha.numero_ficha}</h6>
                 </div>
+                <div className="btns-doc-aprendiz">
+                  <Link to={`/documentos-aprendiz/${item.id}`} className="btn btn-success">Documentos</Link>
+                  <a href={`/formato-etapa-productiva/${item.id}/${'index'}`} className="btn btn-formato">Formato Productiva</a>
+                </div>
+              </li>
+              
+            </div>
+            
+          ))}
+        </ul>
 
-    <ul className="list-aprendices">
-      
-      {searchValue ? (
-    // Si hay un valor de búsqueda, aplica el filtro a deudas
-    aprendices.filter((item) =>
-        item.nombres.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.apellidos.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.ficha.numero_ficha.includes(searchValue.toLowerCase()) ||
-        item.numero_documento.includes(searchValue.toLowerCase())
-      )
-      .map((filteredItem) => (
-
-        <div  className="item-link">
-
-
-        <li className="item-aprendiz" key={filteredItem.key}>
-        <i class="bi bi-file-earmark-pdf-fill"></i>
-        <div className="datos-aprendiz-doc">
-       
-        <h5>{filteredItem.nombres} {filteredItem.apellidos}</h5>
-        <h6> {filteredItem.tipo_documento}:{filteredItem.numero_documento}</h6>
-        <h6> Ficha: {filteredItem.ficha.numero_ficha}</h6>
+        {/* Botones de paginación */}
+        <div className="pagination-buttons">
+          <button className="boton-anterior" onClick={prevPage} disabled={currentPage === 1}>
+            Anterior
+          </button>
+          <button className="boton-siguiente" onClick={nextPage} disabled={currentPage === Math.ceil(filteredData.length / itemsPerPage)}>
+            Siguiente
+          </button>
         </div>
-        <div className="btns-doc-aprendiz">
-        <Link  to={`/documentos-aprendiz/${filteredItem.id}`} className="btn btn-success">Documentos</Link>
-        <Link to={`/formato-etapa-productiva/${filteredItem.id}/${'index'}`} className="btn btn-formato">Formato</Link>
-      </div>
-       
-
-
-        </li>
-        </div>
-        
-      ))
-  ) : (
-    // Si no hay valor de búsqueda, muestra todas las deudas
-    aprendices.map((item) => (
-        <div className="item-link">
-      <li className="item-aprendiz" key={item.key}> 
-      <i class="bi bi-file-earmark-pdf-fill"></i>
-
-      <div className="datos-aprendiz-doc">
-      
-        <h5>{item.nombres} {item.apellidos}</h5>
-        <h6>{item.tipo_documento}: {item.numero_documento}</h6>
-        <h6> Ficha: {item.ficha.numero_ficha}</h6>
-      </div>
-
-      <div className="btns-doc-aprendiz">
-        <Link  to={`/documentos-aprendiz/${item.id}`} className="btn btn-success">Documentos</Link>
-        <a href={`/formato-etapa-productiva/${item.id}/${'index'}`} className="btn btn-formato">Formato Productiva</a>
-      </div>
-    
-      
-      </li>
-      </div>
-    ))
-  )}
-      </ul>
-                
-
-
-            </section>
-        </Fragment>
-    )
+      </section>
+    </Fragment>
+  );
 }
-export default DocumentosAprendices
+
+export default DocumentosAprendices;

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import clienteAxios from '../../../config/axios';
 import './styles.css';
 import { useHistory } from 'react-router-dom';
+import logoSeep from '../../../img/seep-logo-verde.svg';
+import cditi from '../../../img/cditi-logo.svg';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
@@ -28,8 +30,16 @@ const PasswordResetForm = () => {
     };
 
     return (
+        <div>
+           <header class="encabezado-login">
+        <img className='seep-img' src={logoSeep} alt="logo-SEEP" />
+        <img className='cditi-img' src={cditi} alt="logo-CDITI"/>  
+        </header>
         <div className='container-sm cont-form-reset'>
+        
+            
             <div className='container-form'>
+            
                 <h2>Restablecer Contraseña</h2>
                 <form onSubmit={handleSubmit}>
                     <h6>Para poder restablecer la contraseña debes indicar el email asociado a tu cuenta de usuario</h6>
@@ -46,6 +56,7 @@ const PasswordResetForm = () => {
                     </h6>
                 )}
             </div>
+        </div>
         </div>
     );
 };

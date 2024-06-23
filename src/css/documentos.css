@@ -249,6 +249,18 @@ background-color: #012639 !important;
 
   } */
 }
+.boton-siguiente, .boton-anterior{
+  justify-content: space-between;
+  color: white !important;
+  font-size: 15px;
+  padding: auto;
+}
+.boton-siguiente{
+  margin-left: 5%;
+}
+.boton-siguiente:hover, .boton-anterior:hover{
+  background-color: #012639 !important;
+}
 @media (max-width: 767px) and (orientation: landscape) {
   .campo-firma{
     height: 20rem;

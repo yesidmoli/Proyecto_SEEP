@@ -30,6 +30,7 @@ const Login = () => {
     try {
       // Realizar una solicitud al backend para autenticar al usuario y obtener el token
       const response = await Axios.post('/api/user-token/', datos);
+      console.log(response)
       
       // Obtener el token del cuerpo de la respuesta
       const newToken = response.data.token;

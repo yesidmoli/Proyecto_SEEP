@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import clienteAxios from '../../../config/axios';
 import './styles.css';
 import { useParams, useHistory } from 'react-router-dom';
+import { Header } from '../../layout/Header';
 import Swal from 'sweetalert2';
 
 const PasswordResetConfirmForm = () => {
