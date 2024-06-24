@@ -8,30 +8,26 @@ import clienteAxios from "../../config/axios";
 import Apps from "../layout/menu/App";
 import { useAuth } from "../context/AuthContext";
 import atras from '../../img/atras.png'
-
 import { Link, useHistory } from "react-router-dom";
+import bitacora from '../../../src/components/bitacoras/BitacoraDoc.xlsx';
 
-import bitacora from '../../../src/components/bitacoras/BitacoraDoc.xlsx'
 const Documentos = (props) => {
     const history = useHistory();
     const { id } = props.match.params;
-
-    const { token } = useAuth()
-
+    const { token } = useAuth();
+    
     const [seleccion, setSeleccion] = useState('');
     const [mostrarCampoAdicional, setMostrarCampoAdicional] = useState(false);
     const [mostrarDocumentos, setMostrarDocumentos] = useState(false);
-    const [datosForm, setDatosForm] = useState({
+    let [datosForm, setDatosForm] = useState({
+        "id": 0,
         "tipo_documento": '',
-        "archivo": '',
         "is_bitacora": false,
-        "aprendiz": id
+        "is_bitacora_check":false,
+        "observaciones": '',
+        "aprendiz": parseInt(id)
     });
-
-
     const [documentos, setDocumentos] = useState([]);
-
-    console.log("ESto es lo que se va a enviar", datosForm)
 
     const opciones = ['Bitácora', 'Documento de identidad', 'Carta Laboral', 'Certificado Agencia Publica', 'Carnet Destruido', 'Prubas TyT', 'Carta Laboral'];
 
@@ -39,21 +35,13 @@ const Documentos = (props) => {
         const nuevaSeleccion = e.target.value;
         setSeleccion(nuevaSeleccion);
 
-        // Determina si se debe mostrar el campo adicional
         setMostrarCampoAdicional(nuevaSeleccion === 'Bitácora');
-        // Actualizar el estado de datosForm si no es una bitácora
         if (nuevaSeleccion !== 'Bitácora') {
             setDatosForm(prevState => ({
                 ...prevState,
                 tipo_documento: nuevaSeleccion
             }));
         }
-
-        // // Actualizar el estado de datosForm
-        // setDatosForm(prevState => ({
-        //     ...prevState,
-        //     is_bitacora: true
-        // }));
     }
 
     const handleSeleccionBitacora = (event) => {
@@ -62,82 +50,101 @@ const Documentos = (props) => {
             ...prevState,
             tipo_documento: bitacoraSeleccionada,
             is_bitacora: true,
-
             bitacora: bitacoraSeleccionada
-
         }));
     };
 
     const handleSeleccionArchivo = (event) => {
-        // Obtiene el archivo seleccionado del input de tipo file
         const archivo = event.target.files[0];
-
-        // Actualiza el estado de datosForm con el nuevo archivo
         setDatosForm(prevState => ({
             ...prevState,
             archivo: archivo
         }));
     };
 
+    const handleSobrescribirDocumento = async () => {
+        try {
+            const response = await clienteAxios.put(`api/documentacion-aprendiz/${parseInt(id)}/`, datosForm, {
+                headers: {
+                    Authorization: `Token ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            Swal.fire('¡Éxito!', 'El documento ha sido actualizado exitosamente.', 'success');
+            setMostrarDocumentos(true);
+
+            fetchDocumentos();
+        } catch (error) {
+            console.error('Error al sobrescribir el documento:', error);
+            Swal.fire('Error', 'Error al sobrescribir el documento. Revise que no hayan campos vacíos', 'error');
+        }
+    }
 
     const handleCargarDocumentos = async () => {
+        // Verificar si la bitácora ya ha sido subida
+            const documentoYaCargado = documentos.find(doc => doc.tipo_documento === datosForm.tipo_documento);
+            if (!!documentoYaCargado) {
+                datosForm = {
+                    "id": documentoYaCargado.id,
+                    "tipo_documento": documentoYaCargado.tipo_documento,
+                    "archivo": datosForm.archivo,
+                    "is_bitacora": documentoYaCargado.is_bitacora,
+                    "is_bitacora_check": documentoYaCargado.is_bitacora_check? documentoYaCargado.is_bitacora_check : false,
+                    "observaciones": documentoYaCargado.observaciones? documentoYaCargado.observaciones : '',
+                    "aprendiz": parseInt(id)
+                }
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Este documento ya ha sido cargado. ¿Desea actualizarla?',
+                    icon: 'error',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, actualizar',
+                    cancelButtonText: 'No, cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        handleSobrescribirDocumento();
+                    }
+                });
+                return;
+            }
+
         try {
-            // Realizar la solicitud POST a la API con Axios
             const response = await clienteAxios.post('api/documentacion-aprendiz/', datosForm, {
                 headers: {
                     Authorization: `Token ${token}`,
                     'Content-Type': 'multipart/form-data'
                 }
-            }
-            );
+            });
 
-            // Manejar la respuesta de la API
-            console.log('Documento cargado con éxito:', response.data);
             Swal.fire('¡Éxito!', 'Registro Exitoso.', 'success');
             setMostrarDocumentos(true);
 
             fetchDocumentos();
-
-            // // Actualizar el estado para mostrar el componente de VisualizarDocumentos
-            // setMostrarDocumentos(true);
         } catch (error) {
-            // Manejar errores
             console.error('Error al cargar el documento:', error);
 
             if (error.response && error.response.data.archivo) {
-                // Si hay un mensaje de error específico sobre el archivo, muestra ese mensaje
                 const errorMessage = error.response.data.archivo[0];
                 Swal.fire('Error', errorMessage, 'error');
             } else {
-                // Si no hay un mensaje específico, muestra un mensaje genérico de error
-                Swal.fire('Error', 'Error al cargar el documento. Revise que no hayan campos vacios', 'error');
+                Swal.fire('Error', 'Error al cargar el documento. Revise que no hayan campos vacíos', 'error');
             }
         }
     }
 
-    // if (mostrarDocumentos) {
-    //     // Si mostrarDocumentos es verdadero, renderiza el componente VisualizarDocumentos
-    //     return <VisualizarDocumentos />;
-    // }
-
-
     const fetchDocumentos = async () => {
         try {
-
-            // Realizar la solicitud GET a la API con Axios, incluyendo el parámetro aprendiz_id y el token
             const response = await clienteAxios.get(`api/documentacion-aprendiz/?aprendiz_id=${id}`, {
                 headers: {
                     Authorization: `Token ${token}`
                 }
             });
-
             setDocumentos(response.data);
         } catch (error) {
             console.error("Error al obtener los documentos:", error);
         }
     };
-
-
 
     useEffect(() => {
         fetchDocumentos();
@@ -149,14 +156,12 @@ const Documentos = (props) => {
             <Header />
             <div className="container cont-doc">
                 <Link to={"#"} aria-label="icon" className=" btn-atras" onClick={() => history.goBack()}>
-                    <img src={atras}></img>
-
+                    <img src={atras} alt="Regresar"/>
                     <b>Regresar</b>
                 </Link>
                 <MainSection />
                 <section className="document-container">
                     <h4>Cargue de Documentos</h4>
-
                     <form id="uploadForm" encType="multipart/form-data">
                         <div className="input-doc">
                             <label htmlFor="title">Tipo Documental:</label>
@@ -169,16 +174,15 @@ const Documentos = (props) => {
                                 ))}
                             </select>
                         </div>
-
                         {mostrarCampoAdicional && (
                             <div>
                                 <label>Seleccione el número de bitácora</label>
                                 <select value={datosForm.bitacora || ''} onChange={handleSeleccionBitacora}>
                                     <option value="">Seleccione una opción</option>
-                                    <option value="Bitácora 1"> Bitácora 1</option>
-                                    <option value="Bitácora 2"> Bitácora 2</option>
-                                    <option value="Bitácora 3"> Bitácora 3</option>
-                                    <option value="Bitácora 4"> Bitácora 4</option>
+                                    <option value="Bitácora 1">Bitácora 1</option>
+                                    <option value="Bitácora 2">Bitácora 2</option>
+                                    <option value="Bitácora 3">Bitácora 3</option>
+                                    <option value="Bitácora 4">Bitácora 4</option>
                                     <option value="Bitácora 5">Bitácora 5</option>
                                     <option value="Bitácora 6">Bitácora 6</option>
                                     <option value="Bitácora 7">Bitácora 7</option>
@@ -207,3 +211,4 @@ const Documentos = (props) => {
 };
 
 export default Documentos;
+
