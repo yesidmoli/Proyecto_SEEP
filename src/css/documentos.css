@@ -129,9 +129,9 @@
   }
   .list-aprendices{
     padding: 0px;
-    margin-top: 1rem;
+    margin-top: 10px;
     overflow: scroll;
-    height: 35rem;
+    height: 30rem;
   }
   .datos-aprendiz-doc{
     display: flex;
@@ -149,7 +149,7 @@
     padding: 1rem;
     display: flex !important;
     flex-direction: column !important;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
   .input-doc{
     display: flex; 
@@ -249,15 +249,23 @@ background-color: #012639 !important;
 
   } */
 }
+.pagination-buttons{
+  display: flex;
+  gap: 5px;
+  justify-content: end;
+  align-items: center;
+}
+.pagination-buttons .btns-page{
+  display: flex;
+  gap: 5px;
+}
+
 .boton-siguiente, .boton-anterior{
   justify-content: space-between;
   color: white !important;
-  font-size: 15px;
-  padding: auto;
+  font-size: 11px; 
 }
-.boton-siguiente{
-  margin-left: 5%;
-}
+
 .boton-siguiente:hover, .boton-anterior:hover{
   background-color: #012639 !important;
 }

@@ -373,7 +373,7 @@ function SeguimientoEP({ goToNextComponent, data, id }) {
                         <textarea value={formData.observaciones_aprendiz} name="observaciones1" rows="2" onChange={(e) => handleChange('observaciones_aprendiz', e.target.value)}></textarea>
 
                     </div>
-                    <button id='guardar-seguimientoep' onClick={guardarDatos}>Guardar</button>
+                    <button className='btn-añadir'  onClick={guardarDatos}>Guardar</button>
                     {/* <Link to="/evaluacion_EP" className="custom-button">Siguiente</Link> */}
                 </div>
             </div>

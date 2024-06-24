@@ -366,7 +366,7 @@ function EvaluacionEP({ goToNextComponent, data, id }) {
                             </section>
 
                             {rol !== "aprendiz" ?
-                                <Popup trigger={<button type="button">Firmar</button>} modal>
+                                <Popup trigger={<button className='btn-eliminar' type="button">Firmar</button>} modal>
                                     {(close) => (
                                         <div className="popup campo-firma">
                                             <section className="head-signature">
@@ -423,7 +423,7 @@ function EvaluacionEP({ goToNextComponent, data, id }) {
                                 ) : null}
                             </section>
 
-                            <Popup trigger={<button type="button">Firmar</button>} modal>
+                            <Popup trigger={<button  className='btn-eliminar' type="button">Firmar</button>} modal>
                                 {(close) => (
                                     <div className="popup campo-firma">
                                         <section className="head-signature">
@@ -482,7 +482,7 @@ function EvaluacionEP({ goToNextComponent, data, id }) {
                             </section>
 
                             {rol !== "aprendiz" ?
-                                <Popup trigger={<button type="button">Firmar</button>} modal>
+                                <Popup trigger={<button className='btn-eliminar' type="button">Firmar</button>} modal>
                                     {(close) => (
                                         <div className="popup campo-firma">
                                             <section className="head-signature">

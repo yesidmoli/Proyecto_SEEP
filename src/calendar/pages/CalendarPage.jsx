@@ -22,6 +22,7 @@ import { useAuth } from '../../components/context/AuthContext';
 const CalendarPage = () => {
 
   const { token } = useAuth()
+  const rol = localStorage.getItem('rol')
 
   const { events, setActiveEvent, startLoadingEvents, startDeletingEvent, startSavingEvent } = useCalendarStore();
 
@@ -98,7 +99,10 @@ const CalendarPage = () => {
 
 
     setSelectedEvent(event);
-    openEditForm(event);
+    if (rol !== 'aprendiz') {
+      openEditForm(event);
+    }
+   
   };
   const openEditForm = (event) => {
 
@@ -214,6 +218,9 @@ const CalendarPage = () => {
 
     setSelectedEvent(event);
 
+    if (rol !== 'aprendiz') {
+      
+    
     Swal.fire({
       title: "¿Qué acción desea realizar?",
       showDenyButton: true,
@@ -253,6 +260,7 @@ const CalendarPage = () => {
         console.log("Se ha cancelado la acción");
       }
     });
+  }
   };
 
 
@@ -340,7 +348,12 @@ const CalendarPage = () => {
       
      
     </div>
-    <FabAddNew />
+
+    
+    
+    {rol !== 'aprendiz' && <FabAddNew />}
+
+    
    
       <FabDelete />
 

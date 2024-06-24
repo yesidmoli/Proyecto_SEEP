@@ -296,8 +296,8 @@ const FormularioFicha = ({ history }) => {
             <label>Nivel de Formación <p className="rojo-label">*</p></label>
             <select name="nivel_formacion" value={ficha.nivel_formacion} onChange={actualizarState}>
               <option value={""} selected>Seleccione el nivel</option>
-              <option value="Tecnico">Técnico</option>
-              <option value="Tecnologo">Tecnólogo</option>
+              <option value="Técnico">Técnico</option>
+              <option value="Tecnólogo">Tecnólogo</option>
             </select> 
             {/* <input
               type="text"

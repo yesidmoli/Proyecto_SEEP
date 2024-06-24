@@ -110,6 +110,7 @@ th {
     border-radius: 0px !important;
     color: white !important;
     font-weight: 600 !important;
+    font-size: 10px !important;
 }
 .btn-visualizar-formato:hover{
     background-color: #70B22D !important;
