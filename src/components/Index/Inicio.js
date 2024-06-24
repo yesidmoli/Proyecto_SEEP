@@ -1,4 +1,3 @@
-
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import clienteAxios from '../../config/axios';
@@ -7,146 +6,141 @@ import '../layout/MainSection';
 import '../../../src/css/styleinicio.css'
 import Header from '../layout/Header';
 import MainSection from '../layout/MainSection';
-
 import ReactSearchBox from "react-search-box";
-
-import logoSena from '../../img/logo-sena.png'
-
-
+import logoSena from '../../img/logo-sena.png';
 import InfoFicha from '../Fichas/InfoFicha';
 import { useAuth } from '../context/AuthContext';
 import Apps from '../layout/menu/App';
+
 const Inicio = () => {
-
-
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(1);
+  const [fichas, guardarFicha] = useState([]);
 
-  const [fichas, guardarFicha] = useState([]) 
-
-  const {token} = useAuth()
+  const { token } = useAuth();
 
   //hace el envio
-  const consultarApi = async() =>{ 
-
-      //trae la consulta
-      const consultarFicha = await clienteAxios.get('/api/fichas-instructor/',  {
-        headers: {
-            Authorization: `Token ${token}`,
-        }
-    }); 
-      // console.log(consultarCliente);
-      console.log(consultarFicha.data);
-
-      guardarFicha(consultarFicha.data)
+  const consultarApi = async () => {
+    //trae la consulta
+    const consultarFicha = await clienteAxios.get('/api/fichas-instructor/', {
+      headers: {
+        Authorization: `Token ${token}`,
+      }
+    });
+    guardarFicha(consultarFicha.data);
   }
 
-  //es un hook, me controla toda la vida de los componentes, es decir me permite interactuar con todos los componentes
-  useEffect( () => {
-      consultarApi();
-      setFilteredData(fichas);
+  useEffect(() => {
+    consultarApi();
   }, []);
 
-  //   actualizar el estado searchValue con el valor de búsqueda ingresado por el usuario
+  useEffect(() => {
+    filterFichas(searchValue);
+  }, [searchValue, fichas]);
+
   const handleSearch = (name) => {
     setSearchValue(name);
-
   };
 
-  // const [fichas, setFichas] = useState([]);
+  const filterFichas = (searchTerm) => {
+    if (searchTerm === '') {
+      setFilteredData(fichas);
+    } else {
+      const filtered = fichas.filter((item) =>
+        item.nombre_programa.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.nivel_formacion.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.numero_ficha.includes(searchTerm.toLowerCase())
+      );
+      setFilteredData(filtered);
+    }
+    setCurrentPage(1); // Volver a la página 1 al filtrar
+  };
 
-  // useEffect(() => {
-  //   // Realiza una solicitud GET a la vista de Django que devuelve datos de fichas
-  //   fetch('http://localhost:8000/api/fichas/') // Reemplaza con la URL correcta
-  //     .then((response) => response.json())
-  //     .then((data) => setFichas(data));
-  // }, []);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const nextPage = () => {
+    if (currentPage < Math.ceil(filteredData.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <Fragment>
       <Apps />
-    <Header />
-   <main className='container'> 
-   <MainSection />
-    <section className="contendor-principal-info">
-    
-
-      
-      <div className="fichas">
-        <h1>Programas y fichas de formación</h1>
-          <div className="buscar">
-            <i class="bi bi-search"></i>
-            <label htmlFor="buscar">Palabras clave:</label>
-            {/* <input  type="search" className="form-control" />
-            <button  className="btn-buscar">Buscar</button> */}
-             <ReactSearchBox
-        placeholder="Buscar ..."
-        value={searchValue}
-        onChange={handleSearch}
-        data={filteredData}
-        fuseConfigs={{ threshold: 0.2 }}
-        inputHeight="3rem"
-        
-        iconBoxSize={"5rem"}
-        inputFontSize="1.3rem"
-      />
-          </div>
-
-    </div>
-    
-
-    <section class="info-fichas">
-  {searchValue ? (
-    // Si hay un valor de búsqueda, aplica el filtro a deudas
-    fichas
-      .filter(
-        (item) =>
-          item.nombre_programa
-            .toLowerCase()
-            .includes(searchValue.toLowerCase()) ||
-          item.nivel_formacion
-            .toLowerCase()
-            .includes(searchValue.toLowerCase()) ||
-          item.numero_ficha.includes(searchValue.toLowerCase())
-      )
-      .map((filteredItem) => (
-        <Link
-          className="ficha-info"
-          to={`/lista-aprendices/${filteredItem.numero_ficha}/${filteredItem.nombre_programa}`}
-        >
-          <div className="rectangulo-ficha">
-            <div className="logo-info">
-              <img src={logoSena} width="90" alt="lista" />
-            </div>
-            <div className="texto-info">
-              <Link
-                className="title1"
-                to={`/lista-aprendices/${filteredItem.numero_ficha}/${filteredItem.nombre_programa}`}
-              >
-                {filteredItem.nombre_programa}
-              </Link>
-              <p className="title2">{filteredItem.nombre_programa}</p>
-              <p className="aprendiz">{filteredItem.nivel_formacion}</p>
-              <div className="codigo-ficha">
-                <p className="ficha">Ficha:</p>
-                <p className="numero-ficha">{filteredItem.numero_ficha}</p>
-              </div>
+      <Header />
+      <main className='container'>
+        <MainSection />
+        <section className="contendor-principal-info">
+          <div className="fichas">
+            <h1>Programas y fichas de formación</h1>
+            <div className="buscar">
+              <i className="bi bi-search"></i>
+              <label htmlFor="buscar">Palabras clave:</label>
+              <ReactSearchBox
+                placeholder="Buscar ..."
+                value={searchValue}
+                onChange={handleSearch}
+                data={filteredData}
+                fuseConfigs={{ threshold: 0.2 }}
+                inputHeight="3rem"
+                iconBoxSize={"5rem"}
+                inputFontSize="1.3rem"
+              />
             </div>
           </div>
-        </Link>
-      ))
-  ) : (
-    // Si no hay un valor de búsqueda, muestra todas las fichas
-    fichas.map((ficha) => (
-      <InfoFicha key={ficha.id} ficha={ficha} />
-    ))
-  )}
-</section>
-  
-  
-    </section>
-    
-    </main>
+          <section className="info-fichas">
+            {currentItems.length > 0 ? (
+              currentItems.map((filteredItem) => (
+                <Link
+                  key={filteredItem.id}
+                  className="ficha-info"
+                  to={`/lista-aprendices/${filteredItem.numero_ficha}/${filteredItem.nombre_programa}`}
+                >
+                  <div className="rectangulo-ficha">
+                    <div className="logo-info">
+                      <img src={logoSena} width="90" alt="lista" />
+                    </div>
+                    <div className="texto-info">
+                      <Link
+                        className="title1"
+                        to={`/lista-aprendices/${filteredItem.numero_ficha}/${filteredItem.nombre_programa}`}
+                      >
+                        {filteredItem.nombre_programa}
+                      </Link>
+                      <p className="title2">{filteredItem.nombre_programa}</p>
+                      <p className="aprendiz">{filteredItem.nivel_formacion}</p>
+                      <div className="codigo-ficha">
+                        <p className="ficha">Ficha:</p>
+                        <p className="numero-ficha">{filteredItem.numero_ficha}</p>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <p>No se encontraron fichas</p>
+            )}
+          </section>
+          <div className="pagination-buttons">
+            <button className="boton-anterior" onClick={prevPage} disabled={currentPage === 1}>
+              Anterior
+            </button>
+            <button className="boton-siguiente" onClick={nextPage} disabled={currentPage === Math.ceil(filteredData.length / itemsPerPage)}>
+              Siguiente
+            </button>
+          </div>
+        </section>
+      </main>
     </Fragment>
   );
 };
