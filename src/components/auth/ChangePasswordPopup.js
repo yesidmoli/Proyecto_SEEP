@@ -80,6 +80,7 @@ const ChangePasswordPage = () => {
 
     return (
         <>
+        <Header/>
             <div className='container container-padre'>
                 <h2>Cambio de contraseña</h2>
                 <div className='container-update'>
