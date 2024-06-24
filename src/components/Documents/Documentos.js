@@ -25,7 +25,8 @@ const Documentos = (props) => {
         "is_bitacora": false,
         "is_bitacora_check":false,
         "observaciones": '',
-        "aprendiz": parseInt(id)
+        "aprendiz": parseInt(id),
+        "archivo": null
     });
     const [documentos, setDocumentos] = useState([]);
 
@@ -64,7 +65,15 @@ const Documentos = (props) => {
 
     const handleSobrescribirDocumento = async () => {
         try {
-            const response = await clienteAxios.put(`api/documentacion-aprendiz/${parseInt(id)}/`, datosForm, {
+            const formData = new FormData();
+            formData.append('tipo_documento', datosForm.tipo_documento);
+            formData.append('is_bitacora', datosForm.is_bitacora);
+            formData.append('is_bitacora_check', datosForm.is_bitacora_check);
+            formData.append('observaciones', datosForm.observaciones);
+            formData.append('aprendiz', datosForm.aprendiz);
+            formData.append('archivo', datosForm.archivo);
+
+            const response = await clienteAxios.put(`api/documentacion-aprendiz/${datosForm.id}/`, formData, {
                 headers: {
                     Authorization: `Token ${token}`,
                     'Content-Type': 'multipart/form-data'
@@ -81,36 +90,41 @@ const Documentos = (props) => {
     }
 
     const handleCargarDocumentos = async () => {
-        // Verificar si la bitácora ya ha sido subida
-            const documentoYaCargado = documentos.find(doc => doc.tipo_documento === datosForm.tipo_documento);
-            if (!!documentoYaCargado) {
-                datosForm = {
-                    "id": documentoYaCargado.id,
-                    "tipo_documento": documentoYaCargado.tipo_documento,
-                    "archivo": datosForm.archivo,
-                    "is_bitacora": documentoYaCargado.is_bitacora,
-                    "is_bitacora_check": documentoYaCargado.is_bitacora_check? documentoYaCargado.is_bitacora_check : false,
-                    "observaciones": documentoYaCargado.observaciones? documentoYaCargado.observaciones : '',
-                    "aprendiz": parseInt(id)
-                }
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Este documento ya ha sido cargado. ¿Desea actualizarla?',
-                    icon: 'error',
-                    showCancelButton: true,
-                    confirmButtonText: 'Sí, actualizar',
-                    cancelButtonText: 'No, cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
+        const documentoYaCargado = documentos.find(doc => doc.tipo_documento === datosForm.tipo_documento);
+        if (documentoYaCargado) {
+            datosForm = {
+                ...datosForm,
+                id: documentoYaCargado.id,
+                is_bitacora: documentoYaCargado.is_bitacora,
+                is_bitacora_check: documentoYaCargado.is_bitacora_check ? documentoYaCargado.is_bitacora_check : false,
+                observaciones: documentoYaCargado.observaciones ? documentoYaCargado.observaciones : '',
+            };
 
-                        handleSobrescribirDocumento();
-                    }
-                });
-                return;
-            }
+            Swal.fire({
+                title: 'Error',
+                text: 'Este documento ya ha sido cargado. ¿Desea actualizarlo?',
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, actualizar',
+                cancelButtonText: 'No, cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    handleSobrescribirDocumento();
+                }
+            });
+            return;
+        }
 
         try {
-            const response = await clienteAxios.post('api/documentacion-aprendiz/', datosForm, {
+            const formData = new FormData();
+            formData.append('tipo_documento', datosForm.tipo_documento);
+            formData.append('is_bitacora', datosForm.is_bitacora);
+            formData.append('is_bitacora_check', datosForm.is_bitacora_check);
+            formData.append('observaciones', datosForm.observaciones);
+            formData.append('aprendiz', datosForm.aprendiz);
+            formData.append('archivo', datosForm.archivo);
+
+            const response = await clienteAxios.post('api/documentacion-aprendiz/', formData, {
                 headers: {
                     Authorization: `Token ${token}`,
                     'Content-Type': 'multipart/form-data'
@@ -155,7 +169,7 @@ const Documentos = (props) => {
             <Apps />
             <Header />
             <div className="container cont-doc">
-                <Link to={"#"} aria-label="icon" className=" btn-atras" onClick={() => history.goBack()}>
+                <Link to={"#"} aria-label="icon" className="btn-atras" onClick={() => history.goBack()}>
                     <img src={atras} alt="Regresar"/>
                     <b>Regresar</b>
                 </Link>
@@ -211,4 +225,3 @@ const Documentos = (props) => {
 };
 
 export default Documentos;
-
