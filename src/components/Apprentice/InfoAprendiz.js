@@ -84,7 +84,7 @@ function InfoAprediz(props) {
     <Fragment>
       <Apps />
       <Header />
-      <main className="container">
+      <main className="container container__scroll">
         <div className="btn-group">
           <Link to={`/formato-etapa-productiva/${id}/${'Planeacion'}`}
             className={`btn btn-success ${activeButton === 'Planeación' ? 'active' : ''}`}

@@ -11,6 +11,7 @@ import logoSena from '../../img/logo-sena.png';
 import { useAuth } from '../context/AuthContext';
 import Apps from '../layout/menu/App';
 
+
 const Inicio = () => {
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState([]);

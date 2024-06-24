@@ -43,7 +43,7 @@ body{
 }
 .container-uno input{
     margin-bottom: 20px;
-    background-color: #f8f8f8 !important;
+    /* background-color: #f8f8f8 !important; */
     height: 2rem;
 }
 .container-uno label{
@@ -281,6 +281,10 @@ body{
     z-index: 1;
   }
 
+.container__scroll{
+    height: 40rem;
+    overflow: scroll;
+}
 @media only screen and (max-width: 768px) {
     .nombre-documento{
         margin: 0px;

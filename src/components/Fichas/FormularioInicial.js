@@ -10,12 +10,15 @@ import Apps from "../layout/menu/App";
 import Header from "../layout/Header";
 import { Link } from "react-router-dom";
 
-import atras from '../../img/atras.png'
+import atras from '../../img/atras.png';
 import Spinner from 'react-bootstrap/Spinner';
+import FichaSelector from "./FichaSelector";
 
 const FormularioInicial = () => {
+
+  const [fichaSeleccionada, setFichaSeleccionada] = useState(null);
   const initialState = {
-    numero_ficha: "",
+    numero_ficha: fichaSeleccionada,
     nombres: "",
     apellidos: "",
     tipo_documento: "",
@@ -49,9 +52,7 @@ const FormularioInicial = () => {
   const [modoEdicion, setModoEdicion] = useState(false);
   const [registroAprendices, setRegistroAprendices] = useState(false);
   const [idEditar, setIdEditar] = useState(null);
-
   const [enviandoDatos, setEnviandoDatos] = useState(false);
-
 
   useEffect(() => {
     const obtenerAprendices = async () => {
@@ -96,23 +97,16 @@ const FormularioInicial = () => {
         // Actualizar aprendiz existente
         await clienteAxios.put(`api/aprendices/${idEditar}`, aprendiz);
         Swal.fire("¡Éxito!", "Aprendiz actualizado exitosamente", "success");
-
       } else {
-
         try {
-
           // Crear nuevo aprendiz
           await clienteAxios.post("/api/aprendices/", aprendiz);
           Swal.fire("¡Éxito!", "Aprendiz registrado exitosamente", "success");
-          setEnviandoDatos(false);
-
-
         } catch (error) {
-          console.log("error", error)
+          console.log("error", error);
           let errorMessage = "Se produjo un error al guardar:";
           if (error.response && error.response.data) {
             const data = error.response.data;
-        
             if (data.error) {
               errorMessage += `\n- ${data.error}`;
             } else if (Array.isArray(data)) {
@@ -132,9 +126,7 @@ const FormularioInicial = () => {
             errorMessage += "\n- Ha ocurrido un error inesperado.";
           }
           Swal.fire("Error", errorMessage, "error");
-          setEnviandoDatos(false);
         }
-
       }
 
       // Actualizar la lista de aprendices
@@ -142,7 +134,6 @@ const FormularioInicial = () => {
       setAprendices(response.data);
 
       // Limpiar el formulario y restablecer el estado
-      // setAprendiz(initialState);
       setModoEdicion(false);
       setIdEditar(null);
     } catch (error) {
@@ -158,8 +149,8 @@ const FormularioInicial = () => {
         Swal.fire("¡Error!", "Hubo un error al procesar la solicitud", "error");
       }
     }
+    setEnviandoDatos(false);
   };
-
 
   const editarAprendiz = (id) => {
     const aprendizEditar = aprendices.find((a) => a._id === id);
@@ -194,48 +185,47 @@ const FormularioInicial = () => {
       }
     }
   };
+
   const handleRegistroAprendices = () => {
     // Actualiza el estado para mostrar el componente de VisualizarDocumentos
     setRegistroAprendices(true);
-  }
+  };
 
   if (registroAprendices) {
     // Si mostrarDocumentos es verdadero, renderiza el componente VisualizarDocumentos
     return <AprendicesRegistrados />;
   }
 
-
+  const FichaSeleccionada = (fichaId) => {
+    setFichaSeleccionada(fichaId);
+    setAprendiz({
+      ...aprendiz,
+      numero_ficha: fichaId,
+    });
+  };
 
   return (
-
     <Fragment>
-
       <Header />
       <MainSection />
       <Apps />
-      <div className="container cont-fichas  " >
-
-        <Link to={"/fichas"} aria-label="icon" className=" btn-atras">
-          <img src={atras}></img>
-
+      <div className="container cont-fichas">
+        <Link to={"/fichas"} aria-label="icon" className="btn-atras">
+          <img src={atras} alt="Atrás" />
           <b>Regresar</b>
         </Link>
         <div className='btn-fichas-aprendiz'>
           <button id="ver" onClick={handleRegistroAprendices}>Aprendices registrados</button>
         </div>
-
         <div className="container-uno">
-          <h2>Añadir  Aprendiz</h2>
+          <h2>Añadir Aprendiz</h2>
           <div className="form">
             <form onSubmit={enviarDatos}>
               <label>Número de Ficha: <p className="rojo-label">*</p></label>
-              <input
-                type="number"
-                name="numero_ficha"
-                value={aprendiz.numero_ficha}
-                onChange={actualizarState}
-                required
-              />
+              <div className="select-venta classN">
+              <FichaSelector onAprendizSeleccionada={FichaSeleccionada} />
+              </div>
+              
               <label>Nombres: <p className="rojo-label">*</p></label>
               <input
                 type="text"
@@ -253,22 +243,13 @@ const FormularioInicial = () => {
                 required
               />
               <label>Tipo de Documento: <p className="rojo-label">*</p></label>
-              <select name="tipo_documento"  value={aprendiz.tipo_documento} onChange={actualizarState}>
+              <select name="tipo_documento" value={aprendiz.tipo_documento} onChange={actualizarState}>
                 <option value="" disabled>Seleccione el tipo de documento</option>
                 <option value="CC">Cédula de Ciudadanía</option>
                 <option value="CE">Cédula de Extranjería</option>
                 <option value="TI">Tarjeta de Identidad</option>
                 <option value="PA">Pasaporte</option>
-                {/* <option value="PEP">Permiso Especial de Permanencia</option>
-                <option value="RC">Registro Civil</option> */}
               </select>
-              {/* <input
-                type="text"
-                name="tipo_documento"
-                value={aprendiz.tipo_documento}
-                onChange={actualizarState}
-                required
-              /> */}
               <label>Número de Documento: <p className="rojo-label">*</p></label>
               <input
                 type="number"
@@ -305,19 +286,11 @@ const FormularioInicial = () => {
               />
               <label>Genero: <p className="rojo-label">*</p></label>
               <select name="sexo" value={aprendiz.sexo} onChange={actualizarState} required>
-                <option value="" disabled> Seleccione el sexo</option>
-                <option value="Masculino" >Masculino</option>
-                <option value="Femenino" >Femenino</option>
+                <option value="" disabled>Seleccione el sexo</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
                 <option value="No binario">No binario</option>
-
               </select>
-              {/* <input
-                type="text"
-                name="sexo"
-                value={aprendiz.sexo}
-                onChange={actualizarState}
-                required
-              /> */}
               <label>Dirección Domicilio: <p className="rojo-label">*</p></label>
               <input
                 type="text"
@@ -366,7 +339,7 @@ const FormularioInicial = () => {
               />
               <label>Correo Principal: <p className="rojo-label">*</p></label>
               <input
-                type="mail"
+                type="email"
                 name="correo_principal"
                 value={aprendiz.correo_principal}
                 onChange={actualizarState}
@@ -374,7 +347,7 @@ const FormularioInicial = () => {
               />
               <label>Correo Secundario:</label>
               <input
-                type="mail"
+                type="email"
                 name="correo_secundario"
                 value={aprendiz.correo_secundario}
                 onChange={actualizarState}
@@ -388,18 +361,9 @@ const FormularioInicial = () => {
                 onChange={actualizarState}
                 required
               />
-              {/* <label>Estado de Aprobación:</label>
-                <input
-                placeholder="pediente"
-                  type="text"
-                  name="estado_aprobacion"
-                  value={aprendiz.estado_aprobacion}
-                  onChange={actualizarState}
-                  required
-                /> */}
               <div className="datos-empresa">
                 <h3 id="datos-emp">Datos de la empresa </h3>
-                <p>(Si el aprendiz no cuenta con empresa coloque el numero 0)</p>
+                <p>(Si el aprendiz no cuenta con empresa coloque el número 0)</p>
                 <label>Nit: <p className="rojo-label">*</p></label>
                 <input
                   type="number"
@@ -407,42 +371,42 @@ const FormularioInicial = () => {
                   value={aprendiz.empresa.nit}
                   onChange={actualizarState}
                   required
-                ></input>
+                />
                 <label>Empresa: </label>
                 <input
                   type="text"
                   name="empresa.razon_social"
                   value={aprendiz.empresa.razon_social}
                   onChange={actualizarState}
-                ></input>
+                />
                 <label>Jefe inmediato:</label>
                 <input
                   type="text"
                   name="empresa.nombre_jefe_inmediato"
                   value={aprendiz.empresa.nombre_jefe_inmediato}
                   onChange={actualizarState}
-                ></input>
+                />
                 <label>Dirección:</label>
                 <input
                   type="text"
                   name="empresa.direccion"
                   value={aprendiz.empresa.direccion}
                   onChange={actualizarState}
-                ></input>
+                />
                 <label>Correo:</label>
                 <input
-                  type="mail"
+                  type="email"
                   name="empresa.correo"
                   value={aprendiz.empresa.correo}
                   onChange={actualizarState}
-                ></input>
-                <label>Telefono</label>
+                />
+                <label>Teléfono:</label>
                 <input
                   type="number"
                   name="empresa.telefono"
                   value={aprendiz.empresa.telefono}
                   onChange={actualizarState}
-                ></input>
+                />
                 <div className="botones">
                   <button id="save">
                     {enviandoDatos ? (
@@ -453,9 +417,7 @@ const FormularioInicial = () => {
                     ) : (
                       "Registrar"
                     )}
-
                   </button>
-
                 </div>
               </div>
             </form>
@@ -465,4 +427,5 @@ const FormularioInicial = () => {
     </Fragment>
   );
 };
+
 export default FormularioInicial;
