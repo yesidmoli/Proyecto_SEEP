@@ -85,7 +85,7 @@ const Documentos = (props) => {
             fetchDocumentos();
         } catch (error) {
             console.error('Error al sobrescribir el documento:', error);
-            Swal.fire('Error', 'Error al sobrescribir el documento. Revise que no hayan campos vacíos', 'error');
+            Swal.fire('Error', error.response.data.archivo[0], 'error');
         }
     }
 
@@ -142,7 +142,7 @@ const Documentos = (props) => {
                 const errorMessage = error.response.data.archivo[0];
                 Swal.fire('Error', errorMessage, 'error');
             } else {
-                Swal.fire('Error', 'Error al cargar el documento. Revise que no hayan campos vacíos', error.response.data);
+                Swal.fire('Error', error.response.data, 'error');
             }
         }
     }
