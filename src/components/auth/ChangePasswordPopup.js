@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import Apps from '../layout/menu/App';
 import MainSection from '../layout/MainSection';
 import Header from '../layout/Header';
+import logoSeep from '../../img/seep-logo-verde.svg';
+import cditi from '../../img/cditi-logo.svg';
 import './style.css';
 
 const ChangePasswordPage = () => {
@@ -43,6 +45,17 @@ const ChangePasswordPage = () => {
             return;
         }
 
+         // Verificar que la contraseña tenga mayúsculas, minúsculas, y caracteres especiales
+         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{8,}$/;
+         if (!passwordRegex.test(password)) {
+             Swal.fire({
+                 icon: 'error',
+                 title: 'Error',
+                 text: 'La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial',
+             });
+             return;
+         }
+
         try {
             const response = await clienteAxios.patch(
                 '/api/update-user/',
@@ -79,7 +92,11 @@ const ChangePasswordPage = () => {
     };
 
     return (
-        <>
+        <> 
+        <header class="encabezado-login">
+            <img className='seep-img' src={logoSeep} alt="logo-SEEP" />
+            <img className='cditi-img' src={cditi} alt="logo-CDITI" />
+        </header>
             <div className='container container-padre'>
                 <h2>Cambio de contraseña</h2>
                 <div className='container-update'>
@@ -113,6 +130,7 @@ const ChangePasswordPage = () => {
 
                 <button onClick={handleChangePassword}>Cambiar la contraseña</button>
             </div>
+    
         </>
     );
 };
