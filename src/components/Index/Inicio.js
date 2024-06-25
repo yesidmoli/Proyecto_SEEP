@@ -8,28 +8,29 @@ import Header from '../layout/Header';
 import MainSection from '../layout/MainSection';
 import ReactSearchBox from "react-search-box";
 import logoSena from '../../img/logo-sena.png';
-import InfoFicha from '../Fichas/InfoFicha';
 import { useAuth } from '../context/AuthContext';
 import Apps from '../layout/menu/App';
+
 
 const Inicio = () => {
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);  // Inicializar en 1
+  const [itemsPerPage, setItemsPerPage] = useState(5);
   const [fichas, guardarFicha] = useState([]);
 
   const { token } = useAuth();
 
-  //hace el envio
+  // Hace el envío
   const consultarApi = async () => {
-    //trae la consulta
+    // Trae la consulta
     const consultarFicha = await clienteAxios.get('/api/fichas-instructor/', {
       headers: {
         Authorization: `Token ${token}`,
       }
     });
     guardarFicha(consultarFicha.data);
+    setFilteredData(consultarFicha.data);  // Inicializar filteredData con todos los datos
   }
 
   useEffect(() => {
@@ -73,6 +74,8 @@ const Inicio = () => {
       setCurrentPage(currentPage - 1);
     }
   };
+
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
   return (
     <Fragment>
@@ -132,12 +135,18 @@ const Inicio = () => {
             )}
           </section>
           <div className="pagination-buttons">
+          <span className="page-info">
+              Página {currentPage} de {totalPages}
+            </span>
+            <div className='btns-page'>
             <button className="boton-anterior" onClick={prevPage} disabled={currentPage === 1}>
               Anterior
             </button>
-            <button className="boton-siguiente" onClick={nextPage} disabled={currentPage === Math.ceil(filteredData.length / itemsPerPage)}>
+            <button className="boton-siguiente" onClick={nextPage} disabled={currentPage === totalPages}>
               Siguiente
             </button>
+            </div>
+
           </div>
         </section>
       </main>

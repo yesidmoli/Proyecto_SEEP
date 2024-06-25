@@ -221,7 +221,7 @@ function PlaneacionEP({ goToNextComponent, data , id}) {
                     ></input>
                   </td>
                   <td>
-                    {rol !== "aprendiz" ? <button  disabled ={rol==="aprendiz"} type="button" onClick={() => handleRemoveActividad(index)}>
+                    {rol !== "aprendiz" ? <button className="btn-eliminar"  disabled ={rol==="aprendiz"} type="button" onClick={() => handleRemoveActividad(index)}>
                       Eliminar
                     </button> 
                     : null}
@@ -232,7 +232,7 @@ function PlaneacionEP({ goToNextComponent, data , id}) {
             </tbody>
           </table>
           {rol !== "aprendiz" ? 
-          <button type="button" onClick={handleAddActividad} disabled ={rol==="aprendiz"}>
+          <button className="btn-añadir" type="button" onClick={handleAddActividad} disabled ={rol==="aprendiz"}>
           Añadir Actividad
         </button>
           :null}
@@ -274,7 +274,7 @@ function PlaneacionEP({ goToNextComponent, data , id}) {
                 ) : null}
               </section>
               
-              <Popup trigger={<button type="button"  disabled={rol==="aprendiz"} >Firmar</button>} modal>
+              <Popup trigger={<button type="button"  className="btn-eliminar"  disabled={rol==="aprendiz"} >Firmar</button>} modal>
 
                 {(close) => (
                   <div className="popup campo-firma">
@@ -335,7 +335,7 @@ function PlaneacionEP({ goToNextComponent, data , id}) {
                 ) : null}
               </section>
 
-              <Popup trigger={<button type="button">Firmar</button>} modal>
+              <Popup trigger={<button  className="btn-eliminar" type="button">Firmar</button>} modal>
                 {(close) => (
                   <div className="popup campo-firma">
                     <section className="head-signature">
@@ -393,7 +393,7 @@ function PlaneacionEP({ goToNextComponent, data , id}) {
                 ) : null}
               </section>
               {rol !== "aprendiz" ?
-              <Popup trigger={<button type="button">Firmar</button>} modal>
+              <Popup trigger={<button className="btn-eliminar" type="button">Firmar</button>} modal>
               {(close) => (
                 <div className="popup campo-firma">
                   <section className="head-signature">
@@ -414,7 +414,7 @@ function PlaneacionEP({ goToNextComponent, data , id}) {
                   />
 
                   <div className="btn-guardar-firma">
-                    <button className="btn btn-success" onClick={() => { saveSignature(instructorRef, "firma_instructor"); close(); }}>
+                    <button className="btn btn-añadir" onClick={() => { saveSignature(instructorRef, "firma_instructor"); close(); }}>
                       Guardar Firma
                     </button>
                   </div>
@@ -429,7 +429,7 @@ function PlaneacionEP({ goToNextComponent, data , id}) {
 
 
 
-          <div className="btn btn-success" onClick={handleGuardarDatos}>
+          <div className="btn btn-success btn-añadir" onClick={handleGuardarDatos}>
             <h5>Guardar</h5>
           </div>
         </form>

@@ -225,10 +225,18 @@
     
 }
 
-
+.btn-eliminar{
+    font-size: 10px;
+    
+}
+.btn-añadir{
+    width: 10rem;
+    font-size: 12px;
+    margin-top: 5px;
+}
 .input-planeacion{
     width: 100% !important;
-    height: 3rem;
+    height: 2rem;
     border: 1px solid #ccc !important;
 }
 .observaciones-planeacion{
@@ -277,6 +285,7 @@
 .btns-sigue-atras button{
     background-color: #70B22D !important;
     font-weight: 600;
+    font-size: 8px;
 }
 .btns-sigue-atras button:hover{
     background-color: var(--color-corp-azul) !important;
@@ -302,7 +311,9 @@
 .pagination{
     display: none !important;
 }
-
+.input-si-evidencia {
+    height: 1rem;
+}
 
 @media only screen and (max-width: 768px) {
     .btn-ant-desp{

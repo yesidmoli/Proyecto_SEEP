@@ -14,7 +14,7 @@ function DocumentosAprendices() {
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(2); // Inicializar con 5 ítems por página
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Inicializar con 5 ítems por página
 
   useEffect(() => {
     consultarDatosCliente();
@@ -71,6 +71,7 @@ function DocumentosAprendices() {
     setCurrentPage(1); // Volver a la página 1 al cambiar el número de ítems por página
   };
 
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
   return (
     <Fragment>
       <Apps />
@@ -113,12 +114,18 @@ function DocumentosAprendices() {
 
         {/* Botones de paginación */}
         <div className="pagination-buttons">
+        <span className="page-info">
+              Página {currentPage} de {totalPages}
+            </span>
+          <div className="btns-page">
           <button className="boton-anterior" onClick={prevPage} disabled={currentPage === 1}>
             Anterior
           </button>
           <button className="boton-siguiente" onClick={nextPage} disabled={currentPage === Math.ceil(filteredData.length / itemsPerPage)}>
             Siguiente
           </button>
+          </div>
+         
         </div>
       </section>
     </Fragment>
