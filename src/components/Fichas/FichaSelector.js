@@ -14,7 +14,7 @@ const FichaSelector = ({onAprendizSeleccionada}) => {
 
     const fetchAprendices = async () => {
       try {
-        const response = await Axios.get('/api/fichas/', {
+        const response = await Axios.get('/api/fichas-list/', {
           headers: {
             Authorization: `Token ${token}`,
           },

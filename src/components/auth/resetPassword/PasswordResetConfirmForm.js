@@ -26,7 +26,7 @@ const PasswordResetConfirmForm = () => {
         }
         setLoading(true);
         try {
-            const response = await clienteAxios.post('http://localhost:8000/dj-rest-auth/password/reset/confirm/', {
+            const response = await clienteAxios.post('/dj-rest-auth/password/reset/confirm/', {
                 uid,
                 token,
                 new_password1: password1,

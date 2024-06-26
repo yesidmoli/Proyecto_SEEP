@@ -68,7 +68,15 @@ const FormularioInicial = () => {
   }, []);
 
   const actualizarState = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
+  
+    let newValue = value;
+  
+    // Validar campos de tipo 'number' para no permitir números negativos
+    if (type === 'number') {
+      newValue = value.replace(/[^0-9]/g, ''); // Remueve cualquier caracter que no sea un número
+    }
+  
     if (name.includes("empresa.")) {
       // Si el campo pertenece a 'empresa', actualiza ese campo específico
       const empresaField = name.split("empresa.")[1];
@@ -76,17 +84,19 @@ const FormularioInicial = () => {
         ...aprendiz,
         empresa: {
           ...aprendiz.empresa,
-          [empresaField]: value,
+          [empresaField]: newValue, // Aplica el nuevo valor validado
         },
       });
     } else {
       // Si no es un campo de 'empresa', actualiza directamente en el nivel superior
       setAprendiz({
         ...aprendiz,
-        [name]: value,
+        [name]: newValue, // Aplica el nuevo valor validado
       });
     }
   };
+  
+
 
   const enviarDatos = async (e) => {
     e.preventDefault();
@@ -252,6 +262,7 @@ const FormularioInicial = () => {
               </select>
               <label>Número de Documento: <p className="rojo-label">*</p></label>
               <input
+              min="0"
                 type="number"
                 name="numero_documento"
                 value={aprendiz.numero_documento}
@@ -317,6 +328,7 @@ const FormularioInicial = () => {
               />
               <label>Número de Celular 1: <p className="rojo-label">*</p></label>
               <input
+              min="0"
                 type="number"
                 name="numero_celular1"
                 value={aprendiz.numero_celular1}
@@ -325,6 +337,7 @@ const FormularioInicial = () => {
               />
               <label>Número de Celular 2:</label>
               <input
+              min="0"
                 type="number"
                 name="numero_celular2"
                 value={aprendiz.numero_celular2}
@@ -332,6 +345,7 @@ const FormularioInicial = () => {
               />
               <label>Teléfono Fijo:</label>
               <input
+              min="0"
                 type="number"
                 name="telefono_fijo"
                 value={aprendiz.telefono_fijo}
@@ -366,6 +380,7 @@ const FormularioInicial = () => {
                 <p>(Si el aprendiz no cuenta con empresa coloque el número 0)</p>
                 <label>Nit: <p className="rojo-label">*</p></label>
                 <input
+                min="0"
                   type="number"
                   name="empresa.nit"
                   value={aprendiz.empresa.nit}
@@ -402,6 +417,8 @@ const FormularioInicial = () => {
                 />
                 <label>Teléfono:</label>
                 <input
+                 pattern="[0-9]*"
+                min="0"
                   type="number"
                   name="empresa.telefono"
                   value={aprendiz.empresa.telefono}

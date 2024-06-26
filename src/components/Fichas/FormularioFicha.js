@@ -278,6 +278,7 @@ const FormularioFicha = ({ history }) => {
               name="numero_ficha"
               value={ficha.numero_ficha}
               onChange={actualizarState}
+              min="0"
             />
 
             <label>Nombre del Programa <p className="rojo-label">*</p></label>

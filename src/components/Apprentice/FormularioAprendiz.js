@@ -5,10 +5,14 @@ import Swal from "sweetalert2";
 import "../layout/MainSection";
 import "../layout/Header";
 import Spinner from 'react-bootstrap/Spinner';
+import FichaSelector from "../Fichas/FichaSelector";
 
 const FormularioAprendiz = () => {
+
+  const [fichaSeleccionada, setFichaSeleccionada] = useState(null);
+  
   const initialState = {
-    numero_ficha: "",
+    numero_ficha: fichaSeleccionada,
     nombres: "",
     apellidos: "",
     tipo_documento: "",
@@ -44,6 +48,8 @@ const FormularioAprendiz = () => {
 
   const [enviandoDatos, setEnviandoDatos] = useState(false);
 
+  
+
   useEffect(() => {
     const obtenerAprendices = async () => {
       try {
@@ -58,7 +64,15 @@ const FormularioAprendiz = () => {
   }, []);
 
   const actualizarState = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
+  
+    let newValue = value;
+  
+    // Validar campos de tipo 'number' para no permitir números negativos
+    if (type === 'number') {
+      newValue = value.replace(/[^0-9]/g, ''); // Remueve cualquier caracter que no sea un número
+    }
+  
     if (name.includes("empresa.")) {
       // Si el campo pertenece a 'empresa', actualiza ese campo específico
       const empresaField = name.split("empresa.")[1];
@@ -66,18 +80,18 @@ const FormularioAprendiz = () => {
         ...aprendiz,
         empresa: {
           ...aprendiz.empresa,
-          [empresaField]: value,
+          [empresaField]: newValue, // Aplica el nuevo valor validado
         },
       });
     } else {
       // Si no es un campo de 'empresa', actualiza directamente en el nivel superior
       setAprendiz({
         ...aprendiz,
-        [name]: value,
+        [name]: newValue, // Aplica el nuevo valor validado
       });
     }
   };
-
+  
   const enviarDatos = async (e) => {
     e.preventDefault();
 
@@ -163,6 +177,13 @@ const FormularioAprendiz = () => {
       }
     }
   };
+  const FichaSeleccionada = (fichaId) => {
+    setFichaSeleccionada(fichaId);
+    setAprendiz({
+      ...aprendiz,
+      numero_ficha: fichaId,
+    });
+  };
 
   return (
     <div className="main-container">
@@ -175,13 +196,17 @@ const FormularioAprendiz = () => {
           <div className="form">
             <form onSubmit={enviarDatos}>
               <label>Número de Ficha: <p className="rojo-label">*</p></label>
-              <input
+              {/* <input
+              min="0"
                 type="number"
                 name="numero_ficha"
                 value={aprendiz.numero_ficha}
                 onChange={actualizarState}
                 required
-              />
+              /> */}
+               <div className="select-venta classN">
+              <FichaSelector onAprendizSeleccionada={FichaSeleccionada} />
+              </div>
               <label>Nombres: <p className="rojo-label">*</p></label>
               <input
                 type="text"
@@ -217,6 +242,7 @@ const FormularioAprendiz = () => {
       /> */}
               <label>Número de Documento: <p className="rojo-label">*</p></label>
               <input
+              min="0"
                 type="number"
                 name="numero_documento"
                 value={aprendiz.numero_documento}
@@ -290,6 +316,7 @@ const FormularioAprendiz = () => {
               />
               <label>Número de Celular 1: <p className="rojo-label">*</p></label>
               <input
+              min="0"
                 type="number"
                 name="numero_celular1"
                 value={aprendiz.numero_celular1}
@@ -298,6 +325,7 @@ const FormularioAprendiz = () => {
               />
               <label>Número de Celular 2:</label>
               <input
+              min="0"
                 type="number"
                 name="numero_celular2"
                 value={aprendiz.numero_celular2}
@@ -305,6 +333,7 @@ const FormularioAprendiz = () => {
               />
               <label>Teléfono Fijo:</label>
               <input
+              min="0"
                 type="number"
                 name="telefono_fijo"
                 value={aprendiz.telefono_fijo}
@@ -312,7 +341,7 @@ const FormularioAprendiz = () => {
               />
               <label>Correo Principal: <p className="rojo-label">*</p></label>
               <input
-                type="mail"
+                type="email"
                 name="correo_principal"
                 value={aprendiz.correo_principal}
                 onChange={actualizarState}
@@ -320,7 +349,7 @@ const FormularioAprendiz = () => {
               />
               <label>Correo Secundario:</label>
               <input
-                type="mail"
+                type="email"
                 name="correo_secundario"
                 value={aprendiz.correo_secundario}
                 onChange={actualizarState}
@@ -348,6 +377,7 @@ const FormularioAprendiz = () => {
                 <p>(Si el aprendiz no cuenta con empresa coloque el numero 0)</p>
                 <label>Nit: <p className="rojo-label">*</p></label>
                 <input
+                min="0"
                   type="number"
                   name="empresa.nit"
                   value={aprendiz.empresa.nit}
@@ -377,13 +407,14 @@ const FormularioAprendiz = () => {
                 ></input>
                 <label>Correo:</label>
                 <input
-                  type="mail"
+                  type="email"
                   name="empresa.correo"
                   value={aprendiz.empresa.correo}
                   onChange={actualizarState}
                 ></input>
                 <label>Telefono</label>
                 <input
+                min="0"
                   type="number"
                   name="empresa.telefono"
                   value={aprendiz.empresa.telefono}
