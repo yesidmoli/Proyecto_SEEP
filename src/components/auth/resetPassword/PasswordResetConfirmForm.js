@@ -3,6 +3,8 @@ import clienteAxios from '../../../config/axios';
 import './styles.css';
 import { useParams, useHistory } from 'react-router-dom';
 import { Header } from '../../layout/Header';
+import logoSeep from '../../../img/seep-logo-verde.svg';
+import cditi from '../../../img/cditi-logo.svg';
 import Swal from 'sweetalert2';
 
 const PasswordResetConfirmForm = () => {
@@ -24,6 +26,15 @@ const PasswordResetConfirmForm = () => {
             setMessage('La contraseña debe tener al menos 8 caracteres.');
             return;
         }
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{8,}$/;
+         if (!passwordRegex.test(password1)) {
+             Swal.fire({
+                 icon: 'error',
+                 title: 'Error',
+                 text: 'La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial',
+             });
+             return;
+            }
         setLoading(true);
         try {
             const response = await clienteAxios.post('http://localhost:8000/dj-rest-auth/password/reset/confirm/', {
@@ -46,7 +57,12 @@ const PasswordResetConfirmForm = () => {
     };
 
     return (
+        <><header class="encabezado-login">
+        <img className='seep-img' src={logoSeep} alt="logo-SEEP" />
+        <img className='cditi-img' src={cditi} alt="logo-CDITI" />
+        </header>
         <div className='container-sm cont-form-reset'>
+            
             <div className='container-form'>
                 <h2>Restablecer Contraseña</h2>
                 <form onSubmit={handleSubmit}>
@@ -67,6 +83,7 @@ const PasswordResetConfirmForm = () => {
                 {message && <p className="error-message">{message}</p>}
             </div>
         </div>
+        </>
     );
 };
 
