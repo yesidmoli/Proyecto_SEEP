@@ -10,12 +10,13 @@ import { useAuth } from "../context/AuthContext";
 import atras from '../../img/atras.png'
 import { Link, useHistory } from "react-router-dom";
 import bitacora from '../../../src/components/bitacoras/BitacoraDoc.xlsx';
+import Spinner from 'react-bootstrap/Spinner';
 
 const Documentos = (props) => {
     const history = useHistory();
     const { id } = props.match.params;
     const { token } = useAuth();
-    
+
     const [seleccion, setSeleccion] = useState('');
     const [mostrarCampoAdicional, setMostrarCampoAdicional] = useState(false);
     const [mostrarDocumentos, setMostrarDocumentos] = useState(false);
@@ -23,12 +24,13 @@ const Documentos = (props) => {
         "id": 0,
         "tipo_documento": '',
         "is_bitacora": false,
-        "is_bitacora_check":false,
+        "is_bitacora_check": false,
         "observaciones": '',
         "aprendiz": parseInt(id),
         "archivo": null
     });
     const [documentos, setDocumentos] = useState([]);
+    const [isGenerating, setIsGenerating] = useState(false); // Estado para manejar el spinner
 
     const opciones = ['Bitácora', 'Documento de identidad', 'Carta Laboral', 'Certificado Agencia Publica', 'Carnet Destruido', 'Pruebas TyT', 'Carta Laboral'];
 
@@ -65,6 +67,7 @@ const Documentos = (props) => {
 
     const handleSobrescribirDocumento = async () => {
         try {
+            setIsGenerating(true);
             const formData = new FormData();
             formData.append('tipo_documento', datosForm.tipo_documento);
             formData.append('is_bitacora', datosForm.is_bitacora);
@@ -81,6 +84,7 @@ const Documentos = (props) => {
             });
             Swal.fire('¡Éxito!', 'El documento ha sido actualizado exitosamente.', 'success');
             setMostrarDocumentos(true);
+            setIsGenerating(false);
 
             fetchDocumentos();
         } catch (error) {
@@ -170,7 +174,7 @@ const Documentos = (props) => {
             <Header />
             <div className="container cont-doc">
                 <Link to={"#"} aria-label="icon" className="btn-atras" onClick={() => history.goBack()}>
-                    <img src={atras} alt="Regresar"/>
+                    <img src={atras} alt="Regresar" />
                     <b>Regresar</b>
                 </Link>
                 <MainSection />
@@ -214,7 +218,23 @@ const Documentos = (props) => {
                             <input className="file" type="file" id="file" name="file" required onChange={handleSeleccionArchivo} />
                         </div>
                         <div className="buttons">
-                            <button id="subir" type="button" onClick={handleCargarDocumentos}>Cargar</button>
+                            <button id="subir" type="button" onClick={handleCargarDocumentos} disabled={isGenerating}>
+                                {isGenerating ? (
+                                    <div className='spiner-alert'>
+                                        <Spinner
+                                            as="span"
+                                            animation="border"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                        />
+                                        <p>Subiendo Documento</p></div>
+
+                                ) : (
+                                    'Cargar'
+                                )}
+                            </button>
+
                         </div>
                     </form>
                 </section>
