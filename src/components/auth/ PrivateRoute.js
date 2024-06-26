@@ -50,6 +50,19 @@ const PrivateRoute = ({ component: Component, allowedRoles, ...rest })  => {
             return <Component {...props} />;
           }
         }
+        if (props.match.path === '/graficas' || props.match.path === '/nuevo-aprendiz'  ) {
+          if (rol === 'aprendiz') {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "No tienes permisos para ver este modulo!",
+            });
+
+            return  <Redirect to={"/"} />;
+          } else {
+            return <Component {...props} />;
+          }
+        }
         if (props.match.path === '/bitacoras') {
           if (rol === 'aprendiz') {
             return <Redirect to={`/bitacora-aprendiz/${storedDatos.id}/`} />;

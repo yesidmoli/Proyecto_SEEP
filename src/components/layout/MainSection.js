@@ -51,6 +51,14 @@ const MainSection = () => {
         </Link>
         <div className="animated slideInLeft">Bitácoras</div>
       </li>
+      {rol !== "aprendiz" ?
+      <li>
+        <Link to={"/graficas"} aria-label="icon" className="iconLink">
+        <i class=" iconMenuLateral bi bi-bar-chart-fill"></i>
+        </Link>
+        <div className="animated slideInLeft">Gráficas</div>
+      </li>
+      : null}
     </ul>
 
 

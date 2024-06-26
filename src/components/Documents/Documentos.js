@@ -30,7 +30,7 @@ const Documentos = (props) => {
     });
     const [documentos, setDocumentos] = useState([]);
 
-    const opciones = ['Bitácora', 'Documento de identidad', 'Carta Laboral', 'Certificado Agencia Publica', 'Carnet Destruido', 'Prubas TyT', 'Carta Laboral'];
+    const opciones = ['Bitácora', 'Documento de identidad', 'Carta Laboral', 'Certificado Agencia Publica', 'Carnet Destruido', 'Pruebas TyT', 'Carta Laboral'];
 
     const handleSeleccion = (e) => {
         const nuevaSeleccion = e.target.value;

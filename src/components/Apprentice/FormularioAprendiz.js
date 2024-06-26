@@ -30,7 +30,7 @@ const FormularioAprendiz = () => {
     correo_principal: "",
     correo_secundario: "",
     finalizacion_etapa_lectiva: "",
-    estado_aprobacion: "",
+    estado_aprobacion: "pendiente",
     empresa: {
       nit: "",
       razon_social: "",

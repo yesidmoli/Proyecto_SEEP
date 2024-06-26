@@ -1,0 +1,90 @@
+/* AlertaPopup.css */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+  }
+  
+  .modal-alert {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    overflow: auto;
+    border-radius: 10px;
+    outline: none;
+    padding: 20px;
+    max-width: 500px;
+    width: 80%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 2001;
+  }
+  
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .modal-content h3{
+    text-align: center;
+  }
+  .close {
+    color: #aaa;
+    align-self: flex-end;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+  }
+  
+  .generar-alerta-btn {
+    background: #70b22d;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 20px;
+  }
+  
+  .generar-alerta-btn:hover {
+    background: #5a8c22;
+  }
+  .btn-alerta{
+    display: flex;
+    justify-content: end;
+    margin-top: 5px;
+  }
+  .btn-generar-alerta__verde{
+    background-color: #70b22d !important;
+  }
+  .spiner-alert{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+/*   
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  } */
+  

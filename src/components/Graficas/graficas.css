@@ -1,0 +1,29 @@
+.cont-graficas{
+    margin-top: 1rem !important;
+    display: flex;
+    gap: 2px;
+    justify-content: space-between
+}
+.section-graficas{
+    display: flex;
+    width: 100%;
+    overflow: scroll !important;
+}
+.grafica-section{
+    padding: 2px;
+    width: 100%;
+}
+.grafica-section h6{
+    font-weight: 600;
+    margin-bottom: 1rem !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .cont-graficas{
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .grafi{
+        height: 300px;
+    }
+}

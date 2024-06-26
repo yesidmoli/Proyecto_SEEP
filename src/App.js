@@ -48,6 +48,7 @@ import Calendar from './components/Calendar/Calendario';
 
 import ChangePasswordPage from './components/auth/ChangePasswordPopup';
 import Modal from 'react-modal';
+import Graficas from './components/Graficas/indexGraficas';
 Modal.setAppElement('#root');
 function App() {
   
@@ -79,7 +80,8 @@ function App() {
             <PrivateRoute exact path="/formato-etapa-productiva-pdf/:id" component={FormatoE} />
 
             <Route exact path="/formulario-final/:id" component={FormularioFinal}/>
-            
+            <PrivateRoute exact path="/graficas" component={Graficas} />
+
             <PrivateRoute exact path="/bitacora-aprendiz/:id" component={AprendizBitacoraIndividual} />
             <PrivateRoute exact path="/update-password" component={ChangePasswordPage} />
             <Route exact path="/password/reset/" component={PasswordResetForm} />

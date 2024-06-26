@@ -36,7 +36,7 @@ const FormularioInicial = () => {
     correo_principal: "",
     correo_secundario: "",
     finalizacion_etapa_lectiva: "",
-    estado_aprobacion: "",
+    estado_aprobacion: "pendiente",
     empresa: {
       nit: "",
       razon_social: "",
@@ -54,6 +54,7 @@ const FormularioInicial = () => {
   const [idEditar, setIdEditar] = useState(null);
   const [enviandoDatos, setEnviandoDatos] = useState(false);
 
+  console.log("aprendiz", aprendiz);
   useEffect(() => {
     const obtenerAprendices = async () => {
       try {

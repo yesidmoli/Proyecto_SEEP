@@ -35,7 +35,6 @@
 
 .ReactModalPortal .ReactModal__Overlay--after-open {
   opacity: 1 !important;
-  background-color: aqua
 }
 
 .ReactModalPortal .ReactModal__Overlay--before-close {
