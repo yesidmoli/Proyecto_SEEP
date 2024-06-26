@@ -88,8 +88,12 @@ const AprendicesRegistrados = () => {
       <input type="email" id="correo_secundario" class="email-form-aprendiz" value="${aprendizEditar.correo_secundario}" placeholder="Correo secundario">
       <label class="swal2-label" for="finalizacion_etapa_lectiva">Finalizacion etapa lectiva:</label>
       <input type="date" id="finalizacion_etapa_lectiva" class="date-form-aprendiz" value="${aprendizEditar.finalizacion_etapa_lectiva}" placeholder="Finalizacion etapa lectiva">
-      <label class="swal2-label" for="estado_aprobacion">Estado de aprobacion:</label>
-      <input type="text" id="estado_aprobacion" class="swal2-input" value="${aprendizEditar.estado_aprobacion}" placeholder="Estado aprobacion">
+      <label class="swal2-label" for="estado_aprobacion">Estado de aprobación:</label>
+      <select id="estado_aprobacion" class="swal2-input">
+          <option value="">Seleccione un estado</option>
+          <option value="aprobado" ${aprendizEditar.estado_aprobacion === "aprobado" ? "selected" : ""}>Aprobado</option>
+          <option value="pendiente" ${aprendizEditar.estado_aprobacion === "pendiente" ? "selected" : ""}>Pendiente</option>
+        </select>
       <p>Datos de la empresa</p>
       <label class="swal2-label" for="nit">Nit:</label>
       <input type="text" id="nit" class="swal2-input" value="${aprendizEditar.empresa.nit}" placeholder="Nit">
