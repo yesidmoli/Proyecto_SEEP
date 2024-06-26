@@ -97,6 +97,12 @@ const Menu = ({ open }) => {
         </Link>
         <div className="animated slideInLeft">Bitácoras</div>
       </li>
+      <li>
+        <Link to={"/graficas"} aria-label="icon" className="iconLink">
+        <i class=" iconMenuLateral bi bi-bar-chart-fill"></i>
+        </Link>
+        <div className="animated slideInLeft">Gráficas</div>
+      </li>
 
       <li>
       <Link  onClick={handleLogout} className='a-logout' to="/"><i class="bi bi-box-arrow-left"></i></Link>
