@@ -75,17 +75,35 @@ const VisualizarDocumentos = ({ documentos }) => {
                         <th>Descargar Archivo</th>
                     </tr>
                 </thead>
-                <tbody id="documentBody">
-                    {documentosConArchivo.map((documento, index) => (
-                        <tr key={index}>
-                            <td>{documento.tipo_documento}</td>
-                            <td>{documento.id}</td>
-                            <td>
-                                <a href={documento.archivo} download>{documento.tipo_documento}</a>
+
+                {documentos.length > 0 ? (
+                    <tbody id="documentBody">
+                        {documentosConArchivo.map((documento, index) => (
+                            <tr key={index}>
+                                <td>{documento.tipo_documento}</td>
+                                <td>{documento.id}</td>
+                                <td>
+                                    <a href={documento.archivo} download>{documento.tipo_documento}</a>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                ) : (
+                    <tbody id="documentBody">
+                        <tr>
+                            <td colSpan="3" className="text-center">
+                                <div className="img-bitacoras">
+                                    <img
+                                        alt="img"
+                                        src="https://png.pngtree.com/png-clipart/20230825/original/pngtree-waiting-for-results-isolated-cartoon-vector-illustrations-picture-image_8710547.png"
+                                    />
+                                    <p>El aprendiz no tiene documentos aún</p>
+                                </div>
                             </td>
                         </tr>
-                    ))}
-                </tbody>
+                    </tbody>
+                )}
+
             </table>
             <div className="button btn-2">
                 <button onClick={comprimirArchivos}>Descargar ZIP</button>

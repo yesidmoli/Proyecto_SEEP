@@ -156,6 +156,22 @@ body {
   border-bottom: 1px solid #6f7e95;
   margin-top: 1rem;
 }
+.img-bitacoras{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  transition: all 0.3s;
+
+}
+.img-bitacoras img{
+  width: 10rem;
+}
+.img-bitacoras p{
+  font-size: 1rem;
+  font-weight: 600;
+}
 @media only screen and (max-width: 768px) {
   .cont-bitacoras{
     gap: 0px;

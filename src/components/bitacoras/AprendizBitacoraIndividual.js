@@ -26,6 +26,7 @@ const AprendizBitacoraIndividual = () => {
   const history = useHistory()
   const fetchDocumentos = async () => {
     try {
+
       const response = await clienteAxios.get(
         `api/documentacion-aprendiz/?aprendiz_id=${id}`,
         {
@@ -112,6 +113,7 @@ const AprendizBitacoraIndividual = () => {
 
 
 
+
   return (
     <>
       <Header />
@@ -139,7 +141,7 @@ const AprendizBitacoraIndividual = () => {
         </div>
 
         <div className="bitacoras-container">
-          {rol !="aprendiz" ? <Toast modificada={"toast__modificado"}  mensaje={"Visualiza y aprueba las bitácoras del aprendiz. Puedes agregar observaciones si es necesario."} /> : null}
+          {rol != "aprendiz" ? <Toast modificada={"toast__modificado"} mensaje={"Visualiza y aprueba las bitácoras del aprendiz. Puedes agregar observaciones si es necesario."} /> : null}
           {/* <Toast modificada={"toast__modificado"}  mensaje={"Visualiza y aprueba las bitácoras del aprendiz. Puedes agregar observaciones si es necesario."} /> */}
           <h3 className="titulo-bitacoras-list">Bitácoras del aprendiz</h3>
 
@@ -162,45 +164,65 @@ const AprendizBitacoraIndividual = () => {
                   <th>Observaciones bitácora</th>
                 </tr>
               </thead>
-              <tbody id="documentBody">
-                {bitacoras.map((documento) => (
-                  <tr key={documento.id}>
-                    <td> <strong>{documento.tipo_documento}</strong> </td>
-                    <td>{documento.id}</td>
-                    <td>
-                      <a href={documento.archivo} download>
-                        {documento.tipo_documento}
-                      </a>
-                    </td>
-                    <td>
-                      <input className="check-bitacora"
-                        type="checkbox"
-                        id={documento.id}
-                        checked={checkboxesMarcados[documento.id]}
-                        onChange={() => handleCheckboxChange(documento.id)}
-                        disabled={rol === "aprendiz"}
-                      />
-                    </td>
-                    <td>
-                      <textarea
-                        className="obs-bitacora"
-                        placeholder="Observaciones"
-                        type="text"
-                        value={documento.observaciones}
-                        onChange={(e) => handleChangeObservaciones(e, documento.id)}
-                        disabled={rol === "aprendiz"}
-                      ></textarea>
+
+              {bitacoras.length > 0 ? (
+                <tbody id="documentBody">
+                  {bitacoras.map((documento) => (
+                    <tr key={documento.id}>
+                      <td> <strong>{documento.tipo_documento}</strong> </td>
+                      <td>{documento.id}</td>
+                      <td>
+                        <a href={documento.archivo} download>
+                          {documento.tipo_documento}
+                        </a>
+                      </td>
+                      <td>
+                        <input
+                          className="check-bitacora"
+                          type="checkbox"
+                          id={documento.id}
+                          checked={checkboxesMarcados[documento.id]}
+                          onChange={() => handleCheckboxChange(documento.id)}
+                          disabled={rol === "aprendiz"}
+                        />
+                      </td>
+                      <td>
+                        <textarea
+                          className="obs-bitacora"
+                          placeholder="Observaciones"
+                          type="text"
+                          value={documento.observaciones}
+                          onChange={(e) => handleChangeObservaciones(e, documento.id)}
+                          disabled={rol === "aprendiz"}
+                        ></textarea>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              ) : (
+                <tbody>
+                  <tr>
+                    <td colSpan="5" className="text-center">
+                      <div className="img-bitacoras">
+                       
+                        <img
+                          alt="img"
+                          src="https://png.pngtree.com/png-clipart/20230825/original/pngtree-waiting-for-results-isolated-cartoon-vector-illustrations-picture-image_8710547.png"
+                        ></img>
+                         <p>El aprendiz no tiene bitácoras aún</p>
+                      </div>
                     </td>
                   </tr>
-                ))}
-              </tbody>
+                </tbody>
+              )}
+
             </table>
           </div>
           <div className="button-guardar-check">
-            {rol !=="aprendiz" ? 
-            <button id="guardar--check" onClick={bitacorasValidas}  >Guardar</button> : null
+            {rol !== "aprendiz" ?
+              <button id="guardar--check" onClick={bitacorasValidas}  >Guardar</button> : null
             }
-            
+
           </div>
         </div>
       </div>
