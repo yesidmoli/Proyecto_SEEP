@@ -349,6 +349,10 @@ body {
     background-color: #70B22D;
     border-radius: 5px;
 }
+.listado-aprendices{
+    color: #fff !important;
+    font-size: 13px !important;
+}
 
 @media only screen and (max-width: 768px) {
     .nombre-documento {

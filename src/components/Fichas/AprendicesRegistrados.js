@@ -310,7 +310,7 @@ const AprendicesRegistrados = () => {
             />
             <div>
               <button className='btn descargar-excel' onClick={descargarExcel}>Reporte de aprendices</button>
-              <button className='btn btn-add-ficha' onClick={handleFormularioAprendiz}> + Añadir Aprendiz</button>
+              <Link  to={'/nuevo-aprendiz'}className='btn btn-add-ficha'> + Añadir Aprendiz</Link>
             </div>
           </div>
 

@@ -226,7 +226,7 @@ const FormularioInicial = () => {
           <b>Regresar</b>
         </Link>
         <div className='btn-fichas-aprendiz'>
-          <button id="ver" onClick={handleRegistroAprendices}>Aprendices registrados</button>
+        <Link  to={'/aprendices'} id="ver" className='btn listado-aprendices'  >Aprendices registrados</Link>
         </div>
         <div className="container-uno">
           <h2>Añadir Aprendiz</h2>
