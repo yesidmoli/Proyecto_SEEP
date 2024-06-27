@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import clienteAxios from "../../config/axios";
 import FormularioFicha from "./FormularioFicha";
 import Swal from "sweetalert2";
@@ -6,35 +6,35 @@ import { useAuth } from "../context/AuthContext";
 import * as XLSX from 'xlsx';
 import Header from "../layout/Header";
 import MainSection from "../layout/MainSection";
-import atras from '../../img/atras.png'
+import atras from '../../img/atras.png';
 import { Link } from "react-router-dom";
+
+
 const ListaFichas = () => {
   const [fichas, setFichas] = useState([]);
   const [formularioFichas, setFormularioFichas] = useState(false);
   const [busqueda, setBusqueda] = useState("");
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [elementosPorPagina] = useState(10);
 
-  const { token } = useAuth()
-
+  const { token } = useAuth();
 
   const editarFicha = (id) => {
-    // Buscar la ficha por ID
     const fichaEditar = listaFichas.find((f) => f.id === id);
-    // Establecer el estado con los datos de la ficha a editar
     Swal.fire({
       title: 'Editar ficha',
       html: `
-      <input type="text" id="numero_ficha" class="swal2-input " value="${fichaEditar.numero_ficha}" placeholder="Número de ficha">
-      <input type="text" id="nombre_programa" class="swal2-input" value="${fichaEditar.nombre_programa}" placeholder="Nombre del programa">
-      <input type="text" id="nivel_formacion" class="swal2-input" value="${fichaEditar.nivel_formacion}" placeholder="Nivel de formación">
-      <input type="text" id="horario_formacion" class="swal2-input" value="${fichaEditar.horario_formacion}" placeholder="Horario de formación">
-    `,
+        <input type="text" id="numero_ficha" class="swal2-input" value="${fichaEditar.numero_ficha}" placeholder="Número de ficha">
+        <input type="text" id="nombre_programa" class="swal2-input" value="${fichaEditar.nombre_programa}" placeholder="Nombre del programa">
+        <input type="text" id="nivel_formacion" class="swal2-input" value="${fichaEditar.nivel_formacion}" placeholder="Nivel de formación">
+        <input type="text" id="horario_formacion" class="swal2-input" value="${fichaEditar.horario_formacion}" placeholder="Horario de formación">
+      `,
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Guardar',
       cancelButtonText: 'Cancelar',
       preConfirm: async () => {
-        // Obtener los valores actualizados del formulario
         const numeroFicha = Swal.getPopup().querySelector('#numero_ficha').value;
         const nombrePrograma = Swal.getPopup().querySelector('#nombre_programa').value;
         const nivelFormacion = Swal.getPopup().querySelector('#nivel_formacion').value;
@@ -44,12 +44,12 @@ const ListaFichas = () => {
           nombre_programa: nombrePrograma,
           nivel_formacion: nivelFormacion,
           horario_formacion: horarioFormacion,
-        }
+        };
         await clienteAxios.put(`/api/fichas/${id}/`, fichaEditada, {
           headers: {
             Authorization: `Token ${token}`,
           }
-        })
+        });
         Swal.fire('¡Cambios guardados!', '', 'success');
         const consultarFicha = await clienteAxios.get('api/fichas/', {
           headers: {
@@ -59,11 +59,10 @@ const ListaFichas = () => {
         setFichas(consultarFicha.data);
       }
     });
-
   };
+
   const eliminarFicha = async (id) => {
     try {
-      // Mostrar ventana de confirmación
       const confirmacion = await Swal.fire({
         title: '¿Estás seguro?',
         text: 'La ficha será eliminada permanentemente.',
@@ -75,7 +74,6 @@ const ListaFichas = () => {
         cancelButtonText: 'Cancelar',
       });
 
-      // Si el usuario confirma la eliminación, proceder con la solicitud de eliminación
       if (confirmacion.isConfirmed) {
         await clienteAxios.delete(`/api/fichas/${id}/`, {
           headers: {
@@ -83,7 +81,6 @@ const ListaFichas = () => {
           }
         });
 
-        // Actualizar la lista de fichas después de eliminar
         const consultarFicha = await clienteAxios.get('api/fichas/', {
           headers: {
             Authorization: `Token ${token}`,
@@ -91,7 +88,6 @@ const ListaFichas = () => {
         });
         setFichas(consultarFicha.data);
 
-        // Mostrar mensaje de éxito
         Swal.fire('¡Éxito!', 'La ficha se eliminó correctamente.', 'success');
       }
     } catch (error) {
@@ -116,12 +112,12 @@ const ListaFichas = () => {
 
     obtenerFichas();
   }, []);
-  const listaFichas = Array.isArray(fichas)
-    ? fichas
-    : [];
+
+  const listaFichas = Array.isArray(fichas) ? fichas : [];
   const handleCargarFormulario = () => {
     setFormularioFichas(true);
-  }
+  };
+
   const descargarExcel = () => {
     const columnas = [
       "Numero ficha",
@@ -144,36 +140,37 @@ const ListaFichas = () => {
 
     XLSX.utils.book_append_sheet(wb, ws, 'Fichas');
     XLSX.writeFile(wb, 'Lista_Fichas.xlsx');
-  }
+  };
 
-
+  
   if (formularioFichas) {
     return <FormularioFicha />;
   }
-
 
   const handleBuscar = (e) => {
     setBusqueda(e.target.value);
   };
 
   const fichasFiltradas = fichas.filter((ficha) => {
-    // Filtra las fichas cuyo número de ficha o nombre del programa coincidan con el término de búsqueda
     return ficha.numero_ficha.includes(busqueda) || ficha.nombre_programa.toLowerCase().includes(busqueda.toLowerCase());
   });
+
+  const indiceUltimoElemento = paginaActual * elementosPorPagina;
+  const indicePrimerElemento = indiceUltimoElemento - elementosPorPagina;
+  const fichasPaginadas = fichasFiltradas.slice(indicePrimerElemento, indiceUltimoElemento);
+  const totalPaginas = Math.ceil(fichasFiltradas.length / elementosPorPagina);
+
   return (
     <>
       <Header />
       <MainSection />
-      <Link to={"#"} aria-label="icon" className=" btn-atras" onClick={handleCargarFormulario}>
-        <img src={atras}></img>
-
+      <Link to={"#"} aria-label="icon" className="btn-atras" onClick={handleCargarFormulario}>
+        <img src={atras} alt="Atrás" />
         <b>Regresar</b>
       </Link>
       <div className="container lista-fichas">
-
         <div className="header-fichas">
-
-        <input
+          <input
             type="text"
             value={busqueda}
             onChange={handleBuscar}
@@ -181,14 +178,10 @@ const ListaFichas = () => {
           />
           <div>
             <button className='descargar-excel' onClick={descargarExcel}>Reporte Fichas</button>
-
             <button className='btn-add-ficha' onClick={handleCargarFormulario}> + Añadir Ficha</button>
           </div>
-
         </div>
-        {/* <header className="encabezado-fichas">Fichas registradas</header> */}
-
-        <div class="table-container">
+        <div className="table-container">
           <table className="tabla-fichas">
             <thead>
               <tr>
@@ -197,28 +190,45 @@ const ListaFichas = () => {
                 <th>NIVEL DE FORMACIÓN</th>
                 <th>HORARIO DE FORMACIÓN</th>
                 <th>ACCIONES</th>
-
               </tr>
             </thead>
             <tbody>
-              {fichasFiltradas.map((ficha) => (
+              {fichasPaginadas.map((ficha) => (
                 <tr key={ficha.id}>
                   <td>{ficha.numero_ficha}</td>
                   <td>{ficha.nombre_programa}</td>
                   <td>{ficha.nivel_formacion}</td>
                   <td>{ficha.horario_formacion}</td>
                   <td>
-                    <button onClick={() => editarFicha(ficha.id)}>Editar</button>
+                    <button className="boton-anterior" onClick={() => editarFicha(ficha.id)}>Editar</button>
+                    {/* <button onClick={() => eliminarFicha(ficha.id)}>Eliminar</button> */}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        {/* <button className='descargar-excel' onClick={descargarExcel}>Reporte de fichas</button> */}
+        <div className="paginacion pagination-buttons">
+        <span style={{fontSize: "13px"}} className="paginacion__numero">Página {paginaActual} de {totalPaginas}</span>
+          <button
+            className="paginacion__anterior boton-anterior"
+            onClick={() => setPaginaActual(paginaActual - 1)}
+            disabled={paginaActual === 1}
+          >
+            Anterior
+          </button>
+         
+          <button
+            className="paginacion__siguiente boton-siguiente"
+            onClick={() => setPaginaActual(paginaActual + 1)}
+            disabled={paginaActual === totalPaginas}
+          >
+            Siguiente
+          </button>
+        </div>
       </div>
     </>
-
   );
 };
+
 export default ListaFichas;

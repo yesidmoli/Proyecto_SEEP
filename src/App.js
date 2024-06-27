@@ -49,6 +49,7 @@ import Calendar from './components/Calendar/Calendario';
 import ChangePasswordPage from './components/auth/ChangePasswordPopup';
 import Modal from 'react-modal';
 import Graficas from './components/Graficas/indexGraficas';
+import AprendicesRegistrados from './components/Fichas/AprendicesRegistrados';
 Modal.setAppElement('#root');
 function App() {
   
@@ -81,6 +82,8 @@ function App() {
 
             <Route exact path="/formulario-final/:id" component={FormularioFinal}/>
             <PrivateRoute exact path="/graficas" component={Graficas} />
+
+            <PrivateRoute exact path="/aprendices" component={AprendicesRegistrados} />
 
             <PrivateRoute exact path="/bitacora-aprendiz/:id" component={AprendizBitacoraIndividual} />
             <PrivateRoute exact path="/update-password" component={ChangePasswordPage} />

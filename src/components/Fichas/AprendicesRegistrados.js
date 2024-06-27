@@ -5,22 +5,22 @@ import Swal from "sweetalert2";
 import Header from "../layout/Header";
 import MainSection from "../layout/MainSection";
 import * as XLSX from 'xlsx';
-import atras from '../../img/atras.png'
+import atras from '../../img/atras.png';
 import { Link } from "react-router-dom";
-import ListaAprendices from "./ListaAprendices";
-import Apps from "../layout/menu/App";
 import { useAuth } from "../context/AuthContext";
+import Apps from "../layout/menu/App";
+import { useHistory } from "react-router-dom";
+
 const AprendicesRegistrados = () => {
   const [aprendices, setAprendices] = useState([]);
-
- 
-
   const [formularioAprendiz, setFormularioAprendiz] = useState(false);
-
   const [busqueda, setBusqueda] = useState("");
+  const { token } = useAuth();
 
-  const {token} = useAuth()
+  const [paginaActual, setPaginaActual] = useState(1);
+  const elementosPorPagina = 10; // Número de elementos por página
 
+  const history = useHistory()
   useEffect(() => {
     const obtenerAprendices = async () => {
       try {
@@ -38,16 +38,14 @@ const AprendicesRegistrados = () => {
         console.error("Error al obtener los aprendices:", error);
       }
     };
-  
     obtenerAprendices();
-  }, []);
-  const listaAprendices = Array.isArray(aprendices)
-    ? aprendices
-    : [];
-  
+  }, [token]);
+
+  const listaAprendices = Array.isArray(aprendices) ? aprendices : [];
+
   const editarAprendiz = (id) => {
     const aprendizEditar = listaAprendices.find((f) => f.id === id);
-   
+
     Swal.fire({
       title: 'Editar Aprendiz',
       html: `
@@ -112,196 +110,184 @@ const AprendicesRegistrados = () => {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Guardar',
+      confirmButtonText: 'Guardar cambios',
       cancelButtonText: 'Cancelar',
-      preConfirm: async () => {
-        // Obtener los valores actualizados del formulario
-        const nombres = Swal.getPopup().querySelector('#nombres').value;
-        const apellidos = Swal.getPopup().querySelector('#apellidos').value;
-        const numeroDocumento = Swal.getPopup().querySelector('#numero_documento').value;
-        const tipoDocumento = Swal.getPopup().querySelector('#tipo_documento').value;
-        const numeroFicha = Swal.getPopup().querySelector('#numero_ficha').value;
-        const fechaExpedicion = Swal.getPopup().querySelector('#fecha_expedicion').value;
-        const lugarExpedicion = Swal.getPopup().querySelector('#lugar_expedicion').value;
-        const fechaNacimiento = Swal.getPopup().querySelector('#fecha_nacimiento').value;
-        const sexo = Swal.getPopup().querySelector('#sexo').value;
-        const direccionDomicilio = Swal.getPopup().querySelector('#direccion_domicilio').value;
-        const municipio = Swal.getPopup().querySelector('#municipio').value;
-        const departamento = Swal.getPopup().querySelector('#departamento').value;
-        const numeroCelular1 = Swal.getPopup().querySelector('#numero_celular1').value;
-        const numeroCelular2 = Swal.getPopup().querySelector('#numero_celular2').value;
-        const telefonoFijo = Swal.getPopup().querySelector('#telefono_fijo').value;
-        const correoPrincipal = Swal.getPopup().querySelector('#correo_principal').value;
-        const correoSecundario = Swal.getPopup().querySelector('#correo_secundario').value;
-        const finalizacionLectiva = Swal.getPopup().querySelector('#finalizacion_etapa_lectiva').value;
-        const estadoAprobacion = Swal.getPopup().querySelector('#estado_aprobacion').value;
-        const nit = Swal.getPopup().querySelector('#nit').value;
-        const razonSocial = Swal.getPopup().querySelector('#razon_social').value;
-        const nombreJefeInmediato = Swal.getPopup().querySelector('#nombre_jefe_inmediato').value;
-        const correo = Swal.getPopup().querySelector('#correo').value;
-        const telefono = Swal.getPopup().querySelector('#telefono').value;
-        const direccion = Swal.getPopup().querySelector('#direccion').value;
+      preConfirm: () => {
+        const nombres = document.getElementById("nombres").value;
+        const apellidos = document.getElementById("apellidos").value;
+        const numero_documento = document.getElementById("numero_documento").value;
+        const numero_ficha = document.getElementById("numero_ficha").value;
+        const tipo_documento = document.getElementById("tipo_documento").value;
+        const fecha_expedicion = document.getElementById("fecha_expedicion").value;
+        const lugar_expedicion = document.getElementById("lugar_expedicion").value;
+        const fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
+        const sexo = document.getElementById("sexo").value;
+        const direccion_domicilio = document.getElementById("direccion_domicilio").value;
+        const municipio = document.getElementById("municipio").value;
+        const departamento = document.getElementById("departamento").value;
+        const numero_celular1 = document.getElementById("numero_celular1").value;
+        const numero_celular2 = document.getElementById("numero_celular2").value;
+        const telefono_fijo = document.getElementById("telefono_fijo").value;
+        const correo_principal = document.getElementById("correo_principal").value;
+        const correo_secundario = document.getElementById("correo_secundario").value;
+        const finalizacion_etapa_lectiva = document.getElementById("finalizacion_etapa_lectiva").value;
+        const estado_aprobacion = document.getElementById("estado_aprobacion").value;
+        const nit = document.getElementById("nit").value;
+        const razon_social = document.getElementById("razon_social").value;
+        const nombre_jefe_inmediato = document.getElementById("nombre_jefe_inmediato").value;
+        const correo = document.getElementById("correo").value;
+        const telefono = document.getElementById("telefono").value;
+        const direccion = document.getElementById("direccion").value;
 
-
-        const aprendizEditado = {
-          nombres: nombres,
-          apellidos: apellidos,
-          numero_documento: numeroDocumento,
-          numero_ficha: numeroFicha,
-          tipo_documento: tipoDocumento,
-          fecha_expedicion: fechaExpedicion,
-          lugar_expedicion: lugarExpedicion,
-          fecha_nacimiento: fechaNacimiento,
-          sexo: sexo,
-          direccion_domicilio: direccionDomicilio,
-          municipio: municipio,
-          departamento: departamento,
-          numero_celular1: numeroCelular1,
-          numero_celular2: numeroCelular2,
-          telefono_fijo: telefonoFijo,
-          correo_principal: correoPrincipal,
-          correo_secundario: correoSecundario,
-          finalizacion_etapa_lectiva: finalizacionLectiva,
-          estado_aprobacion: estadoAprobacion,
+        return {
+          nombres,
+          apellidos,
+          numero_documento,
+          numero_ficha,
+          tipo_documento,
+          fecha_expedicion,
+          lugar_expedicion,
+          fecha_nacimiento,
+          sexo,
+          direccion_domicilio,
+          municipio,
+          departamento,
+          numero_celular1,
+          numero_celular2,
+          telefono_fijo,
+          correo_principal,
+          correo_secundario,
+          finalizacion_etapa_lectiva,
+          estado_aprobacion,
           empresa: {
-            nit: nit,
-            razon_social: razonSocial,
-            nombre_jefe_inmediato: nombreJefeInmediato,
-            correo: correo,
-            telefono: telefono,
-            direccion: direccion,
+            nit,
+            razon_social,
+            nombre_jefe_inmediato,
+            correo,
+            telefono,
+            direccion
           }
-        }
-        await clienteAxios.put(`/api/aprendices/${id}/`, aprendizEditado, {
-          headers: {
-              Authorization: `Token ${token}`
+        };
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const aprendizActualizado = result.value;
+
+        const confirmarEdicion = async () => {
+          try {
+            const response = await clienteAxios.put(`api/aprendices/${id}/`, aprendizActualizado, {
+              headers: {
+                Authorization: `Token ${token}`
+              }
+            });
+
+            if (response.status === 200 || response.status === 201) {
+              Swal.fire("¡Actualizado!", "El aprendiz ha sido actualizado correctamente.", "success");
+              setAprendices(aprendices.map((f) => (f.id === id ? { ...f, ...aprendizActualizado } : f)));
+            } else {
+              throw new Error("Error al actualizar el aprendiz");
+            }
+          } catch (error) {
+            Swal.fire("Error", "Hubo un problema al actualizar el aprendiz. Por favor, intenta nuevamente.", "error");
+            console.error("Error al actualizar el aprendiz:", error);
           }
-      });
-        Swal.fire('¡Cambios guardados!', '', 'success');
-        const consultarAprendiz = await clienteAxios.get('/api/aprendices/', {
-          headers: {
-              Authorization: `Token ${token}`
-          }
-      });
-        setAprendices(consultarAprendiz.data.results);
+        };
+        confirmarEdicion();
       }
     });
-
   };
-  const eliminarAprendiz = async (id) => {
-    try {
-      // Mostrar ventana de confirmación
-      const confirmacion = await Swal.fire({
-        title: '¿Estás seguro?',
-        text: 'El aprendiz será eliminado permanentemente.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sí, eliminar',
-        cancelButtonText: 'Cancelar',
-      });
 
-      // Si el usuario confirma la eliminación, proceder con la solicitud de eliminación
-      if (confirmacion.isConfirmed) {
-        await clienteAxios.delete(`/api/aprendices/${id}/`, {
-          headers: {
-              Authorization: `Token ${token}`
+  const eliminarAprendiz = (id) => {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const confirmarEliminacion = async () => {
+          try {
+            await clienteAxios.delete(`api/aprendices/${id}/`, {
+              headers: {
+                Authorization: `Token ${token}`
+              }
+            });
+            Swal.fire("¡Eliminado!", "El aprendiz ha sido eliminado.", "success");
+            setAprendices(aprendices.filter((f) => f.id !== id));
+          } catch (error) {
+            Swal.fire("Error", "Hubo un problema al eliminar el aprendiz. Por favor, intenta nuevamente.", "error");
+            console.error("Error al eliminar el aprendiz:", error);
           }
-      });
-
-        // Actualizar la lista de fichas después de eliminar
-        const consultarAprendiz = await clienteAxios.get('api/aprendices/', {
-          headers: {
-              Authorization: `Token ${token}`
-          }
-      });
-        setAprendices(consultarAprendiz.data.results);
-
-        // Mostrar mensaje de éxito
-        Swal.fire('¡Éxito!', 'El aprendiz se eliminó correctamente.', 'success');
+        };
+        confirmarEliminacion();
       }
-    } catch (error) {
-      console.error('Error al eliminar el aprendiz:', error);
-      Swal.fire('Error', 'Hubo un error al procesar la solicitud.', 'error');
-    }
+    });
   };
-
-
-
 
   const handleFormularioAprendiz = () => {
     setFormularioAprendiz(true);
   };
-  const descargarExcel = () => {
-    const columnas = [
-      "Visitas",
-      "Empresa",
-      "Ficha",
-      "Nombres",
-      "Apellidos",
-      "Tipo de documento",
-      "Número de documento",
-      "Fecha de expedición",
-      "Lugar de expedición",
-      "Fecha de nacimiento",
-      "Sexo",
-      "Dirección domicilio",
-      "Municipio",
-      "Departamento",
-      "Número de celular 1",
-      "Número de celular 2",
-      "Teléfono fijo",
-      "Correo principal",
-      "Correo secundario",
-      "Finalización etapa lectiva",
-      "Estado de aprobación"
-    ];
-    const NombresColumnas = aprendices.map(aprendiz => ({
-      "Visitas": aprendiz.visitas,
-      "Empresa": aprendiz.empresa.razon_social,
-      "Ficha": aprendiz.ficha.numero_ficha,
-      "Nombres": aprendiz.nombres,
-      "Apellidos": aprendiz.apellidos,
-      "Tipo de documento": aprendiz.tipo_documento,
-      "Número de documento": aprendiz.numero_documento,
-      "Fecha de expedición": aprendiz.fecha_expedicion,
-      "Lugar de expedición": aprendiz.lugar_expedicion,
-      "Fecha de nacimiento": aprendiz.fecha_nacimiento,
-      "Sexo": aprendiz.sexo,
-      "Dirección domicilio": aprendiz.direccion_domicilio,
-      "Municipio": aprendiz.municipio,
-      "Departamento": aprendiz.departamento,
-      "Número de celular 1": aprendiz.numero_celular1,
-      "Número de celular 2": aprendiz.numero_celular2,
-      "Teléfono fijo": aprendiz.telefono_fijo,
-      "Correo principal": aprendiz.correo_principal,
-      "Correo secundario": aprendiz.correo_secundario,
-      "Finalización etapa lectiva": aprendiz.finalizacion_etapa_lectiva,
-      "Estado de aprobación": aprendiz.estado_aprobacion,
-    }));
-    const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.json_to_sheet(NombresColumnas, { header: columnas });
-
-    ws['!cols'] = [{ wpx: 80 }, { wpx: 100 }, { wpx: 100 }, { wpx: 120 }, { wpx: 120 }, { wpx: 120 }, { wpx: 140 }, { wpx: 140 }, { wpx: 140 }, { wpx: 140 }, { wpx: 80 }, { wpx: 140 }, { wpx: 140 }, { wpx: 120 }, { wpx: 120 }, { wpx: 120 }, { wpx: 120 }, { wpx: 140 }, { wpx: 140 }, { wpx: 200 }, { wpx: 140 }, { wpx: 140 }];
-
-    XLSX.utils.book_append_sheet(wb, ws, 'Aprendices');
-    XLSX.writeFile(wb, 'Lista_Aprendices.xlsx');
-  }
-  if (formularioAprendiz) {
-    return <FormularioInicial />;
-  }
 
   const handleBuscar = (e) => {
     setBusqueda(e.target.value);
   };
 
-  const aprendicesFiltrados = aprendices.filter((aprendiz) => {
-    // Filtra las fichas cuyo número de ficha o nombre del programa coincidan con el término de búsqueda
-    return aprendiz.numero_documento.includes(busqueda) || aprendiz.nombres.toLowerCase().includes(busqueda.toLowerCase()) || aprendiz.apellidos.toLowerCase().includes(busqueda.toLowerCase());;
+  const aprendicesFiltrados = listaAprendices.filter((aprendiz) => {
+    return (
+      aprendiz.numero_documento.includes(busqueda) || 
+      aprendiz.nombres.toLowerCase().includes(busqueda.toLowerCase()) || 
+      aprendiz.apellidos.toLowerCase().includes(busqueda.toLowerCase())
+    );
   });
 
-  
+  const indiceUltimoElemento = paginaActual * elementosPorPagina;
+  const indicePrimerElemento = indiceUltimoElemento - elementosPorPagina;
+  const aprendicesPaginados = aprendicesFiltrados.slice(indicePrimerElemento, indiceUltimoElemento);
+
+  const cambiarPagina = (numeroPagina) => setPaginaActual(numeroPagina);
+
+  const descargarExcel = () => {
+    const datosDescargar = aprendicesFiltrados.map(aprendiz => ({
+      Nombres: aprendiz.nombres,
+      Apellidos: aprendiz.apellidos,
+      Documento: aprendiz.numero_documento,
+      "Numero de ficha": aprendiz.ficha.numero_ficha,
+      "Tipo de documento": aprendiz.tipo_documento,
+      "Fecha de expedicion": aprendiz.fecha_expedicion,
+      "Lugar de expedicion": aprendiz.lugar_expedicion,
+      "Fecha de nacimiento": aprendiz.fecha_nacimiento,
+      Sexo: aprendiz.sexo,
+      "Direccion domicilio": aprendiz.direccion_domicilio,
+      Municipio: aprendiz.municipio,
+      Departamento: aprendiz.departamento,
+      "Numero celular 1": aprendiz.numero_celular1,
+      "Numero celular 2": aprendiz.numero_celular2,
+      "Telefono fijo": aprendiz.telefono_fijo,
+      "Correo principal": aprendiz.correo_principal,
+      "Correo secundario": aprendiz.correo_secundario,
+      "Finalizacion etapa lectiva": aprendiz.finalizacion_etapa_lectiva,
+      "Estado de aprobacion": aprendiz.estado_aprobacion,
+      Nit: aprendiz.empresa.nit,
+      "Razon social": aprendiz.empresa.razon_social,
+      "Nombre jefe inmediato": aprendiz.empresa.nombre_jefe_inmediato,
+      Correo: aprendiz.empresa.correo,
+      Telefono: aprendiz.empresa.telefono,
+      Direccion: aprendiz.empresa.direccion,
+    }));
+
+    const hojaCalculo = XLSX.utils.json_to_sheet(datosDescargar);
+    const libro = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(libro, hojaCalculo, 'Aprendices');
+    XLSX.writeFile(libro, 'aprendices.xlsx');
+  };
+
+  const totalPaginas = Math.ceil(aprendicesFiltrados.length / elementosPorPagina);
+
+
   return (
     <>
       <Header />
@@ -309,22 +295,13 @@ const AprendicesRegistrados = () => {
       <Apps />
       <div className="container  container-reg">
 
-        <div style={{ "cursor": "pointer" }} aria-label="icon" className=" btn-atras" onClick={handleFormularioAprendiz}>
+        <div style={{ "cursor": "pointer" }} aria-label="icon" className=" btn-atras" onClick={() => history.goBack()}>
           <img src={atras}></img>
-
           <b>Regresar</b>
         </div>
 
         <div className="tabla-uno">
-          {/* <h1 style={{ "textAlign": "center", "borderBottom": "1px solid #ccc" }}>Aprendices Registrados</h1> */}
-          {/* <div className="btn-regr">
-             <button id="regresar" onClick={handleFormularioAprendiz}>
-                  Regresar
-                </button>
-          
-          </div> */}
           <div className="header-fichas header-fichas__aprendiz">
-
             <input
               type="text"
               value={busqueda}
@@ -332,12 +309,11 @@ const AprendicesRegistrados = () => {
               placeholder="Buscar aprendiz por número documento o nombre"
             />
             <div>
-              <button className=' btn descargar-excel' onClick={descargarExcel}>Reporte de aprendices</button>
-
-              <button className=' btn btn-add-ficha' onClick={handleFormularioAprendiz} > + Añadir Aprendiz</button>
+              <button className='btn descargar-excel' onClick={descargarExcel}>Reporte de aprendices</button>
+              <button className='btn btn-add-ficha' onClick={handleFormularioAprendiz}> + Añadir Aprendiz</button>
             </div>
-
           </div>
+
           <div className="tabla-scroll tabla-fichas">
             <table className="tabla-reg">
               <thead>
@@ -350,38 +326,50 @@ const AprendicesRegistrados = () => {
                 </tr>
               </thead>
               <tbody>
-                {aprendicesFiltrados.map((aprendiz) => (
+                {aprendicesPaginados.map((aprendiz) => (
                   <tr key={aprendiz.id}>
                     <td>{aprendiz.nombres}</td>
                     <td>{aprendiz.apellidos}</td>
                     <td>{aprendiz.numero_documento}</td>
                     <td>{aprendiz.ficha.numero_ficha}</td>
                     <td className="buttons-opciones">
-                      <button id="editar-aprendiz" onClick={() => editarAprendiz(aprendiz.id)}>
+                      <button className="boton-anterior" id="editar-aprendiz" onClick={() => editarAprendiz(aprendiz.id)}>
                         Editar
                       </button>
-                      <button id="eliminar-aprendiz" onClick={() => eliminarAprendiz(aprendiz.id)}>
+                      {/* <button id="eliminar-aprendiz" onClick={() => eliminarAprendiz(aprendiz.id)}>
                         Eliminar
-                      </button>
+                      </button> */}
                     </td>
                   </tr>
                 ))}
-                <tr>
-                  <td colSpan="5">
-                    <div className="btn-regr">
-                      {/* <button id="regresar" onClick={handleFormularioAprendiz}>
-                  Regresar
-                </button> */}
-                      {/* <button className='descargar-excel' onClick={descargarExcel}>Reporte de aprendices</button> */}
-                    </div>
-                  </td>
-                </tr>
               </tbody>
             </table>
           </div>
+
+          <div className="paginacion pagination-buttons">
+          <span style={{fontSize: "13px"}} className="paginacion__numero">Página {paginaActual} de {totalPaginas}</span>
+            <button
+              className="paginacion__anterior boton-anterior"
+              onClick={() => cambiarPagina(paginaActual - 1)}
+              disabled={paginaActual === 1}
+            >
+              Anterior
+            </button>
+           
+            <button
+              className="paginacion__siguiente boton-siguiente"
+              onClick={() => cambiarPagina(paginaActual + 1)}
+              disabled={indiceUltimoElemento >= aprendicesFiltrados.length}
+            >
+              Siguiente
+            </button>
+          </div>
         </div>
+
+        {/* {formularioAprendiz && <FormularioInicial />} */}
       </div>
     </>
   );
 };
+
 export default AprendicesRegistrados;

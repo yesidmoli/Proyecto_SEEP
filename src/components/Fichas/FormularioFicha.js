@@ -263,6 +263,8 @@ const FormularioFicha = ({ history }) => {
 
           <button className='listado-fichas' onClick={handleCargarFichas} >Listado de Fichas</button>
 
+          <Link to="/aprendices"> <button id='registrar-aprendiz'>Listado de aprendices</button></Link>
+
 
         </div>
 
