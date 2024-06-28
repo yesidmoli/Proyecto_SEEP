@@ -32,7 +32,7 @@ const Documentos = (props) => {
     const [documentos, setDocumentos] = useState([]);
     const [isGenerating, setIsGenerating] = useState(false); // Estado para manejar el spinner
 
-    const opciones = ['Bitácora', 'Documento de identidad', 'Carta Laboral', 'Certificado Agencia Publica', 'Carnet Destruido', 'Pruebas TyT', 'Carta Laboral'];
+    const opciones = ['Bitácora', 'Documento de identidad', 'Carta Laboral', 'Certificado Agencia Publica', 'Carnet Destruido', 'Pruebas TyT'];
 
     const handleSeleccion = (e) => {
         const nuevaSeleccion = e.target.value;
